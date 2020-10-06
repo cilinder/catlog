@@ -1,13 +1,40 @@
 \documentclass[12pt,a4paper]{article}
 
+\usepackage{enumitem}
+
+\newlist{vprasanja}{itemize}{1}
+\setlist[vprasanja]{label=\textbf{Q:}}
+\newcommand\ans{\item[\textbf{A:}]}
+
+    
 \begin{document}
-    \begin{enumerate}
-        \item Razložiti je treba nekaj pojmov teorije tipov.
-    \end{enumerate}
-    \begin{itemize}
-        \item \textbf{Q:} Ali se reče "algebraične" ali "algebrajske" teorije/kategorije?
-        \item \textbf{A:}
-        \item \textbf{Q:} Ali je več "regularnih logik"
-        \item \textbf{Q:} Na kak način naj v \Latex-u označujem da je $x$ tipa $X$.
-    \end{itemize}
+
+    \begin{vprasanja}
+        \item Ali se reče "algebraične" ali "algebrajske" teorije/kategorije?
+        \ans
+        \item  Ali je več "regularnih logik"?
+        \ans
+        \item  Na kak način naj v \LaTeX -u označujemo da je $x$ tipa $X$?
+        \ans
+        \item  Kaj točno je "spremenljivka"?
+        \ans
+        \item  Napišimo kaj točno pomeni formula.
+        \ans
+        \item  Ali je \textbackslash emph\{\textasteriskcentered \} lahko začetek stavka?
+        \ans
+        \item  Ali lahko teorijo polj formuliramo v regularni logiki? Če ne, kak je dokaz?
+        \ans
+        \item  Kako bi prevedli "fragment of first order logic".
+        \ans
+        \item  Kako bi prevedli soundness?
+        \ans
+        \item  Kako bi rekli entailment relation?
+        \ans
+        \item Ali je lepo dati dvopičje direkt pred def okoljem?
+        \ans
+        \item Kako dobiti novo vrstico (na lep način) tako za deklaracijo definicije
+        \ans 
+        \item Pri naštevanju velike začetnice?
+        \ans
+    \end{vprasanja}
 \end{document}

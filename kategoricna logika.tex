@@ -837,9 +837,66 @@ Videli bomo, da s to razširitvijo lahko ponovimo zgodbo iz prvega dela in nam t
 Da to logiko definiramo, moramo razširiti pojem jezika.
 %
 \begin{definicija}
-  \emph{Signatura} $\Sigma$ je sestavljena iz množice \emph{osnovnih tipov} $\underline{\mathrm{sort}}_\Sigma = \set{X_1, X_2, X_3, \ldots}$, množice konstant $\underline{\mathrm{const}}_\Sigma$, množice funkcijskih simbolov $\underline{\mathrm{func}}_\Sigma$ in množice relacijskih simbolov $\underline{\mathrm{rel}}_\Sigma$. Uporabljamo oznake kot so $c : X$ za konstante tipa $X$, $f : X_1 \times \ldots \times X_n \to Y$ za funkcijske simbole in $R \rightarrowtail X_1 \times \ldots \times X_n$ za relacijske simbole.
+  \emph{Signatura} regularnega jezika $\Sigma$ je sestavljena iz množice \emph{osnovnih tipov} $\underline{\mathrm{sort}}_\Sigma = \set{X_1, X_2, X_3, \ldots}$, množice konstant $\underline{\mathrm{const}}_\Sigma$, množice funkcijskih simbolov $\underline{\mathrm{func}}_\Sigma$ in množice relacijskih simbolov $\underline{\mathrm{rel}}_\Sigma$. Uporabljamo oznake kot so $c : X$ za konstante tipa $X$, $f : X_1 \times \ldots \times X_n \to Y$ za funkcijske simbole in $R \rightarrowtail X_1 \times \ldots \times X_n$ za relacijske simbole.
 \end{definicija}
 Pogosto bomo za $X_1 \times \ldots X_n$ uporabljali tudi oznako $\overline{X}$, kjer $n$ razberemo iz konteksta.
+\begin{definicija}
+  Naj bo $\Sigma$ signatura regularnega jezika. Potem \emph{jezik} $\mathcal{L}(\Sigma)$ sestoji iz signature $\Sigma$, za vsak osnovni tip $X$ imamo števno mnogo spremenljivk $x:X$. Množice termov $(T)$ in formul $(F)$ definiramo na sledeče načine:
+  \begin{itemize}
+    \item [(T1)] Če je $x$ spremenljivka tipa $X$, potem je $x$ term tipa $X$.
+    \item [(T2)] Če je $c$ konstanta tipa $X$, potem je $c$ term tipa $X$.
+    \item [(T3)] Če so $t_1, \ldots t_n$ že termi tipov $X_1, \ldots, X_n$ in je $f : X_1 \times \ldots \times X_n \to Y$ funkcijski simbol, potem je $f(t_1, \ldots, t_n)$ term tipa $Y$.
+    \item [(F1)] Če sta $t_1, t_2$ terma tipov $X_1$ in $X_2$, potem je $t_1 = t_2$ formula. Bolj natančno bi to zapisali kot $t_1 =_X t_2$.
+    \item [(F2)] Logična konstanta $\top$ (ki predstavlja resninično izjavo) je formula.
+    \item [(F3)] Če so $t_1, \ldots t_n$ termi tipov $X_1, \ldots, X_n$ in je $R \rightarrowtail X_1 \times \ldots \times X_n$ relacijski simbol, potem je $R(t_1, \ldots, t_n)$ formula.
+    \item [(F4)] Če sta $\varphi$ in $\psi$ logični formuli, potem sta $\varphi \wedge \psi$ in $\exists x \varphi$ tudi logični 
+  \end{itemize}
+  Za logično formulo $\varphi$, množico njenih prostih spremenljiv označujemo z $\mathrm{FV}(\varphi)$. \emph{Teorija} $T$, formulirana v jeziku $\mathcal{L}(\Sigma)$, je množica \emph{sekvent} oblike 
+  $$\varphi \implies \psi$$
+  kjer sta $\varphi$ in $\psi$ formuli v jeziku teorije $T$.
+\end{definicija}
+Če je v sekventi premisa enaka $\top$ potem $\top \implies \psi$ označujemo kar kot $\psi$.
+\begin{primer}
+  Naj bo $\Sigma$ signatura s termi osnovnimi tipi $X,Y$ in $Z$, ki vsebuje tri funkcijske simbole $f: X \to Y$, $g : Y \to Z$ in $h : X \to Z$. V jeziku $\mathcal{L}(\Sigma)$ potem, če je $x$ spremenljivka tipa $X$, lahko v jeziku $\mathcal{L}(\Sigma)$ tvorimo formulo
+  $$f(g(x)) = h(x)$$
+  Ko definiramo interpretacijo teorije bomo videli, da je to ravno formula, ki pomeni, da je $h$ kompozitum $f$ in $g$.
+\end{primer}
+Sedaj bomo definirali pravila sklepanja za naš fragment logike prvega reda, za katera bomo kasenje pokazali, da so "sound" in polna glede na kategorično semantiko, ki jim jih bomo dali.
+Podali jih bomo kot zaporedja dedukcij oblike $\varphi \vdash_F \psi$, indeksiranih po končnih množicah spremenljivk $F$. Dedukcija $\varphi \vdash \psi$ je definirana le, če vse proste spremenljivke v $\varphi$ ali $\psi$ ležijo v $F$. V prihodnje bomo privzeli, da je za izraz $\varphi \vdash \psi$ ta pogoj vedno izpolnjen (napiši to lepše).
+Tu moramo biti pozorni, saj na primer izraz $x_1 = x_2 \vdash_{x_1, x_2} x_2 = x_1$ ni enak izrazu $x_1 = x_2 \vdash_{x_1, x_2, x_3} x_2 = x_1$. Razlog za to podrobnost bomo razložili kasneje, ko definiramo semantiko v kategoriji.
+
+Sedaj definiramo pravila sklepanja, ki jih razdelimo v tri sklope: (ali je lepo dati dvopičje direkt pred def okoljem)
+\begin{definicija}
+  $ $
+  \begin{enumerate}[label*=\arabic*.]
+    \item Strukturna pravila
+    \begin{enumerate}[label*=\arabic*.]
+      \item $p \vdash_F p$
+      \item $\dfrac{p \vdash_F q \ q \vdash_F r}{p \vdash_F r}$
+      \item $\dfrac{p \vdash_F q}{p \vdash_{F \cup \set{y}} q}$
+      \item $\dfrac{\varphi(y) \vdash_F \psi(y)}{\varphi(b) \vdash_{F\setminus\set{y}} \psi(b)}$
+      kjer je $y : B$ spremenljivka, $b$ pa term tipa $B$ in $b$ lahko zamenjamo za $y$ v obeh izrazih.
+    \end{enumerate}
+    \item Logična pravila
+    \begin{enumerate}[label*=\arabic*.]
+      \item $p \vdash_F \top$
+      \item Če $r \vdash_F p \wedge q$ potem $r \vdash_F p$ in $r \vdash_F q$; in če $r \vdash_F p$ in $r \vdash_F q$ potem $r \vdash_F p \wedge q$.
+      \item Če $\exists y \psi(y) \vdash_F p$ potem $\psi(y) \vdash_{F \cup \set{y}} p$; in obratno, če $\psi \vdash_{F \cup \set{y}} p$ potem $\exists y \psi(y) \vdash_F p$.
+    \end{enumerate}
+    \item Pravila za enakost
+    \begin{enumerate}[label*=\arabic*.]
+      \item $\top \vdash_x x = x$
+      \item $x_1 = x_2 \vdash_{x_1, x_2} x_2 = x_1$
+      \item $x_1 = x_2 \wedge x_2 = x_3 \vdash_{x_1, x_2, x_3} x_1 = x_3$
+      \item $\overline{x}^1 = \overline{x}^2 \wedge R(\overline{x}^1) \vdash_{\overline{x}^1, \overline{x}^2} \mathrm{R}(\overline{x}^2)$
+      kjer je $R \rightarrowtail \overline{X}$
+    \end{enumerate}
+  \end{enumerate}
+  Če $F = \emptyset$ potem označimo $\vdash_\emptyset$ kot $\vdash$ in $\emptyset \vdash_F \psi$ označimo z $\vdash_F \psi$.
+  Če imamo podano teorijo $T$, pišemo $T, \varphi \vdash_F \psi$, če $\varphi_F^T \psi$, kjer $\varphi_F^T$ pomeni dedukcijo po zgornjih pravilih sklepanja z dodatnim aksiomom
+  $$\varphi \vdash_{\mathrm{FV}(\varphi) \cup \mathrm{FV}(\psi)} \psi$$
+  za vsako sekvento $\varphi \implies \psi$ v $T$. Alternativno lahko to označimo z $T \vdash_F \varphi \implies \psi$, kar nakazuje, da $\varphi$ implicira $\psi$, modulo $T$.
+\end{definicija}
 %
 \section{Regularne kategorije}
 %
