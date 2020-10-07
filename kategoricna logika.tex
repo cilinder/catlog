@@ -130,6 +130,7 @@
 \DeclareMathOperator{\cod}{cod}
 \DeclareMathOperator{\obj}{obj}
 \DeclareMathOperator{\Mod}{Mod}
+\DeclareMathOperator{\Sub}{Sub}
 %
 \renewcommand{\set}[1]{\{\,#1\,\}}
 %
@@ -831,10 +832,10 @@ Do sedaj smo videli povezavo med algebrajsko teorijo in kategorijo z neko dodatn
 Že iz teh osnovnih gradnikov je mogoče dobiti pomembne matematične "infrastrukture", kot je na primer teorija grup. Za opis nekih matematičnih teorij pa jasno ta stopnja kompleksnosti ne zadostuje.
 Videli smo, da se teorije polj ne da opisati z algebrajsko teorijo. Moderna matematika je standardno opisana v jeziku predukatne logike, oz logike drugega (ali višjega) reda, kjer imamo poleg funkcijskih simbolov še logične veznike kot so "in", "ali", negacijo in univerzalni ter eksistenčni kvantifikator.
 Naravno vprašanje je torej, ali lahko zgodbo algebrajskih teorij ponovimo z neko močnejšo logiko in če se to da, kako se to odraža v strukturi kategorijo, ki jo dobimo na ta način in ali ohranimo lepe lastnosti, ki smo jih videli v primeru algebrajskih teorij.
-Kot vemo iz Gödelovega izreka, bo take polnosti, kot smo jo dobili z univerzalnim modelom za algebrajsko teorijo, pri logiki prvega reda ne moremo pričakovati.
+Kot vemo iz Gödelovega izreka o polnosti logike prvega reda, za modele v kategoriji množic to velja. Zanima nas, ali je to definicijo modela mogoče razširiti na podoben način kot za algebrajske teorije.
 Naredili bomo korak v to smer in našo logiko le delno razširili v tako imenovano $\emph{regularno logiko}$, kjer bomo formule gradili iz atomskih formul, logične konstante resničnosti $\top$, konjunkcij $\wedge$ in eksistenčnega kvantifikatorja $\exists$.
 Videli bomo, da s to razširitvijo lahko ponovimo zgodbo iz prvega dela in nam to da tako imenovane \emph{regularne kategorije}, ki bodo imele dodatno strukturo, ki nam bo omogočala interpretacijo te logike.
-Da to logiko definiramo, moramo razširiti pojem jezika.
+Da to logiko definiramo, moramo najprej razširiti pojem jezika.
 %
 \begin{definicija}
   \emph{Signatura} regularnega jezika $\Sigma$ je sestavljena iz množice \emph{osnovnih tipov} $\underline{\mathrm{sort}}_\Sigma = \set{X_1, X_2, X_3, \ldots}$, množice konstant $\underline{\mathrm{const}}_\Sigma$, množice funkcijskih simbolov $\underline{\mathrm{func}}_\Sigma$ in množice relacijskih simbolov $\underline{\mathrm{rel}}_\Sigma$. Uporabljamo oznake kot so $c : X$ za konstante tipa $X$, $f : X_1 \times \ldots \times X_n \to Y$ za funkcijske simbole in $R \rightarrowtail X_1 \times \ldots \times X_n$ za relacijske simbole.
@@ -881,13 +882,14 @@ Sedaj definiramo pravila sklepanja, ki jih razdelimo v tri sklope: (ali je lepo 
     \begin{enumerate}[label*=\arabic*.]
       \item $p \vdash_F \top$
       \item Če $r \vdash_F p \wedge q$ potem $r \vdash_F p$ in $r \vdash_F q$; in če $r \vdash_F p$ in $r \vdash_F q$ potem $r \vdash_F p \wedge q$.
-      \item Če $\exists y \psi(y) \vdash_F p$ potem $\psi(y) \vdash_{F \cup \set{y}} p$; in obratno, če $\psi \vdash_{F \cup \set{y}} p$ potem $\exists y \psi(y) \vdash_F p$.
+      \item Če doda$\exists y \psi(y) \vdash_F p$ potem $\psi(y) \vdash_{F \cup \set{y}} p$; in obratno, če $\psi \vdash_{F \cup \set{y}} p$ potem $\exists y \psi(y) \vdash_F p$.
     \end{enumerate}
     \item Pravila za enakost
     \begin{enumerate}[label*=\arabic*.]
       \item $\top \vdash_x x = x$
       \item $x_1 = x_2 \vdash_{x_1, x_2} x_2 = x_1$
       \item $x_1 = x_2 \wedge x_2 = x_3 \vdash_{x_1, x_2, x_3} x_1 = x_3$
+      \item $\overline{x}^1 = \overline{x}^2 \wedge f(\overline{x}^1) = f(\overline{x}^2)$
       \item $\overline{x}^1 = \overline{x}^2 \wedge R(\overline{x}^1) \vdash_{\overline{x}^1, \overline{x}^2} \mathrm{R}(\overline{x}^2)$
       kjer je $R \rightarrowtail \overline{X}$
     \end{enumerate}
@@ -897,8 +899,25 @@ Sedaj definiramo pravila sklepanja, ki jih razdelimo v tri sklope: (ali je lepo 
   $$\varphi \vdash_{\mathrm{FV}(\varphi) \cup \mathrm{FV}(\psi)} \psi$$
   za vsako sekvento $\varphi \implies \psi$ v $T$. Alternativno lahko to označimo z $T \vdash_F \varphi \implies \psi$, kar nakazuje, da $\varphi$ implicira $\psi$, modulo $T$.
 \end{definicija}
+\begin{primer}[izpeljava]
+  
+\end{primer}
 %
 \section{Regularne kategorije}
+Regularna logika ima jasno v primerjavi z algebrajskimi teorijami dodatno strukturo, ki se bo odražala v strukturi kategorije v kateri jo bomo lahko interpretirali.
+Za to nalogo bo pomemben koncept podobjekta v kategoriji.
+\begin{definicija}
+ Naj bo $\cat{C}$ kategorija in $X \in \cat{C}$ objekt.
+ \emph{Podobjekt} objekta $X$ je ekvivalenčni razred monomorfizmov $\alpha : A \rightarrowtail X$, kjer sta dva monomorfizma $\alpha$ in $\beta : B \rightarrowtail X$ ekvivalenta, če sta $A$ in $B$ izomorfna nad $X$.
+ (Z drugimi besedami, če sta $A$ in $B$ isti objekt v $\cat{C}/X$). To pomeni, da obstaja tak izomorfizem $i : A \xrightarrow{\cong} B$, da diagram
+ \begin{equation*}
+   \begin{tikzcd}[column sep=small]
+     A \ar[rr, "i"']{a}{\cong} \ar[dr, "\alpha"'] & & B \ar[dl, "\beta"] \\
+     & X &
+   \end{tikzcd}
+ \end{equation*}
+ komutira. Pogosto morfizma $\alpha$ ne navedemo eksplicitno ampak pišemo samo $A \rightarrowtail X$. Razred (ki ni nujno množica) podoobjektov $X$ označujemo z $\Sub(X)$.
+\end{definicija}
 %
 \section{Interna logika regularne kategorije}
 %
