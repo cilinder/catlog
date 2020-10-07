@@ -1,4 +1,5 @@
 \ProvidesPackage{magnastavitve}
+%
 \usepackage[utf8x]{inputenc}   % omogoča uporabo slovenskih črk kodiranih v formatu UTF-8
 \usepackage[slovene,english]{babel}    % naloži, med drugim, slovenske delilne vzorce
 \usepackage[pdftex]{graphicx}  % omogoča vlaganje slik različnih formatov
@@ -8,20 +9,18 @@
 						citecolor=black, filecolor=black, 
 						linkcolor=black, urlcolor=black,
 						pagebackref=false, 
-						pdfproducer={LaTeX}, pdfcreator={LaTeX}, hidelinks]{hyperref}
+                        pdfproducer={LaTeX}, pdfcreator={LaTeX},
+                        unicode=true, hidelinks]{hyperref}
 \usepackage{color}       % dodal Solina
 %\usepackage{soul}
 \usepackage{amsthm}
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
-%
-\usepackage{amsmath}
 \usepackage{mathtools}
 \usepackage{enumitem}
 \usepackage{commath}
 \usepackage{array,xparse}
-\usepackage{hyperref}
 \usepackage{bm} % to make greek symbols bold
 %
 \usepackage{ulem} % ta knjižnica redefinira komando \emph
@@ -31,7 +30,6 @@
 \usepackage{tikz-cd} 
 \usetikzlibrary{babel} % this fixes problems with tikz-cd
 % http://tex.stackexchange.com/questions/166772/problem-with-babel-and-tikz-using-draw
-%
 %
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

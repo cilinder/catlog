@@ -1,28 +1,27 @@
 \documentclass[12pt,a4paper]{book}
 \usepackage{import}
 \usepackage{magnastavitve}
-
-
+\usepackage{subfiles}
 
 \begin{document}
 %
 \frontmatter
-\import{poglavja/}{preduvod.tex}
+\subfile{poglavja/preduvod.tex}
 %
 \mainmatter
 \setcounter{page}{1}
 \pagestyle{fancy}
 %
 \chapter{Uvod}
-\import{poglavja/}{uvod.tex}
+\subfile{poglavja/uvod.tex}
 %
 \chapter{Algebrajske teorije}
-\import{poglavja/}{algebrajske_teorije.tex}
+\subfile{poglavja/algebrajske_teorije.tex}
 %
 \chapter{Regularna logika}
-\import{poglavja/}{regularna_logika.tex}
+\subfile{poglavja/regularna_logika.tex}
 %
 \chapter{Zaključek}
-\import{poglavja/}{zakljucek.tex}
+\subfile{poglavja/zakljucek.tex}
 %
 \end{document}

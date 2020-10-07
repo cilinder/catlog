@@ -1,3 +1,5 @@
+\documentclass[../kategoricna_logika.tex]{subfiles}
+\begin{document}
 Do sedaj smo videli povezavo med algebrajsko teorijo in kategorijo z neko dodatno struktuo, ki nam je omogočila interpretacijo take teorije v semantiki same kategorije. Teorija, ki smo jo obravnavali je bila precej enostavna s stališča logike, saj so bile edine logične formule, ki smo jih lahko konstruirali oblike $t_1 = t_2$ za neka terma, sestavljena induktivno iz spremenljivk in funkcijskih simbolov. 
 Že iz teh osnovnih gradnikov je mogoče dobiti pomembne matematične "infrastrukture", kot je na primer teorija grup. Za opis nekih matematičnih teorij pa jasno ta stopnja kompleksnosti ne zadostuje.
 Videli smo, da se teorije polj ne da opisati z algebrajsko teorijo. Moderna matematika je standardno opisana v jeziku predukatne logike, oz logike drugega (ali višjega) reda, kjer imamo poleg funkcijskih simbolov še logične veznike kot so "in", "ali", negacijo in univerzalni ter eksistenčni kvantifikator.
@@ -86,9 +88,34 @@ Za to nalogo bo pomemben koncept podobjekta v kategoriji.
      & X &
    \end{tikzcd}
  \end{equation*}
- komutira. Pogosto morfizma $\alpha$ ne navedemo eksplicitno ampak pišemo samo $A \rightarrowtail X$. Razred (ki ni nujno množica) podoobjektov $X$ označujemo z $\Sub(X)$.
+ komutira. Pogosto morfizma $\alpha$ ne navedemo eksplicitno ampak pišemo samo $A \rightarrowtail X$. 
+ Razred vseh podobjektov objekta $X$ označimo z $\Sub(X)$ in ga opermimo z relacijo delne urejenosti, kjer je $A \leq B$, če lahko $\alpha : A \rightarrowtail X$ faktoriziramo(?) skozi podobjekt $\beta : B \rightarrowtail X$.
 \end{definicija}
+Ta delno urejeni razred ima največji element, in sicer $\mathrm{id}_X$.
+\begin{definicija}
+    Pravimo da je kategorija $\cat{C}$ \emph{dobro pogojena}, če je $\Sub(X)$ množica za vsak objekt $X \in \cat{C}$.
+\end{definicija}
+Od sedaj naprej bomo privzeli, da je $\cat{C}$ dobro pogojena. Oglejmo si interakcijo med množico $\Sub(X)$ in nekaterimi kategoričnimi konstrukti.
+
+Recimo, da $\cat{C}$ ima vse povleke. Potem lahko za vsak $X \in \cat{C}$ v množici $\Sub(X)$ tvorimo konjunkcije. Recimo namreč, da imamo $\alpha : A \rightarrowtail X$ in $\beta : B \rightarrowtail X$. Potem njuno konjunkcijo predstavlja kompozitum $A \times_X B \rightarrowtail X$, ki ga dobimo iz diagrama povleka:
+\begin{equation*}
+    \begin{tikzcd}
+        A \times_X B \ar[r, hook] \ar[d, hook] & B \ar[d, hook, "\beta"] \\
+        A \ar[r, hook, "\alpha"] & X
+    \end{tikzcd}
+\end{equation*}
+Opazimo lahko tudi, da sta obe projekciji v povleku monomorfizma. Naj bo sedaj $f : X \to Y$ morfizem v $\cat{C}$. Potem dobimo z povlekom inducirano preslikavo
+$$f^{-1} : Sub(Y) \to Sub(X)$$
+ki ohranja konjunkcije. To lahko vidimo v diagramu
+\begin{equation*}
+    \begin{tikzcd}
+        f^{-1} \ar[r, hook] ar[d, hook] & B \ar[d, hook, "\beta"] \\
+        X \ar[r, "f"] & Y
+    \end{tikzcd}
+\end{equation*}
+
 %
 \section{Interna logika regularne kategorije}
 %
 \section{Polnost regularne teorije}
+\end{document}
