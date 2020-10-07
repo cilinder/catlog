@@ -104,15 +104,63 @@ Recimo, da $\cat{C}$ ima vse povleke. Potem lahko za vsak $X \in \cat{C}$ v mno�
         A \ar[r, hook, "\alpha"] & X
     \end{tikzcd}
 \end{equation*}
-Opazimo lahko tudi, da sta obe projekciji v povleku monomorfizma. Naj bo sedaj $f : X \to Y$ morfizem v $\cat{C}$. Potem dobimo z povlekom inducirano preslikavo
-$$f^{-1} : Sub(Y) \to Sub(X)$$
-ki ohranja konjunkcije. To lahko vidimo v diagramu
+Opazimo lahko tudi, da sta obe projekciji v povleku monomorfizma. Naj bo sedaj $f : X \to Y$ morfizem v $\cat{C}$. Potem dobimo s povlekom inducirano preslikavo
+$$f^{-1} : \Sub(Y) \to \Sub(X)$$
+ki pošlje podobjekt $\beta : B \rightarrowtail Y$ v $f^{-1}B \rightarrowtail X$ kar lahko prikažemo v diagramu
 \begin{equation*}
     \begin{tikzcd}
-        f^{-1} \ar[r, hook] ar[d, hook] & B \ar[d, hook, "\beta"] \\
+        f^{-1} \ar[r, hook] \ar[d, hook] & B \ar[d, hook, "\beta"] \\
         X \ar[r, "f"] & Y
     \end{tikzcd}
 \end{equation*}
+Ta preslikava ohranja konjunkcije (dodamo dokaz?), kar pomeni, da za dobro pogojeno kategorijo $\cat{C}$ dobimo funktor $\Sub(\_) : \cat{C}^{\mathrm{op}} \to \cat{\wedge-\mathbf{SLat}}$, ki ga imenujemo \emph{podobjektni funktor}.
+\begin{definicija}
+    Recimo, da je $f : X \to Y$ morfizem v $\cat{C}$. Potem paru morfizmov $(p_1, p_2)$ iz diagrama povleka
+    \begin{equation*}
+        \begin{tikzcd}
+        X \times_Y X \ar[d, "p_1"'] \ar[r, "p_2"] & X \ar[d, "f"] \\
+        X \ar[r, "f"'] & Y
+        \end{tikzcd}
+    \end{equation*}
+    pravimo \emph{par jedra} morfizma $f$.
+\end{definicija}
+Sedaj imamo pripravljeno vse potrebno, da definiramo regularno kategorijo.
+\begin{definicija}
+    Kategorija $\cat{C}$ je \emph{regularna}, če ima vse končne limite, če za vsak par jedra morfizma obstaja kozožek, in če povleki ohranjajo regularne epimorfizme.
+\end{definicija}
+Poglejmo si nekaj lastnosti regularnih kategorij.
+\begin{lema}
+    Naj bo $\cat{C}$ regularna kategorija. Potem
+    \begin{enumerate}[label=(\roman*), nosep]
+        \item Vsak regularni epimorfizem je kozožek svojega para jedra.
+        \item Morfizem, ki je hkrati regularni epimorfizem in monomorfizem je izomorfizem.
+        \item Kompozitum dveh regularnih epimorfizmov je regularen epimorfizem.
+        \item Če sta morfizma $f : X \to Y$ in $g : Y \to Z$ taka, da sta $g \circ f$ in $f$ regularna epimorfizma, potem je tudi $g$ regularen epimorfizem
+    \end{enumerate}
+\end{lema}
+\begin{dokaz}
+    sorry
+\end{dokaz}
+
+Kot vidimo, imajo regularni epimorfizmi mnogo lepih lastnosti, ki smo jih vajeni iz surjektivnih funkcij v kategoriji $\cat{Set}$. Še ena posebno lepa lastnost v regularnih kategorijah je, da je mogoče vsak morfizem razcepiti kot regularen epimorfizem, ki mu sledi monomorfizem.
+\begin{lema}
+    Naj bo $\cat{C}$ regularna kategorija in $f: X \to Y$ morfizem v $\cat{C}$.
+    Potem lahko $f$ razcepimo v kompozitum regularnega epimorfizma in monomorfizma. Velja tudi, da za vsak komutativni diagram
+    \begin{equation*}
+        \begin{tikzcd}
+            X \ar[d, "e"'] \ar[r, "f"] & Y \ar[d, "m"] \\
+            X' \ar[r, "f'"] & Y'
+        \end{tikzcd}
+    \end{equation*}
+    v katerem je $e$ regularen epimorfizem in $m$ monomorfizem, obstaja enoličen diagonalni morfizem $d : X' \to Y$, tako da oba trikotnika komutirata.
+    V posebnem, je zgornji razcep enoličen do izomorfizma natančno.
+\end{lema}
+\begin{dokaz}
+    sorry
+\end{dokaz}
+
+Monomorfizmu $m : E \hookrightarrow Y$
+
 
 %
 \section{Interna logika regularne kategorije}
