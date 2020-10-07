@@ -1,0 +1,199 @@
+\ProvidesPackage{magnastavitve}
+\usepackage[utf8x]{inputenc}   % omogoča uporabo slovenskih črk kodiranih v formatu UTF-8
+\usepackage[slovene,english]{babel}    % naloži, med drugim, slovenske delilne vzorce
+\usepackage[pdftex]{graphicx}  % omogoča vlaganje slik različnih formatov
+\usepackage{fancyhdr}          % poskrbi, na primer, za glave strani
+\usepackage{comment}
+\usepackage[pdftex, colorlinks=true,
+						citecolor=black, filecolor=black, 
+						linkcolor=black, urlcolor=black,
+						pagebackref=false, 
+						pdfproducer={LaTeX}, pdfcreator={LaTeX}, hidelinks]{hyperref}
+\usepackage{color}       % dodal Solina
+%\usepackage{soul}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+%
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{commath}
+\usepackage{array,xparse}
+\usepackage{hyperref}
+\usepackage{bm} % to make greek symbols bold
+%
+\usepackage{ulem} % ta knjižnica redefinira komando \emph
+% ta komanda jo nastavi nazaj na privzeto vrednost
+\normalem
+%
+\usepackage{tikz-cd} 
+\usetikzlibrary{babel} % this fixes problems with tikz-cd
+% http://tex.stackexchange.com/questions/166772/problem-with-babel-and-tikz-using-draw
+%
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	DIPLOMA INFO
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\ttitle}{Kategorična logika}
+\newcommand{\ttitleEn}{Naslov EN}
+\newcommand{\tsubject}{\ttitle}
+\newcommand{\tsubjectEn}{\ttitleEn}
+\newcommand{\tauthor}{Jure Taslak}
+\newcommand{\tkeywords}{Teorija kategorij, Kategorična logika, kategorije, logika, algebraične teorije}
+\newcommand{\tkeywordsEn}{Category theory, Categorical logic, categories, logic, algebraic theories}
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% naslovi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+\newcommand{\autfont}{\Large}
+\newcommand{\titfont}{\LARGE\bf}
+\newcommand{\clearemptydoublepage}{\newpage{\pagestyle{empty}\cleardoublepage}}
+\setcounter{tocdepth}{1}
+%
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%									%
+% konstrukti						%
+%									%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+%
+\theoremstyle{definition}
+\newtheorem{definicija}{Definicija}[chapter]
+%
+\theoremstyle{plain}
+\newtheorem{izrek}[definicija]{Izrek}
+\newtheorem{trditev}[definicija]{Trditev}
+\newtheorem{posledica}{Posledica}[definicija]
+\newtheorem{lema}[definicija]{Lema}
+\newenvironment{dokaz}{\emph{Dokaz.}\ }{\hspace{\fill}{$\Box$}}
+%
+\theoremstyle{definition}
+\newtheorem{primer}{Primer}[section]
+\newtheorem*{primer*}{Primer}
+%
+\theoremstyle{remark}
+\newtheorem*{opomba}{Opomba}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%								%
+%	Tikz-cd nastavitve			%
+%								%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\tikzcdset{
+ 	diagrams={sep=large},
+	labels={font=\small}
+}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Avtor in naslov			%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\author{Jure Taslak}
+\title{Kategorična logika}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% pdfInfo
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+\pdfinfo{%
+    /Title    (\ttitle)
+    /Author   (\tauthor, damjan@cvetan.si)
+    /Subject  (\ttitleEn)
+    /Keywords (\tkeywordsEn)
+    /ModDate  (\pdfcreationdate)
+    /Trapped  /False
+}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%									%
+% 		Misc						%
+%									%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\newcommand{\eqtext}[1]{\stackrel{\mathclap{\normalfont\mbox{#1}}}{=}} % write text over =
+% could use a way to make the text smaller
+%
+\newcommand{\cat}[1]{\textbf{#1}}
+\newcommand{\homset}[2]{\mathrm{Hom(#1,#2)}}
+%
+\DeclareMathOperator{\Hom}{Hom}
+%\DeclareMathOperator[1]{\colim}{\underset{#1}{colim}}
+\DeclareMathOperator{\colim}{colim}
+%\newcommand[1]{\colim}{\underset{#1}\colim_op}
+\DeclareMathOperator{\Fun}{Fun}
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\cod}{cod}
+\DeclareMathOperator{\obj}{obj}
+\DeclareMathOperator{\Mod}{Mod}
+\DeclareMathOperator{\Sub}{Sub}
+%
+\renewcommand{\set}[1]{\{\,#1\,\}}
+%
+\newcommand{\fprod}[1]{\langle #1 \rangle}
+%
+\newcommand{\predsnop}[1]{\cat{Set}^{\cat{#1}^{op}}}
+%
+\newcommand{\powerset}[1]{\mathcal{P}(#1)}
+%
+%\DeclareMathOperator{\eval}{eval}
+%
+% \newcommand{\coprod}[2]{\cat{#1} + \cat{#2}}
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Two-way rule for adjunction
+%TODO make this more usefull
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ExplSyntaxOn
+\NewDocumentEnvironment{adjunctions}{O{}}
+ {
+  \cs_set_eq:cN {@arraycr} \farin_arraycr:
+  \keys_set:nn { farin/adjunction } { #1 }
+  \begin{array}
+   {
+    @{ \hspace { \dim_eval:n { \l_farin_left_shift_dim + \l_farin_padding_dim } } }
+    r
+    @{ {\farin_strut:} \l_farin_symbol_tl {} }
+    l
+    @{ \hspace { \dim_eval:n { \l_farin_right_shift_dim + \l_farin_padding_dim } } }
+   }
+ }
+ {
+  \end{array}
+ }
+\keys_define:nn { farin/adjunction }
+ {
+  leftshift       .dim_set:N = \l_farin_left_shift_dim,
+  leftshift       .initial:n = 0pt,
+  rightshift      .dim_set:N = \l_farin_right_shift_dim,
+  rightshift      .initial:n = 0pt,
+  padding         .dim_set:N = \l_farin_padding_dim,
+  padding         .initial:n = 6pt,
+  symbol          .tl_set:N  = \l_farin_symbol_tl,
+  symbol          .initial:n = \longrightarrow,
+  verticalspacing .dim_set:N  = \l_farin_vertspac_dim,
+  verticalspacing .initial:n = {3pt},
+ }
+\cs_new_protected:Npn \farin_strut:
+ {
+  \vrule height \dim_eval:n { \ht\strutbox + 1.2\l_farin_vertspac_dim }
+         depth  \dim_eval:n { \dp\strutbox + \l_farin_vertspac_dim }
+         width 0pt
+ }
+\makeatletter
+\exp_args:NNo \cs_new:Npn \farin_arraycr:
+ {
+  \@arraycr\hline
+ }
+\makeatother
+\ExplSyntaxOff
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
