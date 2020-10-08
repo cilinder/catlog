@@ -13,12 +13,13 @@
                         unicode=true, hidelinks]{hyperref}
 \usepackage{color}       % dodal Solina
 %\usepackage{soul}
-\usepackage{amsthm}
-\usepackage{amsmath}
-\usepackage{amsfonts}
+\usepackage{amsthm} % the backend package for theorem enviroments
+\usepackage{amsmath} % package for math things
+\usepackage{amsfonts} % math fonts
 \usepackage{amssymb}
 \usepackage{mathtools}
-\usepackage{enumitem}
+\usepackage{thmtools} % extends the theorem enviroment functionality
+\usepackage{enumitem} % for enumeration enviroments
 \usepackage{commath}
 \usepackage{array,xparse}
 \usepackage{bm} % to make greek symbols bold
@@ -129,6 +130,7 @@
 \DeclareMathOperator{\obj}{obj}
 \DeclareMathOperator{\Mod}{Mod}
 \DeclareMathOperator{\Sub}{Sub}
+\DeclareMathOperator{\graph}{graph}
 %
 \renewcommand{\set}[1]{\{\,#1\,\}}
 %

@@ -1,5 +1,6 @@
 \documentclass[../kategoricna_logika.tex]{subfiles}
 \begin{document}
+\section{Regularna logika}
 Do sedaj smo videli povezavo med algebrajsko teorijo in kategorijo z neko dodatno struktuo, ki nam je omogočila interpretacijo take teorije v semantiki same kategorije. Teorija, ki smo jo obravnavali je bila precej enostavna s stališča logike, saj so bile edine logične formule, ki smo jih lahko konstruirali oblike $t_1 = t_2$ za neka terma, sestavljena induktivno iz spremenljivk in funkcijskih simbolov. 
 Že iz teh osnovnih gradnikov je mogoče dobiti pomembne matematične "infrastrukture", kot je na primer teorija grup. Za opis nekih matematičnih teorij pa jasno ta stopnja kompleksnosti ne zadostuje.
 Videli smo, da se teorije polj ne da opisati z algebrajsko teorijo. Moderna matematika je standardno opisana v jeziku predukatne logike, oz logike drugega (ali višjega) reda, kjer imamo poleg funkcijskih simbolov še logične veznike kot so "in", "ali", negacijo in univerzalni ter eksistenčni kvantifikator.
@@ -14,7 +15,7 @@ Da to logiko definiramo, moramo najprej razširiti pojem jezika.
 \end{definicija}
 Pogosto bomo za $X_1 \times \ldots X_n$ uporabljali tudi oznako $\overline{X}$, kjer $n$ razberemo iz konteksta.
 \begin{definicija}
-  Naj bo $\Sigma$ signatura regularnega jezika. Potem \emph{jezik} $\mathcal{L}(\Sigma)$ sestoji iz signature $\Sigma$, za vsak osnovni tip $X$ imamo števno mnogo spremenljivk $x:X$. Množice termov $(T)$ in formul $(F)$ definiramo na sledeče načine:
+  Naj bo $\Sigma$ signatura regularnega jezika. Potem \emph{(regularen?) jezik} $\mathcal{L}(\Sigma)$ sestoji iz signature $\Sigma$, za vsak osnovni tip $X$ imamo števno mnogo spremenljivk $x:X$. Množice termov $(T)$ in formul $(F)$ definiramo na sledeče načine:
   \begin{itemize}
     \item [(T1)] Če je $x$ spremenljivka tipa $X$, potem je $x$ term tipa $X$.
     \item [(T2)] Če je $c$ konstanta tipa $X$, potem je $c$ term tipa $X$.
@@ -29,7 +30,7 @@ Pogosto bomo za $X_1 \times \ldots X_n$ uporabljali tudi oznako $\overline{X}$, 
   kjer sta $\varphi$ in $\psi$ formuli v jeziku teorije $T$.
 \end{definicija}
 Če je v sekventi premisa enaka $\top$ potem $\top \implies \psi$ označujemo kar kot $\psi$.
-\begin{primer}
+\begin{primer}\label{primer:kompozitum}
   Naj bo $\Sigma$ signatura s termi osnovnimi tipi $X,Y$ in $Z$, ki vsebuje tri funkcijske simbole $f: X \to Y$, $g : Y \to Z$ in $h : X \to Z$. V jeziku $\mathcal{L}(\Sigma)$ potem, če je $x$ spremenljivka tipa $X$, lahko v jeziku $\mathcal{L}(\Sigma)$ tvorimo formulo
   $$f(g(x)) = h(x)$$
   Ko definiramo interpretacijo teorije bomo videli, da je to ravno formula, ki pomeni, da je $h$ kompozitum $f$ in $g$.
@@ -159,12 +160,154 @@ Kot vidimo, imajo regularni epimorfizmi mnogo lepih lastnosti, ki smo jih vajeni
     sorry
 \end{dokaz}
 
-Monomorfizmu $m : E \hookrightarrow Y$
+\begin{definicija}
+Monomorfizmu $m : E \hookrightarrow Y$, ki smo ga videli pri dokazu razcepitve morfizma $f$ pravimo \emph{(direktna) slika} in ga označimo z $\mathrm{Im}(f)$.
+Včasih rečemo kar objektu $E$ slika $f$. Slika morfizma je določena le do izomorfizma natančno, a določa natanko en podobjekt objekta $Y$, ki ga označimo z $\exists_f(X)$.
+Oznake $\mathrm{Im}(f)$, $\exists_f(X)$ in $E$ uporabljamo izmenljivo, če je namen jasen iz konteksta.
 
-jure
-jure
+Za podobjekt $A \overset{\alpha}{\rightarrowtail} X$ definiramo sliko kot
+$$\exists_f(A) := \mathrm{Im}(f \circ \alpha),$$
+kar nam da dobro definirano preslikavo $\exists_f : \Sub(X) \to \Sub(Y)$.
+\end{definicija}
+\begin{lema}
+  Naj bo $\cat{C}$ regularna kategorija. Naj bo $f : X \to Y$ morfizem v $\cat{C}$. Potem
+  \begin{enumerate}[label=(\roman*)]
+    \item Preslikava $\exists_f$ je monotona in skupaj z povlekom $f^{-1}$ tvorita adjungiran par funktorjev, torej $\exists_f \dashv f^{-1}$.
+    \item Če je $g : Y \to Z$ morfizem v $\cat{C}$, potem velja $$\exists_g \circ \exists_f = \exists_{g \circ f} : \Sub(X) \to \Sub$$
+  \end{enumerate}
+\end{lema}
+\begin{dokaz}
+  sorry
+\end{dokaz}
 
+Kot posledico tega lahko vidimo, da $f^{-1}$ ohranja konjunkcije v $\Sub(Y)$.
+\begin{lema}[Frobeniusova lema]
+  Naj bo $\cat{C}$ regularna kategorija. Naj bo $f : X \to Y$ morfizem v $\cat{C}$ in $A \overset{\alpha}{\rightarrowtail} X$, $B \overset{\alpha}{\rightarrowtail} X$ podobjekta $X$. Potem velja
+  $$\exists_f(A \wedge f^{-1}B) = \exists_f(A) \wedge B,$$
+  kot elements $\Sub(X)$.
+\end{lema}
+\begin{dokaz}
+  sorry
+\end{dokaz}
 
+Še ena izmed lepih lastnosti funkcij med množicami je, da jih lahko opišemo kot njihov graf. Izkaže se, da je taka konstrukcija mogoča tudi v regularnih kategorijah.
+\begin{definicija}
+  Naj bo $f : X \to Y$ morfizem v regularni kategoriji $\cat{C}$. Potem je \emph{graf} tega morfizma podobjekt
+  $$\graph(f) \rightarrowtail X \times Y,$$
+  ki ga definiramo kot sliko morfizma $\fprod{\mathrm{id}_X, f}$.
+\end{definicija}
+
+Opazimo lahko, da je kanonični morfizem $X \to \graph(f)$ izomorfizem (dodamo dokaz?).
+\begin{lema}
+  Naj bodo oznake kot v zgornji definiciji in naj bo $A \overset{\alpha}{\rightarrowtail} X$ podobjekt. Če z $\pi_X$ in $\pi_Y$ označimo projekciji iz produkta, potem velja
+  $$\exists_f(A) = \exists_{\pi_Y}(\pi_X^{-1}(A) \wedge \graph(f))$$.
+\end{lema}
+\begin{dokaz}
+  sorry
+\end{dokaz}
+
+Sedaj bomo opisali, kako lahko dobimo nazaj morfizem iz njegovega grafa.
+\begin{definicija}
+  Na podobjekt $R \rightarrowtail X \times Y$ lahko gledamo kot na relacijo med ``elementi'' $X$ in $Y$. Relaciji $R$ pravimo 
+  \begin{itemize}
+    \item \emph{totalna}, če je $\exists_{\pi_Y}R = X$ (to intuitivno pomeni, da je množica vseh tistih $x$, za katere obstaja nek $y$ za katerega velja $xRy$, enaka $X$).
+    \item \emph{funkcijska}, če kanonični morfizem $R \times_X R \to X \times Y \times Y$, lahko faktoriziramo skozi inkluzijo $\mathrm{id}_X \times \Delta_Y : X \times Y \to X \times Y \times Y$. (tu si lahko predstavljamo, da ker $R \times_X R$ predstavlja trojice elementov $(x, y_1, y_2)$ za katere velja $xRy_1$ in $xRy_2$, nam ta faktorizacija omogoča, da iz tega izpeljemo $y_1 = y_2$).
+  \end{itemize}
+\end{definicija}
+\begin{lema}
+  Naj bo $\cat{C}$ regularna kategorija.
+  \begin{enumerate}[label=(\roman*)]
+    \item Graf morfizma $f : X \to Y$ je totalna in funkcijska relacija na $X \times Y$.
+    \item Za vsako totalno in funkcijsko relacijo $R \rightarrowtail X \times Y$ obstaja natanko en morfizem $f : X \to Y$ za katerega je $R = \graph(f)$.
+  \end{enumerate}
+\end{lema}
+\begin{dokaz}
+  sorry
+\end{dokaz}
+
+Naslednja pomembna lastnost regularnih kategorij je interakcija slik in povlekov.
+\begin{lema}
+  Naj bo
+  \begin{equation*}
+    \begin{tikzcd}
+      Z \times_Y X \ar[d, "f'"'] \ar[r, "g'"] & X \ar[d, "f"] \\
+      Z \ar[r, "g"'] & Y
+    \end{tikzcd}
+  \end{equation*}
+  kvadrat povleka. Potem je
+  $$\exists_{g'}f^{'-1} = f^{-1}\exists_g : \Sub(Z) \to \Sub(X).$$
+\end{lema}
+\begin{dokaz}
+  sorry
+\end{dokaz}
+\begin{definicija}
+  Naj bosta $\cat{C}$ in $\cat{D}$ regularni kategoriji. Funktorju $F : \cat{C} \to \cat{D}$ pravimo \emph{regularen}, če ohranja končne limite in kozožke para jedra.
+\end{definicija}
+\begin{definicija}
+  $\cat{RegCat}$ je kategorija v kateri so objekti majhne (ali je dovolj dobro pogojene?) kategorije in morfizmi regularni funktorji med njimi.
+\end{definicija}
+
+Ker je v kategoriji s povleki morfizem $f$ monomorfizem natanko takrat, ko je kvadrat
+\begin{equation*}
+  \begin{tikzcd}
+    \bullet \ar[d, "\mathrm{id}"'] \ar[r, "\mathrm{id}"] & \bullet \ar[d, "f"] \\
+    \bullet \ar[r, "f"] & \bullet
+  \end{tikzcd}
+\end{equation*}
+povlek, to pomeni, da vsak regularen funktor $F : \cat{C} \to \cat{D}$ inducira za vsak objekt $X \in \cat{C}$, preslikavo
+$$F_X : \Sub_\cat{C}(X) \to \Sub_\cat{D}(F(X)),$$
+ki ohranja končne konjunkcije in največji element. Torej je v posebnem tudi monotona. $F$ pa tudi ohranja slike morfizmov, torej če imamo podobjekt $A \xhookrightarrow{\alpha} X \xrightarrow{f} Y$ potem je 
+$$F(\exists_f A) = \exists_{F(f)}(F(A))$$.
+(dodamo dokaz?)
+to bi bilo mogoče boljše dati v neko eksplicitno lemo.
+%
+\section{Model regularnega jezika}
+Recimo, da imamo regularen jezik $\mathcal{L}(\Sigma)$. Kot smo to storili za algebrajsko teorijo, bi radi definirali model tega jezika v neki regularni kategoriji.
+Za to najprej potrebujemo interpretacijo.
+\begin{opomba}
+  Za definicijo interpretacije bomo potrebovali končne produkte in zožke, ki so v splošnem določeni le do izomorfizma natančno. Privzeli bomo, da lahko vedno \emph{izberemo} nek objekt, ki produkt oziroma zožek predstavlja. To pa pomeni, da moramo privzeti neko verzijo Aksioma Izbire.
+\end{opomba}
+\begin{definicija}
+  Naj bo $\mathcal{L}(\Sigma)$ jezik. Potem \emph{interpretacija} $M$ v kategoriji $\cat{C}$ sestoji iz:
+  \begin{itemize}
+    \item Objekta $X^{(M)}$ v $\cat{C}$, za vsak osnovni tip $X \in \underline{\mathrm{sort}}_\Sigma$
+    \item Morfizma $c^{(M)} : 1 \to X^{(M)}$ za vsako konstanto $c \in \underline{\mathrm{const}}_\Sigma$. Tu je $1$ končni objekt v $\cat{C}$.
+    \item Morfizma $f^{(M)}  : X_1^{(M)} \times \ldots \times X_n^{(M)} \to Y^{(M)}$ za vsak funkcijski simbol $f : X_1 \times \ldots \times X_n \to Y \in \underline{\mathrm{func}}_\Sigma$.
+    \item Podobjekta $R^{(M)} \rightarrowtail X_1^{(M)} \times \ldots \times X_n^{(M)}$ za vsak relacijski simbol\\ $R \rightarrowtail X_1 \times \ldots \times X_n \in \underline{\mathrm{rel}}_\Sigma$.
+  \end{itemize}
+  Produkt $X_1^{(M)} \times \ldots \times X_n^{(M)}$ označimo z $\overline{X}^{(M)}$. 
+  Interpretacijo $M$ bomo razširili na vse terme in formule jezika.
+  Za term $t$ tipa $Y$ s prostimi spremenljivkami med $\overline{z} : \overline{Z}$ bomo predpisali morfizem $t(\overline{z})^{(M)} : \overline{Z}^{(M)} \to Y^{(M)}$, za formulo $\varphi$ s prostimi spremenljivkami med $\overline{z} : \overline{Z}$ pa predpišemo podobjekt $\set{\overline{z} \mid \varphi}^{(M)}$ objekta $\overline{Z}^{(M)}$ po naslednjih pravilih:
+  \begin{itemize}
+    \item[(T1)] Če je $x$ spremenljivka tipa $X$ potem $x(\overline{z})^{(M)}$ definiramo kot kompozitum $\overline{Z}^{(M)} \xrightarrow{\pi} X^{(M)} \xrightarrow{\mathrm{id}_X}$. Tu je $\mathrm{id}_X$ tisti, ki interpretira $x$, medtem, ko je projekcija $\pi$ potrebna zaradi ``slepih'' spremenljivk, ki nastopajo v $\overline{z}$. (Opomnimo, da po predpostavki proste spremenljivke v termu $x$ (torej spremenljivka $x$ sama) nastopajo v $\overline{z}$).
+    \item[(T2)] Če je $c:X$ konstanta, potem $c(\overline{z})^{(M)}$ interpretiramo kot kompozitum $\overline{Z} \to 1 \xrightarrow{c^{(M)}} X^{(M)}$.
+    \item[(T3)] Naj bo $f : X_1 \times \ldots \times X_n \to Y$ funkcijski simbol in $t_i$ term tipa $X_i$ za $i \in \set{1, \ldots, n}$. Po indukciji imamo interpretacije $t_i(\overline{z})^{(M)} : \overline{Z}^{(M)} \to X_i^{(M)}$. Potem term $f(t_1, \ldots, t_n)$ interpretiramo kot kompozitum
+    $$f^{(M)}(t_1^{(M)}, \ldots, t_n^{(M)}) : \overline{Z}^{(M)} \xrightarrow{\fprod{t_1^{(M)}, \ldots, t_n^{(M)}}} \overline{X}^{(M)} \xrightarrow{f^{(M)}} Y^{(M)}.$$
+    \item[(F1)] Formuli $t_1 = t_2$ priredimo podobjekt $\set{\overline{z} \mid t_1 = t_2}^{(M)}$, ki ga definiramo kot zožek morfizmov
+    \begin{tikzcd}[column sep=huge]\overline{Z}^{(M)} \ar[r, shift left, "t_1(\overline{z})^{(M)}"] \ar[r, shift right, "t_2(\overline{z})^{(M)}"'] & X^{(M)}\end{tikzcd}.
+    \item[(F2)] $\set{\overline{z} \mid R(t_1, \ldots, t_n)}^{(M)}$ je podobjekt $\overline{Z}^{(M)}$ definiran kot povlek v diagramu
+    \begin{equation*}
+      \begin{tikzcd}
+        \set{\overline{z} \mid R(t_1, \ldots, t_n)}^{(M)} \ar[d] \ar[r, hook] & \overline{Z}^{(M)} \ar[d, "\fprod{t_1^{(M)}, \ldots ,t_n^{(M)}}"] \\
+        R^{(M)} \ar[r, hook] & \overline{X}^{(M)}
+      \end{tikzcd}
+    \end{equation*} 
+    \item[(F3)] $\set{\overline{z} \mid \top}^{(M)}$ je enak $\overline{Z}^{(M)}$.
+    \item[(F4)] $\set{\overline{z} \mid \varphi \wedge \psi}^{(M)} = \set{\overline{z} \mid \varphi}^{(M)} \wedge \set{\overline{z} \mid \psi}^{(M)}$.
+    \item[(F5)] $\set{\overline{z} \mid \exists x \varphi}^{(M)} = \exists_{\pi}\set{(y, \overline{z}) \mid \varphi}^{(M)}$, kjer je $\pi$ projekcija\\ $Y^{(M)} \times \overline{Z}^{(M)} \xrightarrow{\pi} \overline{Z}^{(M)}$.
+  \end{itemize}
+\end{definicija}
+\begin{definicija}
+  Interpretaciji $M$ pravimo \emph{model} za sekvento $\varphi \implies \psi$, kar označimo kot
+  $$M \models \varphi \implies \psi$$
+  če je $\set{\overline{x} \mid \varphi}^{(M)} \leq \set{\overline{x} \mid \psi}^{(M)}$ kot podobjekta $\overline{X}^{(M)}$, kjer je $\overline{x}$ množica prostih spremenljivk, ki nastopajo prosto v $\varphi$ ali $\psi$. Interpretacija $M$ je model teorije $T$, če je model vsake sekvente v $T$. To označimo z $M \models T$.
+\end{definicija}
+
+Da je $M$ model $\varphi \implies \psi$ je v $\cat{Set}$ to ekvivalentno temu, da je $M$ model (v klasičnem smislu) formule $\forall \overline{x} (\varphi \rightarrow \psi)$. To je intuicija, ki jo je dobro imeti v mislih.
+\begin{primer}
+  Naj bo $\mathcal{L}(\Sigma)$ jezik iz primera \ref{primer:kompozitum} s tremi tipi $X,Y,Z$ in funkcijskimi simboli $f : X \to Y$, $g : Y \to Z$ in $h : X \to Z$. Potem za interpretacijo $M$ v regularni kategoriji $\cat{C}$ velja da je $M$ model formule $f(g(x)) = h(x)$, oziroma
+  $$M \models \top \implies f(g(x)) = h(x)$$. Poglejmo si ta primer precej detajlno.
+\end{primer}
 %
 \section{Interna logika regularne kategorije}
 %

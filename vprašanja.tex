@@ -2,6 +2,7 @@
 
 \usepackage{enumitem}
 \usepackage{hyperref}
+\usepackage{fancyvrb}
 
 \newlist{vprasanja}{itemize}{1}
 \setlist[vprasanja]{label=\textbf{Q:}}
@@ -10,51 +11,72 @@
     
 \begin{document}
 
+    \section*{Terminološka vprašanja}
     \begin{vprasanja}
-        \item Kako prevedemo "meet"?
+        \item Kako prevedemo ``meet"?
         \ans
-        \item Ali se reče "algebraične" ali "algebrajske" teorije/kategorije?
+        \item Ali se reče ``algebraične" ali ``algebrajske" teorije/kategorije?
         \ans
-        \item  Ali je več "regularnih logik"?
+        \item Kako bi prevedli ``fragment of first order logic".
         \ans
-        \item  Na kak način naj v \LaTeX -u označujemo da je $x$ tipa $X$?
+        \item Kako bi prevedli soundness?
         \ans
-        \item  Kaj točno je "spremenljivka"?
+        \item Kako bi rekli entailment relation?
         \ans
-        \item  Napišimo kaj točno pomeni formula.
+        \item Kako prevajamo well-powered (za kategorijo). Moj guess je ``dobro pogojena".
         \ans
-        \item  Ali je \textbackslash emph\{\textasteriskcentered \} lahko začetek stavka?
+        \item Kako prevajamo ``kernel pair"
         \ans
-        \item  Ali lahko teorijo polj formuliramo v regularni logiki? Če ne, kak je dokaz?
+        \item Kako prevajamo ``in particular"?
+        \ans V posebnem?
+        \item Kako prevajamo 
+    \end{vprasanja}
+
+    \section*{\LaTeX vprašanja}
+    \begin{vprasanja}
+        \item Na kak način naj v \LaTeX -u označujemo da je $x$ tipa $X$ (v smislu $x:X$)?
         \ans
-        \item  Kako bi prevedli "fragment of first order logic".
-        \ans
-        \item  Kako bi prevedli soundness?
-        \ans
-        \item  Kako bi rekli entailment relation?
+        \item Ali je \verb|\emph{*}| lahko začetek stavka?
         \ans
         \item Ali je lepo dati dvopičje direkt pred def okoljem?
         \ans
-        \item Kako dobiti novo vrstico (na lep način) tako za deklaracijo definicije
-        \ans 
-        \item Pri naštevanju velike začetnice?
-        \ans
         \item Kaj je najboljše okolje za postavit tikzcd diagram?
         \ans
-        \item težava s šumnikom v imenu poglavja
+        \item Kako dobiti novo vrstico (na lep način) tako za deklaracijo definicije?
+        \ans 
+        \item Težava s šumnikom v imenu poglavja
         \ans Dodamo opcijo [unicode=true] v hyperref paket
         \url{https://tex.stackexchange.com/questions/159479/problem-with-composite-letters-in-section-labels}
         \item Kaj je s tem headheight too small problemom?
         \ans \url{https://tex.stackexchange.com/questions/327285/what-does-this-warning-mean-fancyhdr-and-headheight}
-        \item Kako prevajamo well-powered (za kategorijo). Moj guess je "dobro pogojena".
+        \item Ali pri naštevanju (enumerate) uporabimo nosep opcijo?
+        \ans
+        \item Pri naštevanju velike začetnice?
+        \ans
+    \end{vprasanja}
+
+    \section*{Tehnična vprašanja}
+    \begin{vprasanja}
+        \item Ali lahko teorijo polj formuliramo v regularni logiki? Če ne, kak je dokaz?
+        \ans
+        \item Pri definiciji funkcijske relacije (na strani 8), kaj je ta kanonični morfizem $R \times_X R \to X \times Y \times Y$?
+        \ans
+        \item Ali je za definicijo kategorije regularnih kategorij potrebno da so te regularne kategorije majhne ali je dovolj lokalno majhne oz. dobro pogojene.
+        \ans
+        \item Kdaj je $\lbrace \overline{z} \mid \top \rbrace^{(M)} \leq \lbrace \overline{z} \mid \varphi \rbrace^{(M)}$?
+        \ans Ko je $\lbrace \overline{z} \mid \varphi \rbrace^{(M)} \cong \overline{Z}$.
+    \end{vprasanja}
+
+    \section*{Misc}
+    \begin{vprasanja}
+        \item Ali je več ``regularnih logik"?
+        \ans
+        \item Kaj točno je ``spremenljivka''?
+        \ans
+        \item Napišimo kaj točno pomeni formula.
         \ans
         \item Kako detajlni naj bodo dokazi?
         \ans
-        \item Kako prevajamo "kernel pair"
-        \ans
-        \item Ali pri naštevanju (enumerate) uporabimo nosep opcijo?
-        \ans
-        \item Kako prevajamo "in particular"?
-        \ans
     \end{vprasanja}
+
 \end{document}
