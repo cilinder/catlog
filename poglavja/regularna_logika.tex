@@ -300,16 +300,276 @@ Za to najprej potrebujemo interpretacijo.
 \begin{definicija}
   Interpretaciji $M$ pravimo \emph{model} za sekvento $\varphi \implies \psi$, kar označimo kot
   $$M \models \varphi \implies \psi$$
-  če je $\set{\overline{x} \mid \varphi}^{(M)} \leq \set{\overline{x} \mid \psi}^{(M)}$ kot podobjekta $\overline{X}^{(M)}$, kjer je $\overline{x}$ množica prostih spremenljivk, ki nastopajo prosto v $\varphi$ ali $\psi$. Interpretacija $M$ je model teorije $T$, če je model vsake sekvente v $T$. To označimo z $M \models T$.
+  če velja $\set{\overline{x} \mid \varphi}^{(M)} \leq \set{\overline{x} \mid \psi}^{(M)}$ kot podobjekta $\overline{X}^{(M)}$, kjer je $\overline{x}$ množica prostih spremenljivk, ki nastopajo prosto v $\varphi$ ali $\psi$. Interpretacija $M$ je model teorije $T$, če je model vsake sekvente v $T$. To označimo z $M \models T$.
 \end{definicija}
 
 Da je $M$ model $\varphi \implies \psi$ je v $\cat{Set}$ to ekvivalentno temu, da je $M$ model (v klasičnem smislu) formule $\forall \overline{x} (\varphi \rightarrow \psi)$. To je intuicija, ki jo je dobro imeti v mislih.
 \begin{primer}
   Naj bo $\mathcal{L}(\Sigma)$ jezik iz primera \ref{primer:kompozitum} s tremi tipi $X,Y,Z$ in funkcijskimi simboli $f : X \to Y$, $g : Y \to Z$ in $h : X \to Z$. Potem za interpretacijo $M$ v regularni kategoriji $\cat{C}$ velja da je $M$ model formule $f(g(x)) = h(x)$, oziroma
-  $$M \models \top \implies f(g(x)) = h(x)$$. Poglejmo si ta primer precej detajlno.
+  $$M \models \top \implies f(g(x)) = h(x).$$ 
+  Poglejmo si ta primer bolj detajlno.
+  Edina prosta spremenljivka, ki nastopa v tej formuli je $x$. Gledamo torej interpretacijo
+  $\set{x \,\middle|\, f(g(x)) = h(x)}^{(M)}$, ki je realizirana kot zožek 
+  \begin{equation*}
+    \begin{tikzcd}
+      \set{x \,\middle|\, f(g(x)) = h(x)}^{(M)} \ar[r, hook] & X^{(M)} \ar[r, "x^{(M)}"] & X^{(M)} \ar[r, "f^{(M)}"] \ar[rr, bend right, "h^{(M)}"] & Y^{(M)} \ar[r, "g^{(M)}"] & Z^{(M)}
+    \end{tikzcd}
+  \end{equation*}
+  Po definiciji ta formula velja, ko je $\set{x \,\middle|\, \top}^{(M)} = X^{(M)} \leq \set{x \,\middle|\, f(g(x)) = h(x)}^{(M)}$ kot podobjekt $X^{(M)}$.
+  To pa velja natanko takrat, ko sta $f^{(M)} \circ g^{(M)}$ in $h^{(M)}$ isti morfizem v $\cat{C}$.
 \end{primer}
+Z interpretacijo teorije v rokah se lahko vprašamo, ali le-ta lepo sodeluje s pravili sklepanja, ki smo jih definirali za regularno logiko.
+Bolj natančno, ali so tako-definirana pravila sklepanja veljavna glede na modele te teorije.
+Za to bomo najprej potrebovali dve tehnični lemi o ``slepih spremenljivkah'' in substituciji.
+\begin{lema}
+  Naj bo $\varphi$ formula s prostimi spremenljivkami izmed $\overline{z} = (z_1, \ldots, z_n)$.
+  Naj bo $\pi : \overline{Z}^{(M)} \times Y^{(M)} \to \interp{\overline{Z}}$ projekcija. Potem je
+  $$\set{(y, \overline{}) \,\middle|\, \varphi}^{(M)} = \pi^{-1} \set{\overline{z} \,\middle|\, \varphi}^{(M)}.$$
+\end{lema}
+\begin{dokaz}
+  Z indukcijo po strukturi $\varphi$. Najprej za terme $t$ tipa $X$ dokažemo, da
+  $$t(y, \overline{z})^{(M)} = t(\overline{z})^{(M)} \circ \pi : Y^{(M)} \times \interp{\overline{Z}} \to \interp{\overline{Z}}.$$
+\end{dokaz}
+
+\noindent
+Kot posledico te leme, lahko vedno pišemo $t^{(M)}$ namesto $t(\overline{z})^{(M)}$,
+saj so tej morfizmi enolično določeni,
+če poznamo morfizem za primer $\overline{z} = \operatorname{FV}(\varphi)$.
+Sedaj še rezultat, ki nam pove kako se obnaša interpretacija pri substituciji spremenljivk.
+\begin{lema}
+  Naj bo $\psi$ formula s prostimi spremenljivkami izmed $y, \overline{z}$ in $b$ term tipa $Y$ (s prostimi spremenljivkami izmed $\overline{z}$), 
+  ki je ``zamenljiv'' za $y$ v $\psi$, kar pomeni, da po substituciji nobena prosta spremenljivka v $b$ ne postane vezana v $\psi(b)$.
+  Potem je 
+  $$\set{\overline{z} \,\middle|\, \psi(b)}^{(M)} = \langle b^{(M)}, \mathrm{id}_{\interp{\overline{Z}}}\rangle^{-1} \set{(y, \overline{z}) \,\middle|\, \psi}^{(M)}$$
+\end{lema}
+\begin{dokaz}
+  Z indukcijo na strukturo $\psi$.
+\end{dokaz}
+\begin{definicija}
+Razred morfizmov teorije $T$ v regularni kategoriji $\cat{C}$ bi radi opremili s strukturo regularne kategorije,
+ki jo bomo označili z $\Mod(T, \cat{C})$. Morfizem med dvema modeloma $M$ in $N$ v $\Mod(T, \cat{C})$ je družina morfizmov
+$$\set{h_X : \interp{X} \to \interp[N]{X}}_{X \in \underline{\mathrm{sort}}_\Sigma},$$
+ki komutirajo z interpretacijami osnovnih operacija jezika $\mathcal{L}(\Sigma)$.
+\end{definicija}
+To z indukcijo razširimo na vse terme in formule. Če imamo npr.\ konstanto $c:X$ in funkcijski simbol $f:\overline{X} \to Y$,
+potem diagrama
+\begin{equation*}
+  \begin{tikzcd}
+    1 \ar[dr, "c^{(N)}"'] \ar[r, "\interp{c}"] & \interp{X} \ar[d, "h_X"]  &&  \interp{\overline{X}} \ar[d, "h_{X_1} \times \ldots \times h_{X_n}"'] \ar[r, "\interp{f}"] & \interp{Y} \ar[d, "h_Y"]\\
+    & \interp[N]{X} && \interp{\overline{X}} \ar[r, "{\interp[N]{f}}"'] & \interp[N]{Y}
+  \end{tikzcd}
+\end{equation*}
+komutirata. Za relacijski simbol $R \rightarrowtail \overline{X}$ pa to pomeni, da kompozitum
+$$(h_{X_1} \times \ldots \times h_{X_n}) \circ \interp{i} : \interp{R} \to \interp{\overline{X}} \to \interp[N]{\overline{X}}$$
+lahko faktoriziramo skozi inkluzijo $\interp[N]{R} \hookrightarrow \interp[N]{X}$.
+Po indukciji potem velja, da za vsak term $t(\overline{z})$ tipa $Y$ diagram
+\begin{equation*}
+  \begin{tikzcd}
+    \interp{\overline{Z}} \ar[d, "h_{\overline{Z}}"'] \ar[r, "{t(\overline{z})^{(M)}}"] & \interp{Y} \ar[d, "h_Y"] \\
+    \interp[N]{\overline{Z}} \ar[r, "{\interp[N]{t(\overline{z})}}"'] & \interp[N]{Y}
+  \end{tikzcd}
+\end{equation*}
+komutira (tu je $h_{\overline{Z}}$ mišljen kot $h_{Z_1 \times \ldots \times Z_n}$).
+Podobno z indukcijo pokažemo, da za vsako formulo $\varphi(\overline{z})$ kompozitum
+$$\interp{\set{\overline{z} \,\middle|\, \varphi}} \hookrightarrow \interp{\overline{Z}} \to \interp[N]{\overline{Z}}$$
+lahko faktoriziramo skozi $\interp[N]{\set{\overline{z} \,\middle|\, \varphi}}$.
+\begin{definicija}
+  Naj bo $F : \cat{C} \to \cat{D}$ regularen funktor med regularnima kategorijama.
+  Če je $M$ model teorije $T$ (formulirane v jeziku $\mathcal{L}(\Sigma)$) v $\cat{C}$,
+  potem definiramo interpretacijo $F(M)$ jezika $\mathcal{L}(\Sigma)$ v $\cat{D}$ kot
+  \begin{itemize}
+    \item Za tip $X$ iz $\underline{\mathrm{sort}}_\Sigma$ definiramo $\interp[F(M)]{X} = F(\interp{X})$
+    \item Za konstanto $c:X$ definiramo $\interp[F(M)]{c} = F(\interp{x})$
+    \item Za funkcijski simbol $f : \overline{X} \to Y$ definiramo $\interp[F(M)]{f} = F(\interp{f})$
+    \item Za relacijski simbol $R \rightarrowtail \overline{X}$ definiramo $\interp[F(M)]{R} = F(\interp{R}) \rightarrowtail \overline{X}$
+  \end{itemize}
+\end{definicija}
+S to definicijo velja
+\begin{lema}
+  Vsak regularen funktor $F : \cat{C} \to \cat{D}$ med regularnima kategorijama inducira,
+  za vsako regularno teorijo $T$ funktor
+  $$\Mod(T, \_)=F_T : \Mod(T,\cat{C}) \to \Mod(T, \cat{D})$$
+  V posebnem imamo funktor $\cat{RegCat} \to \cat{Cat}$ iz kategorije majhnih regularnhi kategorij v majhne kategorije.
+\end{lema}
+\begin{dokaz}
+  Najprej z indukcijo razširimo interpretacijo $F(M)$ na vse terme in formule jezike $\mathcal{L}(\Sigma)$.
+\end{dokaz}
+Po drugi strani, če je $M$ fiksen model teorije $T$ v regularni kategoriji $\cat{E}$
+dobimo za vsako regualarno kategorij $\cat{D}$ funcktor
+$$\mathfrak{M}_{M,\cat{D}} = (\_)_T(M): \cat{RegCat}(\cat{E}, \cat{D}) \to \Mod(T, \cat{D}),$$
+ki pošlje funktor $G : \cat{E} to \cat{D}$ v model $G(M)$ v $\cat{D}$.
+Naravno transformacijo $\alpha : G \to H$ pošlje v morfizem modelov
+$$\set{\alpha_{\interp{X}}: G(\interp{X}) \to H(\interp{X})}_{X \in \underline{\mathrm{sort}}_{\Sigma}}.$$
+Dodatno velja, da če imamo regularen funktor $F : \cat{D} \to \cat{C}$, potem diagram funktorjev
+\begin{equation}
+  \begin{tikzcd}
+    \cat{RegCat}(\cat{E}, \cat{D}) \ar[d, "F \circ (\_)"'] \ar[r, "\mathfrak{M}_{M,\cat{D}}"] & \Mod(T, \cat{D}) \ar[d, "F_T"] \\
+    \cat{RegCat}(\cat{E}, \cat{C}) \ar[r, "\mathfrak{M}_{M,\cat{C}}"'] & \Mod(T, \cat{C})
+  \end{tikzcd}
+\end{equation}
+komutira.
+\subsection{Veljavnost}
+Pripravili smo si vse potrebno, da lahko govorimo o veljavnosti pravil sklepanja, ki smo jih definirali za regularno logiko,
+glede na interpretacijo v regularni kategoriji.
+\begin{izrek}[Veljavnost]
+  Naj bo $T$ regularna teorija formulirana v jeziku $\mathcal{L}(\Sigma)$ in $M$ model te teorije v regualrni kategoriji $\cat{C}$.
+  Če $T, \varphi \vdash_{\overline{x}} \psi$, potem je $M \models \varphi \implies \psi$,
+  oziroma je $\set{\overline{x} \,\middle|\, \varphi}^{(M)} \leq \set{\overline{x} \,\middle|\, \psi}^{(M)}$, kot podobjekta $\interp{X}$.
+\end{izrek}
+\begin{dokaz}
+  Z indukcijo po derivacijah $\varphi \vdash_{\overline{x}}^{T} \psi$
+\end{dokaz}
 %
 \section{Interna logika regularne kategorije}
+Naj bo $\cat{C}$ regularna kategorija.
+Priredili ji bomo signaturo $\Sigma_\cat{C}$ in regularen jezik na naslednji način:
+Signatura $\Sigma_\cat{C}$ ima za osnovne tipe objekte kategorije $\cat{C}$.
+Fiksiramo končni objekt in za vsak končen seznam objektov fiksiramo objekt, ki predstavlja njihov produkt.
+Tu torej spet uporabimo aksiom izbire. Potem
+\begin{itemize}
+  \item Za vsak morfizem $c : 1 \to X$ v jezik dodamo konstanto $c:X$
+  \item Za vsak morfizem $f : \overline{X} \to Y$ v jezik dodamo funkcijski simbol $f : \overline{X} \to Y$
+  \item Za vsak podobjekt $R \hookrightarrow \overline{X}$ v jezik dodamo en relacijski simbol $R \rightarrowtail \overline{X}$
+\end{itemize}
+Jezik $\mathcal{L}(\Sigma_\cat{C})$ ima sedaj kanonično interpretacijo $I^{\cat{C}}$ v $\cat{C}$.
+Teorijo $T_\cat{C}$ definiramo kot teorijo te interpretacije, torej množico vseh sekvent
+$\varphi \vdash_F \psi$ v jeziku $\mathcal{L}(\Sigma_\cat{C})$, ki so resnične pod interpretacijo $I^\cat{C}$.
+V imenu zlorabe notacije bomo namesto $I^\cat{C}$ pisali kar $\cat{C}$, 
+hkrati pa tudi ne bomo ločevali med npr.\ funkcijskim simbolom $f$ v tem jeziku in njegovo interpretacijo $f^{(I^\cat{C})}$ v $\cat{C}$.
+Sedaj lahko s pomočjo jezika regularne teorije opišemo kategorične pojme.
+\begin{lema}
+  Naj bo $\cat{C}$ regularna kategorija. Potem
+  \begin{enumerate}[label=(\roman*)]
+    \item Naj bodo $A \xrightarrow{f} B \xrightarrow{g} C$ in $A \xrightarrow{h} C$ morfizmi v $\cat{C}$.
+    Potem je $h = g \circ g$ natanko takrat, ko velja $\cat{C} \models h(x) = g(f(x))$, kjer je $x$ prosta spremenljivka tipa $A$.
+    \item Morfizem $m : X \to Y$ je monomorfizem natanko takrat, ko velja $\cat{C} \models m(x_1) = m(x_2) \implies x_1 = x_2$.
+    \item Morfizem $f : X \to Y$ je regularen epimorfizem natanko, ko velja $\cat{C} \models \exists x f(x) = y$.
+  \end{enumerate}
+\end{lema}
+\begin{dokaz}
+  sorry
+\end{dokaz}
+Naslednja lema karakterizira končne limite v regularni kategoriji v internem jeziku regularne kategorije, ki smo ga definirali zgoraj.
+\begin{lema}
+  Naj bo $\cat{C}$ regularna kategorija. Potem
+  \begin{enumerate}[label=(\roman*)]
+    \item Objekt $X$ v $\cat{C}$ je končen natanko takrat, ko velja $\cat{C} \models x_1 = x_2$ in $\cat{C} \models \exists x . x=x$.
+    \item Morfizma $f : Z \to X$ in $g : Z \to Y$ določita $Z$ kot produkt $X$ in $Y$ natanko takrat,
+    ko velja $\cat{C} \models f(z_1) = f(z_2) \wedge g(z_1) = g(z_2) \implies z_1 = z_2$ in 
+    $\cat{C} \models \exists z(f(z) = x \wedge g(z) = y)$.
+    \item Če imamo diagram \begin{tikzcd}[column sep=normal] Z \ar[r, "e"] & X \ar[r, shift left, "f"] \ar[r, shift right, "g"'] & Y \end{tikzcd},
+    tako da velja $f e = g e$, potem je $Z$ zožek $f$ in $g$ natanko takrat, ko je $e$ monomorfizem in
+    $\cat{C} \models f(x) = g(x) \implies \exists z . e(z) = x$. To lahko izrazimo s predikatom $Z$,
+    ki ga določa podobjekt $Z \hookrightarrow X$ kot $\cat{C} \models f(x) = g(x) \implies Z(x)$.
+  \end{enumerate}
+\end{lema}
+\begin{dokaz}
+  sorry.
+\end{dokaz}
+
+\noindent
+Prejšnje leme pokažejo, da lahko vse lastnosti, ki določajo regularno kategorijo izrazimo v interni logiki regularne kategorije.
+Na ta način lahko izrazimo tudi regularne funktorje.
+Če je $F : \cat{C} \to \cat{D}$ funktor med regularnima kategorijama (ki ni nujno regularen), potem dobimo interpretacijo $\mathfrak{F}$ signature $\Sigma_\cat{C}$ (oziroma njen funkcijski del) na sledeč način:
+\begin{itemize}
+  \item $\interp[\mathfrak{F}]{X} = F(X)$, za $X \in \underline{\mathrm{sort}}_{\Sigma}$.
+  \item $\interp[\mathfrak{F}]{f} : \interp[\mathfrak{F}]{X} \to \interp[\mathfrak{F}]{Y} = F(f : X \to Y)$, za morfizem $f: X \to Y$ v $\cat{C}$.
+\end{itemize}
+\begin{lema}
+  Funktor $F$ je regularen natanko takrat, ko velja $\mathfrak{F} \models T_\cat{C}$.
+\end{lema}
+\begin{dokaz}
+  sorry.
+\end{dokaz}
 %
-\section{Polnost regularne teorije}
+\section{Generični model in polnost regularne teorije}
+V primeru algebrajskih toerij smo videli, da za vsako algebrajsko teorijo $\mathbb{T}$ obstaja poseben model $\mathcal{U}$,
+ki smo ga imenovali generični model teorije $\mathbb{T}$, za katerega velja, da je dokazljivost v teoriji envivalentna veljavnosti v $\mathcal{U}$.
+Dobili smo tudi ekvivalenco med kategorijama modelov algebrajske teorije in kategorijo funktorjev, ki ohranjajo končne produkte
+$$\Hom_{\mathrm{FP}}(\cat{C}_{\mathbb{T}}, \cat{C}) \simeq \Mod(\mathbb{T}, \cat{C}).$$
+Izkaže se, da je podobno konstrukcijo mogoče ponoviti za regularne teorije.
+Za teorijo $T$ bomo konstruirali regularno kategorijo $\mathcal{R}(T)$, ki bo inducirala ekvivalenco kategorij
+$$\Mod(T, \cat{C}) \simeq \cat{RegCat}(\mathcal{R}(T), \cat{C})$$
+naravno v $\cat{C}$. Analogno kot pri algebrajskih kategorijah bo $\mathcal{R}(T)$ vsebovala \emph{konzervativen model} teorije $T$,
+za katerega se bosta pojma veljavnosti in dokazljivosti ujemala.
+\begin{definicija}
+  Naj bo $T$ fiksna regularna teorija. Konstruirali bomo $\mathcal{R}(T)$ kot Lindenbaum-Tarski kategorijo:
+  \begin{itemize}
+    \item \emph{Objekti} so ekvivalenčni razredi parov $(\overline{X}, p(\overline{x}))$,
+      kjer je $\overline{x} : \overline{X}$ končna množica tipov in je $p$ regularna formula.
+      $\overline{X}$ imenujemo \emph{kontekst} za $p$. Ekvivalentne so lahko le formule v istem kontekstu.
+      Dva taka para $(\overline{X}, p_1(\overline{x}_1))$ in $(\overline{X}, p_2(\overline{x}_2))$ sta ekvivalentna, če
+      $$T \vdash_{\overline{x}} p_1(\overline{x}) \Leftrightarrow p_2(\overline{x})$$
+      kjer je $\overline{x}$ množica svežih(?) spremenljivk tipa $\overline{X}$.
+      Ekvivalenčne razrede označimo z $\set{\overline{x} \,\middle|\, p}$ in konteksta ne pišemo eksplicitno.
+      (Tu smo na nek način vezali spremenljivke $\overline{x}$, ki se pojavljajo v $p$)(ne razumem točno tega stavka)
+    \item \emph{Morfizem} od $\set{\overline{x} \,\middle|\, p}$ do $\set{\overline{y} \,\middle|\, q}$
+      je ekvivalenčni razred regularnih formul v kontekstu $(\overline{X}\overline{Y}, \gamma(\overline{x},\overline{y}))$,
+      kjer je $\gamma$ dokazljivo funkcijska:
+      \begin{align*}
+        &T \vdash_{\overline{x},\overline{y}} \gamma(\overline{x},\overline{y})  \implies p(\overline{x}) \wedge q(\overline{y}) \\
+        &T \vdash_{\overline{x}} p(\overline{x}) \implies \exists \overline{y} \gamma(\overline{x},\overline{y}) \\
+        &T \vdash_{\overline{x},\overline{y}_1,\overline{y}_2} \gamma(\overline{x},\overline{y}_1) \wedge \gamma(\overline{x},\overline{y}_2) \implies \overline{y}_1 = \overline{y}_2
+      \end{align*}
+      kar intuitivno pravi, da je $\gamma$ graf funkcije. Dve taki formuli v kontekstu sta ekvivalentni, če sta dokazljivo ekvivalentni v $T$.
+      Ekvivalenčni razred take formule označimo z $\set{(\overline{x},\overline{y}) \,\middle|\, \gamma(\overline{x},\overline{y})}$, ali krajše kar z $\set{\gamma}$.
+    \item Kompozitum dveh morfizmov $\set{\gamma} : \set{\overline{x} \,\middle|\, p} \to \set{\overline{y} \,\middle|\, q}$ in
+      $\set{\chi} : \set{\overline{y}\,\middle|\, q} \to \set{\overline{z}\,\middle|\, r}$ je podan z ekvivalenčnim razredom formule
+      $$\exists \overline{x}(\gamma(\overline{y},\overline{x}) \wedge \chi(\overline{x},\overline{z}))$$
+  \end{itemize}
+\end{definicija}
+\begin{lema}
+  Kompozitum dveh morfizmov v $\mathcal{R}(T)$ je dobro definiran.
+\end{lema}
+\begin{dokaz}
+  sorry
+\end{dokaz}
+Iz konstrukcije je jasno, da dobimo majhno kategorijo.
+\begin{lema}
+  Kategorija $\mathcal{R}(T)$ ima vse končne limite
+  \begin{enumerate}[label=(\roman*)]
+    \item Objekt $\set{\cdot \,\middle|\, \top}$ (ekvivalenčni razred formul v kontekstu $(\emptyset, \top)$) je končni objekt v $\mathcal{R}(T)$.
+    \item Produkt objektov $\set{\overline{x}\,\middle|\, p}$ in $\set{\overline{y}\,\middle|\, q}$ je podan z objektom
+      $\set{(\overline{x},\overline{y})\,\middle|\, p \wedge q}$.
+      Projekcija na $\set{\overline{x}\,\middle|\, p}$ je podana z ekvivalenčnim  razredom 
+      $$\set{(\overline{x}\overline{y},\overline{x}')\,\middle|\, p(\overline{x}) \wedge q(\overline{y}) \wedge \overline{x} = \overline{x}'}.$$
+      Projekcija na $\set{\overline{y}\,\middle|\, q}$ pa z ekvivalenčnim razredom
+      $$\set{(\overline{x}\overline{y},\overline{y}')\,\middle|\, p(\overline{x}) \wedge q(\overline{y}) \wedge \overline{y} = \overline{y}'}.$$
+    \item Zožek dveh morfizmov $\set{\gamma}, \set{\gamma'} : \set{\overline{x}\,\middle|\, p} \to \set{\overline{y}\,\middle|\, q}$
+      je podan z objektom $E = \set{\overline{x}\,\middle|\, \epsilon(\overline{x})}$ kjer je 
+      $$\epsilon(\overline{x}) \equiv \exists \overline{y}\left(\gamma(\overline{x},\overline{y}) \wedge \gamma'(\overline{x},\overline{y})\right)$$
+      in morfizmom $\set{(\overline{x},\overline{x}')\,\middle|\, \epsilon(\overline{x}) \wedge \overline{x} = \overline{x}'}$.
+    \item Povlek dveh morfizmov $\set{\varphi} : \set{\overline{x}\,\middle|\, p} \to  \set{\overline{z}\,\middle|\, r}$ in $\set{\gamma} : \set{\overline{y}\,\middle|\, q} \to \set{\overline{z}\,\middle|\, r}$
+      je podan z objektom 
+      $$\set{(\overline{x},\overline{y})\,\middle|\, \exists \overline{z} \left(\varphi(\overline{x},\overline{z}) \wedge \gamma(\overline{y},\overline{z})\right)}$$
+      in kanoničnima projekcijama.
+  \end{enumerate}
+\end{lema}
+\begin{opomba}
+  Opazimo, da so v $\mathcal{R}(T)$ vse limite podane enolično, ne samo enolično do izomorfizma,
+  saj smo objekte podali kot ekvivalenčne razrede. Definicija kategorije bi delovala tudi, če tega nebi storili, a to omogoča sledeči dokaz.
+\end{opomba}
+\begin{dokaz}
+  Uporabljali bomo lastnosti relacije $\vdash^T$.
+\end{dokaz}
+\begin{lema}
+  Morfizem $\set{\varphi} \set{\overline{x}\,\middle|\, p} \to \set{\overline{y}\,\middle|\, q}$ je
+  \begin{enumerate}[label=(\roman*)]
+    \item monomorfizem natanko takrat, ko
+      $$T \vdash_{\overline{x}_1,\overline{x}_2}  \exists \overline{y} \left( \varphi(\overline{x}_1,\overline{y}) \wedge \varphi(\overline{x}_2,\overline{y}) \implies \overline{x}_1 = \overline{x}_2 \right),$$
+    \item regularen epimorfizem natanko takrat, ko
+      $$T \vdash_{\overline{y}} q(\overline{y}) \implies \exists \overline{x} \varphi(\overline{x},\overline{y}).$$
+    \item Morfizem $\set{p(\overline{x}) \wedge \overline{x}, = \overline{x}'} : \set{\overline{x}\,\middle|\, p } \to \set{\overline{x}\,\middle|\, q}$ je monomorfizem natanko takrat, ko
+      $$T \vdash_{\overline{x}} p \implies q.$$
+  \end{enumerate}
+\end{lema}
+\begin{dokaz}
+  sorry.
+\end{dokaz}
+\begin{trditev}
+  $\mathcal{R}(T)$ je regularna kategorija.
+\end{trditev}
+\begin{dokaz}
+  sorry.a
+\end{dokaz}
 \end{document}

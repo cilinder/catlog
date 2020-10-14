@@ -3,6 +3,7 @@
 \usepackage[utf8x]{inputenc}   % omogoča uporabo slovenskih črk kodiranih v formatu UTF-8
 \usepackage[slovene,english]{babel}    % naloži, med drugim, slovenske delilne vzorce
 \usepackage[pdftex]{graphicx}  % omogoča vlaganje slik različnih formatov
+\usepackage{lmodern}
 \usepackage{fancyhdr}          % poskrbi, na primer, za glave strani
 \usepackage{comment}
 \usepackage[pdftex, colorlinks=true,
@@ -78,6 +79,7 @@
 \theoremstyle{remark}
 \newtheorem*{opomba}{Opomba}
 %
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %								%
 %	Tikz-cd nastavitve			%
@@ -114,6 +116,8 @@
 %									%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
+\newcommand{\interp}[2][M]{{#2}^{(#1)}} % interpretacija argumenta v modelu M v regularni kategoriji
+%
 \newcommand{\eqtext}[1]{\stackrel{\mathclap{\normalfont\mbox{#1}}}{=}} % write text over =
 % could use a way to make the text smaller
 %
@@ -132,7 +136,7 @@
 \DeclareMathOperator{\Sub}{Sub}
 \DeclareMathOperator{\graph}{graph}
 %
-\renewcommand{\set}[1]{\{\,#1\,\}}
+\renewcommand{\set}[1]{\left\lbrace\,#1\,\right\rbrace}
 %
 \newcommand{\fprod}[1]{\langle #1 \rangle}
 %
