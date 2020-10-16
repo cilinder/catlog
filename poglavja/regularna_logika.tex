@@ -2,8 +2,8 @@
 \begin{document}
 \section{Regularna logika}
 Do sedaj smo videli povezavo med algebrajsko teorijo in kategorijo z neko dodatno struktuo, ki nam je omogočila interpretacijo take teorije v semantiki same kategorije. Teorija, ki smo jo obravnavali je bila precej enostavna s stališča logike, saj so bile edine logične formule, ki smo jih lahko konstruirali oblike $t_1 = t_2$ za neka terma, sestavljena induktivno iz spremenljivk in funkcijskih simbolov. 
-Že iz teh osnovnih gradnikov je mogoče dobiti pomembne matematične "infrastrukture", kot je na primer teorija grup. Za opis nekih matematičnih teorij pa jasno ta stopnja kompleksnosti ne zadostuje.
-Videli smo, da se teorije polj ne da opisati z algebrajsko teorijo. Moderna matematika je standardno opisana v jeziku predukatne logike, oz logike drugega (ali višjega) reda, kjer imamo poleg funkcijskih simbolov še logične veznike kot so "in", "ali", negacijo in univerzalni ter eksistenčni kvantifikator.
+Že iz teh osnovnih gradnikov je mogoče dobiti veliko pomembne matematične ``infrastrukture'', kot je na primer teorija grup. Za opis nekih matematičnih teorij pa jasno ta stopnja kompleksnosti ne zadostuje.
+Videli smo, da se teorije polj ne da opisati z algebrajsko teorijo. Moderna matematika je standardno opisana v jeziku predukatne logike, oz logike drugega (ali višjega) reda, kjer imamo poleg funkcijskih simbolov še logične veznike kot so ``in'', ``ali'', negacijo in univerzalni ter eksistenčni kvantifikator.
 Naravno vprašanje je torej, ali lahko zgodbo algebrajskih teorij ponovimo z neko močnejšo logiko in če se to da, kako se to odraža v strukturi kategorijo, ki jo dobimo na ta način in ali ohranimo lepe lastnosti, ki smo jih videli v primeru algebrajskih teorij.
 Kot vemo iz Gödelovega izreka o polnosti logike prvega reda, za modele v kategoriji množic to velja. Zanima nas, ali je to definicijo modela mogoče razširiti na podoben način kot za algebrajske teorije.
 Naredili bomo korak v to smer in našo logiko le delno razširili v tako imenovano $\emph{regularno logiko}$, kjer bomo formule gradili iz atomskih formul, logične konstante resničnosti $\top$, konjunkcij $\wedge$ in eksistenčnega kvantifikatorja $\exists$.
@@ -35,6 +35,31 @@ Pogosto bomo za $X_1 \times \ldots X_n$ uporabljali tudi oznako $\overline{X}$, 
   $$f(g(x)) = h(x)$$
   Ko definiramo interpretacijo teorije bomo videli, da je to ravno formula, ki pomeni, da je $h$ kompozitum $f$ in $g$.
 \end{primer}
+\begin{primer}[Delno urejene grupe]
+  Naj bo $\Sigma$ signatura z enim osnovnim tipom $X$. Za delno urejeno grupo potrebujemo operacije grupe:
+  \begin{itemize}
+    \item konstanto $e : X$, ki predstavlja enoto grupe,
+    \item operacijo množenja $m : X \times X \to X$,
+    \item operacijo inverza $i : X \to X,$
+  \end{itemize}
+  ki zadoščajo aksiomom
+  \begin{itemize}
+    \item[(G1)] $m(x,(m(y,z))) = m(m(x,y), z)$
+    \item[(G2)] $m(x,e) = m(e,x) = x$
+    \item[(G3)] $m(x,i(x)) = m(i(x), x) = e$
+  \end{itemize}
+  Poleg tega imamo še relacijo $\leq$, za katero veljajo aksiomi delne urejenosti:
+  \begin{itemize}
+    \item[(U1)] $x \leq x$ (refleksivnost)
+    \item[(U2)] $x \leq y \wedge y \leq x \implies x = y$ (anti-simetričnost)
+    \item[(U3)] $x \leq y \wedge y \leq z \implies x \leq z$ (tranzitivnost)
+  \end{itemize}
+  Za definicje delno urejene grupe potrebujemo še aksiom \emph{invariance za translacijo}, ki pravi
+  \begin{itemize}
+    \item[(TI)] $x \leq y \implies m(x, g) \leq m(y, g) \wedge m(g,x) \leq m(g,y)$
+  \end{itemize}
+\end{primer}
+
 Sedaj bomo definirali pravila sklepanja za naš fragment logike prvega reda, za katera bomo kasenje pokazali, da so "sound" in polna glede na kategorično semantiko, ki jim jih bomo dali.
 Podali jih bomo kot zaporedja dedukcij oblike $\varphi \vdash_F \psi$, indeksiranih po končnih množicah spremenljivk $F$. Dedukcija $\varphi \vdash \psi$ je definirana le, če vse proste spremenljivke v $\varphi$ ali $\psi$ ležijo v $F$. V prihodnje bomo privzeli, da je za izraz $\varphi \vdash \psi$ ta pogoj vedno izpolnjen (napiši to lepše).
 Tu moramo biti pozorni, saj na primer izraz $x_1 = x_2 \vdash_{x_1, x_2} x_2 = x_1$ ni enak izrazu $x_1 = x_2 \vdash_{x_1, x_2, x_3} x_2 = x_1$. Razlog za to podrobnost bomo razložili kasneje, ko definiramo semantiko v kategoriji.
@@ -200,12 +225,13 @@ Kot posledico tega lahko vidimo, da $f^{-1}$ ohranja konjunkcije v $\Sub(Y)$.
 Opazimo lahko, da je kanonični morfizem $X \to \graph(f)$ izomorfizem (dodamo dokaz?).
 \begin{lema}
   Naj bodo oznake kot v zgornji definiciji in naj bo $A \overset{\alpha}{\rightarrowtail} X$ podobjekt. Če z $\pi_X$ in $\pi_Y$ označimo projekciji iz produkta, potem velja
-  $$\exists_f(A) = \exists_{\pi_Y}(\pi_X^{-1}(A) \wedge \graph(f))$$.
+  $$\exists_f(A) = \exists_{\pi_Y}(\pi_X^{-1}(A) \wedge \graph(f)).$$
 \end{lema}
 \begin{dokaz}
   sorry
 \end{dokaz}
 
+\noindent
 Sedaj bomo opisali, kako lahko dobimo nazaj morfizem iz njegovega grafa.
 \begin{definicija}
   Na podobjekt $R \rightarrowtail X \times Y$ lahko gledamo kot na relacijo med ``elementi'' $X$ in $Y$. Relaciji $R$ pravimo 
@@ -482,7 +508,7 @@ Na ta način lahko izrazimo tudi regularne funktorje.
   sorry.
 \end{dokaz}
 %
-\section{Generični model in polnost regularne teorije}
+\section{Generični model in polnost regularnih teorij}
 V primeru algebrajskih toerij smo videli, da za vsako algebrajsko teorijo $\mathbb{T}$ obstaja poseben model $\mathcal{U}$,
 ki smo ga imenovali generični model teorije $\mathbb{T}$, za katerega velja, da je dokazljivost v teoriji envivalentna veljavnosti v $\mathcal{U}$.
 Dobili smo tudi ekvivalenco med kategorijama modelov algebrajske teorije in kategorijo funktorjev, ki ohranjajo končne produkte
@@ -524,6 +550,8 @@ za katerega se bosta pojma veljavnosti in dokazljivosti ujemala.
 \begin{dokaz}
   sorry
 \end{dokaz}
+
+\noindent
 Iz konstrukcije je jasno, da dobimo majhno kategorijo.
 \begin{lema}
   Kategorija $\mathcal{R}(T)$ ima vse končne limite
@@ -553,7 +581,7 @@ Iz konstrukcije je jasno, da dobimo majhno kategorijo.
   Uporabljali bomo lastnosti relacije $\vdash^T$.
 \end{dokaz}
 \begin{lema}
-  Morfizem $\set{\varphi} \set{\overline{x}\,\middle|\, p} \to \set{\overline{y}\,\middle|\, q}$ je
+  Morfizem $\set{\varphi} : \set{\overline{x}\,\middle|\, p} \to \set{\overline{y}\,\middle|\, q}$ je
   \begin{enumerate}[label=(\roman*)]
     \item monomorfizem natanko takrat, ko
       $$T \vdash_{\overline{x}_1,\overline{x}_2}  \exists \overline{y} \left( \varphi(\overline{x}_1,\overline{y}) \wedge \varphi(\overline{x}_2,\overline{y}) \implies \overline{x}_1 = \overline{x}_2 \right),$$
@@ -570,6 +598,75 @@ Iz konstrukcije je jasno, da dobimo majhno kategorijo.
   $\mathcal{R}(T)$ je regularna kategorija.
 \end{trditev}
 \begin{dokaz}
-  sorry.a
+  sorry
+\end{dokaz}
+\begin{definicija}
+  Kategorija $\mathcal{R}(T)$ vsebuje kanonično interpretacijo $\mathcal{U}$ jezika $\mathcal{L}(\Sigma)$:
+  \begin{itemize}
+    \item $\interp[\mathcal{U}]{X} = \set{x\,\middle|\, x = x}$, kjer je $x$ spremenljivka tipa $X$.
+    \item $\interp[\mathcal{U}]{c} = \set{x\,\middle|\, x = c} : \set{\cdot\,\middle|\, \top} \to \interp[\mathcal{U}]{X}$, kjer je $c:X$ konstanta.
+    \item $\interp[\mathcal{U}]{f} = \set{(\overline{x}y)\,\middle|\, f(\overline{x}) = y}$,
+      kjer je $f : \overline{X}\to Y$ funkcijski simbol. Uporabimo dejstvo, da je $\overline{X}^{(\mathcal{U})} = \interp[\mathcal{U}]{\bar{X}_1} \times \ldots \times \interp[\mathcal{U}]{\bar{X}_n}$
+    \item $\interp[\mathcal{U}]{R} = \set{\overline{x}\,\middle|\, R(\overline{x})}$, kjer je $R$ relacijski simbol.
+  \end{itemize}
+\end{definicija}
+\noindent
+Enostavna indukcija (napiši to indukcijo) pokaže, da je za term $t(\overline{z})$ tipa $Y$
+$$\caninterp{t(\overline{z})} = \set{(\overline{z}y)\,\middle|\, t(\overline{z}) = y}$$
+morfizem $\caninterp{\overline{Z}} \to \caninterp{Y}$. Podobno za regularno formulo $\varphi(\overline{z})$ velja 
+$$\caninterp{\set{\overline{z}\,\middle|\, \varphi}} = \set{\overline{z}\,\middle|\, \varphi}.$$
+Sledi, da je $\mathcal{U}$ model teorije $T$, kajti če je $\varphi \implies \psi$ sekventa v $T$,
+potem je $\set{(\overline{x}, \overline{x}')\,\middle|\, p(\overline{x}) \wedge \overline{x}= \overline{x}'}$
+monomorfizem iz $\set{\overline{x}\,\middle|\, p}$ v $\set{\overline{x}'\,\middle|\, q}$,
+torej je $\set{\overline{x}\,\middle|\, p} \leq \set{\overline{x}'\,\middle|\, q}$.
+Za model $\mathcal{U}$ velja tudi, da je \emph{konzervativen}, kar pomeni,
+da za vse sekvente $p \implies q$
+$$\text{če} \ \mathcal{U} \models p \implies q \ \text{,potem} \ T \vdash_{\overline{x}} p \implies q$$
+kar sledi iz zgornje argumentacije in leme o klasifikaciji monomorfizmov v $\mathcal{R}(T)$.
+Če to povzamemo 
+\begin{izrek}
+  Kanonična interpretacija $\mathcal{U}$ v regularni kategoriji $\mathcal{R}(T)$ je konzervativen model teorije $T$. Pravila sklepanja v regularni logiki so polna glede na interpretacije v majhnih regularnih kategorijah.
+\end{izrek}
+Sedaj lahko podamo funktorje, ki nastopajo v ekvivalenci 
+$$\Mod(T, \cat{C}) \simeq \cat{RegCat}(\mathcal{R}, \cat{C}),$$
+naravni v $\cat{C}$. Funktor 
+$$\mathfrak{M}_{\cat{C}} : \cat{RegCat}(\mathcal{R}, \cat{C}) \to \Mod(T, \cat{C})$$
+je funktor $\mathfrak{M}_{\mathcal{U}, \cat{C}}$, kot smo ga definiral v definiciji ?? in pošlje funktor $F : \mathcal{R}(T) \to \cat{C}$ v model $F_T(\mathcal{U})$ v $\cat{C}$ ter naravno transformacijo $\alpha : F \to F$ v družino
+$$F_T(\alpha) = \set{\alpha_{\caninterp{X}} : F(\caninterp{X}) \to G(\caninterp{X})}_{X \in \underline{\mathrm{sort}}_{\Sigma}}.$$
+V drugo smer, funktor 
+$$\mathfrak{F}_{\cat{C}} : \Mod(T, \cat{C}) \to \cat{RegCat}(\mathcal{R}(T), \cat{C})$$
+pošlje model $M$ teorije $T$ v kategoriji $\cat{C}$ v funktor
+\begin{align*}
+  \mathfrak{F}_{\cat{C}} : \mathcal{R}(T) &\to \cat{C}\\
+  \set{\overline{x}\,\middle|\, p} &\mapsto \set{\overline{x}\,\middle|\, p}^{(M)} \\
+  \set{\gamma} : \set{\overline{x}\,\middle|\, p} \to \set{\overline{y}\,\middle|\, q} &\mapsto \text{`enolični morfizem} \ f : \set{\overline{x}\,\middle|\, p}^{(M)} \to \set{\overline{y}\,\middle|\, q}^{(M)} \\ 
+  &\qquad \text{da je} \ \graph(f) = \set{(\overline{x}, \overline{y}) \,\middle|\, \gamma}^{(M)} \text{'}.
+\end{align*}
+Morfizem $f$ obstaja po lemi ??. Veljavnost pravil sklepanja in dejstvo, da model lahko definiramo z interno logiko $\cat{C}$ pomeni, da je $\mathfrak{F}_{\cat{C}}(M)$ regularen funktor.
+Morfizem med modeloma $h : M \to N$ porodi družino morfizmov 
+$$h_{\set{\overline{x}\,\middle|\, p}} : \set{\overline{x}\,\middle|\, p}^{(M)} \to \set{\overline{x}\,\middle|\, p}^{(N)},$$
+ki je naraven, ker če imamo morfizem $\set{\gamma} : \set{\overline{x}\,\middle|\, p} \to \set{\overline{y}\,\middle|\, q}$ potem, ker oba kvadrata v naslednjem diagramu komutirata, to pomeni, da komutira tudi zunanji, ki predstavlja ravno diagram naravne transformacije:
+\begin{equation*}
+  \begin{tikzcd}[column sep=3cm]
+    \set{\overline{x}\,\middle|\, p}^{(M)} \ar[d, two heads] \ar[r, "h_{\set{\overline{x}\,\middle|\, p}}"] & \set{\overline{x}\,\middle|\, p}^{(N)} \ar[d, two heads] \\
+    \set{\overline{y}\,\middle|\, \exists \overline{x} \gamma(\overline{x}, \overline{y})}^{(M)}  \ar[d, hook] \ar[r, "h_{\set{\overline{y}\,\middle|\, \exists \overline{x} \gamma(\overline{x}, \overline{y})}}"] & \set{\overline{y}\,\middle|\, \exists \overline{x} \gamma(\overline{x}, \overline{y})}^{(N)} \ar[d, hook] \\
+    \set{\overline{y}\,\middle|\, q}^{(M)} \ar[r, "h_{\set{\overline{y}\,\middle|\, q}}"] & \set{\overline{y}\,\middle|\, q}^{(N)}
+  \end{tikzcd}
+\end{equation*}
+Ta funktor je naraven v $\cat{C}$: Če je $F : \cat{D} \to \cat{C}$ regularen funktor, potem diagram
+\begin{equation}
+  \begin{tikzcd}
+    \Mod(T, \cat{D}) \ar[d, "F_T"'] \ar[r, "\mathfrak{F}_{\cat{D}}"] & \cat{RegCat}(\mathcal{R}(T), \cat{D}) \ar[d, "F \circ (\_)"] \\
+    \Mod(T, \cat{C}) \ar[r, "\mathfrak{F}_{\cat{C}}"'] & \cat{RegCat}(\mathcal{R}(T), \cat{C})
+  \end{tikzcd}
+\end{equation}
+komutira.
+\begin{izrek}
+  Funktorja $\mathfrak{M}_{\cat{C}}$ in $\mathfrak{F}_{\cat{C}}$ inducirata ekvivalenco kategorij
+  $$\Mod(T, \cat{C}) \simeq \cat{RegCat}(\mathcal{R}(T), \cat{C}),$$
+  ki je naravna v $\cat{C}$. Do ekvivalence natančno, vsaka majhna regularna kategorija $\cat{C}$ nastane na tak način, kot `klasifikacijska kategorija' regularne teorije, kajti $\cat{C} \simeq \mathcal{R}(T_{\cat{C}})$.
+\end{izrek}
+\begin{dokaz}
+  Preverimo, da je kompozitum v obe smeri izomorfen identiteti. Drugi del sledi iz leme ??.
 \end{dokaz}
 \end{document}
