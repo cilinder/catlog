@@ -1,5 +1,6 @@
 \documentclass[12pt,a4paper]{article}
 
+\usepackage{amsmath}
 \usepackage{enumitem}
 \usepackage{hyperref}
 \usepackage{fancyvrb}
@@ -7,6 +8,7 @@
 \newlist{vprasanja}{itemize}{1}
 \setlist[vprasanja]{label=\textbf{Q:}}
 \newcommand\ans{\item[\textbf{A:}]}
+\newcommand{\set}[1]{\lbrace #1 \rbrace}
 
     
 \begin{document}
@@ -64,13 +66,24 @@
         \item Ali je za definicijo kategorije regularnih kategorij potrebno da so te regularne kategorije majhne ali je dovolj lokalno majhne oz. dobro pogojene.
         \ans
         \item Kdaj je $\lbrace \overline{z} \mid \top \rbrace^{(M)} \leq \lbrace \overline{z} \mid \varphi \rbrace^{(M)}$?
-        \ans Ko je $\lbrace \overline{z} \mid \varphi \rbrace^{(M)} \cong \overline{Z}$.
+        \ans Ko je $\lbrace \overline{z} \mid \varphi \rbrace^{(M)} \cong \overline{Z}^{(M)}$.
         \item Ko definiramo jezik regularne teorije ali dodamo za vsak podobjekt po en relacijski simbol in en funkcijski simbol,
             kajti vsak podobjekt je tudi morizem v kategoriji.
         \ans
         \item Kaj naredimo v primeru če imamo npr.\ objekt $\lbrace \cdot \mid p \rbrace$ z formulo $\exists y . p$?
             Ali je to $\exists \emptyset . p$ in ali je to enako samo $p$?
         \ans
+        \item Če imamo morfizem v $\mathcal{R}(T)$ iz $\set{ \bar{x} \mid p}$ v $\set{ \bar{y} \mid q}$, ali moramo za spremenljivke vzeti sveže?
+            V smislu $\set{ (\bar{x}, \bar{x}') \mid \gamma(\bar{x}, \bar{x}')}$ (za $\gamma$ funkcijska relacija/formula).
+        \ans
+        \item Zakaj enakost ni implementirana kot relacija?
+        \ans
+        \item Kako izpeljemo $p(x) \wedge q(y) \vdash_{x,y} p(x)$?
+        \ans 
+            \begin{align*}
+               p(x) \wedge q(y) &\vdash_{x,y} p(x) \wedge q(y)  &(1.1) \\
+               p(x) \wedge q(y) &\vdash_{x,y} p(x) &(2.2)
+            \end{align*}
     \end{vprasanja}
 
     \section*{Misc}
@@ -82,6 +95,8 @@
         \item Napišimo kaj točno pomeni formula.
         \ans
         \item Kako detajlni naj bodo dokazi?
+        \ans
+        \item Ali je ta `grafični calculus' za regularno logiko (\url{https://arxiv.org/abs/1812.05765}) uporabna stvar?
         \ans
     \end{vprasanja}
 

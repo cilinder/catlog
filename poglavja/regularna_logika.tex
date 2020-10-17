@@ -87,7 +87,7 @@ Sedaj definiramo pravila sklepanja, ki jih razdelimo v tri sklope: (ali je lepo 
       \item $\top \vdash_x x = x$
       \item $x_1 = x_2 \vdash_{x_1, x_2} x_2 = x_1$
       \item $x_1 = x_2 \wedge x_2 = x_3 \vdash_{x_1, x_2, x_3} x_1 = x_3$
-      \item $\overline{x}^1 = \overline{x}^2 \wedge f(\overline{x}^1) = f(\overline{x}^2)$
+      \item $\overline{x}^1 = \overline{x}^2 \vdash_{\overline{x}^1, \overline{x}^2} f(\overline{x}^1) = f(\overline{x}^2)$
       \item $\overline{x}^1 = \overline{x}^2 \wedge R(\overline{x}^1) \vdash_{\overline{x}^1, \overline{x}^2} \mathrm{R}(\overline{x}^2)$
       kjer je $R \rightarrowtail \overline{X}$
     \end{enumerate}
