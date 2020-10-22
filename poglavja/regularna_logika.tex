@@ -60,7 +60,8 @@ Pogosto bomo za $X_1 \times \ldots X_n$ uporabljali tudi oznako $\overline{X}$, 
   \end{itemize}
 \end{primer}
 
-Sedaj bomo definirali pravila sklepanja za naš fragment logike prvega reda, za katera bomo kasenje pokazali, da so "sound" in polna glede na kategorično semantiko, ki jim jih bomo dali.
+Sedaj bomo definirali pravila sklepanja za naš fragment logike prvega reda, 
+za katera bomo kasenje pokazali, da so veljavna in polna glede na kategorično semantiko, ki jim jih bomo dali.
 Podali jih bomo kot zaporedja dedukcij oblike $\varphi \vdash_F \psi$, indeksiranih po končnih množicah spremenljivk $F$. Dedukcija $\varphi \vdash \psi$ je definirana le, če vse proste spremenljivke v $\varphi$ ali $\psi$ ležijo v $F$. V prihodnje bomo privzeli, da je za izraz $\varphi \vdash \psi$ ta pogoj vedno izpolnjen (napiši to lepše).
 Tu moramo biti pozorni, saj na primer izraz $x_1 = x_2 \vdash_{x_1, x_2} x_2 = x_1$ ni enak izrazu $x_1 = x_2 \vdash_{x_1, x_2, x_3} x_2 = x_1$. Razlog za to podrobnost bomo razložili kasneje, ko definiramo semantiko v kategoriji.
 
@@ -172,8 +173,10 @@ Za to nalogo bo pomemben koncept podobjekta v kategoriji.
      & X &
    \end{tikzcd}
  \end{equation*}
- komutira. Pogosto morfizma $\alpha$ ne navedemo eksplicitno ampak pišemo samo $A \rightarrowtail X$. 
- Razred vseh podobjektov objekta $X$ označimo z $\Sub(X)$ in ga opermimo z relacijo delne urejenosti, kjer je $A \leq B$, če lahko $\alpha : A \rightarrowtail X$ faktoriziramo(?) skozi podobjekt $\beta : B \rightarrowtail X$.
+ komutira. Pogosto morfizma $\alpha$ ne navedemo eksplicitno ampak pišemo samo $A \rightarrowtail X$.
+ Razred vseh podobjektov objekta $X$ označimo z $\Sub(X)$ in ga opermimo z relacijo delne urejenosti,
+ kjer je $A \leq B$, če lahko $\alpha : A \rightarrowtail X$ faktoriziramo skozi podobjekt 
+ $\beta : B \rightarrowtail X$.
 \end{definicija}
 Ta delno urejeni razred ima največji element, in sicer $\mathrm{id}_X$.
 \begin{definicija}
@@ -181,23 +184,48 @@ Ta delno urejeni razred ima največji element, in sicer $\mathrm{id}_X$.
 \end{definicija}
 Od sedaj naprej bomo privzeli, da je $\cat{C}$ dobro potencirana. Oglejmo si interakcijo med množico $\Sub(X)$ in nekaterimi kategoričnimi konstrukti.
 
-Recimo, da $\cat{C}$ ima vse povleke. Potem lahko za vsak $X \in \cat{C}$ v množici $\Sub(X)$ tvorimo konjunkcije. Recimo namreč, da imamo $\alpha : A \rightarrowtail X$ in $\beta : B \rightarrowtail X$. Potem njuno konjunkcijo predstavlja kompozitum $A \times_X B \rightarrowtail X$, ki ga dobimo iz diagrama povleka:
+Recimo, da $\cat{C}$ ima vse povleke. 
+Potem lahko za vsak $X \in \cat{C}$ v množici $\Sub(X)$ tvorimo konjunkcije.
+Namreč, recimo, da imamo $\alpha : A \rightarrowtail X$ in $\beta : B \rightarrowtail X$.
+Potem njuno konjunkcijo predstavlja kompozitum $A \times_X B \rightarrowtail X$,
+ki ga dobimo iz diagrama povleka:
 \begin{equation*}
     \begin{tikzcd}
-        A \times_X B \ar[r, hook] \ar[d, hook] & B \ar[d, hook, "\beta"] \\
-        A \ar[r, hook, "\alpha"] & X
+        A \times_X B \ar[r, tail] \ar[d, tail] & B \ar[d, tail, "\beta"] \\
+        A \ar[r, tail, "\alpha"] & X
     \end{tikzcd}
 \end{equation*}
-Opazimo lahko tudi, da sta obe projekciji v povleku monomorfizma. Naj bo sedaj $f : X \to Y$ morfizem v $\cat{C}$. Potem dobimo s povlekom inducirano preslikavo
-$$f^{-1} : \Sub(Y) \to \Sub(X)$$
-ki pošlje podobjekt $\beta : B \rightarrowtail Y$ v $f^{-1}B \rightarrowtail X$ kar lahko prikažemo v diagramu
+Opazimo lahko tudi, da sta obe projekciji v povleku monomorfizma.
+Naj bo sedaj $f : X \to Y$ morfizem v $\cat{C}$.
+Potem dobimo s povlekom inducirano preslikavo
+$$f^{-1} : \Sub(Y) \to \Sub(X),$$
+ki pošlje podobjekt $\beta : B \rightarrowtail Y$ v $f^{-1}B \rightarrowtail X$,
+kar lahko prikažemo v diagramu
 \begin{equation*}
     \begin{tikzcd}
-        f^{-1} \ar[r, hook] \ar[d, hook] & B \ar[d, hook, "\beta"] \\
+        f^{-1} \ar[r, tail] \ar[d, tail] & B \ar[d, tail, "\beta"] \\
         X \ar[r, "f"] & Y
     \end{tikzcd}
 \end{equation*}
-Ta preslikava ohranja konjunkcije (dodamo dokaz?), kar pomeni, da za dobro pogojeno kategorijo $\cat{C}$ dobimo funktor $\Sub(\_) : \cat{C}^{\mathrm{op}} \to \cat{\wedge-\mathbf{SLat}}$, ki ga imenujemo \emph{podobjektni funktor}.
+\begin{lema}
+  Preslikava $f^{-1}$ ohranja konjunkcije.
+\end{lema}
+\begin{dokaz}
+  To lahko razberemo iz diagrama
+  \begin{equation*}
+  \begin{tikzcd}[column sep=small, row sep=normal]
+    & f^{-1}(B \land C) \ar[dl] \ar[dd, tail] \ar[rr, tail] & & f^{-1}C \ar[dl] \ar[dd, tail] \\
+    B \land C \ar[dd, tail] \ar[rr, crossing over, tail] & & C  & \\
+    & f^{-1}B \ar[dl] \ar[rr, tail] & & X \ar[dl, "f"] \\
+    B \ar[rr, tail] & & Y \ar[from=uu, crossing over, tail] & 
+  \end{tikzcd}
+  \end{equation*}
+  v katerem je zadnja stranica povlek.
+\end{dokaz}
+
+To pomeni, da za dobro pogojeno kategorijo $\cat{C}$ dobimo funktor
+$$\Sub(\_) : \cat{C}^{\mathrm{op}} \to \cat{\wedge-\mathbf{SLat}},$$
+ki ga imenujemo \emph{podobjektni funktor}.
 \begin{definicija}
     Recimo, da je $f : X \to Y$ morfizem v $\cat{C}$. Potem paru morfizmov $(p_1, p_2)$ iz diagrama povleka
     \begin{equation*}
@@ -217,14 +245,43 @@ Sedaj imamo pripravljeno vse potrebno, da definiramo regularno kategorijo.
     Kategorija $\cat{C}$ je \emph{regularna}, če ima vse končne limite,
     če za vsak jederni par obstaja kozožek, in če povleki ohranjajo regularne epimorfizme.
 \end{definicija}
+\begin{primer}[Primeri regularnih kategorij]
+\begin{itemize}
+  \item Kategorija $\cat{Set}$ množic in funkcij je pričakovano regularna.
+  \item Če je $\mathbb{T}$ algebrajska teorija, potem je kategorija modelov teorije $\mathbb{T}$ regularna kategorija.
+  \item Če je $\mathbb{T}$ algebrajska teorija in $\cat{C}$ regularna,
+    potem je $\cat{Mod}(\mathbb{T}, \cat{C})$ regularna.
+  \item Vsaka abelova kategorija je regularna.
+  \item Če je $\cat{C}$ regularna in je $\cat{D}$ poljubna kategorija,
+    potem je funktorska kategorija $\cat{C}^{\cat{D}}$ regularna.
+  \item Če je $\cat{C}$ regularna in $X \in \cat{C}$ potem je $\cat{C}/X$ regularna.
+  \item Kategorija kompaktnih Hausdorffovih topoloških prostorov je regularna.
+  \item Kategorija $\cat{Top}^{\mathrm{op}}$ je regularna.
+\end{itemize}
+\end{primer}
+\begin{primer}[Primeri neregularnih kategorij]
+  Kategorije $\cat{Cat}, \cat{Pos}\ \text{in}\ \cat{Top}$ niso regularne.
+  Sledeči primer pokaže neregularnost za vse tri primere:
+  Naj bo $A$ delno urejena množica $\set{a, b} \times (0 \to 1)$ in $B$ delno urejena množica
+  $(0 \to 1 \to 2)$ ter $C$ delno urejena množica $(0 \to 2)$.
+  Obstaja regularen epimorfizem $p : A \to B$, ki ga dobimo z identifikacijo $(a,1)$ z $(b, 0)$
+  in imamo očitno inkluzijo $\dot{\imath} : C \to B$. Povlek morfizma $p$ po $\dot{\imath}$ nam da inkluzijo
+  $\set{0, 2} \to (0 \to 2)$, ki je epimozfizem, a ni regularen, kar pomeni,
+  da povleki v $\cat{Pos}$ ne ohranjajo regularnih epimorfizmov.
+
+  Če delno urejene množice interpretiramo kot kategorije, isti primer deluje za $\cat{Cat}$
+  in ker je kategorija končnih delno urejenih množic ekvivalentna kategoriji končnih topoloških prostorov,
+  isti primer deluje tudi za kategorijo $\cat{Top}$.
+\end{primer}
 Poglejmo si nekaj lastnosti regularnih kategorij.
 \begin{lema}
     Naj bo $\cat{C}$ regularna kategorija. Potem
     \begin{enumerate}[label=(\roman*), nosep]
-        \item Vsak regularni epimorfizem je kozožek svojega para jedra.
-        \item Morfizem, ki je hkrati regularni epimorfizem in monomorfizem je izo\-morfizem.
+        \item Vsak regularen epimorfizem je kozožek svojega para jedra.
+        \item Morfizem, ki je hkrati regularen epimorfizem in monomorfizem je izo\-morfizem.
         \item Kompozitum dveh regularnih epimorfizmov je regularen epimorfizem.
-        \item Če sta morfizma $f : X \to Y$ in $g : Y \to Z$ taka, da sta $g \circ f$ in $f$ regularna epimorfizma, potem je tudi $g$ regularen epimorfizem
+        \item Če sta morfizma $f : X \to Y$ in $g : Y \to Z$ taka,
+          da sta $g \circ f$ in $f$ regularna epimorfizma, potem je tudi $g$ regularen epimorfizem.
     \end{enumerate}
 \end{lema}
 \noindent
@@ -241,13 +298,14 @@ Poglejmo si nekaj lastnosti regularnih kategorij.
       & & & T
     \end{tikzcd}
     \end{equation*}
-    kjer je morfizem $u$ podan z univerzalno lastnostjo povleka in morfizem $v$ dobimo iz univerzalne lastnosti kozožka $g$ in $h$.
+    kjer je morfizem $u$ podan z univerzalno lastnostjo povleka in morfizem~$v$
+    dobimo iz univerzalne lastnosti kozožka $g$ in $h$.
     Torej je $f$ res kozožek morfizmov $p_1$ in $p_2$.
     (to je pomoje malo čudno napisano, ampak nočem pisat preveč enačb eksplicitno)
 
   \item % (ii)
     Naj bo $f : X \to Y$ regularen epimorfizem, ki je tudi monomorfizem.
-    Ker je $f$ kozožek svojega para jedra $(p_1, p_2)$ velja $f \circ p_1 = f \circ p_2$,
+    Ker je $f$ kozožek svojega para jedra $(p_1, p_2)$, velja $f \circ p_1 = f \circ p_2$,
     iz česar sledi $p_1 = p_2$, kajti $f$ je monomorfizem.
     Ker je $f$ kozožek, dobimo enoličen morfizem $g : Y \to X$, da je $g \circ f = \mathrm{id}_X$.
     To pa pomeni, da je~$f$ hkrati sekcija in epimorfizem, torej je izomorfizem.
@@ -287,7 +345,7 @@ Poglejmo si nekaj lastnosti regularnih kategorij.
     \item  % (iv)
       Naj bosta $f : X \to Y$ in $g : Y \to Z$ taka, da sta $g \circ f$ in $f$ oba regularna epimorfizma.
       Podobno kot pri prejšnji točki, naj bo $(\pi_1, \pi_2)$ par jedra $g$ in $(q_1, q_2)$ par jedra $g \circ f$.
-      Če imamo $t : Y \to T$ tak, da je $t pi_1 = t \pi_2$ potem morfizem $tf$ zoži $q_1$ in $q_2$ in dobimo morfizem
+      Če imamo $t : Y \to T$ tak, da je $t \pi_1 = t \pi_2$ potem morfizem $tf$ zoži $q_1$ in $q_2$ in dobimo morfizem
       $h : Z \to T$, da velja $t f = h g f$. Ker je $f$ epimorfizem, res dobimo $t = h g$.
 \end{enumerate}
 \end{dokaz}
@@ -297,7 +355,7 @@ Kot vidimo, imajo regularni epimorfizmi mnogo lepih lastnosti, ki smo jih vajeni
 Naslednja lema nam pove, da lahko v regularni kategoriji vsak morfizem razcepimo na regularen epimorfizem,
 ki mu sledi monomorfizem. 
 \begin{lema}
-  Naj bo $\cat{C}$ regularna kategorija in $f: X \to Y$ morfizem v $\cat{C}$.
+  Naj bo $\cat{C}$ regularna kategorija in $f: X \to Y$ morfizem v~$\cat{C}$.
   Potem lahko $f$ razcepimo v kompozitum regularnega epimorfizma in monomorfizma.
   Velja še, da za vsak komutativni diagram
   \begin{equation*}
@@ -310,6 +368,9 @@ ki mu sledi monomorfizem.
   obstaja enoličen diagonalni morfizem $d : X' \to Y$, tako da oba trikotnika komutirata.
   V posebnem, je zgornji razcep enoličen do izomorfizma natančno.
 \end{lema}
+\begin{opomba}
+  Pokažimo, da zgornja trditev res pomeni, da so slike morfizmov enolične.
+\end{opomba}
 \begin{dokaz}
 Naj bo $f : X \to Y$ morfizem.
 Označimo njegov par jedra s $p_1, p_2 : X \times_Y X \rightrightarrows X$
@@ -326,7 +387,7 @@ da velja $m t_1 = m t_2$. Povlek $m$ nam da par morfizmov $(\pi_1, \pi_2) : Q \t
 in morfizem $t : T \to  Q \times_Y Q$, da velja $t_1 = \pi_1 t$ in $t_2 = \pi_2 t$.
 Podobno kot pri dokazu prejšnje leme dobimo epimorfizem $e : X \times_Y X \to Q \times_Y Q$,
 ki nam da enačbi $p_1 e = q p_1$ in $\pi_2 e = q p_2$.
-Ampak ker je $q$ kozožek $p_1$ in $p_2$ dobimo $\pi_1 e = \pi_2 e$, iz česar sledi $\pi_1 = \pi_2$, 
+Ampak, ker je $q$ kozožek $p_1$ in $p_2$ dobimo $\pi_1 e = \pi_2 e$, iz česar sledi $\pi_1 = \pi_2$, 
 kajti $e$ je epimorfizem.
 Potem pa je $t_1 = \pi_1 t = \pi_2 t = t_2$, kar pomeni, da je~$m$ res monomorfizem.
 
@@ -337,7 +398,7 @@ da velja $f = d e$. Ker kvadrat komutira dobimo $f' e = m f = m d e$, kar pomeni
 \end{dokaz}
 
 \begin{definicija}
-Monomorfizmu $m : E \hookrightarrow Y$, ki smo ga videli pri dokazu razcepitve morfizma $f$ pravimo \emph{(direktna) slika} in ga označimo z $\mathrm{Im}(f)$.
+Monomorfizmu $m : E \hookrightarrow Y$, ki smo ga videli pri dokazu faktorizacije morfizma $f$ pravimo \emph{(direktna) slika} in ga označimo z $\mathrm{Im}(f)$.
 Včasih rečemo kar objektu $E$ slika $f$. Slika morfizma je določena le do izomorfizma natančno, a določa natanko en podobjekt objekta $Y$, ki ga označimo z $\exists_f(X)$.
 Oznake $\mathrm{Im}(f)$, $\exists_f(X)$ in $E$ uporabljamo izmenljivo, če je namen jasen iz konteksta.
 
@@ -359,14 +420,15 @@ iz katerega lahko zaradi enoličnosti slik (do izomorfizma natančno) razberemo,
 \begin{lema}
   Naj bo $\cat{C}$ regularna kategorija. Naj bo $f : X \to Y$ morfizem~v~$\cat{C}$. Potem
   \begin{enumerate}[label=(\roman*)]
-    \item Preslikava $\exists_f$ je monotona in levo adjungirana povleku $f^{-1}$, imamo torej par funktorjev
+    \item Preslikava $\exists_f$ je monotona in levo adjungirana povleku $f^{-1}$,
+      imamo torej par adjungiranih funktorjev
     $$\exists_f : \Sub(X) \rightleftarrows \Sub(Y) : f^{-1}.$$
     \item Če je $g : Y \to Z$ morfizem v $\cat{C}$, potem velja $$\exists_g \circ \exists_f = \exists_{g \circ f} : \Sub(X) \to \Sub(Z)$$
   \end{enumerate}
 \end{lema}
 \begin{dokaz}
   Da pokažemo monotonost, recimo da imamo dva podobjekta $A' \leq A$ v $\Sub(X)$.
-  Nato najprej faktoriziramo $A \xhookrightarrow{\alpha} X \xrightarrow{f} Y$ in potem $A' \to \exists_f A$.
+  Najprej faktoriziramo $A \xhookrightarrow{\alpha} X \xrightarrow{f} Y$ in potem $A' \to \exists_f A$.
   Iz diagrama
   \begin{equation*}
   \begin{tikzcd}
@@ -374,11 +436,11 @@ iz katerega lahko zaradi enoličnosti slik (do izomorfizma natančno) razberemo,
     Z \ar[r, tail] & \exists_f A \ar[r, tail] & Y
   \end{tikzcd}
   \end{equation*}
-  lahko preberemo, da je $A' \twoheadrightarrow Z \hookrightarrow Y$ zaradi enoličnosti to faktorizacija
+  lahko razberemo, da je $A' \twoheadrightarrow Z \hookrightarrow Y$ zaradi enoličnosti to faktorizacija
   $f \circ \alpha'$ in velja $Z \cong \exists_f A' \leq \exists_f A$.
 
   Da pokažemo, da sta to adjungirana morfizma moramo pokazati 
-  $$\Sub(X)(\exists_f A, B) \cong \Sub(Y)(A, f^{-1}B)$$
+  $$\Sub(X)(\exists_f A, B) \cong \Sub(Y)(A, f^{-1}B),$$
   kjer sta $A \leq X$ in $B \leq Y$. Če v diagramu
   \begin{equation*}
   \begin{tikzcd}
@@ -413,13 +475,14 @@ Kot posledico tega lahko vidimo, da $f^{-1}$ ohranja konjunkcije v $\Sub(Y)$, ka
     A \land f^{-1}B \ar[u, tail] \ar[r, dashed, two heads] & \exists_f A \land B \ar[r, tail] \ar[u, tail] & B \ar[uu, tail, "\beta"']
   \end{tikzcd}
   \end{equation*}
-  je spodnji levi kvadrat povlek, torej je črtkani morfizem regularni epimorfizem, saj je povlek regularnega epimorfizma.
+  je spodnji levi kvadrat povlek, torej je črtkani morfizem regularen epimorfizem, saj je povlek regularnega epimorfizma.
   To pa pomeni, da je kompozitum 
   $A \land f^{-1}B \twoheadrightarrow \exists_f A \land B \hookrightarrow B$
   kanonična faktorizacija morfizma $A \land f^{-1}B \to Y$, kar nam da želeno enakost.
 \end{dokaz}
 
-Še ena izmed lepih lastnosti funkcij med množicami je, da jih lahko opišemo kot njihov graf. Izkaže se, da je taka konstrukcija mogoča tudi v regularnih kategorijah.
+Še ena izmed lepih lastnosti funkcij med množicami je, da jih lahko opišemo kot njihov graf.
+Izkaže se, da so regularne kategorije ravno pravo okolje za tako konstrukcijo.
 \begin{definicija}
   Naj bo $f : X \to Y$ morfizem v regularni kategoriji $\cat{C}$. Potem je \emph{graf} tega morfizma podobjekt
   $$\graph(f) \rightarrowtail X \times Y,$$
@@ -427,7 +490,7 @@ Kot posledico tega lahko vidimo, da $f^{-1}$ ohranja konjunkcije v $\Sub(Y)$, ka
 \end{definicija}
 
 Opazimo lahko, da je kanonični morfizem $X \to \graph(f)$ izomorfizem,
-kajti po definiciji je regularni epimorfizem
+kajti po definiciji je regularen epimorfizem
 in kot sekcija je monomorfizem, torej je po lemi ?? izomorfizem.
 \begin{lema}
   Naj bodo oznake kot v zgornji definiciji in naj bo $A \overset{\alpha}{\rightarrowtail} X$ podobjekt. Če z $\pi_X$ in $\pi_Y$ označimo projekciji iz produkta, potem velja
@@ -444,7 +507,9 @@ in kot sekcija je monomorfizem, torej je po lemi ?? izomorfizem.
   \end{equation*}
   kjer so kvadrati povleki.
   Levi spodnji kvadrat dobimo kot povlek zunanjega trivialnega povleka $\mathrm{id}_X$ in $\alpha$.
-  Tako dobimo, da je morfizem $A \twoheadrightarrow \pi_X^{-1}A \land \operatorname{graph}(f)$ regularen epimorfizem.
+  Tako dobimo, da je morfizem 
+  $$A \twoheadrightarrow \pi_X^{-1}A \land \operatorname{graph}(f)$$
+  regularen epimorfizem.
   Torej nam da sliko morfizma $f \circ \alpha$, kar pokaže iskano enakost.
 \end{dokaz}
 
@@ -453,22 +518,27 @@ Sedaj bomo opisali, kako lahko dobimo nazaj morfizem iz njegovega grafa.
 \begin{definicija}
   Na podobjekt $R \rightarrowtail X \times Y$ lahko gledamo kot na relacijo med ``elementi'' $X$ in $Y$. Relaciji $R$ pravimo 
   \begin{itemize}
-    \item \emph{totalna}, če je $\exists_{\pi_Y}R = X$ (to intuitivno pomeni, da je množica vseh tistih $x$, za katere obstaja nek $y$ za katerega velja $xRy$, enaka $X$).
-    \item \emph{funkcijska}, če kanonični morfizem $R \times_X R \to X \times Y \times Y$, lahko faktoriziramo skozi inkluzijo $\mathrm{id}_X \times \Delta_Y : X \times Y \to X \times Y \times Y$. (tu si lahko predstavljamo, da ker $R \times_X R$ predstavlja trojice elementov $(x, y_1, y_2)$ za katere velja $xRy_1$ in $xRy_2$, nam ta faktorizacija omogoča, da iz tega izpeljemo $y_1 = y_2$).
+    \item \emph{totalna}, če je $\exists_{\pi_X}R = X$ (to intuitivno pomeni, da je množica vseh tistih $x$, za katere obstaja nek $y$ za katerega velja $xRy$, enaka $X$).
+    \item \emph{funkcijska}, če kanonični morfizem $R \times_X R \to X \times Y \times Y$,
+      lahko faktoriziramo skozi inkluzijo 
+      $\mathrm{id}_X \times \Delta_Y : X \times Y \to X \times Y \times Y$
+      (tu si lahko predstavljamo, da ker $R \times_X R$ predstavlja trojice elementov $(x, y_1, y_2)$,
+      za katere velja $xRy_1$ in $xRy_2$, nam ta faktorizacija omogoča,
+      da iz tega izpeljemo $y_1 = y_2$).
   \end{itemize}
 \end{definicija}
 \begin{opomba}
   Kanonični morfizem $R \times_X R \to X \times Y \times Y$ lahko dobimo tako, da v diagramu
   \begin{equation*}
-  \begin{tikzcd}[row sep=small, column sep=small]
+  \begin{tikzcd}[row sep=normal, column sep=small]
     R \times_X R \ar[d] \ar[r] & Y \times R \ar[d] \ar[r] & R \ar[d] \\
     R \times Y \ar[d] \ar[r] & (X \times Y) \times_X (X \times Y) \ar[d] \ar[r] & X \times Y \ar[d] \\
     R \ar[r] & X \times Y \ar[r] & X
   \end{tikzcd}
   \end{equation*}
-  uporabimo izormofizem $(X \times Y) \times_X (X \times Y) \cong X \times Y \times Y$, ki ga dobimo v diagramu povleka
+  uporabimo izormofizem $(X \times Y) \times_X (X \times Y) \cong X \times Y \times Y$, ki ga dobimo iz diagrama povleka
   \begin{equation*}
-  \begin{tikzcd}[row sep=small, column sep=normal]
+  \begin{tikzcd}[row sep=normal, column sep=normal]
     X \times Y  \times Y\ar[d] \ar[r] & X \times Y \ar[d, "\pi_X"] \ar[r] & Y \ar[d] \\
     X \times Y \ar[r, "\pi_X"] & X \ar[r] & 1
   \end{tikzcd}
@@ -483,10 +553,48 @@ Sedaj bomo opisali, kako lahko dobimo nazaj morfizem iz njegovega grafa.
 \end{lema}
 \begin{dokaz}
 \begin{enumerate}[label=(\roman*)]
-  \item
-  
+  \item Ker je $X \to \graph(f)$ izomorfziem, lahko faktoriziramo kompozitum
+    $\graph(f) \hookrightarrow X \times Y \xrightarrow{\pi_X} X$ kot
+    \begin{equation*}
+    \begin{tikzcd}
+      \operatorname{graph}(f) \ar[d, two heads] \ar[r, tail]  & X \times Y \ar[d, "\pi_X"] \\
+      X \ar[r, tail, "\mathrm{id}_X"] & X
+    \end{tikzcd}
+    \end{equation*}
+    Iz enoličnosti faktorizacije sledi $X \cong \exists_{\pi_X}\graph(f)$, torej je $\graph(f)$ totalna.
 
+  \item Ker je $R$ totalna, je $R \xhookrightarrow{r} X \times Y \xrightarrow{\pi_X} X$ regularen epimorfizem,
+    torej je kozožek jedernega para $(p_1, p_2)$ kar lahko predstavimo v diagramu
+    \begin{equation*}
+    \begin{tikzcd}[column sep=normal]
+      R \times_X R \ar[ddd, bend right=30, "p_1"'] \ar[dd, tail] \ar[dr, dashed] \ar[rr, tail] \ar[rrr, bend left=20, "p_2"] & &  Y \times R \ar[dd] \ar[r] & R \ar[dd, tail, "r"] & \\
+      & X \times Y \ar[dr, dashed, "\mathrm{id}_X \times \Delta_Y"'] & & & \\
+      R \times Y \ar[d] \ar[rr, tail] & & X \times Y \times Y  \ar[d, "\pi_{1,2}"'] \ar[r, "\pi_{1,3}"] & X\times Y \ar[d, "\pi_X"'] \ar[ddr, "\pi_Y"] & \\
+      R \ar[rr, tail, "r"] & & X \times Y \ar[r, "\pi_X"] \ar[drr, "\pi_Y"'] & X & \\
+      & & & & Y
+    \end{tikzcd}
+    \end{equation*}
+    v katerem je predstavljena tudi faktorizacija 
+    $$R \times_X R \to X \times Y \xrightarrow{\mathrm{id}_X \times \Delta_Y} X \times Y \times Y,$$
+    ki obstaja, ker je $R$ funkcijska relacija.
+    Obe poti od $X \times Y$ do $Y$ sta samo projekciji na drugo koordinato, torej velja $\pi_Y r p_1 = \pi_Y r p_2$.
+    Ker pa je $X$ kozožek svojega para jedra, obstaja enoličen morfizem $f : X \to Y$, da diagram komutira.
 
+    Pokazati moramo še, da je $\graph(f)$ res izomorfen $R$. Za to pogledamo diagram
+    \begin{equation*}
+    \begin{tikzcd}
+      & & & & Y \\
+      R \ar[r, tail, "r"'] \ar[rr, two heads, bend left] & X \times Y \ar[r, "\pi_X"'] & X \ar[r, two heads]  \ar[rr, bend left, pos=0.3, "\fprod{\mathrm{id}_X, f}"] \ar[urr, crossing over, pos=0.75, "f"] \ar[drr, "\mathrm{id}_X"']  & \operatorname{graph}(f) \ar[r, tail] & X \times Y \ar[d, "\pi_X"] \ar[u, "\pi_Y"'] \\
+      & & & & X
+    \end{tikzcd}
+    \end{equation*}
+    v katerem je desni del samo definicja grafa morfizma $f$.
+    Levi kompozitum $R \to X$ je regularen epimorfizem.
+    Torej dobimo enolični morfizem $R \twoheadrightarrow \graph(f) \hookrightarrow X \times Y$,
+    za katerega nam kompozitum s $\pi_X$ da $\mathrm{id}_X \pi_X r$ in kompozitum s $\pi_X$ da 
+    $f \pi_X r = \pi_Y \circ \fprod{\mathrm{id}_X, f} \circ \pi_X \circ r = \pi_Y r$.
+    To pa je ravno monomorfizem $r R : \hookrightarrow X \times Y$, katerega slika je kar $R$.
+    Torej je $R \cong \graph(f)$.
 \end{enumerate}
 \end{dokaz}
 
@@ -503,11 +611,25 @@ Naslednja pomembna lastnost regularnih kategorij je interakcija slik in povlekov
   $$\exists_{g'}f^{'-1} = f^{-1}\exists_g : \Sub(Z) \to \Sub(X).$$
 \end{lema}
 \begin{dokaz}
-  sorry
+  Naj bo $A \xhookrightarrow{\alpha} Z$ podobjekt.
+  Situacijo lahko prikažemo v $3$D diagramu
+  \begin{equation*}
+  \begin{tikzcd}[column sep=small]
+    A \times_Y X \ar[dd] \ar[dr, tail] \ar[rr, two heads] & & f^{-1}\exists_g A \ar[dd] \ar[dr, tail] & \\
+    & Z \times_Y X  \ar[rr, crossing over] & & X \ar[dd, "f"] \\
+    A \ar[dr, tail] \ar[rr, two heads] & & \exists_g A \ar[dr, tail] & \\
+    & Z \ar[rr, "g"'] \ar[from=uu, pos=0.2, crossing over, "f'"] & & Y
+  \end{tikzcd}
+  \end{equation*}
+  kjer je sprednja stranica kvadrat povleka.
+  Leva stran je povlek $A$ po $f'$, spodnja stran je faktorizacija morfizma $g$,
+  desna stran je povlek po $f$ in zadnja stran je tudi kvadrat povleka.
+  Ker je $A \times_Y X = f'^{-1}A$, je $A \times_Y X \twoheadrightarrow f^{-1}\exists_g A \hookrightarrow X$
+  ravno faktorizacija kompozituma $f'^{-1}A \hookrightarrow Z \times_Y X \to X$, kar nam da želeno enakost.
 \end{dokaz}
 \begin{definicija}
   Naj bosta $\cat{C}$ in $\cat{D}$ regularni kategoriji.
-  Funktorju ${F : \cat{C} \to \cat{D}}$ pravimo \emph{regularen}, če ohranja končne limite in kozožke para jedra.
+  Funktorju ${F : \cat{C} \to \cat{D}}$ pravimo \emph{regularen}, če ohranja končne limite in kozožke jedernih parov.
 \end{definicija}
 \begin{definicija}
   $\cat{RegCat}$ je kategorija v kateri so objekti majhne (ali je dovolj dobro pogojene?) kategorije in morfizmi regularni funktorji med njimi.
@@ -520,12 +642,18 @@ Ker je v kategoriji s povleki morfizem $f$ monomorfizem natanko takrat, ko je kv
     \bullet \ar[r, "f"] & \bullet
   \end{tikzcd}
 \end{equation*}
-povlek, to pomeni, da vsak regularen funktor $F : \cat{C} \to \cat{D}$ inducira za vsak objekt $X \in \cat{C}$, preslikavo
+povlek, to pomeni, da vsak regularen funktor $F : \cat{C} \to \cat{D}$ inducira, za vsak objekt $X \in \cat{C}$, preslikavo
 $$F_X : \Sub_\cat{C}(X) \to \Sub_\cat{D}(F(X)),$$
-ki ohranja končne konjunkcije in največji element. Torej je v posebnem tudi monotona. $F$ pa tudi ohranja slike morfizmov, torej če imamo podobjekt $A \xhookrightarrow{\alpha} X \xrightarrow{f} Y$ potem je 
-$$F(\exists_f A) = \exists_{F(f)}(F(A))$$.
-(dodamo dokaz?)
-to bi bilo mogoče boljše dati v neko eksplicitno lemo.
+ki ohranja končne konjunkcije in največji element. Torej je v posebnem tudi monotona.
+Funktor $F$ pa ohranja tudi slike morfizmov, kar pomeni da, če imamo podobjekt 
+$A \xhookrightarrow{\alpha} X \xrightarrow{f} Y$ potem je 
+$$F(\exists_f A) = \exists_{F(f)}(F(A)),$$
+kajti $\exists_f A$ je definiran kot kozožek para jedra $f \circ \alpha : A \to Y$.
+To pomeni
+\begin{lema}
+  Regularen funktor med regularnima kategorijama ohranja povleke in slike.
+  \hfill$\Box$
+\end{lema}
 %
 \section{Model regularnega jezika}
 Recimo, da imamo regularen jezik $\mathcal{L}(\Sigma)$. Kot smo to storili za algebrajsko teorijo, bi radi definirali model tega jezika v neki regularni kategoriji.
