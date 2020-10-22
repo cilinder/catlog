@@ -3,9 +3,11 @@
 \usepackage[utf8x]{inputenc}   % omogoča uporabo slovenskih črk kodiranih v formatu UTF-8
 \usepackage[slovene,english]{babel}    % naloži, med drugim, slovenske delilne vzorce
 \usepackage[pdftex]{graphicx}  % omogoča vlaganje slik različnih formatov
+\usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{fancyhdr}          % poskrbi, na primer, za glave strani
-\usepackage{comment}
+\usepackage{comment}			% doda dodatne opcije za komentarje, npr. okolje za večvrstične komentarje
+% opisano v : http://texdoc.net/texmf-dist/doc/latex/comment/comment.pdf
 \usepackage[pdftex, colorlinks=true,
 						citecolor=black, filecolor=black, 
 						linkcolor=black, urlcolor=black,
@@ -32,7 +34,7 @@
 \usepackage{tikz-cd} 
 \usetikzlibrary{babel} % this fixes problems with tikz-cd
 % http://tex.stackexchange.com/questions/166772/problem-with-babel-and-tikz-using-draw
-%
+\usepackage{bussproofs} % package for writing natural deduction tree-style proofs
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %	DIPLOMA INFO
@@ -64,17 +66,16 @@
 %
 \theoremstyle{definition}
 \newtheorem{definicija}{Definicija}[chapter]
-%
-\theoremstyle{plain}
+\newtheorem{primer}{Primer}[section]
+\newtheorem*{primer*}{Primer}
+
+\theoremstyle{theorem}
 \newtheorem{izrek}[definicija]{Izrek}
 \newtheorem{trditev}[definicija]{Trditev}
 \newtheorem{posledica}{Posledica}[definicija]
 \newtheorem{lema}[definicija]{Lema}
-\newenvironment{dokaz}{\emph{Dokaz.}\ }{\hspace{\fill}{$\Box$}}
+\newenvironment{dokaz}{\emph{Dokaz.}\ }{\hfill{$\Box$}}
 %
-\theoremstyle{definition}
-\newtheorem{primer}{Primer}[section]
-\newtheorem*{primer*}{Primer}
 %
 \theoremstyle{remark}
 \newtheorem*{opomba}{Opomba}
@@ -154,49 +155,49 @@
 % Two-way rule for adjunction
 %TODO make this more usefull
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\ExplSyntaxOn
-\NewDocumentEnvironment{adjunctions}{O{}}
- {
-  \cs_set_eq:cN {@arraycr} \farin_arraycr:
-  \keys_set:nn { farin/adjunction } { #1 }
-  \begin{array}
-   {
-    @{ \hspace { \dim_eval:n { \l_farin_left_shift_dim + \l_farin_padding_dim } } }
-    r
-    @{ {\farin_strut:} \l_farin_symbol_tl {} }
-    l
-    @{ \hspace { \dim_eval:n { \l_farin_right_shift_dim + \l_farin_padding_dim } } }
-   }
- }
- {
-  \end{array}
- }
-\keys_define:nn { farin/adjunction }
- {
-  leftshift       .dim_set:N = \l_farin_left_shift_dim,
-  leftshift       .initial:n = 0pt,
-  rightshift      .dim_set:N = \l_farin_right_shift_dim,
-  rightshift      .initial:n = 0pt,
-  padding         .dim_set:N = \l_farin_padding_dim,
-  padding         .initial:n = 6pt,
-  symbol          .tl_set:N  = \l_farin_symbol_tl,
-  symbol          .initial:n = \longrightarrow,
-  verticalspacing .dim_set:N  = \l_farin_vertspac_dim,
-  verticalspacing .initial:n = {3pt},
- }
-\cs_new_protected:Npn \farin_strut:
- {
-  \vrule height \dim_eval:n { \ht\strutbox + 1.2\l_farin_vertspac_dim }
-         depth  \dim_eval:n { \dp\strutbox + \l_farin_vertspac_dim }
-         width 0pt
- }
-\makeatletter
-\exp_args:NNo \cs_new:Npn \farin_arraycr:
- {
-  \@arraycr\hline
- }
-\makeatother
-\ExplSyntaxOff
+%\ExplSyntaxOn
+%\NewDocumentEnvironment{adjunctions}{O{}}
+% {
+%  \cs_set_eq:cN {@arraycr} \farin_arraycr:
+%  \keys_set:nn { farin/adjunction } { #1 }
+%  \begin{array}
+%   {
+%    @{ \hspace { \dim_eval:n { \l_farin_left_shift_dim + \l_farin_padding_dim } } }
+%    r
+%    @{ {\farin_strut:} \l_farin_symbol_tl {} }
+%    l
+%    @{ \hspace { \dim_eval:n { \l_farin_right_shift_dim + \l_farin_padding_dim } } }
+%   }
+% }
+% {
+%  \end{array}
+% }
+%\keys_define:nn { farin/adjunction }
+% {
+%  leftshift       .dim_set:N = \l_farin_left_shift_dim,
+%  leftshift       .initial:n = 0pt,
+%  rightshift      .dim_set:N = \l_farin_right_shift_dim,
+%  rightshift      .initial:n = 0pt,
+%  padding         .dim_set:N = \l_farin_padding_dim,
+%  padding         .initial:n = 6pt,
+%  symbol          .tl_set:N  = \l_farin_symbol_tl,
+%  symbol          .initial:n = \longrightarrow,
+%  verticalspacing .dim_set:N  = \l_farin_vertspac_dim,
+%  verticalspacing .initial:n = {3pt},
+% }
+%\cs_new_protected:Npn \farin_strut:
+% {
+%  \vrule height \dim_eval:n { \ht\strutbox + 1.2\l_farin_vertspac_dim }
+%         depth  \dim_eval:n { \dp\strutbox + \l_farin_vertspac_dim }
+%         width 0pt
+% }
+%\makeatletter
+%\exp_args:NNo \cs_new:Npn \farin_arraycr:
+% {
+%  \@arraycr\hline
+% }
+%\makeatother
+%\ExplSyntaxOff
 %
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

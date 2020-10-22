@@ -4,7 +4,9 @@
 %
 \section{Splošni izreki}
 \begin{lema}
-Naj bo $\cat{C}$ poljubna kategorija in $f : X \to Y$ morfizem. Denimo, da v $\cat{C}$ obstaja produkt $X \times Y$. Potem je projekcija $X \times Y \to X$ epimorfizem.
+Naj bo $\cat{C}$ poljubna kategorija in $f : X \to Y$ morfizem. 
+Denimo, da v $\cat{C}$ obstaja produkt $X \times Y$.
+Potem je projekcija $X \times Y \to X$ epimorfizem.
 \end{lema}
 \begin{dokaz}
 Naj bo $p : X \times Y \to X$ projekcija iz produkta in $u = \langle id_X, f \rangle : X \to X \times Y$. Recimo, da imamo dva vzporedna morfizma $g,h : X \to Z$ za katera velja $g \circ p = h \circ p$. To prikažemo v diagramu
@@ -22,6 +24,21 @@ g \circ id_X &= h \circ id_X \\
 g &= h
 \end{align*}
 \end{dokaz}
+\begin{lema}
+  Če je morfizem $f : X \to Y$ epimorfizem in sekcija, potem je izomorfizem.
+\end{lema}
+\begin{dokaz}
+To lahko razberemo iz diagrama
+\begin{equation*}
+\begin{tikzcd}
+  X \ar[r, "f"] & Y \ar[dr, "id_Y"'] \ar[r, "g"] & X \ar[d, "f"] \\
+  & & Y 
+\end{tikzcd}
+\end{equation*}
+\end{dokaz}
+\begin{lema}
+  Skladanje kvadratov povleka.
+\end{lema}
 \begin{izrek} [Adjoint functor theorem]
 Naj bo $\cat{C}$ lokalno majhna in polna. Za vsako kategorijo $\cat{X}$ in funktor 
 $$U : \cat{X} \to \cat{C}$$
