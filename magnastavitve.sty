@@ -74,7 +74,7 @@
 \newtheorem{trditev}[definicija]{Trditev}
 \newtheorem{posledica}{Posledica}[definicija]
 \newtheorem{lema}[definicija]{Lema}
-\newenvironment{dokaz}{\emph{Dokaz.}\ }{\hfill{$\Box$}}
+\newenvironment{dokaz}{\begin{proof}[Dokaz]\ }{\end{proof}}
 %
 %
 \theoremstyle{remark}
@@ -139,6 +139,8 @@
 \DeclareMathOperator{\graph}{graph}
 %
 \renewcommand{\set}[1]{\left\lbrace\,#1\,\right\rbrace}
+%
+\newcommand{\setb}[2]{\left\lbrace\, #1 \,\middle|\, #2 \,\right\rbrace}
 %
 \newcommand{\fprod}[1]{\langle #1 \rangle}
 %

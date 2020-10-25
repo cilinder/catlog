@@ -5,6 +5,10 @@
 \usepackage{hyperref}
 \usepackage{fancyvrb}
 
+\usepackage{tikz-cd} 
+\usetikzlibrary{babel} % this fixes problems with tikz-cd
+% http://tex.stackexchange.com/questions/166772/problem-with-babel-and-tikz-using-d
+
 \newlist{vprasanja}{itemize}{1}
 \setlist[vprasanja]{label=\textbf{Q:}}
 \newcommand\ans{\item[\textbf{A:}]}
@@ -16,7 +20,7 @@
     \section*{Terminološka vprašanja}
     \begin{vprasanja}
         \item Kako prevedemo ``meet"?
-        \ans
+        \ans Konjunkcija, največja spodna meja ali kar uporabimo znak $\land$.
         \item Ali se reče ``algebraične" ali ``algebrajske" teorije/kategorije?
         \ans
         \item Kako bi prevedli ``fragment of first order logic".
@@ -31,7 +35,6 @@
         \ans par jedra neki-neki / jederni par.
         \item Kako prevajamo ``in particular"?
         \ans V posebnem?
-        \item Kako prevajamo 
     \end{vprasanja}
 
     \section*{\LaTeX vprašanja}
@@ -41,21 +44,29 @@
         \item Ali je \verb|\emph{*}| lahko začetek stavka?
         \ans Da.
         \item Ali je lepo dati dvopičje direkt pred def okoljem?
-        \ans
+        \ans Pomoje ni problema.
         \item Kaj je najboljše okolje za postavit tikzcd diagram?
         \ans \verb|\equation{}|.
         \item Kako dobiti novo vrstico (na lep način) po začetku definicije?
-        \ans 
+        \ans Urediti moram theorem okolja.
         \item Težava s šumnikom v imenu poglavja
         \ans Dodamo opcijo [unicode=true] v hyperref paket
         \url{https://tex.stackexchange.com/questions/159479/problem-with-composite-letters-in-section-labels}
         \item Kaj je s tem headheight too small problemom?
         \ans \url{https://tex.stackexchange.com/questions/327285/what-does-this-warning-mean-fancyhdr-and-headheight}
         \item Ali pri naštevanju (enumerate) uporabimo nosep opcijo?
-        \ans
+        \ans Važna je konsistenca skozi cel dokument.
         \item Pri naštevanju velike začetnice?
         \ans Odvisno od stavka.
         \item Ali je fraza $3D$ primerna?
+        \ans
+        \item Pri definiciji interpretacije jezika imamo pri treh zadnjih definicjah (F3, F4, F5) matematični simbol na začetku stavka,
+            ali je to sprejemljivo v tej situaciji?
+        \ans
+        \item Ali se piše tako-definirana, ali tako--definirana?
+        \ans
+        \item Ali naj kvadrate povleka označujem s tistim kotkom v levem zgornjem kotu?
+        \ans
     \end{vprasanja}
 
     \section*{Tehnična vprašanja}
@@ -85,6 +96,18 @@
                p(x) \wedge q(y) &\vdash_{x,y} p(x) \wedge q(y)  &(1.1) \\
                p(x) \wedge q(y) &\vdash_{x,y} p(x) &(2.2)
             \end{align*}
+        \item Na kak način naj se označuje substitucijo, npr.~če v $\psi$, ki ima proste spremenljivke izmed
+            $y,\bar{z}$ zamenjamo $y$ z $b$. Ali to označimo kot $\psi(b/y, \bar{z})$?
+        \ans
+        \item Ali je 
+            \begin{equation*}
+            \begin{tikzcd}
+                X \ar[d, two heads] \ar[r, "f"] & Y \ar[d, "\mathrm{id}"] \\
+                \exists_f X \ar[r, tail] & Y 
+            \end{tikzcd}
+            \end{equation*}
+            diagram povleka?
+        \ans Ne, kajti potem bi bil $X \cong \exists_f X$.
     \end{vprasanja}
 
     \section*{Misc}
