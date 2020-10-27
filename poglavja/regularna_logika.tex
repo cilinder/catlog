@@ -526,7 +526,15 @@ in kot sekcija je monomorfizem, torej je po lemi ?? izomorfizem.
   $f\circ \pi_1, \pi_2 : X \times Y \to Y$.
 \end{lema}
 \begin{dokaz}
-  Graf lahko prikažemo v diagramu 
+  Ker je $\pi_X \circ \fprod{\mathrm{id}_X, f} = \mathrm{id}_X$, je $\fprod{\mathrm{id}_X, f}$ sekcija,
+  torej monomorfizem. To pomeni, da je kompozitum $X \xrightarrow{\mathrm{id}_X} X \xrightarrow{\fprod{\mathrm{id}_X, f}} X \times Y$
+  že faktorizacija $\fprod{\mathrm{id}_X, f}$. Da ta morfizem res zoži $f \pi_X$ in $\pi_Y$ velja, ker
+  $f \circ \pi_X \circ \fprod{\mathrm{id}_X, f} = f \circ \mathrm{id}_X = f$ in
+  $\pi_Y \circ \fprod{\mathrm{id}_X, f} = f$. Denimo sedaj, da obstaja morfizem $t : T \to X \times Y$,
+  za katerega velja $f \circ \pi_X \circ t = \pi_Y \circ t$. Po univerzalni lastnosti produkta lahko $t$
+  zapišemo kot $\fprod{t_1, t_2}$, kjer $t_1 = \pi_X \circ t : T \to X$ in $t_2 = \pi_Y \circ t : T \to Y$.
+  Dobili smo torej morfizem od $T$ do $X$, ki faktorizira~$t$. Ker je $\fprod{\mathrm{id}_X, f}$ monomorfizem,
+  je to enolični morfizem, za katerega ta diagram komutira. (mogoče bi bilo lepše, če samo narišemo diagramček)
 \end{dokaz}
 \begin{lema}
   Naj bodo oznake kot v zgornji definiciji in naj bo $A \overset{\alpha}{\rightarrowtail} X$ podobjekt. Če z $\pi_X$ in $\pi_Y$ označimo projekciji iz produkta, potem velja
@@ -1081,6 +1089,7 @@ Naslednja lema karakterizira končne limite v regularni kategoriji v internem je
       Če upoštevamo še, da je $\cat{C} \models \exists x (x = x)$ natanko takrat,
       ko je $X \to 1$ regularen epimorfizem, smo pokazali prvi del.
       
+    \item 
   \end{enumerate}
 \end{dokaz}
 
@@ -1326,4 +1335,8 @@ komutira.
 \begin{dokaz}
   Preverimo, da je kompozitum v obe smeri izomorfen identiteti. Drugi del sledi iz leme ??.
 \end{dokaz}
+pipipipipi.
 \end{document}
+%%% Local Variables:
+%%% TeX-master: nil
+%%% End:

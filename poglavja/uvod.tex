@@ -39,6 +39,18 @@ To lahko razberemo iz diagrama
 \begin{lema}
   Skladanje kvadratov povleka.
 \end{lema}
+\begin{lema}
+  Naj bo $\cat{C}$ kategorija, ki ima končne limite in naj bo $E$ zožek $p_1, p_2 : X \to Y$.
+  Potem za vsak objekt $Z$ potem dobimo zožek $E'$ morfizmov
+  \begin{tikzcd} X \times Z 
+    \ar[r, shift left, "p_1 \times \mathrm{id}_Z"] \ar[r, shift right, "p_2 \times \mathrm{id}_Z"'] & 
+    Y \times Z
+  \end{tikzcd}
+  kot $E' = \pi^{-1}E$, kjer je $\pi$ projekcija $X \times Y \xrightarrow{\pi} X$.
+\end{lema}
+\begin{dokaz}
+  sorry.
+\end{dokaz}
 \begin{izrek} [Adjoint functor theorem]
 Naj bo $\cat{C}$ lokalno majhna in polna. Za vsako kategorijo $\cat{X}$ in funktor 
 $$U : \cat{X} \to \cat{C}$$
