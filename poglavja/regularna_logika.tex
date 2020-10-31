@@ -167,7 +167,7 @@ potem to podamo kot dvosmerno izpeljavo, ki jo označimo z dvojno črto ulomka.
   Izpeljave gradimo v obliki dreves,
   kjer so listi drevesa naše predpostavke in koren sklep izpeljave.
 \end{definicija}
-\begin{primer}
+\begin{primer}\label{primer:vpeljava-eksist-kvantifikatorja}
 Poglejmo si kako bi izpeljali pravilo za vnos kvantifikatorja obstoja, ki pravi
 \begin{prooftree}
   \AxiomC{$r \vdash_F \psi(t)$}
@@ -188,6 +188,17 @@ Podali bi ga v obliki drevesa
   \BinaryInfC{$r \vdash_F \exists x \psi(x)$}
 \end{prooftree}
 \end{primer}
+Brez dokaza podamo še naslednji dve izpeljavi.
+\begin{lema}\label{lema:uporabne-izpeljave}
+  Imamo naslednji dve izpeljavi
+  \begin{enumerate}
+  \item $\vdash_{\bar{z}} \exists \bar{x}(p(\bar{x} \land q) \iff (\exists \bar{x} p(\bar{x})) \land q$,
+    pri pogoju, da $\bar{x}$ ne nastopa prosto v $q$.
+  \item $\vdash_{\bar{x}, \bar{x}'} p(\bar{x}) \land \bar{x} = \bar{x}' \implies p(\bar{x}').$
+  \end{enumerate}
+\end{lema}
+%
+%
 %
 \section{Regularne kategorije}
 Regularna logika ima jasno v primerjavi z algebrajskimi teorijami dodatno strukturo, ki se bo odražala v strukturi kategorije v kateri jo bomo lahko interpretirali.
@@ -1089,6 +1100,8 @@ Naslednja lema karakterizira končne limite v regularni kategoriji v internem je
       Če upoštevamo še, da je $\cat{C} \models \exists x (x = x)$ natanko takrat,
       ko je $X \to 1$ regularen epimorfizem, smo pokazali prvi del.
       
+    \item
+
     \item 
   \end{enumerate}
 \end{dokaz}
@@ -1219,7 +1232,7 @@ za katerega se bosta pojma veljavnosti in dokazljivosti ujemala.
 
 \noindent
 Iz konstrukcije je jasno, da dobimo majhno kategorijo.
-\begin{lema}
+\begin{lema}\label{lema:limite-v-interni-logiki}
   Kategorija $\mathcal{R}(T)$ ima vse končne limite
   \begin{enumerate}[label=(\roman*)]
     \item Objekt $\set{\cdot \,\middle|\, \top}$ (ekvivalenčni razred formul v kontekstu $(\emptyset, \top)$) je končni objekt v $\mathcal{R}(T)$.
@@ -1245,6 +1258,114 @@ Iz konstrukcije je jasno, da dobimo majhno kategorijo.
 \end{opomba}
 \begin{dokaz}
   Uporabljali bomo lastnosti relacije $\vdash^T$.
+  \begin{enumerate}[label=(\roman*)]
+  \item Za poljuben objekt $\set{\bar{x} \mid p}$ dobimo morfizem v $\set{\cdot \mid \top}$
+    z ekvivalenčnim razredom $(\bar{X}\emptyset, p(\bar{x}))$.
+    Recimo, da imamo dva morfizma $\set{\bar{x} \mid \gamma}, \set{\bar{x} \mid \gamma'}$
+    iz $\set{\bar{x} \mid p}$ v $\set{\cdot \mid \top}$.
+    Potem iz deifnicije morfizma v $\mathcal{R}(\mathbb{T})$ sledi
+    $\gamma \vdash_{\bar{x}}^{\mathbb{T}} p(\bar{x})$ in
+    $p(\bar{x}) \vdash_{\bar{x}}^{\mathbb{T}} \exists \emptyset \gamma'(\bar{x})$.
+    To pa je ekvivalentno $p(\bar{x}) \vdash_{\bar{x}}^{\mathbb{T}} \gamma'(\bar{x})$.
+    Po tranzitivnosti izpeljav sledi $\gamma(\bar{x}) \vdash_{\bar{x}}^{\mathbb{T}} \gamma'(\bar{x})$.
+    S podobnim argumentom dobimo še izpeljavo $\gamma'(\bar{x}) \vdash_{\bar{x}}^{\mathbb{T}} \gamma(\bar{x}) $,
+    torej velja $T \vdash_{\bar{x}} \gamma(\bar{x}) \gamma'(\bar{x})$
+    in sta morfizma, ki ju ti dve formuli definirata enaka.
+    
+  \item Naj imata objekta $\set{x \mid p}$ in $\set{y \mid q}$, zaradi
+    enostavnosti po eno samo prosto spremenljivko.  Označimo s
+    $\set{\pi_1}$ in $\set{\pi_2}$ morfizma podana s formulama
+    \[ \pi_1(x,y,x') \equiv p(x) \land q(y) \land x=x', \qquad
+      \pi_2(x,y,y') \equiv p(x) \land q(y) \land y=y'.
+    \]
+    Najprej moramo preveriti, da sta to res morfizma v
+    $\mathcal{R}(\mathbb{T})$.  Iz definicije $\pi_1$ in leme
+    \ref{lema:uporabne-izpeljave} sledi
+    $\pi_1(x,y,x') \vdash_{x,y,x'} p(x')$, kar implicira
+    $\pi_1(x,y,x') \vdash_{x,y,x'} p(x) \land q(y) \land p(x')$.  Da
+    je to totalana relacija:
+    $p(x) \land q(y) \vdash_{x,y} \exists x' \pi_1(x,y,x')$ sledi iz
+    primera \ref{primer:vpeljava-eksist-kvantifikatorja} in leme
+    \ref{lema:uporabne-izpeljave}.  Funkcijskost
+    $\pi_1(x,y,x_1') \land \pi_1(x,y,x_2') \implies x_1' = x_2'$,
+    dobimo z uporabo pravil ??, ?? in ??.
+
+    Denimo sedaj, da imamo objekt $\set{z \mid r}$ in morfizma
+    $\set{\varphi} : \set{z \mid r} \to \set{x \mid p}$ in
+    $\set{\gamma} : \set{z \mid r} \to \set{y \mid q}$.  Definirajmo
+    formulo
+    \[ \mu(z,x,y) \equiv \varphi(z,x) \land \gamma(z,y). \] Dokazali
+    bomo, da $\mu$ inducira enolični morfizem
+    $\set{z \mid r} \to \set{x,y \mid \varphi \land \gamma}$, za
+    katerega velja $\set{\pi_1} \circ \set{\mu} = \set{\varphi}$ in
+    $\set{\pi_2} \circ \set{\mu} = \set{\gamma}$.  Kot prvo pokažimo,
+    da $\mu$ res inducira morfizem.  Ker
+    $\mu \vdash \varphi \land \gamma$ in $\varphi \vdash r \land p$
+    ter $\gamma \vdash q$, sledi
+    $\mu(z,x,y) \vdash_{z,x,y}r(z) \land p(x) \land q(y)$.  Da je to
+    totalna relacija, sledi iz dejstva, da sta taki že $\varphi$ in
+    $\gamma$, oziroma eksplicitno imamo
+    $r(z) \vdash_z \exists x \varphi(z,x)$ in
+    $r(z) \vdash_z \exists y \gamma(z,y)$, kar nam da
+    \[ r(z) \vdash_z \exists x \varphi(z,x) \land \exists y
+      \gamma(z,y) \vdash_z \exists x \exists y (\varphi(z,x) \land
+      \gamma(z,y)), \] z uporabo leme \ref{lema:uporabne-izpeljave}.
+    Pokazati moramo še, da je to funkcijska relacija.  Ker je
+    $\varphi$ funkcijska, velja
+    \[ \mu(z,x,y_1) \land \mu(z,x,y_2) \vdash_{z,x,y_1,y_2}
+      \varphi(z,y_1) \land \varphi(z,y_2) \vdash_{z,x,y_1,y_2} y_1 =
+      y_2 \] in podobno za $\gamma$.  Kompozitum
+    $\set{\pi_1} \circ \set{\mu}$ je po definiciji podan s formulo
+    \[ \exists x,y(\mu(z,x,y) \land p(x) \land q(y) \land x=x') \] Ker
+    je $x = x'$ je to ekvivalentno formuli
+    \begin{align*}
+      \exists y(\mu(z,x',y) \land p(x') \land q(y)) \equiv&
+                                                            \exists y(\varphi(z,x') \land \gamma(z,y) \land p(x') \land q(y)) \\
+      \iff& \varphi(z,x') \land p(x') \land \exists y(\gamma(z,y) \land q(y)) \\
+      \iff& \varphi(z,x') \land \exists y \gamma(z,y) \\
+      \iff& \varphi(z,x').
+    \end{align*}
+    Podoben argument velja za $\set{\pi_2} \circ \set{\gamma}$.
+
+    Za enoličnost bomo pokazali, da iz
+    $\set{\pi_1} \circ \set{\mu} = \set{\varphi}$ in
+    $\set{\pi_2} \circ \set{\mu} = \set{\gamma}$ sledi
+    $T \vdash_{z,x',y'} \mu \iff \varphi \land \gamma$.  Po
+    podpostavki je $\varphi(z,x')$ ekvivalentna
+    $\exists x,y(\mu(z,x,y) \land p(x) \land q(y) \land x=x')$, kar je
+    ekvivalentno $\exists y(\mu(z,x',y))$.  Podobno za $\gamma$ velja,
+    da je ekvivalentna $\exists x(\mu(z,x,y'))$. Torej je
+    \begin{align*}
+      \varphi(z,x') \land \gamma(z,z') &\iff \exists y(\mu(z,x',y)) \land \exists x(\mu(z,x,y')) \\
+                                       &\iff \mu(z,x',y'),
+    \end{align*}
+    kjer smo uporabili dejstvo, da je $\mu$ funkcijska slika $z$.
+
+  \item Najprej pokažimo, da je $\set{x,x' \mid \epsilon(x') \land x = x'}$ morfizem.
+    Iz definicije $\epsilon$ sledi, da $\epsilon(x') \land x = x' \vdash_{x,x'} p(x)$.
+    Za totalnost moramo pokazati $\epsilon(x') \vdash_{x'} \exists x \epsilon(x') \land x=x'$,
+    za kar uporabimo izpeljavo iz primera \ref{primer:vpeljava-eksist-kvantifikatorja}.
+    Zadnjo točko dobimo ker $\epsilon(x') \land x'=x_1 \land \epsilon(x') x'= x_2 \vdash x_1 = x_2$.
+    Pokazati moramo, da velja $\set{\gamma} \circ \set{\epsilon(x') \land x = x'} =
+    \set{\gamma} \circ \set{\epsilon(x') \land x = x'}$.
+    Prvi kompozitum je po definiciji enak
+    \[\exists x( \exists y(\gamma(x',y) \land \gamma'(x',y)) \land x = x' \land \gamma(x,y')). \]
+    Ta formula je modulo $\mathbb{T}$ ekvivalentna $\exists y(\gamma(x',y) \land \gamma(x',y))$
+    in enako velja za drugi kompozitum.
+    Denimo, da imamo morfizem $\set{\theta} : \set{z \mid r} \to \set{x \mid p}$,
+    za katerega velja $\set{\gamma} \circ \set{\theta} = \set{\gamma'} \circ \set{\theta}$.
+    Potem iščemo $\set{z,x' \mid \mu} : \set{z \mid r} \to \set{x' \mid \epsilon}$.
+    Definiramo kar $\mu(z,x') \equiv  \theta(z,x')$. Ni se težko prepričati(ali dodamo to izpeljavo?),
+    da s tako definicijo res dobimo morfizem $\set{z \mid r} \to \set{x' \mid \epsilon}$.
+    Kompozitum z $\set{\epsilon(x') \land x = x'}$ je po definiciji enak
+    $\exists x' (\theta(z,x') \land \epsilon(x') \land x=x')$, kar
+    je (modulo $\mathbb{T}$) ekvivalentno kar $\theta(z,x)$.
+    Iz zgornje izpeljave je tudi očitno, da za vsak morfizem $\set{\mu}$,
+    ki nam da tako faktorizacijo velja $T \vdash \mu \iff \theta$.
+
+  \item Opis povlekov v interni logiki sledi iz konstrukcije iz produktov
+    in zožkov, ki velja v vsaki kategoriji s končnimi limitami.
+  \end{enumerate}
 \end{dokaz}
 \begin{lema}
   Morfizem $\set{\varphi} : \set{\bar{x}\,\middle|\, p} \to \set{\bar{y}\,\middle|\, q}$ je
@@ -1264,7 +1385,8 @@ Iz konstrukcije je jasno, da dobimo majhno kategorijo.
   $\mathcal{R}(T)$ je regularna kategorija.
 \end{trditev}
 \begin{dokaz}
-  sorry
+  Po lemi \ref{lema:limite-v-interni-logiki} vemo, da ima $\mathcal{R}(\mathbb{T})$
+  končne limite. Pokazati moramo še, da povleki ohranjajo regularne epimorfizme.
 \end{dokaz}
 \begin{definicija}
   Kategorija $\mathcal{R}(T)$ vsebuje kanonično interpretacijo $\mathcal{U}$ jezika $\mathcal{L}(\Sigma)$:
@@ -1335,8 +1457,9 @@ komutira.
 \begin{dokaz}
   Preverimo, da je kompozitum v obe smeri izomorfen identiteti. Drugi del sledi iz leme ??.
 \end{dokaz}
-pipipipipi.
+assasasasaas!
 \end{document}
 %%% Local Variables:
-%%% TeX-master: nil
+%%% mode: latex
+%%% TeX-master: t
 %%% End:

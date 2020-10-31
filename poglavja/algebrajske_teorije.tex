@@ -109,6 +109,7 @@ Teorija z eno konstanto in brez enačb je teorija množice z odlikovanim element
 %
 %
 \section{Model algebrajske teorije}
+\markright{Modeli}
 Poglejmo si sedaj na primeru grup, kaj je \emph{model} algebrajske teorije.
 Kot smo povedali zgoraj, v klasični algebri grupo razumemo kot množico $G$,
 konstanto $e \in G$ in dve operaciji, ki jih bomo zaradi ilustrativnosti sedaj
@@ -621,9 +622,18 @@ Demonstrirali smo ekvivalenco kategorij
 \[ \mathbf{Mod}_{\mathbf{Set}}(\mathbb{G}) \simeq \mathbf{Grp}. \]
 \end{primer}
 \section{Polnost algebrajske teorije}
+V matematični logiki pravimo, da je logičen sistem \emph{validen},
+če vsaka formula, ki jo lahko dokažemo v tem sistemu, resnična
+glede na semantiko tega sistema. Logične formule algebrajske teorije
+$\mathbb{T}$ imajo zelo preprosto strukturo, vse so namreč enačbe
+oblike $s = t$ med termi te teorije. To, da je ta teorija veljavna
+pomeni, da vsak model zadošča vsem enačbam, ki jih lahko izpeljemo
+iz aksiomov. Obratna lastnost logičnega sistema se imenuje \emph{polnost}.
 Pravimo, da je teorija $\mathbb{T}$ polna (semantično polna), če velja
 da
-$$\text{Vsak model } \mathbb{T} \text{ zadošča }s=t \quad \Longrightarrow \quad \mathbb{T} \vdash s = t$$
+$$\text{Vsak model } \mathbb{T} \text{ zadošča }s=t \quad \Longrightarrow \quad \mathbb{T} \vdash s = t,$$
+kjer $\vdash$ predstavlja izpeljavo enačbe iz aksiomov teorije.
+Za teorije prvega reda velja naslednji slaven izrek o polnosti
 \begin{izrek}[Gödel]
   Naj bo $T$ teorija prvega reda in $\varphi$ formula v jeziku, ki
   opisuje $T$. Potem so naslednje trditve ekvivalentne:
@@ -643,20 +653,75 @@ To velja v posebno močnem smislu za kategorično semantiko
 $$\mathcal{U} \models s = t \quad \Longleftrightarrow \quad \mathbb{T} \vdash s = t$$
 \end{izrek}
 \begin{dokaz}
-  Kot kategorijo $\mathbf{C}$ bomo vzeli klasifikacijsko kategorijo
+  Kot kategorijo $\mathbf{C}$ vzamemo klasifikacijsko kategorijo
   $\mathbf{C}_\mathbb{T}$ in univerzalni model $\mathcal{U}$. Če
   velja $\mathbb{T} \vdash s = t$, potem iz konstrukcije
   $\mathbf{C}_\mathbb{T}$ sledi $s^\mathcal{U} =
-  t^\mathcal{U}$. Obratno, če $\mathcal{U} \models s = t$, potem
-  $s^\mathcal{U} = t^\mathcal{U}$. Ampak ponovno iz konstrukcije
-  $\mathbf{C}_\mathbb{T}$ sledi, da mora veljati
-  $\mathbb{T} \vdash s = t$.
+  t^\mathcal{U}$. Vsak model $M$ v kategoriji $\mathbf{C}$,
+  s končnimi produkti ima klasifikacijski funktor $M^{\#} : \mathbf{C}_{\mathbb{T}} \to \mathbf{C}$,
+  ki ohranja interpretacijo termov $s$ in $t$, kajti velja
+  \[ M^{\#}(s^\mathcal{U}) = s^{M^{\#}(\mathcal{U})} = s^M. \]
+  Podobno za $t$.
+  To pomeni, da iz $s^{\mathcal{U}} = t^{\mathcal{U}}$ sledi $s^M = t^M$.
+  Obratno, če ${\mathcal{U} \models s = t}$, potem velja $s^{\mathcal{U}} = t^{\mathcal{U}}$.
+  Iz konstrukcije $\mathbf{C}_{\mathbb{T}}$ potem sledi ${\mathbb{T} \vdash s = t}$.
 \end{dokaz}
+\begin{definicija}
+  Modelu za katerega velja lastnost iz zgornjega izreka, da zadošča
+  natanko tistim enačbam, ki jih lahko izpeljemo iz aksiomov teorije,
+  pravimo \emph{logično generičen}.
+\end{definicija}
+Po prejšnjem izreku je torej univerzalni model logično generičen.
+V klasičnem smislu models v kategoriji $\mathbf{Set}$, le redko obstaja
+logično generičen model. Za polnost moramo gledati veljavnost
+v vseh modelih teorije hkrati. Za algebrajske teorije v tem posplošenem
+smislu model velja torej močnejša lastnost.
+Za modele v kategoriji $\mathbf{Set}^{\mathbf{C}^{\mathrm{op}}}$
+imamo posebej lep generičen model.
+\begin{trditev}
+  Naj bo $\mathbb{T}$ algebrajska teorija. Potem je Yonedova vložitev
+  \[ y : \mathbf{C}_{\mathbb{T}} \to \mathbf{Fun}(\mathbf{C}_{\mathbb{T}}^{\mathrm{op}}, \mathbf{Set}) \]
+  generičen model $\mathbb{T}$.
+\end{trditev}
+\begin{dokaz}
+  Yonedova vložitev ohranja limite, torej v posebnem končne produkte.
+  Sledi, da nam da model $\tilde{U} = y(U)$ teorije $\mathbb{T}$.
+  Ker je $y$ funktor, so v $\tilde{U}$ zadoščene vse enačbe,
+  ki veljajo v $U$, ker pa je $y$ zvest funktor, je vsaka enačba,
+  ki velja v $\tilde{U}$, morala veljati že v $U$.
+  Ker je $U$ logično generičen, mora biti tudi $\tilde{U}$.
+\end{dokaz}
+\begin{primer}
+  Poglejmo si, kaj nam to pove v primeru teorije grup. Univerzalen model
+  grupe je grupa, ki zadošča vsem enačbam, ki veljajo za vse grupe
+  in nobenim drugim. Spomnimo se, da je univerzalni model $U$
+  predstavljen s kontekstom $[x_1]$ v $\mathbb{G}$.
+  Yonedova vložitev nam da
+  \[ \tilde{U} = y[x_1] = \mathbb{G}(-, [x_1]). \]
+  To je množica, ki jo parametrizirajo objekti $\mathbb{G}$.
+  Za vsak $n \in \mathbb{}N$ dobimo množico $\mathbb{G}([x_1, \ldots, x_x], [x_1])$,
+  vseh termov, ki jih lahko konstruiramo iz $n$ spremenljivk,
+  modulo enačbe teorije grup.
+  To pa je ravno prosta grupa z $n$ generatorji. Enota, inverz in množenje
+  v $\tilde{U}$ so definirani za vsak $n$ kot te operacije na
+  prosti grupi z $n$ generatorji.
+
+  Univerzalna grupa je torej prosta grupa na $n$ generatorjih,
+  kjer je $n \in \mathbb{N}$ parameter.
+\end{primer}
+%
+\section{Funktorialna semantika}
+\label{sec:funkt-semant}
+%
+%
+%
+%
+\section{Lawverjeva dualnost}
+%
+%
 %
 %
 \section{Lawverjeva Teorija}
-%
-\section{Lawverjeva dualnost}
 \end{document}
 
 %%% Local Variables:
