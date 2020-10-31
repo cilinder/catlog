@@ -36,6 +36,7 @@
 % http://tex.stackexchange.com/questions/166772/problem-with-babel-and-tikz-using-draw
 \usepackage{bussproofs} % package for writing natural deduction tree-style proofs
 %
+\usepackage{listings} % paket za prikazovanje kode
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %	DIPLOMA INFO
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -66,7 +67,7 @@
 %
 \theoremstyle{definition}
 \newtheorem{definicija}{Definicija}[chapter]
-\newtheorem{primer}{Primer}[section]
+\newtheorem{primer}{Primer}[definicija]
 \newtheorem*{primer*}{Primer}
 
 \theoremstyle{theorem}
@@ -80,7 +81,14 @@
 \theoremstyle{remark}
 \newtheorem*{opomba}{Opomba}
 %
+\newenvironment{diagram}
+{\begin{equation*}
+  \begin{tikzcd}}
+{\end{tikzcd}
+\end{equation*}}
+
 %
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %								%
 %	Tikz-cd nastavitve			%
