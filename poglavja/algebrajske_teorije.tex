@@ -1,10 +1,9 @@
 \documentclass[../kategoricna_logika.tex]{subfiles}
 \begin{document}
 V matematiki pogosto ``v naravi'' naletimo na strukture, za katere se izkaže,
-da zanje obstaja opis z naborom operacij in enačb, ki za to strukturo veljajo.
-Slaven tak primer je odkritje strukture grupe pri raziskovanju ničel polinomov,
-kar je omogočilo razrešitev klasičnega matematičnega problema formule za ničle
-splošnega polinoma stopnje pet ali več.
+da jih lahko opišemo z naborom operacij in enačb.
+Slaven tak primer je odkritje strukture grupe pri iskanju splošne formule
+za računanje ničel polinomov.
 Tak opis strukture z operacijami in enačbami imenujemo \emph{algebraična teorija}.
 Na tak način lahko tretiramo mnogo znanih primerov iz osnovne algebre,
 kot so grupe, kolobarji, modulu, itd., a tudi nekatere konstrukcije, ki niso
@@ -18,10 +17,10 @@ idejo razširili.
 Začeli bomo s splošnim pristopom opisa algebraičnih teorij.
 Te so karakterizirane z aksiomatskim opisom, ki sestoji izključno iz
 spremenljivk, konstant, operacij in enačb. Pomembno (za naš pristop) je,
-da so operacije definirane za celotno strukturo, ne pa samo za določene
+da so operacije definirane za celotno strukturo, ne pa samo za nekatere
 elemente strukture. To izključi dva pomembna primera: teorijo polj,
-kajti inverz ničle v polju ni definiran, in teorijo kategorij, kajti kompozitumi
-so definirani samo za določene pare morfizmov.
+kjer inverz ničle ni definiran, in teorijo kategorij, kjer so kompozitumi
+definirani samo za določene pare morfizmov.
 Idejo bomo ilustrirali s temeljnim primerom iz algebre, teorijo grup.
 \begin{primer}[Teorija grup]
   \label{primer:teorija-grup}
@@ -32,18 +31,18 @@ Idejo bomo ilustrirali s temeljnim primerom iz algebre, teorijo grup.
     &\exists e \in G . \forall x \in G . \exists y \in G . \quad (e \cdot x = x \cdot e = x \wedge x \cdot y = y \cdot x = e)
   \end{align}
 \end{primer}
-Po vizualni inšpekciji zgornjih dveh aksiomov, je mogoče dognati,
-da je drugi aksiom bistveno manj zadovoljiv od prvega, kajti vsebuje
-tako vgnezdene kvantifikatorje, kot predpisuje obstoj enote in inverzov.
-Njun obstoj pa je iz aksiomov enolično določen in ju(jih?) lahko dodamo
-k strukturi kot konstanto $e \in G$ in eno-mestno operacijo $(-)^{-1} : G \to G$.
-Sedaj dobimo ekvivalentno formulacijo grupe, ki jo lahko podamo samo z enačbami:
+Že na prvi pogled lahko rečemo, da je struktura drugega izmed zgornjih dveh aksiomov
+manj zadovoljiva od prvega, kajti vsebuje tako vgnezdene kvantifikatorje,
+kot določa obstoj nekih elementov, ki pa jih je mogoče iz teh aksiomov
+določiti enolično. To pomeni, da lahko k strukturi grupe dodamo
+konstanto $e \in G$ in eno-mestno operacijo $(-)^{-1} : G \to G$ in
+dobimo ekvivalentno formulacijo grupe, ki jo lahko podamo samo z enačbami:
 \begin{align*}
   &x \cdot (y \cdot z) = (x \cdot y) \cdot z \\
   &x \cdot e = e \cdot x = x \\
   &x \cdot x^{-1} = x^{-1} \cdot x = e
 \end{align*}
-V opisu univerzalnega kvantifikatorja $\forall$ več ne potrebujemo,
+V tem opisu univerzalnega kvantifikatorja $\forall$ več ne potrebujemo,
 saj si interpretiramo vse spremenljivke, kot da tečejo po vseh elementih množice $G$.
 Nepotrebno pa je tudi eksplicitno omenjati množico $G$.
 Za zadnji korak lahko konstanto $e$ opišemo kot nič-mestno operacijo $e : 1 \to G$.
@@ -99,7 +98,7 @@ Teorija z eno konstanto in brez enačb je teorija množice z odlikovanim element
   \end{verbatim}
   Ta definicija bi ustrezala algebrajski teoriji sestavljeni iz konstante $\verb|Empty|$,
   ki bi prestavljala prazno drevo, konstante $\verb|Leaf| \  n$ za vsak $n \in \mathbb{N}$
-  in binarne operacije $\verb|Node|$. Ta teorija nima enačb.
+  in binarne operacije $\verb|Node|$. Ta teorija nima enačb. 
 \end{primer}
 \begin{primer}
   Pomembna struktura, ki ni primer algebrajske teorije, je teorija delno urejene množice,
@@ -120,12 +119,12 @@ označili z $i : G \to G$ in $m : G \times G \to G$. Ustrezati mora aksiomom:
    m(x,i(x)) &= m(i(x),x) = e.
 \end{align*}
 %
-Te koncepte lahko precej enostavno posplošimo tako, da jih ``prevedemo'' v
-kategorični jezik, kar nam bo omogočilo, da govorimo v modelih v drugih
+To idejo lahko posplošimo tako, da jo ``prevedemo'' v
+kategorični jezik, kar nam bo omogočilo, da govorimo o modelih v drugih
 kategorijah kot $\mathbf{Set}$. To storimo na naslednji način:
-Grupa je objekt $G \in \mathbf{Set}$ skupaj s tremi morfizmi
+Grupa je objekt $G \in \mathbf{Set}$ skupaj s tremi morfizmi:
 \[ e : 1 \to G, \qquad m : G \times G \to G, \qquad i : G \to G. \]
-Aksiome grupe lahko predstavimo s komutativnimi diagrami:
+Aksiome grupe lahko predstavimo s komutativnimi diagrami
 \begin{center}
   \begin{tikzcd}[column sep = large]
     G \times G \times G \ar[d, "\pi_0 \times m"'] \ar[r, "m \times \pi_2"] & G \times G \ar[d, "m"] \\
@@ -148,7 +147,7 @@ Aksiome grupe lahko predstavimo s komutativnimi diagrami:
 V tej formulaciji je bila edina lastnost kategorije $\mathbf{Set}$, ki smo jo uporabili to,
 da ima končne produkte. Torej je tak opis smiselen v vsaki kategoriji $\mathbf{C}$,
 ki ima končne produkte. Torej lahko definiramo:
-\emph{Grupa} v kategoriji $\mathbf{C}$ s končnimi produkti je objekt
+\emph{Grupa} v kategoriji s končnimi produkti $\mathbf{C}$ je objekt
 $G$, skupaj z morfizmi
 \begin{center}
   \begin{tikzcd}
@@ -177,7 +176,7 @@ e^H &= h \circ e^G.
 \end{align*}
 Skupaj s kompozitumi in identitetnimi homomorfizmi, tako dobimo
 kategorijo grup v $\mathbf{C}$, ki jo označimo z $\mathbf{Group}(\mathbf{C})$.
-To sedaj posplošimo na poljubno algebrajsko teorijo.
+To konstrukcijo sedaj posplošimo na poljubno algebrajsko teorijo.
 \begin{definicija}
   Naj bo $\mathbf{C}$ kategorija s končnimi
   produkti. \emph{Interpretacija} $I$ teorije $\mathbb{T}$ je
@@ -269,7 +268,7 @@ $\mathbf{Mod}(\mathbb{T}, \mathcal{C})$.
   Model prazne teorije $\mathbb{T}_0$ je objekt $M \in \mathcal{C}$,
   morfizem med dvema modeloma pa je le morfizem v $\mathcal{C}$ brez
   dodatnih omejitev, torej
-$$\Mod(\mathbb{T}_0, \mathcal{C}) = \mathcal{C}.$$
+$$\mathbf{Mod}(\mathbb{T}_0, \mathcal{C}) = \mathcal{C}.$$
 %
 Model teorije grup $\mathbb{T}_{\mathrm{Grp}}$, v kategoriji množic
 $\mathbf{Set}$ je grupa v običajnem smislu. Homorfizem med dvemi modeli
@@ -286,10 +285,10 @@ $$\mathbf{Mod}(\mathbb{T}_{\mathrm{Grp}}, \mathbf{Set}) = \mathbf{Grp}.$$
   \[ \mathrm{eval}_{\mathbf{C}} : \mathbf{Set}^{\mathbf{C}} \to \mathbf{Set}, \]
   ki je definiran kot $\mathrm{eval}_{\mathbf{C}}(F) = F(C)$, za $F : \mathbf{C} \to \mathbf{Set}$.
   Ker produkte računamo ``po točkah'', evaluacija ohranja produkte.
-  Za vsak morfizem $h : C \to D$ v $\mathbf{C}$ dobimo očitno naravno
+  Za vsak morfizem~${h : C \to D}$ v $\mathbf{C}$ dobimo očitno naravno
   transformacijo $h : \mathrm{eval}_{\mathbf{C}} \to \mathrm{eval}_{\mathbf{D}}$.
   Torej za vsako grupo $G$ v $\mathbf{Set}^{\mathbf{C}}$ dobimo grupo
-  $\mathrm{eval}_C(G)$ za vsak $C \in \mathbf{C}$ in homorfizem $h_{G}C(G) \to D(G)$
+  $\mathrm{eval}_C(G)$, za vsak $C \in \mathbf{C}$ in homorfizem $h_{G} : C(G) \to D(G)$
   grup za vsak morfizem $h : C \to D$, kar definira funktor $G : \mathbf{C} \to \mathbf{Grp}$.
   Obratno, vsak funktor $H : \mathbf{C} \to \mathbf{Grp}$, ki ohranja produkte,
   dobimo kot grupo v $\mathbf{Set}^{\mathbf{C}}$, kjer so komponente
@@ -353,8 +352,8 @@ $$[x_1, \ldots, x_m \mid t_1, \ldots, t_n] : [x_1, \ldots, x_m] \to [x_1, \ldots
 %
 Kompozitum morfizmov
   \begin{align*}
-    \langle t_1, \ldots, t_m \rangle &: [x_1, \ldots, x_k] \to [x_1, \ldots, x_m], \\
-    \langle s_1, \ldots, s_n \rangle &: [x_1, \ldots, x_m] \to [x_1, \ldots, x_n],
+    \langle t_1, \ldots, t_m \rangle : [x_1, \ldots, x_k] &\to [x_1, \ldots, x_m], \\
+    \langle s_1, \ldots, s_n \rangle : [x_1, \ldots, x_m] &\to [x_1, \ldots, x_n],
   \end{align*}
 je morfizem $\langle r_1, \ldots, r_n \rangle$, kjer dobimo $i$-to kompotneto tako,
 da v $s_i$ simultano vstavimo terme $t_1, \ldots, t_m$ namesto

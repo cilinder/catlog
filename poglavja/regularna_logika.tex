@@ -1,228 +1,54 @@
 \documentclass[../kategoricna_logika.tex]{subfiles}
 \begin{document}
-\section{Regularna logika}
-Do sedaj smo videli povezavo med algebrajsko teorijo in kategorijo z neko dodatno struktuo, ki nam je omogočila interpretacijo take teorije v semantiki same kategorije. Teorija, ki smo jo obravnavali je bila precej enostavna s stališča logike, saj so bile edine logične formule, ki smo jih lahko konstruirali oblike $t_1 = t_2$ za neka terma, sestavljena induktivno iz spremenljivk in funkcijskih simbolov. 
-Že iz teh osnovnih gradnikov je mogoče dobiti veliko pomembne matematične ``infrastrukture'', kot je na primer teorija grup. Za opis nekih matematičnih teorij pa jasno ta stopnja kompleksnosti ne zadostuje.
-Videli smo, da se teorije polj ne da opisati z algebrajsko teorijo. Moderna matematika je standardno opisana v jeziku predukatne logike, oz logike drugega (ali višjega) reda, kjer imamo poleg funkcijskih simbolov še logične veznike kot so ``in'', ``ali'', negacijo in univerzalni ter eksistenčni kvantifikator.
-Naravno vprašanje je torej, ali lahko zgodbo algebrajskih teorij ponovimo z neko močnejšo logiko in če se to da, kako se to odraža v strukturi kategorijo, ki jo dobimo na ta način in ali ohranimo lepe lastnosti, ki smo jih videli v primeru algebrajskih teorij.
-Kot vemo iz Gödelovega izreka o polnosti logike prvega reda, za modele v kategoriji množic to velja. Zanima nas, ali je to definicijo modela mogoče razširiti na podoben način kot za algebrajske teorije.
-Naredili bomo korak v to smer in našo logiko le delno razširili v tako imenovano $\emph{regularno logiko}$, kjer bomo formule gradili iz atomskih formul, logične konstante resničnosti $\top$, konjunkcij $\wedge$ in eksistenčnega kvantifikatorja $\exists$.
-Videli bomo, da s to razširitvijo lahko ponovimo zgodbo iz prvega dela in nam to da tako imenovane \emph{regularne kategorije}, ki bodo imele dodatno strukturo, ki nam bo omogočala interpretacijo te logike.
-Da to logiko definiramo, moramo najprej razširiti pojem jezika.
-%
-\begin{definicija}
-\emph{Regularna Signatura} $\Sigma$ je sestavljena iz
-\begin{itemize}
-  \item množice \emph{osnovnih tipov} $\underline{\mathrm{sort}}_\Sigma = \set{X_1, X_2, X_3, \ldots}$,
-  \item množice konstant $\underline{\mathrm{const}}_\Sigma = \set{c_1, c_2, \ldots}$,
-  \item množice funkcijskih simbolov $\underline{\mathrm{func}}_\Sigma$ in
-  \item množice relacijskih simbolov $\underline{\mathrm{rel}}_\Sigma$.
-\end{itemize}
-Za funkcijske simbole uporabljamo oznake kot so $f : X_1 \times \ldots \times X_n \to Y$,
-kjer je $X_1 \times \ldots \times X_n$ formalna oznaka, s kateri želimo zajeti intuicijo produkta.
-Relacijske simbole označujemo kot $R \rightarrowtail X_1 \times \ldots \times X_n$.
-\end{definicija}
-Pogosto bomo za $X_1 \times \ldots X_n$ uporabljali tudi oznako $\bar{X}$,
-kjer $n$ razberemo iz konteksta.
-\begin{definicija}
-  Naj bo $\Sigma$ regularna signatura jezika.
-  Potem \emph{jezik} $\mathcal{L}(\Sigma)$ sestoji iz signature $\Sigma$,
-  za vsak osnovni tip $X$ imamo števno mnogo spremenljivk $x:X$.
-  Množice termov $(T)$ in formul $(F)$ definiramo na sledeče načine:
-  \begin{itemize}
-    \item [(T1)] Če je $x$ spremenljivka tipa $X$, potem je $x$ term tipa $X$.
-    \item [(T2)] Če je $c$ konstanta tipa $X$, potem je $c$ term tipa $X$.
-    \item [(T3)] Če so $t_1, \ldots t_n$ že sestavljeni termi tipov $X_1, \ldots, X_n$
-      in je $f : X_1 \times \ldots \times X_n \to Y$ funkcijski simbol,
-      potem je $f(t_1, \ldots, t_n)$ term tipa $Y$.
-    \item [(F1)] Če sta $t_1, t_2$ terma tipa $X$, potem je $t_1 = t_2$ formula. Bolj natančno bi to zapisali kot $t_1 =_X t_2$.
-    \item [(F2)] Logična konstanta $\top$ (ki predstavlja resninično izjavo) je formula.
-    \item [(F3)] Če so $t_1, \ldots t_n$ termi tipov $X_1, \ldots, X_n$ in je $R \rightarrowtail X_1 \times \ldots \times X_n$ relacijski simbol, potem je $R(t_1, \ldots, t_n)$ formula.
-    \item [(F4)] Če sta $\varphi$ in $\psi$ logični formuli, potem sta $\varphi \wedge \psi$ in $\exists x \varphi$ tudi logični formuli.
-  \end{itemize}
-  Za logično formulo $\varphi$,
-  označujemo množico njenih prostih spremenljiv s $\mathrm{FV}(\varphi)$.
-  \emph{Teorija} $T$, formulirana v jeziku $\mathcal{L}(\Sigma)$,
-  je množica \emph{sekvent}, ki so sestavljene iz \emph{premise} in \emph{zaključka}, oblike 
-  $$\varphi \implies \psi,$$
-  kjer sta $\varphi$ in $\psi$ formuli v jeziku teorije $T$.
-\end{definicija}
-Če je v sekventi premisa enaka $\top$, potem $\top \implies \psi$ označujemo kar kot $\psi$,
-in pravimo da $\psi$ \emph{velja}.
-\begin{primer}\label{primer:kompozitum}
-  Naj bo $\Sigma$ signatura s termi osnovnimi tipi $X,Y,Z$,
-  ki vsebuje tri funkcijske simbole $f: X \to Y$, $g : Y \to Z$ in $h : X \to Z$.
-  Potem, če je $x$ spremenljivka tipa $X$, lahko v jeziku $\mathcal{L}(\Sigma)$ tvorimo formulo
-  $$f(g(x)) = h(x)$$
-  Ko definiramo interpretacijo teorije bomo videli, da je to ravno formula, ki pomeni, da je $h$ kompozitum $f$ in $g$.
-\end{primer}
-\begin{primer}[Delno urejene grupe]
-  Naj bo $\Sigma$ signatura z enim osnovnim tipom $X$. Za delno urejeno grupo potrebujemo operacije grupe:
-  \begin{itemize}
-    \item konstanto $e : X$, ki predstavlja enoto grupe,
-    \item operacijo množenja $m : X \times X \to X$,
-    \item operacijo inverza $i : X \to X$,
-  \end{itemize}
-  ki zadoščajo aksiomom:
-  \begin{itemize}
-    \item[(G1)] $m(x,(m(y,z))) = m(m(x,y), z)$,
-    \item[(G2)] $m(x,e) = m(e,x) = x$,
-    \item[(G3)] $m(x,i(x)) = m(i(x), x) = e$.
-  \end{itemize}
-  Poleg tega imamo še relacijo $\leq$ na $X \times X$, za katero veljajo aksiomi delne urejenosti:
-  \begin{itemize}
-    \item[(U1)] $x \leq x$ (refleksivnost)
-    \item[(U2)] $x \leq y \wedge y \leq x \implies x = y$ (anti-simetričnost)
-    \item[(U3)] $x \leq y \wedge y \leq z \implies x \leq z$ (tranzitivnost)
-  \end{itemize}
-  Za definicjo delno urejene grupe potrebujemo še aksiom \emph{invariance za translacijo},
-  ki pravi:
-  \begin{itemize}
-    \item[(TI)] $x \leq y \implies m(x, g) \leq m(y, g) \wedge m(g,x) \leq m(g,y)$
-  \end{itemize}
-\end{primer}
 
-Sedaj bomo definirali pravila sklepanja za naš fragment logike prvega reda, 
-za katera bomo kasenje pokazali, da so veljavna in polna glede na kategorično semantiko,
-ki jim jih bomo dali.
-Podali jih bomo kot zaporedja izpeljav oblike $\varphi \vdash_F \psi$, indeksiranih po končnih množicah spremenljivk $F$. Dedukcija $\varphi \vdash \psi$ je definirana le, če vse proste spremenljivke v $\varphi$ ali $\psi$ ležijo v $F$. V prihodnje bomo privzeli, da je za izraz $\varphi \vdash \psi$ ta pogoj vedno izpolnjen (napiši to lepše).
-Tu moramo biti pozorni, saj na primer izraz $x_1 = x_2 \vdash_{x_1, x_2} x_2 = x_1$,
-ni enak izrazu $x_1 = x_2 \vdash_{x_1, x_2, x_3} x_2 = x_1$.
-Razlog za to podrobnost bomo razložili kasneje, ko definiramo semantiko v kategoriji.
-
-Sedaj definiramo pravila sklepanja v regularni logiki, ki jih razdelimo v tri sklope.
-Podali jih bomo kot izpeljave, ki so zapisane v obliki ulomka, kjer števec predstavlja premise,
-imenovalec pa skelp izpeljave.
-Beremo jih kot: Če veljajo vse premise nekega pravila, lahko izpeljemo njegov sklep.
-Če neka izpeljava velja v obe smeri,
-torej če lahko iz premise $A$ izpeljemo sklep $B$ in iz premise $B$ izpeljemo sklep~$A$,
-potem to podamo kot dvosmerno izpeljavo, ki jo označimo z dvojno črto ulomka.
-
-\begin{definicija}
-  \begin{enumerate}[label*=\arabic*.]
-    \item Strukturna pravila
-    \begin{enumerate}[label*=\arabic*]
-      \item 
-        \begin{prooftree}
-          \AxiomC{}
-          \UnaryInfC{$p \vdash_F p$}
-        \end{prooftree}
-      \item
-        \begin{prooftree}
-            \AxiomC{$p \vdash_F q$} \AxiomC{$q \vdash_F r$}
-                        \BinaryInfC{$p \vdash_F r$}
-        \end{prooftree}
-      \item %$$\dfrac{p \vdash_F q}{p \vdash_{F \cup \set{y}} q}$$
-        \begin{prooftree}
-          \AxiomC{$p \vdash_F q$}
-          \UnaryInfC{$p \vdash_{F \cup \set{y}} q$}
-        \end{prooftree}
-      \item %$$\dfrac{\varphi(y) \vdash_F \psi(y)}{\varphi(b) \vdash_{F\setminus\set{y}} \psi(b)}$$
-        \begin{prooftree}
-          \AxiomC{$\varphi(y) \vdash_F \psi(y)$}
-          \UnaryInfC{$\varphi(b) \vdash_{F \setminus \set{y}} \psi(b)$}
-        \end{prooftree}
-      kjer je $y : B$ spremenljivka, $b$ pa term tipa $B$ in $b$ lahko zamenjamo za $y$ v obeh izrazih.
-    \end{enumerate}
-    \item Logična pravila
-    \begin{enumerate}[label*=\arabic*]
-      \item %$$\dfrac{}{p \vdash_F \top}$$
-        \begin{prooftree}
-          \AxiomC{}
-          \UnaryInfC{$p \vdash_F \top$}
-        \end{prooftree}
-      \item %Če $r \vdash_F p \wedge q$, potem $r \vdash_F p$ in $r \vdash_F q$; in, če $r \vdash_F p$ in $r \vdash_F q$ potem $r \vdash_F p \wedge q$.
-        \begin{prooftree}
-          \AxiomC{$r \vdash_F p$}
-          \AxiomC{$r \vdash_F q$}
-          \doubleLine
-          \BinaryInfC{$r \vdash_F p \wedge q$}
-        \end{prooftree}
-      \item %Če $\exists y \psi(y) \vdash_F p$, potem $\psi(y) \vdash_{F \cup \set{y}} p$; in obratno, če $\psi \vdash_{F \cup \set{y}} p$ potem $\exists y \psi(y) \vdash_F p$.
-        \begin{prooftree}
-          \AxiomC{$\exists y \psi(y) \vdash_F p$}
-          \doubleLine
-          \UnaryInfC{$\psi(y) \vdash_{F \cup \set{y}} p$}
-        \end{prooftree}
-    \end{enumerate}
-    \item Pravila za enakost
-    \begin{enumerate}[label*=\arabic*]
-      \item $\top \vdash_x x = x$
-      \item $x_1 = x_2 \vdash_{x_1, x_2} x_2 = x_1$
-      \item $x_1 = x_2 \wedge x_2 = x_3 \vdash_{x_1, x_2, x_3} x_1 = x_3$
-      \item $\bar{x}^1 = \bar{x}^2 \vdash_{\bar{x}^1, \bar{x}^2} f(\bar{x}^1) = f(\bar{x}^2)$
-      \item $\bar{x}^1 = \bar{x}^2 \wedge R(\bar{x}^1) \vdash_{\bar{x}^1, \bar{x}^2} \mathrm{R}(\bar{x}^2)$
-      kjer je $R \rightarrowtail \bar{X}$
-    \end{enumerate}
-  \end{enumerate}
-  Če je $F = \emptyset$, potem označimo $\vdash_\emptyset$ kot $\vdash$.
-  Izpeljavo $\emptyset \vdash_F \psi$ označimo kar kot $\vdash_F \psi$.
-  Če imamo podano teorijo $T$, pišemo $T, \varphi \vdash_F \psi$,
-  če $\varphi \vdash_F^T \psi$, kjer $\vdash_F^T$ pomeni izpeljava po zgornjih pravilih sklepanja,
-  z dodatnim aksiomom
-  $$\varphi \vdash_{\mathrm{FV}(\varphi) \cup \mathrm{FV}(\psi)} \psi$$
-  za vsako sekvento $\varphi \implies \psi$ v $T$.
-  Alternativno lahko to označimo s ${T \vdash_F \varphi \implies \psi}$,
-  kar nakazuje, da $\varphi$ implicira $\psi$, modulo $T$.
-  Izpeljave gradimo v obliki dreves,
-  kjer so listi drevesa naše predpostavke in koren sklep izpeljave.
-\end{definicija}
-\begin{primer}\label{primer:vpeljava-eksist-kvantifikatorja}
-Poglejmo si kako bi izpeljali pravilo za vnos kvantifikatorja obstoja, ki pravi
-\begin{prooftree}
-  \AxiomC{$r \vdash_F \psi(t)$}
-  \RightLabel{\scriptsize $\exists$-intro}
-  \UnaryInfC{$r \vdash_F \exists x \psi(x)$}
-\end{prooftree}
-Podali bi ga v obliki drevesa
-\begin{prooftree}
-  \AxiomC{$r \vdash_F \psi(t)$}
-  \AxiomC{}
-  \RightLabel{\scriptsize(1.1)}
-  \UnaryInfC{$\exists x \psi(x) \vdash_F \exists x \psi(x)$}
-  \RightLabel{\scriptsize(2.3)}
-  \UnaryInfC{$\psi(x) \vdash_{F \cup \set{x}} \exists x \psi(x)$}
-  \RightLabel{\scriptsize(1.4)}
-  \UnaryInfC{$\psi(t) \vdash_F \exists x \psi(x)$}
-  \RightLabel{\scriptsize(1.2)}
-  \BinaryInfC{$r \vdash_F \exists x \psi(x)$}
-\end{prooftree}
-\end{primer}
-Brez dokaza podamo še naslednji dve izpeljavi.
-\begin{lema}\label{lema:uporabne-izpeljave}
-  Imamo naslednji dve izpeljavi
-  \begin{enumerate}
-  \item $\vdash_{\bar{z}} \exists \bar{x}(p(\bar{x} \land q) \iff (\exists \bar{x} p(\bar{x})) \land q$,
-    pri pogoju, da $\bar{x}$ ne nastopa prosto v $q$.
-  \item $\vdash_{\bar{x}, \bar{x}'} p(\bar{x}) \land \bar{x} = \bar{x}' \implies p(\bar{x}').$
-  \end{enumerate}
-\end{lema}
-%
-%
-%
 \section{Regularne kategorije}
-Regularna logika ima jasno v primerjavi z algebrajskimi teorijami dodatno strukturo, ki se bo odražala v strukturi kategorije v kateri jo bomo lahko interpretirali.
-Za to nalogo bo pomemben koncept podobjekta v kategoriji.
+V prvem delu smo videli kako lahko klasično obravnavo algebrajske
+teorije posplošimo v okvir teorije teorij, kjer je opis teorije
+z operacijami in enačbami porodil model v poljubni kategoriji
+s končnimi produkti. To nam je omogočilo tudi interpretacijo
+končnih produktov v kategoriji kot predstavitev neke algebrajske
+teorije. Kategorije s katerimi pa imamo ponavadi opravka v
+matematiki niso samo kategoriji s končnimi produkti ampak
+imajo velikokrat še neko dodatno strukturo, ki jo je
+mogoče izkoristiti za obravnavo le-te. En tak razred kategorij,
+ki se pojavljajo ``v naravi'' so tako imenovane \emph{regularne kategorije}.
+To so na nek način kategorije, v katerih je mogoče govoriti o
+relacijah, ki jih poznamo iz logike in teorije množic.
+Izkaže se, da je v regularnih kategorijah prav tako mogoče
+najti interpretacijo neke logične teorije, ki pa je bolj
+bogata od algebrajskih. Gre za fragment logike prvega reda,
+ki ga poimenujemo regularna logika.
+Kaj so regularne kategorije, kje jih najdemo v matematiki,
+kako v njih najdemo relacije in kaj je ta fragment logike,
+ki ga je mogoče v njih interpretirati si bomo ogledali v
+naslednjem poglavju.
+
+Za to bomo najprej potrebovali nekaj terminologije.
 \begin{definicija}
  Naj bo $\cat{C}$ kategorija in $X \in \cat{C}$ objekt.
- \emph{Podobjekt} objekta $X$ je ekvivalenčni razred monomorfizmov $\alpha : A \rightarrowtail X$, kjer sta dva monomorfizma $\alpha$ in $\beta : B \rightarrowtail X$ ekvivalenta, če sta $A$ in $B$ izomorfna nad $X$.
- (Z drugimi besedami, če sta $A$ in $B$ isti objekt v $\cat{C}/X$). To pomeni, da obstaja tak izomorfizem $i : A \xrightarrow{\cong} B$, da diagram
+ \emph{Podobjekt} objekta $X$ je ekvivalenčni razred monomorfizmov v $X$,
+ kjer sta dva monomorfizma $\alpha: A \rightarrowtail X$ in $\beta : B \rightarrowtail X$
+ ekvivalenta, če sta $A$ in $B$ izomorfna nad $X$
+ (Z drugimi besedami, če sta $A$ in $B$ isti objekt v $\cat{C}/X$).
+ To pomeni, da obstaja tak izomorfizem $i : A \xrightarrow{\cong} B$, da diagram
  \begin{equation*}
    \begin{tikzcd}[column sep=small]
      A \ar[rr, "i"']{a}{\cong} \ar[dr, "\alpha"'] & & B \ar[dl, "\beta"] \\
      & X &
    \end{tikzcd}
  \end{equation*}
- komutira. Pogosto morfizma $\alpha$ ne navedemo eksplicitno ampak pišemo samo $A \rightarrowtail X$.
- Razred vseh podobjektov objekta $X$ označimo z $\Sub(X)$ in ga opermimo z relacijo delne urejenosti,
+ komutira. Pogosto pišemo samo~${A \rightarrowtail X}$ in morfizma $\alpha$ ne navajamo eksplicitno.
+ Razred vseh podobjektov objekta $X$ označimo s $\Sub(X)$ in ga opermimo z relacijo delne urejenosti,
  kjer je $A \leq B$, če lahko $\alpha : A \rightarrowtail X$ faktoriziramo skozi podobjekt 
  $\beta : B \rightarrowtail X$.
 \end{definicija}
 Ta delno urejeni razred ima največji element, in sicer $\mathrm{id}_X$.
 \begin{definicija}
-    Pravimo da je kategorija $\cat{C}$ \emph{dobro potencirana}, če je $\Sub(X)$ množica za vsak objekt $X \in \cat{C}$.
+  Pravimo da je kategorija $\cat{C}$ \emph{dobro potencirana},
+  če je $\Sub(X)$ množica za vsak objekt $X \in \cat{C}$.
 \end{definicija}
-Od sedaj naprej bomo privzeli, da je $\cat{C}$ dobro potencirana. Oglejmo si interakcijo med množico $\Sub(X)$ in nekaterimi kategoričnimi konstrukti.
+Od sedaj naprej bomo privzeli, da je $\cat{C}$ dobro potencirana.
+Oglejmo si interakcijo med množico $\Sub(X)$ in nekaterimi kategoričnimi konstrukti.
 
 Recimo, da $\cat{C}$ ima vse povleke. 
 Potem lahko za vsak $X \in \cat{C}$ v množici $\Sub(X)$ tvorimo konjunkcije.
@@ -243,7 +69,7 @@ ki pošlje podobjekt $\beta : B \rightarrowtail Y$ v $f^{-1}B \rightarrowtail X$
 kar lahko prikažemo v diagramu
 \begin{equation*}
     \begin{tikzcd}
-        f^{-1} \ar[r, tail] \ar[d, tail] & B \ar[d, tail, "\beta"] \\
+        f^{-1}B \ar[r, tail] \ar[d, tail] & B \ar[d, tail, "\beta"] \\
         X \ar[r, "f"] & Y
     \end{tikzcd}
 \end{equation*}
@@ -286,18 +112,24 @@ Sedaj imamo pripravljeno vse potrebno, da definiramo regularno kategorijo.
     če za vsak jederni par obstaja kozožek, in če povleki ohranjajo regularne epimorfizme.
 \end{definicija}
 \begin{primer}[Primeri regularnih kategorij]
-\begin{itemize}
+  \hfill
+  \begin{itemize}
   \item Kategorija $\cat{Set}$ množic in funkcij je regularna.
-  \item Če je $\mathbb{T}$ algebrajska teorija, potem je kategorija modelov teorije $\mathbb{T}$ regularna kategorija.
-  \item Če je $\mathbb{T}$ algebrajska teorija in $\cat{C}$ regularna,
-    potem je $\cat{Mod}(\mathbb{T}, \cat{C})$ regularna.
+  \item Kategorija $\mathbf{Grp}$ grup in homomorfizmov med njimi.
+  \item Če je $\mathbb{T}$ algebrajska teorija, potem je kategorija
+    (klasičnih) modelov teorije $\mathbb{T}$ regularna kategorija.
+  \item Bolj splošno, če je $\mathbb{T}$ algebrajska teorija in
+    $\cat{C}$ regularna, potem je $\cat{Mod}(\mathbb{T}, \cat{C})$
+    regularna.(Dokaz lahko najdemo v Barr, Exact categories 1971)
   \item Vsaka abelova kategorija je regularna.
   \item Če je $\cat{C}$ regularna in je $\cat{D}$ poljubna kategorija,
     potem je funktorska kategorija $\cat{C}^{\cat{D}}$ regularna.
-  \item Če je $\cat{C}$ regularna in $X \in \cat{C}$ potem je $\cat{C}/X$ regularna.
-  \item Kategorija kompaktnih Hausdorffovih topoloških prostorov je regularna.
+  \item Če je $\cat{C}$ regularna in $X \in \cat{C}$ potem je
+    $\cat{C}/X$ regularna.
+  \item Kategorija kompaktnih Hausdorffovih topoloških prostorov je
+    regularna.
   \item Kategorija $\cat{Top}^{\mathrm{op}}$ je regularna.
-\end{itemize}
+  \end{itemize}
 \end{primer}
 \begin{primer}[Primeri neregularnih kategorij]
   Kategorije $\cat{Cat}, \cat{Pos}\ \text{in}\ \cat{Top}$ niso regularne.
@@ -710,6 +542,226 @@ To pomeni
   \hfill$\Box$
 \end{lema}
 %
+%
+\section{Regularna logika}
+V prvem poglavju smo videli povezavo med algebrajsko teorijo
+in kategorijami s končnimi produkti.
+Teorija, ki smo jo obravnavali je bila precej enostavna s stališča logike,
+saj so bile edine logične formule, ki smo jih lahko konstruirali oblike
+$t_1 = t_2$ za neka terma, sestavljena induktivno iz spremenljivk in funkcijskih simbolov. 
+Že iz teh osnovnih gradnikov je mogoče dobiti veliko pomembne matematične ``infrastrukture'',
+kot je na primer teorija grup.
+Za opis nekih matematičnih teorij pa jasno ta stopnja kompleksnosti ne zadostuje.
+Videli smo, da se teorije polj ne da opisati z algebrajsko teorijo.
+Moderna matematika je standardno opisana v jeziku predikatne logike,
+oziroma logike drugega (ali višjega) reda,
+kjer imamo poleg funkcijskih simbolov še logične veznike kot so ``in'', ``ali'',
+negacijo in univerzalni ter eksistenčni kvantifikator.
+Naravno vprašanje je torej, ali lahko zgodbo algebrajskih teorij
+ponovimo z neko močnejšo logiko in če se to da,
+kako se to odraža v strukturi kategorijo,
+ki jo dobimo na ta način in ali ponovno dobimo povezavo med modeli take teorije
+in kakim posebnim razredom funktorjev, kot smo to videli v primeru algebrajskih teorij.
+Naredili bomo korak v to smer in našo logiko le delno razširili v tako imenovano
+$\emph{regularno logiko}$, kjer bomo formule gradili iz atomskih formul,
+logične konstante resničnosti $\top$, konjunkcij $\wedge$
+in eksistenčnega kvantifikatorja $\exists$.
+Videli bomo, da s to razširitvijo lahko ponovimo zgodbo iz prvega dela in nam to da
+tako imenovane \emph{regularne kategorije}, ki bodo imele dodatno strukturo,
+ki nam bo omogočala interpretacijo te logike.
+Da to logiko definiramo, moramo najprej razširiti pojem jezika iz prvega dela.
+%
+\begin{definicija}
+\emph{Regularna Signatura} $\Sigma$ je sestavljena iz
+\begin{itemize}
+  \item množice \emph{osnovnih tipov} $\underline{\mathrm{sort}}_\Sigma = \set{X_1, X_2, X_3, \ldots}$,
+  \item množice konstant $\underline{\mathrm{const}}_\Sigma = \set{c_1, c_2, \ldots}$,
+  \item množice funkcijskih simbolov $\underline{\mathrm{func}}_\Sigma$ in
+  \item množice relacijskih simbolov $\underline{\mathrm{rel}}_\Sigma$.
+\end{itemize}
+Za funkcijske simbole uporabljamo oznake kot so $f : X_1 \times \ldots \times X_n \to Y$,
+kjer je $X_1 \times \ldots \times X_n$ formalna oznaka, s kateri želimo zajeti intuicijo produkta.
+Relacijske simbole označujemo kot $R \rightarrowtail X_1 \times \ldots \times X_n$.
+\end{definicija}
+Pogosto bomo za $X_1 \times \ldots X_n$ uporabljali tudi oznako $\bar{X}$,
+kjer $n$ razberemo iz konteksta.
+\begin{definicija}
+  Naj bo $\Sigma$ regularna signatura jezika.
+  Potem \emph{jezik} $\mathcal{L}(\Sigma)$ sestoji iz signature $\Sigma$,
+  za vsak osnovni tip $X$ imamo števno mnogo spremenljivk $x:X$.
+  Množice termov $(T)$ in formul $(F)$ definiramo na sledeče načine:
+  \begin{itemize}
+    \item [(T1)] Če je $x$ spremenljivka tipa $X$, potem je $x$ term tipa $X$.
+    \item [(T2)] Če je $c$ konstanta tipa $X$, potem je $c$ term tipa $X$.
+    \item [(T3)] Če so $t_1, \ldots t_n$ že sestavljeni termi tipov $X_1, \ldots, X_n$
+      in je $f : X_1 \times \ldots \times X_n \to Y$ funkcijski simbol,
+      potem je $f(t_1, \ldots, t_n)$ term tipa $Y$.
+    \item [(F1)] Če sta $t_1, t_2$ terma tipa $X$, potem je $t_1 = t_2$ formula. Bolj natančno bi to zapisali kot $t_1 =_X t_2$.
+    \item [(F2)] Logična konstanta $\top$ (ki predstavlja resninično izjavo) je formula.
+    \item [(F3)] Če so $t_1, \ldots t_n$ termi tipov $X_1, \ldots, X_n$ in je $R \rightarrowtail X_1 \times \ldots \times X_n$ relacijski simbol, potem je $R(t_1, \ldots, t_n)$ formula.
+    \item [(F4)] Če sta $\varphi$ in $\psi$ logični formuli, potem sta $\varphi \wedge \psi$ in $\exists x \varphi$ tudi logični formuli.
+  \end{itemize}
+  Za logično formulo $\varphi$,
+  označujemo množico njenih prostih spremenljiv s $\mathrm{FV}(\varphi)$.
+  \emph{Teorija} $T$, formulirana v jeziku $\mathcal{L}(\Sigma)$,
+  je množica \emph{sekvent}, ki so sestavljene iz \emph{premise} in \emph{zaključka}, oblike 
+  $$\varphi \implies \psi,$$
+  kjer sta $\varphi$ in $\psi$ formuli v jeziku teorije $T$.
+\end{definicija}
+Če je v sekventi premisa enaka $\top$, potem $\top \implies \psi$ označujemo kar kot $\psi$,
+in pravimo da $\psi$ \emph{velja}.
+\begin{primer}\label{primer:kompozitum}
+  Naj bo $\Sigma$ signatura s termi osnovnimi tipi $X,Y,Z$,
+  ki vsebuje tri funkcijske simbole $f: X \to Y$, $g : Y \to Z$ in $h : X \to Z$.
+  Potem, če je $x$ spremenljivka tipa $X$, lahko v jeziku $\mathcal{L}(\Sigma)$ tvorimo formulo
+  $$f(g(x)) = h(x)$$
+  Ko definiramo interpretacijo teorije bomo videli, da je to ravno formula, ki pomeni, da je $h$ kompozitum $f$ in $g$.
+\end{primer}
+\begin{primer}[Delno urejene grupe]
+  Naj bo $\Sigma$ signatura z enim osnovnim tipom $X$. Za delno urejeno grupo potrebujemo operacije grupe:
+  \begin{itemize}
+    \item konstanto $e : X$, ki predstavlja enoto grupe,
+    \item operacijo množenja $m : X \times X \to X$,
+    \item operacijo inverza $i : X \to X$,
+  \end{itemize}
+  ki zadoščajo aksiomom:
+  \begin{itemize}
+    \item[(G1)] $m(x,(m(y,z))) = m(m(x,y), z)$,
+    \item[(G2)] $m(x,e) = m(e,x) = x$,
+    \item[(G3)] $m(x,i(x)) = m(i(x), x) = e$.
+  \end{itemize}
+  Poleg tega imamo še relacijo $\leq$ na $X \times X$, za katero veljajo aksiomi delne urejenosti:
+  \begin{itemize}
+    \item[(U1)] $x \leq x$ (refleksivnost)
+    \item[(U2)] $x \leq y \wedge y \leq x \implies x = y$ (anti-simetričnost)
+    \item[(U3)] $x \leq y \wedge y \leq z \implies x \leq z$ (tranzitivnost)
+  \end{itemize}
+  Za definicjo delno urejene grupe potrebujemo še aksiom \emph{invariance za translacijo},
+  ki pravi:
+  \begin{itemize}
+    \item[(TI)] $x \leq y \implies m(x, g) \leq m(y, g) \wedge m(g,x) \leq m(g,y)$
+  \end{itemize}
+\end{primer}
+
+Sedaj bomo definirali pravila sklepanja za naš fragment logike prvega reda, 
+za katera bomo kasenje pokazali, da so veljavna in polna glede na kategorično semantiko,
+ki jim jih bomo dali.
+Podali jih bomo kot zaporedja izpeljav oblike $\varphi \vdash_F \psi$, indeksiranih po končnih množicah spremenljivk $F$. Dedukcija $\varphi \vdash \psi$ je definirana le, če vse proste spremenljivke v $\varphi$ ali $\psi$ ležijo v $F$. V prihodnje bomo privzeli, da je za izraz $\varphi \vdash \psi$ ta pogoj vedno izpolnjen (napiši to lepše).
+Tu moramo biti pozorni, saj na primer izraz $x_1 = x_2 \vdash_{x_1, x_2} x_2 = x_1$,
+ni enak izrazu $x_1 = x_2 \vdash_{x_1, x_2, x_3} x_2 = x_1$.
+Razlog za to podrobnost bomo razložili kasneje, ko definiramo semantiko v kategoriji.
+
+Sedaj definiramo pravila sklepanja v regularni logiki, ki jih razdelimo v tri sklope.
+Podali jih bomo kot izpeljave, ki so zapisane v obliki ulomka, kjer števec predstavlja premise,
+imenovalec pa skelp izpeljave.
+Beremo jih kot: Če veljajo vse premise nekega pravila, lahko izpeljemo njegov sklep.
+Če neka izpeljava velja v obe smeri,
+torej če lahko iz premise $A$ izpeljemo sklep $B$ in iz premise $B$ izpeljemo sklep~$A$,
+potem to podamo kot dvosmerno izpeljavo, ki jo označimo z dvojno črto ulomka.
+
+\begin{definicija}
+  \begin{enumerate}[label*=\arabic*.]
+    \item Strukturna pravila
+    \begin{enumerate}[label*=\arabic*]
+      \item 
+        \begin{prooftree}
+          \AxiomC{}
+          \UnaryInfC{$p \vdash_F p$}
+        \end{prooftree}
+      \item
+        \begin{prooftree}
+            \AxiomC{$p \vdash_F q$} \AxiomC{$q \vdash_F r$}
+                        \BinaryInfC{$p \vdash_F r$}
+        \end{prooftree}
+      \item %$$\dfrac{p \vdash_F q}{p \vdash_{F \cup \set{y}} q}$$
+        \begin{prooftree}
+          \AxiomC{$p \vdash_F q$}
+          \UnaryInfC{$p \vdash_{F \cup \set{y}} q$}
+        \end{prooftree}
+      \item %$$\dfrac{\varphi(y) \vdash_F \psi(y)}{\varphi(b) \vdash_{F\setminus\set{y}} \psi(b)}$$
+        \begin{prooftree}
+          \AxiomC{$\varphi(y) \vdash_F \psi(y)$}
+          \UnaryInfC{$\varphi(b) \vdash_{F \setminus \set{y}} \psi(b)$}
+        \end{prooftree}
+      kjer je $y : B$ spremenljivka, $b$ pa term tipa $B$ in $b$ lahko zamenjamo za $y$ v obeh izrazih.
+    \end{enumerate}
+    \item Logična pravila
+    \begin{enumerate}[label*=\arabic*]
+      \item %$$\dfrac{}{p \vdash_F \top}$$
+        \begin{prooftree}
+          \AxiomC{}
+          \UnaryInfC{$p \vdash_F \top$}
+        \end{prooftree}
+      \item %Če $r \vdash_F p \wedge q$, potem $r \vdash_F p$ in $r \vdash_F q$; in, če $r \vdash_F p$ in $r \vdash_F q$ potem $r \vdash_F p \wedge q$.
+        \begin{prooftree}
+          \AxiomC{$r \vdash_F p$}
+          \AxiomC{$r \vdash_F q$}
+          \doubleLine
+          \BinaryInfC{$r \vdash_F p \wedge q$}
+        \end{prooftree}
+      \item %Če $\exists y \psi(y) \vdash_F p$, potem $\psi(y) \vdash_{F \cup \set{y}} p$; in obratno, če $\psi \vdash_{F \cup \set{y}} p$ potem $\exists y \psi(y) \vdash_F p$.
+        \begin{prooftree}
+          \AxiomC{$\exists y \psi(y) \vdash_F p$}
+          \doubleLine
+          \UnaryInfC{$\psi(y) \vdash_{F \cup \set{y}} p$}
+        \end{prooftree}
+    \end{enumerate}
+    \item Pravila za enakost
+    \begin{enumerate}[label*=\arabic*]
+      \item $\top \vdash_x x = x$
+      \item $x_1 = x_2 \vdash_{x_1, x_2} x_2 = x_1$
+      \item $x_1 = x_2 \wedge x_2 = x_3 \vdash_{x_1, x_2, x_3} x_1 = x_3$
+      \item $\bar{x}^1 = \bar{x}^2 \vdash_{\bar{x}^1, \bar{x}^2} f(\bar{x}^1) = f(\bar{x}^2)$
+      \item $\bar{x}^1 = \bar{x}^2 \wedge R(\bar{x}^1) \vdash_{\bar{x}^1, \bar{x}^2} \mathrm{R}(\bar{x}^2)$
+      kjer je $R \rightarrowtail \bar{X}$
+    \end{enumerate}
+  \end{enumerate}
+  Če je $F = \emptyset$, potem označimo $\vdash_\emptyset$ kot $\vdash$.
+  Izpeljavo $\emptyset \vdash_F \psi$ označimo kar kot $\vdash_F \psi$.
+  Če imamo podano teorijo $T$, pišemo $T, \varphi \vdash_F \psi$,
+  če $\varphi \vdash_F^T \psi$, kjer $\vdash_F^T$ pomeni izpeljava po zgornjih pravilih sklepanja,
+  z dodatnim aksiomom
+  $$\varphi \vdash_{\mathrm{FV}(\varphi) \cup \mathrm{FV}(\psi)} \psi$$
+  za vsako sekvento $\varphi \implies \psi$ v $T$.
+  Alternativno lahko to označimo s ${T \vdash_F \varphi \implies \psi}$,
+  kar nakazuje, da $\varphi$ implicira $\psi$, modulo $T$.
+  Izpeljave gradimo v obliki dreves,
+  kjer so listi drevesa naše predpostavke in koren sklep izpeljave.
+\end{definicija}
+\begin{primer}\label{primer:vpeljava-eksist-kvantifikatorja}
+Poglejmo si kako bi izpeljali pravilo za vnos kvantifikatorja obstoja, ki pravi
+\begin{prooftree}
+  \AxiomC{$r \vdash_F \psi(t)$}
+  \RightLabel{\scriptsize $\exists$-intro}
+  \UnaryInfC{$r \vdash_F \exists x \psi(x)$}
+\end{prooftree}
+Podali bi ga v obliki drevesa
+\begin{prooftree}
+  \AxiomC{$r \vdash_F \psi(t)$}
+  \AxiomC{}
+  \RightLabel{\scriptsize(1.1)}
+  \UnaryInfC{$\exists x \psi(x) \vdash_F \exists x \psi(x)$}
+  \RightLabel{\scriptsize(2.3)}
+  \UnaryInfC{$\psi(x) \vdash_{F \cup \set{x}} \exists x \psi(x)$}
+  \RightLabel{\scriptsize(1.4)}
+  \UnaryInfC{$\psi(t) \vdash_F \exists x \psi(x)$}
+  \RightLabel{\scriptsize(1.2)}
+  \BinaryInfC{$r \vdash_F \exists x \psi(x)$}
+\end{prooftree}
+\end{primer}
+Brez dokaza podamo še naslednji dve izpeljavi.
+\begin{lema}\label{lema:uporabne-izpeljave}
+  Imamo naslednji dve izpeljavi
+  \begin{enumerate}
+  \item $\vdash_{\bar{z}} \exists \bar{x}(p(\bar{x} \land q) \iff (\exists \bar{x} p(\bar{x})) \land q$,
+    pri pogoju, da $\bar{x}$ ne nastopa prosto v $q$.
+  \item $\vdash_{\bar{x}, \bar{x}'} p(\bar{x}) \land \bar{x} = \bar{x}' \implies p(\bar{x}').$
+  \end{enumerate}
+\end{lema}
+%
+%
+%
+
 \section{Model regularnega jezika}
 Recimo, da imamo jezik $\mathcal{L}(\Sigma)$.
 Kot smo to storili za algebrajsko teorijo,
@@ -1367,7 +1419,7 @@ Iz konstrukcije je jasno, da dobimo majhno kategorijo.
     in zožkov, ki velja v vsaki kategoriji s končnimi limitami.
   \end{enumerate}
 \end{dokaz}
-\begin{lema}
+\begin{lema}\label{lema:morfizmi-v-sintakticni-kategoriji}
   Morfizem $\set{\varphi} : \set{\bar{x}\,\middle|\, p} \to \set{\bar{y}\,\middle|\, q}$ je
   \begin{enumerate}[label=(\roman*)]
     \item monomorfizem natanko takrat, ko
@@ -1457,7 +1509,6 @@ komutira.
 \begin{dokaz}
   Preverimo, da je kompozitum v obe smeri izomorfen identiteti. Drugi del sledi iz leme ??.
 \end{dokaz}
-assasasasaas!
 \end{document}
 %%% Local Variables:
 %%% mode: latex
