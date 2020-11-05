@@ -753,7 +753,8 @@ Brez dokaza podamo še naslednji dve izpeljavi.
 \begin{lema}\label{lema:uporabne-izpeljave}
   Imamo naslednji dve izpeljavi
   \begin{enumerate}
-  \item $\vdash_{\bar{z}} \exists \bar{x}(p(\bar{x} \land q) \iff (\exists \bar{x} p(\bar{x})) \land q$,
+  \item $\vdash_{\bar{z}} \exists \bar{x}(p(\bar{x}) \land q) \iff
+    (\exists \bar{x} p(\bar{x}) \land q)$,
     pri pogoju, da $\bar{x}$ ne nastopa prosto v $q$.
   \item $\vdash_{\bar{x}, \bar{x}'} p(\bar{x}) \land \bar{x} = \bar{x}' \implies p(\bar{x}').$
   \end{enumerate}
@@ -761,7 +762,6 @@ Brez dokaza podamo še naslednji dve izpeljavi.
 %
 %
 %
-
 \section{Model regularnega jezika}
 Recimo, da imamo jezik $\mathcal{L}(\Sigma)$.
 Kot smo to storili za algebrajsko teorijo,
@@ -935,20 +935,22 @@ Za to bomo najprej potrebovali dve tehnični lemi o ``slepih spremenljivkah'' in
       \item 
         Za formulo $\varphi \equiv \exists x \psi$ bomo zaradi jasnosti poimenovali naslednje projekcije
         \begin{equation*}
-        \begin{tikzcd}[column sep=tiny]
+        \begin{tikzcd}[column sep=small]
           \interp{X} \times \interp{W} \times \interp{\bar{Z}} \ar[d, "\pi"'] \ar[r, "q"] & \interp{W} \times \interp{\bar{Z}} \ar[d, "\tilde{\pi}"] \\
           \interp{X} \times \interp{\bar{Z}} \ar[r, "p"'] & \interp{\bar{Z}}
         \end{tikzcd}
         \end{equation*}
         To sestavimo v diagram povlekov
-        \begin{equation*}
-        \begin{tikzcd}[column sep=tiny]
+        {\scriptsize
+         \begin{equation*}
+         \begin{tikzcd}[column sep=tiny]
           & \setb{(x,w,\bar{z})}{\psi}^{(M)} \ar[dl, equal] \ar[d] \ar[r] & \exists_q \setb{(w,\bar{z})}{\psi}^{(M)} \ar[d] \ar[dr, equal] & \\
           \pi^{-1}\setb{(x,\bar{z})}{\psi}^{(M)} \ar[d] \ar[r] & X^{(M)} \times W^{(M)} \times \bar{Z}^{(M)} \ar[d, "\pi"'] \ar[r, "q"] & W^{(M)} \times \bar{Z}^{(M)} \ar[d, "\tilde{\pi}"] & \tilde{\pi}^{-1} \setb{\bar{z}}{\exists x \psi}^{(M)} \ar[l] \ar[d] \\
           \setb{(x,\bar{z})}{\psi}^{(M)} \ar[dr, equal] \ar[r] & X^{(M)} \times \bar{Z}^{(M)} \ar[r, "p"'] & \bar{Z}^{(M)}  & \setb{\bar{z}}{\exists x \psi}^{(M)} \ar[l] \ar[dl, equal] \\
           & \setb{(x,\bar{z})}{\psi}^{(M)} \ar[u] \ar[r] & \exists_p \setb{(x,\bar{z})}{\psi}^{(M)} \ar[u] &
         \end{tikzcd}
         \end{equation*}
+        }
         od koder lahko potem preberemo
         \begin{align*}
           \setb{(w, \bar{z})}{\exists x \psi}^{(M)} &= \exists_q \setb{(x,w,\bar{z})}{\psi}^{(M)} &\text{(po definiciji)} \\
@@ -1051,7 +1053,8 @@ Tu torej spet uporabimo aksiom izbire. Potem
 \begin{itemize}
   \item Za vsak morfizem $c : 1 \to X$ v jezik dodamo konstanto $c:X$
   \item Za vsak morfizem $f : \bar{X} \to Y$ v jezik dodamo funkcijski simbol $f : \bar{X} \to Y$
-  \item Za vsak podobjekt $R \hookrightarrow \bar{X}$ v jezik dodamo en relacijski simbol $R \rightarrowtail \bar{X}$
+  \item Za vsak podobjekt $R \hookrightarrow \bar{X}$ v jezik dodamo en relacijski simbol
+    ${R \rightarrowtail \bar{X}}$
 \end{itemize}
 Jezik $\mathcal{L}(\Sigma_\cat{C})$ ima sedaj kanonično interpretacijo $I^{\cat{C}}$ v $\cat{C}$.
 Teorijo $T_\cat{C}$ definiramo kot teorijo te interpretacije, torej množico vseh sekvent
@@ -1059,14 +1062,16 @@ $\varphi \vdash_F \psi$ v jeziku $\mathcal{L}(\Sigma_\cat{C})$, ki so resnične 
 V imenu zlorabe notacije bomo namesto $I^\cat{C}$ pisali kar $\cat{C}$, 
 hkrati pa tudi ne bomo ločevali med npr.\ funkcijskim simbolom $f$ v tem jeziku in njegovo interpretacijo $f^{(I^\cat{C})}$ v $\cat{C}$.
 Sedaj lahko s pomočjo internega jezika regularne teorije opišemo kategorične pojme.
-\begin{lema}\label{lema:morfizmi-v-regularni-logiki}
+\begin{lema}\label{lema:morfizmi-v-interni-logiki}
   Naj bo $\cat{C}$ regularna kategorija. Potem
   \begin{enumerate}[label=(\roman*)]
     \item Naj bodo $X \xrightarrow{f} Y \xrightarrow{g} Z$ in $X \xrightarrow{h} Z$ morfizmi v $\cat{C}$.
       Potem je $h = g \circ f$ natanko takrat, ko velja ${\cat{C} \models h(x) = g(f(x))}$,
       kjer je $x$ prosta spremenljivka tipa $X$.
-    \item Morfizem $m : X \to Y$ je monomorfizem natanko takrat, ko velja $\cat{C} \models m(x_1) = m(x_2) \implies x_1 = x_2$.
-    \item Morfizem $f : X \to Y$ je regularen epimorfizem natanko, ko velja $\cat{C} \models \exists x f(x) = y$.
+    \item Morfizem $m : X \to Y$ je monomorfizem natanko takrat, ko velja
+      \[\cat{C} \models m(x_1) = m(x_2) \implies x_1 = x_2. \]
+    \item Morfizem $f : X \to Y$ je regularen epimorfizem natanko, ko velja
+      \[ \cat{C} \models \exists x f(x) = y. \]
   \end{enumerate}
 \end{lema}
 \begin{dokaz}
@@ -1124,7 +1129,8 @@ Naslednja lema karakterizira končne limite v regularni kategoriji v internem je
 \begin{lema}\label{lema:limite-v-interni-logiki}
   Naj bo $\cat{C}$ regularna kategorija. Potem
   \begin{enumerate}[label=(\roman*)]
-    \item Objekt $X$ v $\cat{C}$ je končen natanko takrat, ko velja $\cat{C} \models x_1 = x_2$ in $\cat{C} \models \exists x . x=x$.
+  \item Objekt $X$ v $\cat{C}$ je končen natanko takrat, ko velja
+    $\cat{C} \models x_1 = x_2$ in $\cat{C} \models \exists x (x=x)$.
 
     \item Morfizma $f : Z \to X$ in $g : Z \to Y$ določita $Z$ kot produkt $X$ in $Y$ natanko takrat,
       ko velja $\cat{C} \models f(z_1) = f(z_2) \wedge g(z_1) = g(z_2) \implies z_1 = z_2$ in 
@@ -1140,7 +1146,7 @@ Naslednja lema karakterizira končne limite v regularni kategoriji v internem je
   \begin{enumerate}[label=(\roman*)]
     \item Iz diagrama
       \begin{equation*}
-      \begin{tikzcd}[row sep=small]
+      \begin{tikzcd}[row sep=normal]
         & X & \\
         X \ar[ur] \ar[r, "\Delta"] \ar[dr] & X \times X \ar[u, "\pi_1"'] \ar[d, "\pi_2"] \ar[r, "!"] & 1 \\
         & X & 
@@ -1152,14 +1158,76 @@ Naslednja lema karakterizira končne limite v regularni kategoriji v internem je
       Če upoštevamo še, da je $\cat{C} \models \exists x (x = x)$ natanko takrat,
       ko je $X \to 1$ regularen epimorfizem, smo pokazali prvi del.
       
-    \item
-
-    \item 
+    \item Pokazali bomo, da je $\fprod{f,g}$ izomorfizem, kar bo pomenilo,
+      da $Z$ predstavlja produkt $X$ in $Y$. Videli bomo, da je pogoj,
+      \[ \mathbf{C} \models f(z_{1}) = f(z_{2}) \land g(z_{1}) = g(z_{2}), \]
+      ki ga poimenujmo \((a)\), ekvivalenten temu, da je \( \fprod{f,g}\) monomorfizem.
+      Drugi pogoj
+      \[ \mathbf{C} \models \exists z(f(z) = x \land g(z) = y), \]
+      ki ga poimenujmo \((b)\), pa temu, da je \( \fprod{f,g}\) regularen epimorfizem.
+      Iz leme \ref{lema:lastnosti-regularnih-epimorfizmov} nato lahko sklepamo,
+      da gre za izomorfizem.
+      Najprej opazimo, da lahko interpretacijo formule
+      \[ f(z_{1}) = f(z_{2}) \land g(z_{1}) = g(z_{2})\]
+      izrazimo kot zožek
+      \begin{equation*}
+        \begin{tikzcd}
+          E \ar[r, hook, "e"] & Z \times Z
+          \ar[r, shift left, "\pi_{1}"] \ar[r, shift right, "\pi_{2}"'] & Z
+          \ar[r, , "\fprod{f, g}"] & X \times Y.
+        \end{tikzcd}
+      \end{equation*}
+      Potem kakor v prejšnji lemi, lahko faktoriziramo $E$ skozi diagonalo
+      $\Delta : Z \to Z \times Z$,
+      ki predstavlja interpretacijo $z_{1} = z_{2}$, če in samo če, je $\fprod{f, g}$ monomorfizem.
+      Da pokažemo drugi del, najprej opazimo, da lahko interpretacijo formule iz $(b)$
+      predstavimo kot
+      \begin{equation}\label{diag:injektivnost-produkta}
+        \begin{tikzcd}
+          \set{x,z,y \mid f(z) = x \land g(z) = y} \ar[d] \ar[r] &
+          X \times \mathrm{graph}(g) \ar[d] \\
+          \mathrm{graph}(f) \times Y \ar[r] & X \times Z \times Y
+        \end{tikzcd}
+      \end{equation}
+      Sedaj zgradimo naslednji diagram povlekov, kjer desni kvadrat dobimo s povlekom
+      $Z \to X \times Y$ po morfizmu $X \to 1$. Nato naredimo povlek dobljenega morfizma
+      $X \times Z \to X \times Z \times Y$ z $Z \times Y \to X \times Z \times Y$,
+      nakar lahko iz \ref{diag:injektivnost-produkta} deduciramo, da je interpretacija
+      formule iz pogoja $(a)$ ravno slika morfizma
+      $\fprod{f, \mathrm{id}_{Z}, g} : Z \to X \times Z \times Y$:
+      \begin{equation*}
+        \begin{tikzcd}[column sep=small]
+          Z \ar[d, two heads] \ar[r, two heads] & \mathrm{graph}(f) \ar[d, two heads] \ar[r, hook] &
+          X \times Z \ar[d, two heads] \ar[r] & Z \ar[d, two heads] \\
+          \mathrm{graph}(g) \ar[d, hook] \ar[r, two heads] &
+          \set{x,z,y \mid f(z) = x \land g(z) = y} \ar[d, hook] \ar[r, hook] &
+          X \times \mathrm{graph}(g) \ar[d, hook] \ar[r] &
+          \mathrm{graph}(g) \ar[d, hook] \\
+          Z \times Y \ar[r, two heads] & \mathrm{graph}(f) \times Y \ar[r, hook] &
+          X \times Z \times Y \ar[r] & Z \times Y
+        \end{tikzcd}
+      \end{equation*}
+      Iz leme \ref{lema:morfizmi-v-interni-logiki} sedaj lahko sklepamo,
+      da je $\fprod{f,g}$ regularen epimorfizem natanko takrat,
+      ko $\mathbf{C} \models \exists z (f(z) = x \land g(z) = y)$.
+      
+    \item Zožek morfizmov $f$ in $g$ je enak $\set{x \mid f(x) = g(x)}$.
+      Ker velja $f \circ e = g \circ e$, imamo faktorizacijo
+      \begin{equation*}
+        \begin{tikzcd}
+          \exists_{e}Z \ar[r, hook] & \set{x \mid f(x) = g(x)} \ar[r, hook] &
+          X \ar[r, shift left, "f"] \ar[r, shift right, "g"'] & Y \\
+          Z \ar[u, two heads] \ar[ur, dashed] \ar[urr, "e"']
+        \end{tikzcd}
+      \end{equation*}
+      Potem je $e$ monomorfizem, če in samo če, je $Z \to \exists_{e}Z$ izomorfizem in
+      $\mathbf{C} \models f(x) = g(x) \implies (\exists z e(z) = x)$, če in samo če,
+      je monomorfizem $\exists_{e}Z \hookrightarrow \set{x \mid f(x) = g(x)}$
+      tudi regularen epimorfizem.
   \end{enumerate}
-\end{dokaz}
-
-\noindent
-Prejšnje leme pokažejo, da lahko vse lastnosti, ki določajo regularno kategorijo izrazimo v interni logiki regularne kategorije.
+\end{dokaz}%
+Prejšnje leme pokažejo, da lahko vse lastnosti,
+ki določajo regularno kategorijo izrazimo v interni logiki regularne kategorije.
 Na ta način lahko izrazimo tudi regularne funktorje.
 Če je $F : \cat{C} \to \cat{D}$ funktor med regularnima kategorijama (ki ni nujno regularen),
 potem dobimo interpretacijo~$\mathfrak{F}$ signature~$\Sigma_\cat{C}$ (oziroma njen funkcijski del) na sledeč način:
@@ -1170,8 +1238,21 @@ potem dobimo interpretacijo~$\mathfrak{F}$ signature~$\Sigma_\cat{C}$ (oziroma n
 \begin{lema}
   Funktor $F$ je regularen natanko takrat, ko velja $\mathfrak{F} \models T_\cat{C}$.
 \end{lema}
+Tu se moramo omejiti na tiste sekvente $\varphi \implies \psi$,
+ki vključujejo samo funkcijske simbole.
 \begin{dokaz}
-  sorry.
+  Če je $F$ regularen, potem po lemi \ref{lema:regularen-funktor-slika-model-v-model} velja,
+  da je $\mathfrak{F} \models \mathbb{T}_{\mathbf{C}}$.
+  Obratno, recimo, da je $X$ končen objekt v $\mathbf{C}$.
+  Torej velja $\mathbf{C} \models x_{1} = x_{2}$ in
+  $\mathbf{C} \models \exists x (x = x)$. Po predpostavki torej velja
+  $\mathfrak{F} \models x_{1} = x_{2}$ in $\mathfrak{F} \models \exists x (x = x)$.
+  To pa pomeni, da je $X^{(\mathfrak{F})}$ končen objekt v $\mathbf{D}$.
+  Podoben argument, z uporabo karakterizacije limit v interni logiki, dokažemo še,
+  da $F$ ohranja produkte in zožke.
+  Z uporabo leme \ref{lema:morfizmi-v-interni-logiki} lahko pokažemo še,
+  da $F$ ohranja tudi faktorizacijo morfizmov, v posebnem tiste regularne epimorfizme,
+  ki nastanejo kot kozožki jedernega para (jederni par, ki je povlek, se tudi ohranja).
 \end{dokaz}
 %
 \section{Generični model in polnost regularnih teorij}
@@ -1215,7 +1296,7 @@ lahko faktoriziramo skozi $\interp[N]{\set{\bar{z} \,\middle|\, \varphi}}$.
   \end{itemize}
 \end{definicija}
 S to definicijo velja
-\begin{lema}
+\begin{lema}\label{lema:regularen-funktor-slika-model-v-model}
   Vsak regularen funktor $F : \cat{C} \to \cat{D}$ med regularnima kategorijama inducira,
   za vsako regularno teorijo $T$ funktor
   $$\Mod(T, \_)=F_T : \Mod(T,\cat{C}) \to \Mod(T, \cat{D})$$
@@ -1227,7 +1308,7 @@ S to definicijo velja
 Po drugi strani, če je $M$ fiksen model teorije $T$ v regularni kategoriji $\cat{E}$
 dobimo za vsako regualarno kategorij $\cat{D}$ funcktor
 $$\mathfrak{M}_{M,\cat{D}} = (\_)_T(M): \cat{RegCat}(\cat{E}, \cat{D}) \to \Mod(T, \cat{D}),$$
-ki pošlje funktor $G : \cat{E} to \cat{D}$ v model $G(M)$ v $\cat{D}$.
+ki pošlje funktor $G : \cat{E} \to \cat{D}$ v model $G(M)$ v $\cat{D}$.
 Naravno transformacijo $\alpha : G \to H$ pošlje v morfizem modelov
 $$\set{\alpha_{\interp{X}}: G(\interp{X}) \to H(\interp{X})}_{X \in \underline{\mathrm{sort}}_{\Sigma}}.$$
 Dodatno velja, da če imamo regularen funktor $F : \cat{D} \to \cat{C}$, potem diagram funktorjev
@@ -1268,18 +1349,50 @@ za katerega se bosta pojma veljavnosti in dokazljivosti ujemala.
         &T \vdash_{\bar{x}} p(\bar{x}) \implies \exists \bar{y} \gamma(\bar{x},\bar{y}) \\
         &T \vdash_{\bar{x},\bar{y}_1,\bar{y}_2} \gamma(\bar{x},\bar{y}_1) \wedge \gamma(\bar{x},\bar{y}_2) \implies \bar{y}_1 = \bar{y}_2
       \end{align*}
-      kar intuitivno pravi, da je $\gamma$ graf funkcije. Dve taki formuli v kontekstu sta ekvivalentni, če sta dokazljivo ekvivalentni v $T$.
-      Ekvivalenčni razred take formule označimo z $\set{(\bar{x},\bar{y}) \,\middle|\, \gamma(\bar{x},\bar{y})}$, ali krajše kar z $\set{\gamma}$.
-    \item Kompozitum dveh morfizmov $\set{\gamma} : \set{\bar{x} \,\middle|\, p} \to \set{\bar{y} \,\middle|\, q}$ in
-      $\set{\chi} : \set{\bar{y}\,\middle|\, q} \to \set{\bar{z}\,\middle|\, r}$ je podan z ekvivalenčnim razredom formule
-      $$\exists \bar{x}(\gamma(\bar{y},\bar{x}) \wedge \chi(\bar{x},\bar{z}))$$
+      kar intuitivno pravi, da je $\gamma$ graf funkcije.
+      Dve taki formuli v kontekstu sta ekvivalentni, če sta dokazljivo ekvivalentni v $T$.
+      Ekvivalenčni razred take formule označimo z
+      $\set{(\bar{x},\bar{y}) \,\middle|\, \gamma(\bar{x},\bar{y})}$,
+      ali krajše kar z $\set{\gamma}$.
+    \item Kompozitum dveh morfizmov
+      $\set{\gamma} : \set{\bar{x} \,\middle|\, p} \to \set{\bar{y} \,\middle|\, q}$ in
+      $\set{\chi} : \set{\bar{y}\,\middle|\, q} \to \set{\bar{z}\,\middle|\, r}$
+      je podan z ekvivalenčnim razredom formule
+      $$\exists \bar{x}(\gamma(\bar{y},\bar{x}) \wedge \chi(\bar{x},\bar{z})).$$
   \end{itemize}
 \end{definicija}
 \begin{lema}
   Kompozitum dveh morfizmov v $\mathcal{R}(T)$ je dobro definiran.
 \end{lema}
 \begin{dokaz}
-  sorry
+  Naj bosta $\set{\varphi} : \set{x \mid p} \to \set{y \mid q}$ in
+  $\set{\psi} : \set{y \mid q} \to \set{z \mid r}$ morfizma v $\mathcal{R}(\mathbb{T})$.
+  Potem je $\set{\psi} \circ \set{\varphi}$ induciran z ekvivalenčnim razredom
+  formule
+  \[ \exists y(\varphi(x,y) \land \psi(y,z)). \]
+  To je res formula v $\mathcal{R}(\mathbb{T})$ s prostima spremenljivkama $x, z$.
+  Pokazati moramo, da določa morfizem v $\mathcal{R}(\mathbb{T})$. Najprej privzamemo
+  \[  \exists y(\varphi(x,y) \land \psi(y,z)) \vdash_{x,z}\exists y(p(x) \land r(z))
+    \vdash_{x,z}p(x) \land r(z), \]
+  ker $\varphi(x,y) \vdash p(x) \land q(y)$ in $\psi(y,z) \vdash q(y) \land r(z)$.
+  S tem smo pokazali, da če določa morfizem,
+  ga res določa od $\set{x \mid q}$ do $\set{z \mid r}$.
+  Za totalnost računamo
+  \begin{align*}
+    p(x) &\vdash_{x} \exists y \varphi(x,y) \\
+         &\vdash_{x} \exists y \exists z (\varphi(x,y) \land \psi(y,z)) \\
+    &\vdash_{x} \exists z \exists y(\varphi(x,y) \land \psi(y,z)),
+  \end{align*}
+  kjer smo za drugi korak uporabili
+  $\varphi(x,y) \vdash_{x,y} q(y) \vdash_{x,y} \exists z \psi(y,z)$.
+  Za funkcijskost ponovno računamo
+  \begin{align*}
+    \exists y(\varphi(x,y) \land \psi(y,z_{1})) &\land \exists y' (\varphi(x,y') \land \psi(y',z_{2})) \\
+                                                &\vdash_{x,z_{1}, z_{2}} \exists y \exists y' (\varphi(x,y) \land \psi(y,z_{1}) \land \varphi(x,y') \land \psi(y',z_{2})) \\
+                                                &\vdash y = y' \qquad \text{(ker $\varphi(x,y) \land \varphi(x,y')$)} \\
+    &\vdash z_{1} = z_{2} \qquad \text{(ker $\psi(y,z_{1}) \land \psi(y',z_{2}) \land y=y'$)}.
+  \end{align*}
+  Ta formula torej res določa dobro definiran morfizem v $\mathcal{R}(\mathbb{T})$.
 \end{dokaz}
 
 \noindent
