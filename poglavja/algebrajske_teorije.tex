@@ -632,7 +632,7 @@ Pravimo, da je teorija $\mathbb{T}$ polna (semantično polna), če velja
 da
 $$\text{Vsak model } \mathbb{T} \text{ zadošča }s=t \quad \Longrightarrow \quad \mathbb{T} \vdash s = t,$$
 kjer $\vdash$ predstavlja izpeljavo enačbe iz aksiomov teorije.
-Za teorije prvega reda velja naslednji slaven izrek o polnosti
+Za teorije prvega reda velja naslednji slaven izrek o polnosti \cite{godel-completeness}
 \begin{izrek}[Gödel]
   Naj bo $T$ teorija prvega reda in $\varphi$ formula v jeziku, ki
   opisuje $T$. Potem so naslednje trditve ekvivalentne:
@@ -717,8 +717,185 @@ imamo posebej lep generičen model.
 %
 \section{Lawverjeva dualnost}
 %
-%
-%
+\begin{izrek}
+  Naj bo $\mathbb{T}$ algebrajska teorija in naj bo
+  \[ \mathbb{M} = \mathbf{Mod}_{\mathrm{fg}}(\mathbb{T}) \hookrightarrow \mathbf{Mod}(\mathbb{T}) = \mathbf{Mod}(\mathbb{T}, \mathbf{Set}) \]
+  polna podkategorija končno generiranih, prostih modelov $\mathbb{T}$.
+  Potem $\mathbb{M}^{\mathrm{op}}$ klasificira $\mathbb{T}$-modele.
+  To pomeni, da imamo za vsako kategorijo s končnimi produkti $\mathbf{C}$ ekvivalenco kategorij
+  \[ \mathbf{Hom}_{\mathrm{FP}}(\mathbb{M}^{\mathrm{op}}, \mathbf{C}) \simeq \mathbf{Mod}(\mathbb{T},\mathbf{C}), \]
+  naravno v $\mathbf{C}$.
+\end{izrek}
+\begin{dokaz}
+  Imamo očiten pozabljivi funktor
+  $\mathbf{Mod}(\mathbb{T}) \to \mathbf{Set}$, ki pošlje model~$M$ v
+  množico, ki predstavlja ta model in jo označimo z $|M|$.  Ta funktor
+  ima levi adjunkt, ki mu pravimo prosti funktor in ga označujemo z
+  \[ F_{\mathbb{T}} = F : \mathbf{Set} \to \mathbf{Mod}(\mathbb{T},
+    \mathbf{Set}). \] Velja
+  \[ \mathbf{Hom}_{\mathbf{Mod}_{\mathbb{T}}}(F(M), N) \cong
+    \mathbf{Hom}_{\mathbf{Set}}(M, |N|),\] za vsako množico $M$ in
+  model $N$.  Najprej opazimo, da ima $\mathbb{M}$ vse končne
+  koproduke
+  \begin{align*}
+    F(n) + F(m) &\cong F(n + m) \\
+    0 &\cong F(0),
+  \end{align*}
+  saj ima $\mathbf{Set}$ vse koprodukte in levi adjunkti ohranjajo kolimite.
+  To pa pomeni, da ima $\mathbb{M}^{\mathrm{op}}$ vse produkte. Naj bo
+  \[ U = F(1) \]
+  tako, da je vsak objekt v $\mathbb{M}^{\mathrm{op}}$ potenca $U$,
+  \[ F(n) \cong U^n.\]
+  Pokazali bomo, da je $U$ model $\mathbb{T}$.
+  Za vsako osnovno $n$-mestno operacijo $f$ teorije $\mathbb{T}$ dobimo element modela
+  $F(n)$, ki je sestavljen iz $f$ in generatorjev $x_1, \ldots, x_n$, označimo ga z
+  \[ f(x_1, \ldots, x_n) \in F(n)\]
+  Na primer, v prosti grupi na dveh generatorjih imamo element $x \cdot y \in F(x,y)$.
+  Iz lastnosti prostega funktorja $F$, za vsak element $f(x_1, \ldots, x_n) \in F(n)$
+  dobimo enoličen homomorfizem modelov
+  \[ \overline{f(x_1, \ldots, x_n)} : F(1) \to F(n) \qquad \text{v $\mathbb{M}$}\]
+  (tisti homomorfizem, ki pošlje generator $F(1)$ v $f(x_1, \ldots, x_n) \in F(n)$).
+  Če to dualiziramo, dobimo interpretacijo $n$-mestne operacije
+  \[ [f] : U^n \to U \qquad \text{v $\mathbb{M}^{\mathrm{op}}$}.\]
+  Z indukcijo to sedaj lahko razširimo na vse terme v kontekstu $x_1, \ldots, x_n \mid t$:
+  \[ [x_{1}, \ldots, x_n \mid t] : U^n \to U.\]
+  Sledi, da je vsaka enačba $s = t$ teorije $\mathbb{T}$ zadoščena v $U$,
+  saj, če velja $\mathbb{T} \vdash s = t$, potem morata ta dva terma sovpadati
+  že v prosti $\mathbb{T}$-algebri $F(n)$.
+
+  Sedaj opazimo, da obstaja kanoničen model $V$ teorije $\mathbb{T}$,
+  v funktorski kategoriji $\mathbf{Set}^{\mathbf{Mod}(\mathbb{T})}$, namreč
+  pozabljivi funktor $V : \mathbf{Mod}(\mathbb{T}) \to \mathbf{Set}$.
+  To je res model, saj za vsako $n$-mestno osnovno operacijo $f$ dobimo
+  naravno transformacijo $[f]^V : V^n to V$, kajti homomorfizmi v $\mathbf{Mod}(\mathbb{T})$
+  komutirajo z operacijami, ki interpretirajo $f$. Da zadošča vsem enačba teorije $\mathbb{T}$
+  sledi iz tega, da tem enačbam zadoščajo vsi modeli v $\mathbf{Mod}(\mathbb{T})$.
+  Kot funktor, je $V$ predstavljiv s prostim modelom $U = F(1)$, v smislu (kovariantne)
+  Yonedove vložitve
+  \[ \mathsf{y} : \mathbf{Mod}(\mathbb{T})^{\mathrm{op}} \to \mathbf{Set}^{\mathbf{Mod}(\mathbb{T})}\]
+  Za vsak $A \in \mathbf{Mod}(\mathbb{T})$ namreč velja:
+  \begin{align*}
+    V(A) &\cong \Hom_{\Mod(\mathbb{T})}(F(1), A) = \Hom_{\Mod(\mathbb{T})^{\mathrm{op}}}(A,U) \\
+    V^n(A) &\cong \Hom_{\Mod(\mathbb{T})}(F(n), A) \\
+    &\cong \Hom_{\Mod(\mathbb{T})}(F(1) + \ldots F(1), A) = \Hom_{\Mod(\mathbb{T})^{\mathrm{op}}}(A,U^n).
+  \end{align*}
+  Torej $V \cong \mathsf{y}(U)$. Vsaka interpretacija $[f]^V : V^n \to V$ je oblike
+  \[ [f]^V = \Hom_{\Mod(\T)}([f]^U, -) : \Hom_{\Mod(\T)}(F(n), -) \to \Hom_{\Mod(\T)}(F(1), -),\]
+  za interpretacijo $[f]^U: U^n \to U$, kajti za vsako $\T$-algebro $A$ in element
+  $a = (a_1, \ldots ,a_n) \in \Hom_{\Mod(\T)}(F(n), A)$ imamo:
+  \[ ([f]^V)_A(a) = f(a_1, \ldots, a_n) = a \circ \overline{f(x_1, \ldots, x_n)},\]
+  kjer je $\overline{f(x_1, \ldots, x_n)} : F(1) \to F(n)$ enolični morfizem, ki nam
+  poda $f(x_1, \ldots x_n)$ kot sliko generatorja $F(1)$.
+
+  Na primer, za dva elementa $g_1, g_2$ grupe $G$ imamo preslikavo
+  $\overline{(g_1, g_2)} : F(x,y) \to G$, ki pošlje generatorja v ta par
+  $\overline{(g_1, g_2)}(x,y) = (g_1, g_2)$, in element $x \cdot y \in (x,y)$ s homomorfizmom
+  $\overline{x \cdot y}: F(1) \to F(x,y)$. Kompozitum nam da očitni homomorfizem
+  $\overline{g_1 \cdot g_2} : F(1) \to G$,
+  \[ \overline{(g_1, g_2)} \circ \overline{x \cdot y} = \overline{g_1 \cdot g_2}\]
+  kar lahko prikažemo v diagramu:
+  \begin{equation*}
+    \begin{tikzcd}
+      F(1) \ar[dr, "{\overline{g_1 \cdot g_2}}"'] \ar[r, "{\overline{x \cdot y}}"] &
+      F(x,y) \ar[d, "\overline{(g_1,g_2)}"] \\
+      & G      
+    \end{tikzcd}
+  \end{equation*}
+  Na tak način, je vsaka operacija $[f]^A : A^n \to A$ na $\T$-algebri $A$ inducirana s
+  predkompozicijo z ``univerzalno'' operacijo $[f]^U : U^n \to U$, kar prikažemo kot
+  \begin{equation}\label{diag:univerzalna-operacija}
+    \begin{tikzcd}
+      A^n \ar[d, "\cong"'] \ar[r, "{[f]^{A}}"] & A \ar[d, "\cong"] \\
+      \Hom(F(n), A) \ar[r, "{([f]^U)^{*}}"'] & \Hom(F(1), A) \\
+      F(n) & F(1) \ar[l, "{\overline{f(x_1, \ldots, x_n)}}"'] \\
+      U^n \ar[r, "{[f]^U}"] & U
+    \end{tikzcd}
+  \end{equation}
+  Torej, pokazali smo, da je $U$, z operacijami $[f]^U : U^n \to U$ res model $\T$
+  v $\mathbb{M} = \Mod_{\mathrm{fg}}(\T)$. Sestoji iz prostih $\T$-algeber $F(n)$ in
+  preslikav $F(1) \to F(n)$, ki so določene z elementi $f(x_1, \ldots, x_n) \in F(n)$,
+  kjer so $x_1, \ldots x_n \in F(n)$ generatorji. Sedaj bomo v treh korakih pokazali,
+  da je $U$ res univerzalna $\T$ algebra.
+
+  Prvi korak: Naj bo $A$ poljubna $\T$-algebra v $\mathbf{Set}$. Potem obstaja funktor,
+  ki ohranja končne produkte
+  \[ A^{\#}: \mathbb{M}^{\mathrm{op}} \to \mathbf{Set}\]
+  definiran kot $A^{\#}(U) \cong A$,
+  \[ A^{\#}(-) = \Hom_{\Mod(\T)}(-,A),\]
+  ki ga dobimo tako, da zožimo predstavljivi funktor
+  \[ \Hom_{\Mod(\T)}(-,A) : \Mod(\T)^{\mathrm{op}} \to \mathbf{Set}\]
+  po polni inkluziji
+  \[ \mathbb{M} = \Mod_{\mathrm{fg}}(\T) \to \Mod(\T)\]
+  končno generiranih prostih $\T$-algeber. Eksplicitno, za vsak objekt
+  $U^n \in \mathbb{M}^{\mathrm{op}}$:
+  \[ A^{\#}(U^n) = \Hom_{\Mod(\T)}(F(n), A) \cong V(A)^{n}, \]
+  kjer je $V(A)$ množica modela $A$. Ta funktor
+  \[ A^{\#} : \mathbb{M}^{\mathrm{op}} \hookrightarrow \Mod(\T)^{\mathrm{op}} \to \mathbf{Set}\]
+  jasno ohranja produkte, in velja
+  \[ A^{\#}(U) = \Hom_{\Mod(\T)}(F(1), A) \cong V(A).\]
+  Dodatno iz diagrama \ref{diag:univerzalna-operacija} sledi, da za vsako osnovno operacijo $fa$,
+  do izomorfizma natančno velja
+  \[ [f]^A = ([f]^U)^{*} = \Hom([f]^U,A) = A^{\#}([f]^U).\]
+  Torej, kot algebri $A^{\#} \cong A$. Vsak homomorfizem $h : F(U) \to G(U)$ $\T$-algeber
+  je induciran s funktorji, ki ohranjajo produkte $F,G : \mathbb{M}^{\mathrm{op}} \to \mathbf{Set}$
+  in je oblike $h = \vartheta_U$ za enolično določeno naravno transformacijo $\vartheta : F \to G$.
+
+  Drugi korak: Naj bo $\mathbb{C}$ poljubna (lokalno majhna) kategorija in $\mathcal{A}$ naj bo
+  $\T$-algebra v $\mathbf{Set}$. Ker je
+  \[ \Mod(\T, \mathbf{Set}^{\mathbb{C}}) \cong
+    \Mod(\T, \mathbf{Set})^{\mathbb{C}} = \Mod(\T)^{\mathbb{C}},\]
+  je vsak $\mathcal{A}(X)$ $\T$-algebra v $\mathbf{Set}$,
+  ki ima po prvem koraku klasifikacijski funktor
+  \[ \mathcal{A}(X)^{\#} : \mathbb{M}^{\mathrm{op}} \to \mathbf{Set}.\]
+  Tej podatki skupaj določajo funktor
+  $\mathcal{A}^{\#} : \mathbb{M}^{\mathrm{op}} \to \mathbf{Set}^{\mathbb{C}}$,
+  ki je definiran na $U \in \mathbb{M}^{\mathrm{op}}$ kot
+  \[ (\mathcal{A}^{\#}(U))(X) = \mathcal{A}(X)^{\#}(U) \cong \mathcal{A}(X)\]
+  in je $U^n$ kot $(\mathcal{A}^{\#}(U^{n}))(X) = \mathcal{A}(X)^{\#}(U^n) \cong \mathcal{A}(X)^n$.
+  Funktor $\mathcal{A}^{\#}(U) : \mathbb{C} \to \mathbf{Set}$ deluje na morfizmih $g : X \to Y$ v
+  $\mathbb{C}$ kot je prikazano v naslednjem diagramu
+  \begin{equation*}
+    \begin{tikzcd}
+      \mathcal{A}^{\#}(U)(X) \ar[d, "\cong"'] \ar[r, "{\mathcal{A}^{\#}(U)(g)}"] &
+      \mathcal{A}^{\#}(U)(Y) \ar[d, "\cong"] \\
+      \mathcal{A}(X) \ar[r, "{\mathcal{A}(g)}"] & \mathcal{A}(Y)
+    \end{tikzcd}
+  \end{equation*}
+  Primer za $U^n$ je povsem analogen. Končno, delovanje
+  $\mathcal{A} : \mathbb{M}^{\mathrm{op}} \to \mathbf{Set}$ na morfizmih $U^n \to U^m$
+  v $\mathbb{M}^{\mathrm{op}}$ je definirano prav tako po komponentah
+  \[ (\mathcal{A}^{\#}(U^n))(X) \cong \mathcal{A}(X)^{\#}(U^n) \to
+    \mathcal{A}(X)^{\#}(U^m) \cong \mathcal{A}^{\#}(U^m)(X),\]
+  za vsak $X \in \mathbb{C}$.
+
+  Tretji korak: Za splošni primer naj bo $\mathbf{C}$ poljubna (lokalno majhna) kategorija
+  s končnimi produkti in $A$ naj bo $\T$-algebra v $\mathbf{C}$.
+  Uporabili bomo Yonedovo vložitev
+  \[ \mathsf{y} : \mathbf{C} \to \mathbf{Set}^{\mathbf{C}^{\mathrm{op}}},\]
+  ki pošlje $A$ v $\mathcal{A} = \mathsf{y}(A)$ v $\mathbf{Set}^{\mathbf{C}^{\mathrm{op}}}$
+  (kajti $\mathsf{y}$ ohranja končne produkte). Sedaj po drugem koraku dobimo klasifikacijski
+  funktor
+  \[ \mathbb{M}^{\mathrm{op}} \to \mathbf{Set}^{\mathbf{C}^{\mathrm{op}}}\]
+  in trdimo, da se $\mathcal{A}^{\#}$ faktorizira skozi Yonedovo vložitev
+  \begin{equation*}
+    \begin{tikzcd}
+      & \mathbf{Set}^{\mathbf{C}^{\mathrm{op}}} \\
+      \mathbb{M}^{\mathrm{op}} \ar[ur, "\mathcal{A}^{\#}"] \ar[r, dashed, "A^{\#}"'] &
+      \mathbf{C} \ar[u, hook]
+    \end{tikzcd}
+  \end{equation*}
+  Vemo, da so vsi objekti v $\mathbb{M}^{\mathrm{op}}$ oblike $U^n$, torej so njihove slike
+  \[ \mathcal{A}(U^n) \cong \mathcal{A}^n \cong \mathsf{y}(A)^n \cong \mathsf{y}(A^n)\]
+  vse predstavljive. Ker je $\mathsf{y}$ poln in zvest, zgornja trditev sledi, in
+  dobljeni funktor $A^{\#} : M^{\mathrm{op}} \to \mathbf{Set}$ ohranja končne produkte, saj jih
+  že $\mathcal{A}^{\#}$ in $\mathsf{y}$ jih ustvari. Jasno je
+  \[ A^{\#}(U) \cong A.\]
+  Naravnost ekvivalence
+  \[ \Hom_{\mathrm{FP}}(\mathbb{M}^{\mathrm{op}},\mathbf{C}) \simeq \Mod(\mathbb{T}, \mathbf{C})\]
+  v $\mathbf{C}$ je praktično avtomatska, z uporabo dejstva, da je inducirana z evaluacijo
+  funktorja, ki ohranja končne produkte $F : \mathbb{M}^{\mathrm{op}} \to \mathbf{C}$,
+  pri univerzalnem modelu $U$ v $\mathbb{M}^{\mathrm{op}}$.
+\end{dokaz}
 %
 \section{Lawverjeva Teorija}
 \end{document}

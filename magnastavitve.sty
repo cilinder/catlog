@@ -77,7 +77,7 @@
 %
 \theoremstyle{definition}
 \newtheorem{definicija}{Definicija}[chapter]
-\newtheorem{primer}{Primer}[definicija]
+\newtheorem{primer}[definicija]{Primer}
 \newtheorem*{primer*}{Primer}
 
 \theoremstyle{theorem}
@@ -144,7 +144,8 @@
 \newcommand{\cat}[1]{{\operatorname{\mathbf{#1}}}} % za pisanje imen kategorij kot so Set in podobno
 \newcommand{\homset}[2]{\mathrm{Hom(#1,#2)}}
 %
-\DeclareMathOperator{\Hom}{Hom}
+% \DeclareMathOperator{\Hom}{Hom}
+\newcommand{\Hom}{\mathbf{Hom}}
 %\DeclareMathOperator[1]{\colim}{\underset{#1}{colim}}
 \DeclareMathOperator{\colim}{colim}
 %\newcommand[1]{\colim}{\underset{#1}\colim_op}
@@ -152,9 +153,11 @@
 \DeclareMathOperator{\dom}{dom}
 \DeclareMathOperator{\cod}{cod}
 \DeclareMathOperator{\obj}{obj}
-\DeclareMathOperator{\Mod}{Mod}
+% \DeclareMathOperator{\Mod}{Mod}
+\newcommand{\Mod}{\mathbf{Mod}}
 \DeclareMathOperator{\Sub}{Sub}
 \DeclareMathOperator{\graph}{graph}
+\newcommand{\T}{\mathbb{T}}
 %
 \renewcommand{\set}[1]{\left\lbrace\,#1\,\right\rbrace}
 %

@@ -614,10 +614,10 @@ in pravimo da $\psi$ \emph{velja}.
   Naj bo $\Sigma$ signatura s termi osnovnimi tipi $X,Y,Z$,
   ki vsebuje tri funkcijske simbole $f: X \to Y$, $g : Y \to Z$ in $h : X \to Z$.
   Potem, če je $x$ spremenljivka tipa $X$, lahko v jeziku $\mathcal{L}(\Sigma)$ tvorimo formulo
-  $$f(g(x)) = h(x)$$
+  $$f(g(x)) = h(x).$$
   Ko definiramo interpretacijo teorije bomo videli, da je to ravno formula, ki pomeni, da je $h$ kompozitum $f$ in $g$.
 \end{primer}
-\begin{primer}[Delno urejene grupe]
+\begin{primer}[Delno urejene grupe]\label{primer:delno-urejene-grupe}
   Naj bo $\Sigma$ signatura z enim osnovnim tipom $X$. Za delno urejeno grupo potrebujemo operacije grupe:
   \begin{itemize}
     \item konstanto $e : X$, ki predstavlja enoto grupe,
@@ -1447,8 +1447,8 @@ Iz konstrukcije je jasno, da dobimo majhno kategorijo.
     $\mathcal{R}(\mathbb{T})$.  Iz definicije $\pi_1$ in leme
     \ref{lema:uporabne-izpeljave} sledi
     $\pi_1(x,y,x') \vdash_{x,y,x'} p(x')$, kar implicira
-    $\pi_1(x,y,x') \vdash_{x,y,x'} p(x) \land q(y) \land p(x')$.  Da
-    je to totalana relacija:
+    $$\pi_1(x,y,x') \vdash_{x,y,x'} p(x) \land q(y) \land p(x').$$
+    Da je to totalana relacija:
     $p(x) \land q(y) \vdash_{x,y} \exists x' \pi_1(x,y,x')$ sledi iz
     primera \ref{primer:vpeljava-eksist-kvantifikatorja} in leme
     \ref{lema:uporabne-izpeljave}.  Funkcijskost
@@ -1536,15 +1536,101 @@ Iz konstrukcije je jasno, da dobimo majhno kategorijo.
   Morfizem $\set{\varphi} : \set{\bar{x}\,\middle|\, p} \to \set{\bar{y}\,\middle|\, q}$ je
   \begin{enumerate}[label=(\roman*)]
     \item monomorfizem natanko takrat, ko
-      $$T \vdash_{\bar{x}_1,\bar{x}_2}  \exists \bar{y} \left( \varphi(\bar{x}_1,\bar{y}) \wedge \varphi(\bar{x}_2,\bar{y}) \implies \bar{x}_1 = \bar{x}_2 \right),$$
+      $$T \vdash_{\bar{x}_1,\bar{x}_2}  \exists \bar{y} \left( \varphi(\bar{x}_1,\bar{y}) \wedge \varphi(\bar{x}_2,\bar{y}) \right) \implies \bar{x}_1 = \bar{x}_2 ,$$
     \item regularen epimorfizem natanko takrat, ko
       $$T \vdash_{\bar{y}} q(\bar{y}) \implies \exists \bar{x} \varphi(\bar{x},\bar{y}).$$
-    \item Morfizem $\set{p(\bar{x}) \wedge \bar{x}, = \bar{x}'} : \set{\bar{x}\,\middle|\, p } \to \set{\bar{x}\,\middle|\, q}$ je monomorfizem natanko takrat, ko
+    \item Morfizem $\set{p(\bar{x}) \wedge \bar{x} = \bar{x}'} : \set{\bar{x}\,\middle|\, p } \to \set{\bar{x}\,\middle|\, q}$ je monomorfizem natanko takrat, ko
       $$T \vdash_{\bar{x}} p \implies q.$$
   \end{enumerate}
 \end{lema}
 \begin{dokaz}
-  sorry.
+  Pri dokazu bomo ponovno zaradi preglednosti ponovno predpostavili,
+  da so formule odvisne le od ene proste spremenljivke. Na potek dokaza to ne vpliva
+  in če bralec želi, si lahko to interpretira kot striktno sintaktično substitucijo.
+  \begin{enumerate}[label=(\roman*)]
+  \item Najprej bomo uporabili opazko, da je $f : X \to Y$ monomorfizem natanko takrat,
+    ko je
+    \begin{equation*}
+      \begin{tikzcd}
+        X \ar[d, " \mathrm{id}_X"'] \ar[r, " \mathrm{id}_X"] & X \ar[d, "f"] \\
+        X \ar[r, "f"'] & Y
+      \end{tikzcd}
+    \end{equation*}
+    povlek. Po prejšnji lemi lahko povlek $\{\varphi\}$ izrazimo kot
+    \[ \{ x_1,x_2 \mid \exists y(\varphi(x_1,y) \land \varphi(x_2,y)) \}.\]
+    Da je $\{\varphi\}$ monomorfizem je torej ekvivalentno temu,
+    da v $\mathcal{R}(\mathbb{T})$ velja
+    \[ \{ x_1,x_2 \mid \exists y(\varphi(x_1,y) \land \varphi(x_2,y)) \} = \{x \mid p\} \]
+    Če predpostavimo, da sta ta dva objekta enaka v $\mathcal{R}(\mathbb{T})$,
+    mora jasno veljati
+    $$T \vdash_{\bar{x}_1,\bar{x}_2}  \exists \bar{y} \left( \varphi(\bar{x}_1,\bar{y}) \wedge \varphi(\bar{x}_2,\bar{y}) \right) \implies \bar{x}_1 = \bar{x}_2 .$$
+    Obratno, če zgorna enačba velja potem iz $\exists y(\varphi(x_1,y) \land \varphi(x_2,y))$
+    sledi $p(x_1) \land p(x_2) \land x_1 = x_2$, kar je ekvivalentno $p(x_1)$.
+
+  \item Pokazati moramo, da je
+    \begin{equation*}
+      \begin{tikzcd}
+        \{ x_1,x_2 \mid \exists y(\varphi(x_1,y) \land \varphi(x_2,y)) \}
+        \ar[r, shift left, "\{\pi_1\}"] \ar[r, shift right, "\{\pi_2\}"'] &
+        \{x \mid p\} \ar[r, "\{\varphi\}"] & \{y \mid q\}
+      \end{tikzcd}
+    \end{equation*}
+    diagram kozožka natanko takrat, ko velja zgornji pogoj.
+    Projekcija $\{\pi_1\}$ je inducirana s formulo
+    $\exists y(\varphi(x_1,y) \land \varphi(x_2,y) \land x_1 = x )$ in $\{\pi_2\}$ s podobno.
+    Enakost $\{\varphi\} \circ \{\pi_1\} = \{ \varphi\} \circ \{\pi_2\}$ velja,
+    ker $\{\pi_1\}$ in $\{\pi_2\}$ dobimo iz povleka. Denimo sedaj, da imamo objekt
+    $\{ z \mid r\}$ in morfizem $\{\psi\} : \{ x \mid p\} \to \{ z \mid r\}$,
+    za katerega velja $\{\psi\} \circ \{\pi_1\} = \{\psi\} \circ \{\pi_2\}$.
+    To pomeni
+    \[ T \vdash_{x_1,x_2,z} \left(\exists x (\pi_1(x_1,x_2,x) \land \psi(x,z)) \iff
+       \exists x (\pi_2(x_1,x_2,x) \land \psi(x,z))\right).
+    \]
+    Definirajmo formulo
+    \[ \eta(x,z) \equiv \exists x(\varphi(x,y) \land \psi(x,z)).\]
+    Pokazati želimo, da ta formula inducira enoličen morfizem $\{y \mid q\} \to \{z \mid r\}$,
+    za katerega velja $\{\psi\} = \{ \eta\} \circ \{\varphi\}$.
+    Najprej pokažimo, da res definira morfizem v $\mathcal{R}(\mathbb{T})$.
+    Računamo
+    \begin{align*}
+      \eta(y,z) &\vdash \exists x(p(x) \land q(y) \land p(x) \land r(z)) \\
+                &\vdash q(y) \land r(z).
+    \end{align*}
+    Za totalnost imamo    
+    \begin{align*}
+      q(y) &\vdash\exists x(\varphi(x,y)) \\
+           &\vdash \exists x(p(x) \land q(y)) \\
+           &\vdash \exists x (\exists z \psi(x,z)) \\
+           &\vdash \exists x(\varphi(x,y) \exists z \psi(x,z)) \\
+           &\vdash \exists z ( \exists x(\varphi(x,y) \land \psi(x,z))) \\
+      &\equiv \eta(y,z).
+    \end{align*}
+    Na zadnje
+    \[ \exists x(\varphi(x,y) \land \psi(x,z_1)) \land \exists x' (\varphi(x',y) \land \psi(x',z_2))
+      \vdash \exists x,x'(\varphi(x,y) \land \varphi(x',y)).\]
+    Iz predpostavke potem sledi $z_1 = z_2$, kar smo želeli pokazati.
+    Za kompozitum moramo pogledati formulo
+    \[ \exists y(\varphi(x,y) \land \eta(y,z)) \equiv
+      \exists y(\varphi(x,y) \land \exists x'(\varphi(x',y) \land \psi(x',z)) ), \]
+    iz česar želimo izpeljati $\psi(x,z)$. Najprej potegnemo $\exists x'$ ven in dobimo
+    \[\exists y \exists x'( \varphi(x,y) \land \varphi(x',y) \land \psi(x',z)). \]
+    Po predpostavki potem iz $\varphi(x,y) \land \varphi(x',y)$ sledi
+    $\psi(x',z) \land \psi(x,z)$, iz česar seveda sledi $\psi(x,z)$.
+    Za enoličnost privzamemo, da obstaja drug $\{\eta\} : \{y \mid q\} \to \{z \mid r\}$,
+    za katerega velja $\{\psi\} = \{\tilde{\eta}\} \circ \{\varphi\}$. Potem imamo
+    \begin{align*}
+      \exists y (\varphi(x,y) \land \tilde{\eta}(y,z)) \land \psi(x,z) \\
+      \vdash \exists y (\exists x(\varphi(x,y) \land \psi(x,z)) \land \tilde{\eta}(y,z)) \\
+      \vdash (\eta(y,z) \land \tilde{\eta}(y,z))
+    \end{align*}
+    Torej sta $\{\eta\}$ in $\{\tilde{\eta}\}$ isti morfizem v $\mathcal{R}(\mathbb{T})$.
+    Dokaz v drugo smer potek podobno.
+
+  \item Pogoj v $(\mathrm{iii})$ je potreben,
+    da formula res določa morfizem v~$\mathcal{R}(\mathbb{T})$.
+    To, da določa monomorfizem potem sledi iz točke $(\mathrm{i})$.
+  \end{enumerate}
+  
 \end{dokaz}
 \begin{trditev}
   $\mathcal{R}(T)$ je regularna kategorija.
