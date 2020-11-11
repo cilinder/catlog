@@ -2,184 +2,78 @@
 \begin{document}
 \section{Osnovne Definicije}
 %
-\section{Splošni izreki}
-\begin{lema}
-Naj bo $\cat{C}$ poljubna kategorija in $f : X \to Y$ morfizem. 
-Denimo, da v $\cat{C}$ obstaja produkt $X \times Y$.
-Potem je projekcija $X \times Y \to X$ epimorfizem.
-\end{lema}
-\begin{dokaz}
-Naj bo $p : X \times Y \to X$ projekcija iz produkta in $u = \langle id_X, f \rangle : X \to X \times Y$. Recimo, da imamo dva vzporedna morfizma $g,h : X \to Z$ za katera velja $g \circ p = h \circ p$. To prikažemo v diagramu
-\begin{center}
-\begin{tikzcd}
-& X \ar[d, "u", dashed] \ar[dr, "id_X"] \ar[dl, "f"'] \\
-Y & X\times Y \ar[l] \ar[r, "p"] & X \ar[r, shift left, "g"] \ar[r, shift right, "h"'] & Z
-\end{tikzcd}
-\end{center}
-Sedaj velja
-\begin{align*}
-g \circ p &= h \circ p \\
-g \circ p \circ u &= h \circ p \circ u \\
-g \circ id_X &= h \circ id_X \\
-g &= h
-\end{align*}
-\end{dokaz}
-\begin{lema}
-  Če je morfizem $f : X \to Y$ epimorfizem in sekcija, potem je izomorfizem.
-\end{lema}
-\begin{dokaz}
-To lahko razberemo iz diagrama
-\begin{equation*}
-\begin{tikzcd}
-  X \ar[r, "f"] & Y \ar[dr, "id_Y"'] \ar[r, "g"] & X \ar[d, "f"] \\
-  & & Y 
-\end{tikzcd}
-\end{equation*}
-\end{dokaz}
-\begin{lema}
-  Skladanje kvadratov povleka.
-\end{lema}
-\begin{lema}
-  Naj bo $\cat{C}$ kategorija, ki ima končne limite in naj bo $E$ zožek $p_1, p_2 : X \to Y$.
-  Potem za vsak objekt $Z$ potem dobimo zožek $E'$ morfizmov
-  \begin{tikzcd} X \times Z 
-    \ar[r, shift left, "p_1 \times \mathrm{id}_Z"] \ar[r, shift right, "p_2 \times \mathrm{id}_Z"'] & 
-    Y \times Z
-  \end{tikzcd}
-  kot $E' = \pi^{-1}E$, kjer je $\pi$ projekcija $X \times Y \xrightarrow{\pi} X$.
-\end{lema}
-\begin{dokaz}
-  sorry.
-\end{dokaz}
-\begin{izrek} [Adjoint functor theorem]
-Naj bo $\cat{C}$ lokalno majhna in polna. Za vsako kategorijo $\cat{X}$ in funktor 
-$$U : \cat{X} \to \cat{C}$$
-ki ohranja limite, so naslednje trditve ekvivalentne:
-\begin{enumerate}
-\item $U$ ima levi adjunkt
-\item Za vsak objekt $X \in \cat{X}$ funktor $U$ zadošča kriteriju množice rešitev:
-Obstaja množica $(C_i)_{i \in I}$ objektov v $\cat{C}$ tako, da za vsak objekt $C \in \cat{C}$ in vsak morfizem $f : X \to UC$ obstaja indeks $i \in I$ in morfizma $\phi : X \to UC_i$ in $\overline{f} : C_i \to C$, da velja
-$$f = U(\overline{f}) \circ \phi$$
-\[ \begin{tikzcd}
-X \arrow[r, "\phi"] \arrow[rd, "f"'] & UC_i \arrow[d, "U(\overline{f})"] \\
-& UC
-\end{tikzcd} \]
-\end{enumerate}
-\end{izrek}
-\begin{lema} \label{lema2}
-Funktor $U : \cat{C} \to \cat{X}$ ima levi adjunkt natanko takrat, ko ima comma-kategorija $(X \downarrow U)$ začetni objekt.
-\end{lema}
-\begin{proof}
-Naj bo $F : \cat{X} \to \cat{C}$ levi adjunkt za $U$ in $\eta : 1_{\cat{X}} \to UF$ enota adjunkcije. Potem je $(FX, \eta_X : X \to UFX)$ začetni objekt v $(X \downarrow U)$. To velja, saj če je $(C, f : X \to UC)$ objekt v $(X \downarrow U)$, potem po UMP enote obstaja natanko en $g : FX \to C$, da diagram
-\[ \begin{tikzcd}
-X \arrow[d, "\eta_X"'] \arrow[dr, "f"] & \\
-UFX \arrow[r, "Ug"'] & UC
-\end{tikzcd} \]
-komutira. To je ravno enolični morfizem $(FX,\eta_X) \to (C,f)$. \\
-Obratno, denimo da imamo začetni objekt v $(X \downarrow U)$, ki ga pomenljivo označimo kar z $(FX, \eta_X : X \to U(FX))$. Zaradi obstoja in enoličnosti takega objekta nam to določi funkcijo objektov 
-$$F : \obj(\cat{X}) \to \obj(\cat{C})$$
-Eksplicitno $F(X) = \text{prva komponenta začetnega objekta v } (X \downarrow U)$. Ta $F$ želimo razširito do funktorja, zato naj bo $f : X \to X'$ morfizem v $X$. Morfizem $F(f)$ naj bo enolični morfizem, tako da kvadrat
-\[ \begin{tikzcd}
-X \arrow[d, "\eta_X"'] \arrow[r, "f"] & X' \arrow[d, "\eta_{X'}"] \\
-UFX \arrow[r, "UFf"', dashed] & UFX'
-\end{tikzcd} \]
-komutira. Jasno je, da $F$ slika domeno morfizma v domeno ter kodomeno v kodomeno. Za asociativnost denimo, da imamo morfizma 
-\begin{center}
-\begin{tikzcd}
-X \arrow[r, "f"] & X' \arrow[r, "f'"] & X''
-\end{tikzcd}
-\end{center}
-To nam da enolična morfizma 
-\begin{center}
-\begin{tikzcd}
-FX \arrow[r, "Ff", dashed] & FX' \arrow[r, "Ff'", dashed] & X''
-\end{tikzcd}
-\end{center}
-zaradi katerih diagram
-\begin{center}
-\begin{tikzcd}
-X \ar[d, "\eta_X"'] \ar[r, "f"] & X' \ar[d, "\eta_{X'}"'] \ar[r, "f"] & X'' \ar[d, "\eta_{X''}"] \\
-UFX \ar[r, "UFf"', dashed] & UFX' \ar[r, "UFf'"', dashed] & UFX''
-\end{tikzcd}
-\end{center}
-komutira, kar določi kompozitum kot
-$$F(f' \circ f) = F(f') \circ F(f).$$
-Od tod tudi sledi, da je $\eta$ naravna transformacija, določena s komponentami $\eta_X$, ki zadošča UMP enote. Torej je $F$ res levi adjunkt $U$.
-\end{proof}
+Najprej bomo uvedli nekaj definicij, ki jih bomo uporabljali v
+celotni nalogi. Ta del služi tudi za to, da fiksiramo nekaj
+notacije, ki jo bomo vseskozi uporabljali.
 \begin{definicija}
-\mbox{}
-\begin{enumerate}[label=(\roman*)]
-\item Objekt $C \in \cat{C}$ je \emph{šibko začeten}, če za vsak $X \in \cat{C}$ obstaja morfizem $C \to X$ (ki ni nujno enoličen).
-\item Zbirka objektov $\Phi = (C_i)_{i \in I}$ je \emph{skupno šibko začetna}, če za vsak $X \in C$ obstaja nek $C_i \in \Phi$, za katerega obstaja morfizem $C_i \to X$.
-\end{enumerate}
+  \emph{Kategorija} je sestavljena iz:
+  \begin{itemize}
+  \item Razreda \emph{objektov}, ki jih bomo običajno označevali z
+    velikimi tiskanimi črkami, na primer $X, Y, A, B, \ldots$.
+  \item Razreda \emph{morfizmov}, ki jih bomo običajno označevali z
+    malimi tiskanimi črkami, na primer $f,g,\alpha,\beta, \ldots$.
+    Vsak morfizem $f$ je asociiran z dvema objektoma:
+    \[ \mathrm{dom}(f) \text{,} \qquad \mathrm{cod}(f), \]
+    ki jima pravimo \emph{domena} in \emph{kodomena}. Če je $\mathrm{dom}(f)=X$
+    in ${\mathrm{cod}(f)=Y}$, potem pišemo $f : X \to Y$.
+  \end{itemize}
+  Kategorija mora zadoščati naslednjima aksiomoma:
+  \begin{itemize}
+  \item   Za vsaka dva morfizma $f,g$ za katera velja $\mathrm{cod}(f) = \mathrm{dom}(g)$,
+  mora obstajati njun \emph{kompozitum}, ki ga označujemo z $g \circ f$, in
+  za katerega velja $\mathrm{dom}(g \circ f) = \mathrm{dom}(f)$ in
+  $\mathrm{cod}(g \circ f) = \mathrm{cod}(g)$.
+  \item Za vsak objekt $X$ mora obstajati t.i.\ \emph{identitetni morfizem}
+  $\mathrm{id}_X : X \to X$, za katerega velja $\mathrm{id}_X \circ f = f$,
+  za vsak $f : Y \to X$ in $g \circ \mathrm{id}_X = g$, za vsak $g : X \to Z$.
+\end{itemize}
+Kategorije običajno označujemo z velikimi tiskanimi črkami, na primer $\cat{C}, \cat{D}, \ldots$.
 \end{definicija}
-\begin{lema}
-Naj bo $\cat{C}$ kategorija za katero ima identitetni funktor $1_\cat{C} : \cat{C} \to \cat{C}$ limito. Potem ima $\cat{C}$ začetni objekt.
-\end{lema}
-\begin{proof}
-Naj bo $l = \lim (1_\cat{C})$ z zbirko morfizmov $(\lambda_C)_{C \in \cat{C}}$. Iz definicije limite sledi, da je $l$ šibko začeten objekt. Recimo, da imamo še en morfizem $f : l \to C$. Ker je $l$ stožec sledi
-$$ \lambda_C  = f \circ \lambda_l$$
-Če pa vzamemo $\lambda_C$ kot morfizem diagrama $1_\cat{C}$, dobimo enačbo
-$$\lambda_C = \lambda_C \circ \lambda_l$$
-Iz diagrama
-\begin{center}
-\begin{tikzcd}
-& l \ar[ddl, "1_l"', bend right] \ar[d, "u", dashed] \ar[ddr, "\lambda_C", bend left] & \\
-& l \ar[dl, "\lambda_l"'] \ar[dr, "\lambda_C"]  & \\
-l \ar[rr, "\lambda_C"'] & & C
-\end{tikzcd}
-\end{center}
-dobimo enačbi $1_l = \lambda_l \circ u$ in $\lambda_C = \lambda_C \circ u$. Iz enoličnosti morfizma $u$ sledi $u = 1_l$, kar pomeni $\lambda_C = f$.
-\end{proof}
-\begin{lema} \label{lema1}
-Naj bo $\cat{C}$ lokalno majhna, polna kategorija, ki ima skupno šibko začetno množico objektov $\Phi = (C_i)$. Potem ima $\cat{C}$ začetni objekt.
-\end{lema}
-\begin{proof}
-Naj bo $\iota : \bm{\Phi} \to \cat{C}$ inkluzija polne podkategorije $\cat{C}$ generirane z objektov iz $\Phi$. Ker je $\bm{\Phi}$ majhna in $\cat{C}$ polna, obstaja limita
-$$\ell = \lim \iota$$
-Ker je množica $\Phi$ skupno šibko začetna imamo za vsak objekt $X \in \cat{C}$ morfizem $C_i \to X$ za nek $C_i \in \Phi$. Če komponiramo z ustreznim $l_i : \ell \to C_i$ dobimo morfizem
-$$\lambda_X : \ell \to X$$
-kar pomeni, da je $\ell$ šibko začetni objekt. Sedaj želimo pokazati, da morfizmi $\lambda_X$ določajo stožec nad $1_\cat{C}$ z vrhom $\ell$ in lastnostjo, da je $\lambda_l$ identiteta. Naj bo torej $f : X \to Y$ morfizem v $\cat{C}$. Ker je $\Phi$ šibko začetna, imamo morfizma $c_1 : C_1 \to X$ in $c_2 : C_2 \to Y$. Tvorimo povlek $P$ morfizmov $f \circ c_1$ in $c_2$
-\begin{center}
-\begin{tikzcd}
-\ell \ar[dddrr, bend right, "l_1"'] \ar[ddrrrr, bend left, "l_2"] \ar[dr, dashed, "u"] & & & & \\
-& C_3 \ar[ddr, bend right, dotted] \ar[drrr, bend left, dotted] \ar[dr, "h"] & & & \\
-& & P \ar[d, "p_1"'] \ar[rr, "p_2"] & & C_2 \ar[d, "c_2"] \\
-& & C_1 \ar[r, "c_1"'] & X \ar[r, "f"'] & Y
-\end{tikzcd}
-\end{center}
-Ker je $\Phi$ šibko začetna, obstaja nek morfizem $h : C \to P$. Črtkana kompozituma $p_1 \circ h$ in $p_2 \circ h$ živita v polni podkategoriji generirani s $\Phi$, kar nam pove, da zgornja trikotnika komutirata. Iz komutativnosti ostalega dela diagrama vidimo, da je $\ell$ res vrh stožca nad $1_\cat{C}$. Iz tega sledi komutitativnost diagrama
-\begin{center}
-\begin{tikzcd}
-& \ell \ar[dl, "\lambda_\ell"'] \ar[dr, "l_C = \lambda_C"] & \\
-\ell \ar[rr, "\lambda_C"'] & & C
-\end{tikzcd}
-\end{center}
-kar pomeni, da je $\lambda_\ell$ faktorizacija limitnega stožca skozi samega sebe, iz česar sledi $\lambda_\ell = 1_\ell$. Na dolgo, imamo komutativni diagram
-\begin{center}
-\begin{tikzcd}
-& \ell \ar[ddl, bend right, "\lambda_\ell"'] \ar[ddr, bend left, "\lambda_C"] \ar[d, dashed, "u"] & \\
-& \ell \ar[dl, "\lambda_\ell"'] \ar[dr, "\lambda_C"] & \\
-\ell \ar[rr, "\lambda_C"'] & & C
-\end{tikzcd}
-\end{center}
-iz spodnjega trikotnika imamo enačbo
-$$\lambda_C = \lambda_C \circ \lambda_\ell$$
-Ker pa je $\ell$ limita, dobimo enoličen $u$ za katerega velja
-$$\lambda_\ell = \lambda_\ell \circ u \quad \& \quad \lambda_C = \lambda_C \circ u$$
-Ker je $u$ enoličen tak, ki zadošča tema enačbama in je $1_\ell$ tudi tak, sledi $\lambda_\ell = 1_\ell$. Iz leme \ref{lema1} sledi, da ima $\cat{C}$ začetni objekt.
-\end{proof}
-Z uporabo teh lem lahko sedaj dokažemo izrek.
-\begin{proof}
-Če ima $U$ levi adjunkt, potem je množica $\set{FX}$ zadošča kriteriju množice rešitev.\\
-Obratno, po lemi \ref{lema2} ima $U$ levi adjunkt natanko takrat, ko ima za vsak $X$ kategorija $(X \downarrow U)$ začetni objekt. Preveriti moramo torej
-\begin{enumerate}
-\item $(X \downarrow U)$ je lokalno majhna
-\item $(X \downarrow U)$ je polna 
-\item $(X \downarrow U)$ ima skupno šibko začetni objekt
-\end{enumerate}
-Ker je $\cat{C}$ lokalno majhna, je tudi $(X \downarrow U)$. Iz predpostavke sledi, da je
-$$\set{(C_i, \phi : X \to UC_i) \ \vert \ i \in I}$$
-skupno šibko začetni objekt. Da je $(X \downarrow U)$ polna pokažemo tako, da konstruiramo produkte in zožke, iz česar sledi obstoj limit. 
-\end{proof}
+\begin{definicija}
+  Razred vseh morfizmov v kategoriji $\cat{C}$, z domeno $X$ in kodomeno $Y$ označimo s
+  \[ \Hom_{\cat{C}}(X,Y).\]
+  Če je $\Hom_{\cat{C}}(X,Y)$ množica za vsaka $X$ in $Y$, pravimo, da je $\cat{C}$
+  \emph{lokalno majhna}.
+\end{definicija}
+\begin{definicija}
+  Naj bosta $\cat{C}$ in $\cat{D}$ kategoriji. \emph{Funktor} od $\cat{C}$ do $\cat{D}$
+  je preslikava $F$, ki slika objekte iz $\cat{C}$ v objekte v $\cat{D}$ in morfizme iz
+  $\cat{C}$ v morfizme v~$\cat{D}$ in izpolnjuje naslednje pogoje:
+  \begin{itemize}
+  \item $F(f : X \to Y) = F(f) : F(X) \to F(Y)$,
+\item $F(\mathrm{id}_X) = \mathrm{id}_{F(X)}$,
+\item Za kompozitum $g \circ f$ velja $F(g \circ f) = F(g) \circ F(f)$.
+  \end{itemize}
+\end{definicija}
+\begin{definicija}
+  Naj bosta $\cat{C}$ in $\cat{D}$ kategoriji in $F,G : \cat{C} \to \cat{D}$ par funktorjev
+  med njima. \emph{Naravna transformacija} $\vartheta : F \to G$, iz $F$ v $G$ je
+  družina morfizmov
+  \[ (\vartheta_X : F(X) \to G(X))_{X \in \cat{C}}\]
+  tako, da za vsak morfizem $f : X \to Y$ v $\cat{C}$ naslednji diagram
+  \begin{equation*}
+    \begin{tikzcd}
+      F(X) \ar[d, "F(f)"'] \ar[r, "\vartheta_X"] & G(X) \ar[d, "G(f)"] \\
+      F(Y) \ar[r, "\vartheta_Y"'] & G(Y)
+    \end{tikzcd}
+  \end{equation*}
+  komutira. To pomeni, da velja enačba
+  \[ G(f) \circ \vartheta_X = \vartheta_Y \circ F(f).\]
+\end{definicija}
+\begin{definicija}
+  Naj bosta $\cat{C}$ in $\cat{D}$ kategoriji in $F : \cat{C} \to \cat{D}$, $G : \cat{D} \to \cat{C}$
+  funktorja. Potem sta $F$ in $G$ \emph{adjungirana}, oziroma tvorita
+  \emph{par adjungiranih funktorjev}, če za vsaka objekta $X \in \cat{C}$ in $Y \in \cat{D}$
+  obstaja bijekcija
+  \[ \Hom_{\cat{D}}(FX, Y) \cong \Hom_{\cat{C}}(X, GY),\]
+  naravna v $X$ in $Y$.
+  V tem primeru pravimo, da je $F$ \emph{levi adjunkt} $G$ in simetrično, da je $G$
+  \emph{desni adjunkt} $F$. To označimo kot $F \dashv G$.
+\end{definicija}
+Več osnovnih pojmov iz teorije kategorij lahko najdemo v ??(Tukaj citiram svojo diplomsko).
 \end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

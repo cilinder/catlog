@@ -712,11 +712,81 @@ imamo posebej lep generičen model.
 \section{Funktorialna semantika}
 \label{sec:funkt-semant}
 %
-%
+Stopimo sedaj korak nazaj in si poglejmo naš pristop do te točke.
+V ta namen si poglejmo, kako se primerja s klasičnim pristopom logike.
+Klasični pristop sestavljajo naslednji štirje deli:
+\begin{enumerate}
+\item \emph{Teorija tipov}, na kateri temelji jezik logike, ki jo obravnavamo.
+  V našem primeru gre za enostavno teorijo tipov z enim samim tipom in termi,
+  ki so sestavljeni iz spremenljivk in osnovnih operacij.
+\item \emph{Logika} s katero obravnavamo našo teorijo. Tu gre za vprašanje,
+  kaj so logične operacije, ki jih imamo na voljo. V primeru algebrajskih teorij
+  gre za zelo enostavno logiko, ki vključuje le enakosti med termi jezika.
+\item \emph{Teorija} je sestavljena iz osnovnih tipov, termov in aksiomov.
+  Tipi in termi so podani s teorijo tipov, aksiomi pa z logiko našega sistema.
+\item \emph{Interpretacija} algebrajske teorije je definirana kot množica $I$,
+  skupaj z zbirko $n$-mestnih operacij predstavljenih s preslikavami $I^n \to I$.
+  Interpretaciji včasih rečemo tudi \emph{struktura}. Videli smo, da je
+  koncept interpretacije algebrajske teorije smiselnoč definirati za vsako
+  kategorijo s končnimi produkti. V taki kategoriji je predstavljena z
+  objektom in zbirko morfizmov, ki predstavljajo osnovne operacije, ki jih
+  z indukcijo razširimo na vse terme teorije. Interpretacija je \emph{model}
+  teorije, če izpolnjuje vse aksiome. To pomeni, da so
+  morfizmi, predstavljajo terme, ki nastopajo v aksiomih, enaki.  
+\end{enumerate}
+V tem poglavju smo razvili alternativen pristop, ki ga lahko poimenujemo
+\emph{funktorialna semantika}, kjer so ključne naslednje ideje.
+\begin{enumerate}
+\item \emph{Teorije kot kategorije}. Iz teorije smo konstruirali posebno
+  kategorijo, ki odraža praktično enake informacije kot teorija sama,
+  a to stori na način, ki je tako rekoč sintaktično neodvisen, namreč
+  ne glede na izbiro predstavitve porodi ekvivalentno kategorijo.
+  Za algebrajske teorije na teoriji tipov z enim samim tipom dobimo
+  kategorije s končnimi produkti.
+\item \emph{Modeli kot funktorji}. Videli smo, da model teorije lahko izrazimo
+  kot funktor iz kategorije, ki predstavlja teorijo, v kategorijo z ustrezno
+  strukturo, da lahko intpretiramo logiko te teorije. V našem primeru
+  je bila ta struktura obstoj končnih produktov. Pogoj, da model izpolnjuje
+  vse aksiome teorije se izrazi kot pogoj, da funktor ohranja strukturo
+  kategorije. Za algebrajske teorije so to ravno funktorji, ki ohranjajo
+  končne produkte.
+\item \emph{Homomorfizmi kot naravne transformacije}. Če definiramo model
+  kot funktor, ki ohranja ustrezno strukturo, ven avtomatsko pade koncept
+  homomorfizma med modeli, kot naravna transformacija med funktorji, ki
+  predstavljajo te modele. Videli smo, da ohranjanje algebrajske strukture
+  ustreza ravno pogoju naravnosti.
+\item \emph{Univerzalni model}. To, da smo dopustili interpretacijo teorije
+  v drugih kategorijah kot $\mathbf{Set}$ je porodilo možnost univerzalnega
+  modela. To je model $U$ v klasifikacijski kategoriji $\cat{C}_{\T}$ tako,
+  da je vsak model funktorialna slika modela $U$, z enolično določenim
+  funktorjem, ki ohranja ustrezno strukturo. Tak univerzalni model je
+  \emph{logično generičen}, kar pomeni, da zadošča vsem, in samo tem,
+  lastnostim, ki veljajo za vse modele.
+\item \emph{Veljavnost in polnost}. S konstrukcijo klasifikacijske kategorije
+  smo pokazali veljavnost in polnost algebrajskih teorij, glede na
+  kategorično semantiko, kot je opisana zgoraj.
+\end{enumerate}
+% 
 %
 %
 \section{Lawverjeva dualnost}
 %
+V logiki obstaja fascinantna in daleč razsežna dualnost oblike
+\[ \mathrm{Sintaksa} \simeq \mathrm{Semantika}^{\mathrm{op}}, \]
+ki jo je odkril F.~W.~Lawvere v svoji disertaciji [citat].
+
+To dualnost je mogoče zelo jasno opisati za primer algebrajskih
+teorij. Naj bo \(\mathbf{C}_{\mathbb{T}}\) klasifikacijska kategorija
+za algebrajsko teorijo \(\mathbb{T}\). Videli bomo, da je \(\mathbb{C}_{\mathbb{T}}\)
+dualna neki podkategoriji \(\mathbb{M}\) modelov \(\mathbb{T}\) (v \(\mathbf{Set}\)).
+Specifično, obstaja \emph{polna} podkategorija 
+\(\mathbb{\mathbb{M}} \hookrightarrow \mathbf{Mod}(\mathbb{T})\) in
+ekvivalenca kategorij
+\[ \mathbf{C}_{\mathbb{T}} \simeq \mathbb{M}^{\mathrm{op}} \]
+tako, da je \emph{sintaktična} kategorija \(\mathbf{C}_{\mathbb{T}}\) dualna
+podkategoriji \emph{semantične} kategorije \(\mathbf{Mod}(\mathbb{T})\).
+Torej imamo v kategoriji modelov \(\mathbb{T}\) "skrito" invariantno
+predstavitev sintakse teorije \(\mathbb{T}\).
 \begin{izrek}
   Naj bo $\mathbb{T}$ algebrajska teorija in naj bo
   \[ \mathbb{M} = \mathbf{Mod}_{\mathrm{fg}}(\mathbb{T}) \hookrightarrow \mathbf{Mod}(\mathbb{T}) = \mathbf{Mod}(\mathbb{T}, \mathbf{Set}) \]
@@ -833,10 +903,10 @@ imamo posebej lep generičen model.
   \[ A^{\#} : \mathbb{M}^{\mathrm{op}} \hookrightarrow \Mod(\T)^{\mathrm{op}} \to \mathbf{Set}\]
   jasno ohranja produkte, in velja
   \[ A^{\#}(U) = \Hom_{\Mod(\T)}(F(1), A) \cong V(A).\]
-  Dodatno iz diagrama \ref{diag:univerzalna-operacija} sledi, da za vsako osnovno operacijo $fa$,
+  Dodatno iz diagrama \eqref{diag:univerzalna-operacija} sledi, da za vsako osnovno operacijo $f$,
   do izomorfizma natančno velja
   \[ [f]^A = ([f]^U)^{*} = \Hom([f]^U,A) = A^{\#}([f]^U).\]
-  Torej, kot algebri $A^{\#} \cong A$. Vsak homomorfizem $h : F(U) \to G(U)$ $\T$-algeber
+  Torej, kot algebri $A^{\#}(U) \cong A$. Vsak homomorfizem $h : F(U) \to G(U)$ $\T$-algeber
   je induciran s funktorji, ki ohranjajo produkte $F,G : \mathbb{M}^{\mathrm{op}} \to \mathbf{Set}$
   in je oblike $h = \vartheta_U$ za enolično določeno naravno transformacijo $\vartheta : F \to G$.
 
@@ -896,8 +966,157 @@ imamo posebej lep generičen model.
   funktorja, ki ohranja končne produkte $F : \mathbb{M}^{\mathrm{op}} \to \mathbf{C}$,
   pri univerzalnem modelu $U$ v $\mathbb{M}^{\mathrm{op}}$.
 \end{dokaz}
+Ker je klasifikacijska kategorija enolično določena z univerzalno lastnostjo,
+do ekvivalence natančno, nam zgornji izrek direktno poda naslednji opis sintaktične
+konstrukcije $\mathbf{C}_{\mathbb{T}}$.
+\begin{posledica}
+Za vsako algebrajsko teorijo \(\mathbb{T}\) imamo ekvivalenco
+\[ \mathbf{C}_{\mathbb{T}} \simeq \mathbf{Mod}_{\mathrm{fg}}(\mathbb{T})^{\mathrm{op}} \]
+mde sintaktično kategorijo \(\mathbf{C}_{\mathbb{T}}\) in dualom
+\(\Mod_{\mathrm{fg}}(\mathbb{T})\), končno generiranih,
+prostih modelov.
+\end{posledica}
+V kategoriji modelov lahko torej najdemo invariantno sintaktično
+predstavitev naše teorije.
+Poglejmo si kaj nam to pove v posebnem primeru prazne teorije \(\mathbb{T}_0\),
+brez operacij in brez konstant. Model te teorije je množica \(X\),
+brez dodatne strukture. Torej je \(\mathbb{T}_0\) teorije striktne enakosti
+med objekti.
+Vse $\mathbb{T}\textsubscript{0}$-algebre so proste in končno generirane med njimi
+so ravno končne množice, torej je
+\[ \Mod_{\mathrm{fg}}(\mathbb{T}_0) = \mathbf{Set} _{\mathrm{fin}} \]
+kategorija (dedno) končnih množic. Dualnost nam potem pove, da
+imamo ekvivalenco
+\[ \mathbf{Hom}_{\mathrm{FP}}(\mathbf{Set}_{\mathrm{fin}}^{\mathrm{op}}, \mathbf{C}) \simeq
+   \mathbf{Mod}(\mathbb{T}_0, \mathbf{C}) \simeq \mathbf{C}. \]
+Kar pove preprosto, da je \(\mathbf{Set}_{\mathrm{fin}}^{\mathrm{op}}\)
+prosta kategorija s končnimi produkti z enim objektom.
+
+Zgornja posledica potem pravi, da je teorija enakosti \(\mathbb{T}_0\) dualna
+kategoriji končnih množic. Termi te teorije so enostavno urejeni seznami
+spremenljivk \((x_1, \ldots, x_n)\) in enačbe, ki veljajo so tiste,
+ki veljajo točno za terme \((x_2, x_5) = (x_2, x_5)\).
+Posledica potem pravi, da je to ravno teorija končnih množic, če
+urejene sezname \((x_1, \ldots, x_n) : X \times \ldots \times X\) beremo
+kot urejene \emph{kosezname} \([x_1, \ldots, x_n] : 1 + \ldots + 1 \to 1\).
 %
-\section{Lawverjeva Teorija}
+%
+\section{Lawverjeve Teorije}
+\label{sec:org3518651}
+Če natančno pogledamo zgornjo obravnavo dualnost za algebrajske teorije, nismo uporabili nič,
+kar se direktno nanaša na njihovo primarno sintaktično konstrukcijo, npr. specifikacijo
+kaj so osnovne operacije, kaj so aksiomi in kaj izpeljane enakosti.
+To pomeni, da lahko to konstrukcijo posplošimo na ``abstraktne'' algebrajske teorije,
+ki nam dajo način, da povemo kaj je algebrajska teorija na način, ki je bolj
+sintaktično neodvisen, analogno kot pri pojmih vektorskega prostora, ki jih lahko
+opišemo neodvisno od izbire baze.
+\begin{definicija}
+\emph{Lawverjeva algebrajska teorija} \(\mathbb{A}\) je majhna kategorija
+v kateri objekti tvorijo zaporedje \(A^0, A^1, A^2, \ldots\) in obstajajo
+vsi končni produkti, ki so oblike \(A^m + A^n = A^{m + n}\), za vse \(m,n \in \mathbb{N}\).
+Tukaj je mišljeno, da je \(A^0 = 1\) končni objekt v \(\mathbb{A}\).
+Vsak objekt je torej končni produkt objekta \(A\) samim s sabo.
+
+\emph{Model} Lawverjeve teorije \(\mathbb{A}\) v kategoriji \(\cat{C}\),
+ki ima končne produkte, je funktor \(M : \mathbb{A} \to \cat{C}\),
+ki ohranja končne produkte. \emph{Homomorfizem modelov} je naravna
+transformacija \(\vartheta : M \to M'\).
+\end{definicija}
+%
+\begin{opomba}
+Kategorija \(\mathbb{A}\) ima lahko poljubne morfizme med objekti \(A^n\).
+\end{opomba}
+\begin{opomba}
+Za objekte \(\mathbb{A}\) bi lahko vzeli kar naravna števila \(0, 1, 2, \ldots\),
+a je notacija \(A^n\) bolj opisna.
+\end{opomba}
+%
+Iz vsake Lawverjeve teorije lahko dobimo algebrajsko teorijo na naslednji način.
+Za osnovne \(k\)-mestne operacije vzamemo vse morfizme \(A^k \to A\). 
+Za tako zgrajeno teorijo dobimo kanonično interpretacijo v \(\mathbb{A}\) termov
+zgrajenih iz spremenljivk in morfizmov \(A^k \to A\), kjer vsak morfizem interpretiramo
+kar kot samega sebe, spremenljivke pa kot projekcije iz produktov (te vedno obstajajo,
+ker ima \(\mathbb{A}\) končne produkte). Enačbo \(u = v\) vzamemo kot aksiom te teorije,
+če sta kanonični interpretaciji termov \(u\) in \(v\) isti morfizem v \(\mathbb{A}\).
+
+Modeli te teorije in homomorfzimi med njimi na očiten način ustrezajo naši novi
+funktorialni semantiki.
+\begin{primer}
+Algebraična teorija \(\mathcal{C}^{\infty}\) gladkih preslikav je kategorija
+v kateri so objekti \$n\$-dimenzionalni ekvlidski prostori \(1, \mathbb{R}, \mathbb{R}^2, \ldots\),
+in morfizmi \(\mathcal{C}^{\infty}\) preslikave med njimi.
+
+Model te teorije v \(\cat{Set}\) je funktor \(A : \mathcal{C}^{\infty} \to \cat{Set}\),
+ki ohranja končne produkte. Do naravnega izomorfizma ga lahko opišemo tako, da
+podamo množico \(A\) in za vsako gladko funkcijo \(f : \mathbb{R}^n \to \mathbb{R}\)
+podamo funkcijo \(Af : A^n \to A\). Za \(Af\) mora veljati, da za vse gladke preslikave
+\(g_i : \mathbb{R}^m \to \mathbb{R}, i = 1, \ldots, n\) in vse \(a_1, \ldots, a_m \in A\),
+velja
+\[ 
+   Af \left( (Ag_1)\langle a_1, \ldots, a^m \rangle, \ldots, (Ag_n)\langle a_1, \ldots, a_m \rangle \right) =
+   A(f \circ \langle g_1, \ldots g_n \rangle)\langle a_1, \ldots, a^m \rangle.
+\]
+Ker sta seštevanje in množenje gladki preslikavi, to v posebnem pomeni,
+da je \(A\) komutativen kolobar z enoto.
+Takim strukturam pravimo tudi $\mathcal{C}\textsuperscript{\(\infty\)}$-kolobarji
+ali gladke algebre. Torej so modeli teorije gladkih preslikav v set ravno gladke algebre.
+\end{primer}
+%
+\begin{primer}
+V kategoriji \(\cat{C}\) s končnimi produkti vsak objekt \(A\) določi polno podkategorijo
+končnih potenc \(1, A, A^2, A^3, \ldots\) in morfizmov med njimi. Tej kategoriji
+pravimo teorija objekta \(A\).
+\end{primer}
+\subsection{Dualnost}
+\label{sec:orgef98ac4}
+Da lahko razširimo teorijo dualnosti na našo novo definicjo teorije potrebujemo
+koncept \emph{prostega modela}. Za to recimo, da je \(\mathbb{A}\) algebrajska teorija,
+z objekti \(1, A, A^2, \ldots\). Označimo kategorijo (klasičnih) modelov z
+\[ \mathbf{Mod}(\mathbb{A}) = \mathbf{Hom}_{FP}(\mathbb{A}, \mathbf{Set}). \]
+Definirali bomo pozabljivi funktor
+\begin{align*}
+U : \mathbf{Mod}(\mathbb{A}) &\to \mathbf{Set} \\
+(M : \mathbb{A} \to \mathbf{Set}) &\mapsto M(A)
+\end{align*}
+To označujemo tudi kot \(|M| = U(M) = M(A)\).
+
+Sedaj definirajmo (končni) prosti funktor \(F : \mathbf{Set}_{ \mathrm{fin}} \to \mathbf{Mod}(\mathbb{A})\), 
+kot:
+\begin{align*}
+F(0) &= \mathbf{Hom}_{\mathbb{A}}(1,-) \\
+F(1) &= \mathbf{Hom}_{\mathbb{A}}(A,-) \\
+&\vdots \\
+F(n) &= \mathbf{Hom}_{\mathbb{A}}(A^n, -)
+\end{align*}
+Da smo res dobili adjungirani par prosti--adjungirani funktor, moramo dokazati, da
+imamo izomorfizem
+\[ \mathbf{Hom}_{\mathbf{Mod}_{\mathbb{A}}}(F(n), M) \cong \mathbf{Hom}_{\mathbf{Set}}(n, |M|), \]
+ki mora biti naraven v obeh argumentih. Desna stran je 
+\(\mathbf{Hom}_{\mathbf{Set}}(n, |M|) \cong |M|^n\).
+Za desno stran uporabimo Yonedovo lemo, da dobimo
+\begin{align*}
+\mathbf{Hom}_{\mathbf{Hom}(\mathbb{A})}(F(n),M) &\cong  \mathbf{Hom}_{\mathbf{Hom}(\mathbb{A})}(\mathbf{Hom}_{\mathbb{A}}(A^n, -), M) \\
+&\cong M(A^n) \qquad \text{(Yoneda)} \\
+&\cong M(A)^n \qquad \text{(ohranja produkte)} \\
+&\cong |M|^n.
+\end{align*}
+
+Ker so končno generirani, prosti modeli torej ravno končno predstavljivi, potem
+kot "obratno" semantiko \(\mathbf{Mod}_{\mathrm{fg}}(\mathbb{A}) \hookrightarrow \mathbf{Mod}(\mathbb{A})\)
+teorije \(\mathbb{A}\), v smislu posledice ??, dobimo kar polno podkategorijo kategorije
+\(\mathbf{Hom}_{\mathrm{FP}}(\mathbb{A}, \mathbf{Set})\) kot sliko Yonedove vložitve
+\begin{equation*}
+\begin{tikzcd}
+\mathbf{Mod}_{\mathrm{fg}}(\mathbb{A}) \ar[r, hook] & \mathbf{Mod}(\mathbb{A}) = \mathbf{Hom}_{\mathrm{FG}}(\mathbb{A}, \mathbf{Set}) \ar[r, hook] & \mathbf{Set}^{\mathbb{A}} \\
+\mathbb{A}^{\mathrm{op}} \ar[u, "\cong"] \ar[urr, "y"]
+\end{tikzcd}
+\end{equation*}
+V abstraktnem primeru algebrajske teorije lahko torej logično dualnost
+\[ \mathbb{A} \cong \mathbf{Mod}_{\mathrm{fg}}(\mathbb{A})^{\mathrm{op}} \]
+opišemo s tem, da (kontravariantna) Yonedova vložitev
+\[ \mathbb{A}^{\mathrm{op}} \hookrightarrow \mathbf{Set}^{\mathbb{A}} \]
+predstavi \(\mathbb{A}\) kot dual polne podkategorije funktorjev, ki ohranjajo produkte.
+%
 \end{document}
 
 %%% Local Variables:
