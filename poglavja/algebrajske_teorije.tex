@@ -1,24 +1,24 @@
 \documentclass[../kategoricna_logika.tex]{subfiles}
 \begin{document}
-V matematiki pogosto ``v naravi'' naletimo na strukture, za katere se izkaže,
+V matematiki pogosto "`v naravi"' naletimo na strukture, za katere se izkaže,
 da jih lahko opišemo z naborom operacij in enačb.
 Slaven tak primer je odkritje strukture grupe pri iskanju splošne formule
 za računanje ničel polinomov.
 Tak opis strukture z operacijami in enačbami imenujemo \emph{algebraična teorija}.
-Na tak način lahko tretiramo mnogo znanih primerov iz osnovne algebre,
-kot so grupe, kolobarji, modulu, itd., a tudi nekatere konstrukcije, ki niso
+Na tak način lahko obravnavamo mnogo znanih primerov iz osnovne algebre,
+kot so grupe, kolobarji, moduli, itd., a tudi nekatere konstrukcije, ki niso
 tako očitno algebraične, na primer adjungirane funktorje.
-Vse algebraične teorije imajo mnogo skupnih precej splošnih lastnosti.
+Vse algebraične teorije imajo mnogo skupnih mnogo splošnih lastnosti.
 Nekaj izmed njih bomo predstavili v sledečem poglavju.
 To bomo storili z uporabo tako imenovane funktorialne semantike, katere
 razvoj nam bo služil tudi kot zgled v drugem delu naloge, kjer bomo to
-idejo razširili.
+idejo razširili na strukture, ki jih ni mogoče opisati samo z enačbami.
 
 Začeli bomo s splošnim pristopom opisa algebraičnih teorij.
 Te so karakterizirane z aksiomatskim opisom, ki sestoji izključno iz
 spremenljivk, konstant, operacij in enačb. Pomembno (za naš pristop) je,
 da so operacije definirane za celotno strukturo, ne pa samo za nekatere
-elemente strukture. To izključi dva pomembna primera: teorijo polj,
+elemente te strukture. To izključi dva pomembna primera: teorijo polj,
 kjer inverz ničle ni definiran, in teorijo kategorij, kjer so kompozitumi
 definirani samo za določene pare morfizmov.
 Idejo bomo ilustrirali s temeljnim primerom iz algebre, teorijo grup.
@@ -32,10 +32,10 @@ Idejo bomo ilustrirali s temeljnim primerom iz algebre, teorijo grup.
   \end{align}
 \end{primer}
 Že na prvi pogled lahko rečemo, da je struktura drugega izmed zgornjih dveh aksiomov
-manj zadovoljiva od prvega, kajti vsebuje tako vgnezdene kvantifikatorje,
+manj zadovoljiva od prvega, kajti vsebuje, tako vgnezdene kvantifikatorje,
 kot določa obstoj nekih elementov, ki pa jih je mogoče iz teh aksiomov
 določiti enolično. To pomeni, da lahko k strukturi grupe dodamo
-konstanto $e \in G$ in eno-mestno operacijo $(-)^{-1} : G \to G$ in
+konstanto $e \in G$ in eno-mestno operacijo $(-)^{-1} : G \to G$ ter tako
 dobimo ekvivalentno formulacijo grupe, ki jo lahko podamo samo z enačbami:
 \begin{align*}
   &x \cdot (y \cdot z) = (x \cdot y) \cdot z \\
@@ -50,21 +50,21 @@ Tak način specifikacije bomo uporabili kot definicijo splošne algebrajske teor
 %
 \begin{definicija}
   \emph{Signatura} algebraične teorije $\Sigma$ je sestavljena iz družine
-  množic $\lbrace \Sigma_k \rbrace$, kjer se elementi $\Sigma_k$
+  množic $\lbrace \Sigma_k \rbrace_{k \in \mathbb{N}}$, kjer se elementi $\Sigma_k$
   imenujejo $k$-mestne osnovne operacije.
-  \emph{Jezik} algebraične teorije $\mathcal{L}(\Sigma)$ je množica termov,
+  \emph{Jezik} algebraične teorije $\mathcal{L}(\Sigma)$ je množica \emph{termov},
   ki jih tvorimo induktivno:
   \begin{enumerate}
   \item Spremenljivke $x,y,z, \ldots$ so termi,
-  \item Če so $t_1, \ldots, t_k$ že termi in $f \in \Sigma_k$, potem
+  \item Če so $t_1, \ldots, t_k$ že termi in je $f \in \Sigma_k$, potem
     je $f(t_1,\ldots, t_k)$ tudi term.
   \end{enumerate}
 \end{definicija}
 %
 \begin{definicija}
   \emph{Algebraična teorija}
-  $\mathbb{T} = (\mathcal{L}(\Sigma_\mathbb{T}), A_\mathbb{T})$ je podana z jezikom
-  $\mathcal{L}(\Sigma_\mathbb{T})$ in množico $A_\mathbb{T}$, enačb med termi
+  $\mathbb{T} = (\mathcal{L}(\Sigma_\mathbb{T}), A_\mathbb{T})$ je podana s parom
+  jezika~$\mathcal{L}(\Sigma_\mathbb{T})$ in množice $A_\mathbb{T}$, enačb med termi
   teorije, ki jih imenujemo \emph{aksiomi} teorije $\mathbb{T}$. Formalno so
   to pari termov jezika $\mathcal{L}(\Sigma_{\mathbb{T}})$.
 \end{definicija}
@@ -78,8 +78,7 @@ Teorija z eno konstanto in brez enačb je teorija množice z odlikovanim element
 \begin{primer}
   Teorija komutativnega kolobarja z enoto je algebrajska teorija.
   Imamo dve nič-mestni operaciji (konstanti) $0$ in $1$, eno unitarno operacijo
-  $-$ in dve binarni operaciji $+$ in $\cdot$. Zanje veljajo enačbe:
-  
+  $-$ in dve dvojiški operaciji $+$ in $\cdot$. Zanje veljajo enačbe:
 \begin{align*}
   (x+y)+z &= x + (y + z) & (x \cdot y) \cdot z &= x \cdot (y \cdot z) \\
   x + 0 &= x & x \cdot 1 &= x \\
@@ -91,81 +90,83 @@ Teorija z eno konstanto in brez enačb je teorija množice z odlikovanim element
 \end{primer}
 \begin{primer}
   Iz računalništva so induktivni podatkovni tipi primer algebrajske teorije.
-  Na primer, podatkovni tip binarnih dreves z listi označenimi s celimi števili
+  Na primer, podatkovni tip dvojiških dreves z listi označenimi s celimi števili
   bi lahko definirali kot
   \begin{verbatim}
     type tree = Empty | Leaf of int | Node of tree * tree
   \end{verbatim}
   Ta definicija bi ustrezala algebrajski teoriji sestavljeni iz konstante $\verb|Empty|$,
   ki bi prestavljala prazno drevo, konstante $\verb|Leaf| \  n$ za vsak $n \in \mathbb{N}$
-  in binarne operacije $\verb|Node|$. Ta teorija nima enačb. 
+  in dvomestne operacije $\verb|Node|$. Ta teorija nima enačb. 
 \end{primer}
 \begin{primer}
   Pomembna struktura, ki ni primer algebrajske teorije, je teorija delno urejene množice,
-  ki jo formuliramo z binarno operacijo $\leq$, ki ustreza aksiomom refleksivnosti,
+  ki jo formuliramo z dvomestno operacijo $\leq$, ki ustreza aksiomom refleksivnosti,
   anti-simetričnosti in tranzitivnosti.
 \end{primer}
 %
 %
 \section{Model algebrajske teorije}
 \markright{Modeli}
-Poglejmo si sedaj na primeru grup, kaj je \emph{model} algebrajske teorije.
+Poglejmo si na primeru grup, kaj je \emph{model} algebrajske teorije.
 Kot smo povedali zgoraj, v klasični algebri grupo razumemo kot množico $G$,
-konstanto $e \in G$ in dve operaciji, ki jih bomo zaradi ilustrativnosti sedaj
-označili z $i : G \to G$ in $m : G \times G \to G$. Ustrezati mora aksiomom:
+skupaj s konstanto $e \in G$ in dvema preslikavama,
+ki jih bomo, da jih ločimo od abstraktnih operacij pri definiciji teorije
+grupe, označili z $i : G \to G$ in $m : G \times G \to G$.
+Grupa mora ustrezati aksiomom:
 \begin{align*}
    m(x,m(y,z)) &= m(m(x,y),z) \\
    m(x,e) &= m(e,x) = x \\
    m(x,i(x)) &= m(i(x),x) = e.
 \end{align*}
 %
-To idejo lahko posplošimo tako, da jo ``prevedemo'' v
+To idejo klasičnega modela lahko posplošimo tako, da jo "`prevedemo"' v
 kategorični jezik, kar nam bo omogočilo, da govorimo o modelih v drugih
 kategorijah kot $\mathbf{Set}$. To storimo na naslednji način:
-Grupa je objekt $G \in \mathbf{Set}$ skupaj s tremi morfizmi:
+Grupa je objekt $G \in \mathbf{Set}$, skupaj s tremi morfizmi:
 \[ e : 1 \to G, \qquad m : G \times G \to G, \qquad i : G \to G. \]
 Aksiome grupe lahko predstavimo s komutativnimi diagrami
-\begin{center}
+\begin{equation}\label{diagram:asociativnost}
   \begin{tikzcd}[column sep = large]
     G \times G \times G \ar[d, "\pi_0 \times m"'] \ar[r, "m \times \pi_2"] & G \times G \ar[d, "m"] \\
     G \times G \ar[r, "m"'] & G
   \end{tikzcd}
-\end{center}
-\begin{center}
+\end{equation}
+\begin{equation}\label{diagram:enota}
   \begin{tikzcd}[column sep = large]
     G \times 1 \ar[dr, "\pi_0"'] \ar[r, "1_G \times e"] & G \times G \ar[d, "m"] & 1 \times G \ar[l, "e \times 1_G"'] \ar[dl, "\pi_1"] \\
     & G
   \end{tikzcd}
-\end{center}
-\begin{center}
+\end{equation}
+\begin{equation}\label{diagram:inverz}
   \begin{tikzcd}[column sep = large]
     G \ar[d, "!"'] \ar[r, "{\langle 1_G, i \rangle}"] & G \times G \ar[d, "m"] & G \ar[l, "{\langle i, 1_G \rangle}"'] \ar[d, "!"] \\
     1 \ar[r, "e"'] & G & 1 \ar[l, "e"]
   \end{tikzcd}
-\end{center}
+\end{equation}
 %
 V tej formulaciji je bila edina lastnost kategorije $\mathbf{Set}$, ki smo jo uporabili to,
 da ima končne produkte. Torej je tak opis smiselen v vsaki kategoriji $\mathbf{C}$,
 ki ima končne produkte. Torej lahko definiramo:
 \emph{Grupa} v kategoriji s končnimi produkti $\mathbf{C}$ je objekt
-$G$, skupaj z morfizmi
+$G$, skupaj s tremi morfizmi:
 \begin{center}
   \begin{tikzcd}
     G \times G \ar[r, "m"] & G & G \ar[l, "i"'] \\
     & 1 \ar[u, "e"] &
   \end{tikzcd}
 \end{center}
-za katere zgornji diagrami komutirajo.
+za katere diagrami \eqref{diagram:asociativnost}, \eqref{diagram:enota} in \eqref{diagram:inverz}
+komutirajo.
 %
-Podobno posplošimo homomorfizem med grupami v $\mathcal{C}$. Morfizem
-$h : G \to H$ je homomorfizem grup, če komutira z interpretacijami
-vseh osnovnih operacij $m$, $i$ in $e$.
-To lahko izrazimo, z diagrami
+Podobno posplošimo homomorfizem med grupami v $\cat{C}$. Morfizem
+$h : G \to H$ je homomorfizem grup, če komutira z osnovnimi operacijami $m$, $i$ in $e$.
+To lahko izrazimo v komutirajočih diagramih
 %
 \begin{center}
   \begin{tikzcd}
-    G^2 \ar[d, "m^G"'] \ar[r, "h^2"] & H^2 \ar[d, "m^H"] & & G \ar[d, "i^G"'] \ar[r, "h"] & H \ar[d, "i^H"] & & 1 \ar[d, "e^G"'] \ar[r] & 1 \ar[d, "e^H"] \\
-    G \ar[r, "h"'] & H & & G \ar[r, "h"'] & H & & G \ar[r, "h"'] & H
+    G^2 \ar[d, "m^G"'] \ar[r, "h^2"] & H^2 \ar[d, "m^H"] & G \ar[d, "i^G"'] \ar[r, "h"] & H \ar[d, "i^H"] & 1 \ar[d, "e^G"'] \ar[r] & 1 \ar[d, "e^H"] \\
+    G \ar[r, "h"'] & H & G \ar[r, "h"'] & H & G \ar[r, "h"'] & H
   \end{tikzcd}
 \end{center}
 Ali z enačbami
@@ -180,16 +181,16 @@ To konstrukcijo sedaj posplošimo na poljubno algebrajsko teorijo.
 \begin{definicija}
   Naj bo $\mathbf{C}$ kategorija s končnimi
   produkti. \emph{Interpretacija} $I$ teorije $\mathbb{T}$ je
-  sestavljena iz
+  sestavljena iz:
   \begin{itemize}
-  \item Objekta $I \in \mathcal{C}$,
-  \item Morfizma $f^I : I^k \to I$, za vsako $k$-mestno operacijo $f$.
+  \item objekta $I \in \cat{C}$,
+  \item morfizma $f^I : I^k \to I$, za vsako $k$-mestno operacijo $f$.
   \end{itemize}
 %
   Interpretacijo razširimo na vse terme jezika s \emph{kontekstom}.
   Splošen term $t$ se interpretira skupaj s
   kontekstom spremenljivk $x_1, \ldots, x_n$, kjer v $t$ nastopajo le
-  spremenljivke iz tega konteksta. To označimo z
+  spremenljivke iz tega konteksta. To označimo kot
 $$x_1, \ldots, x_n \mid t.$$
 %
 Interpretacija terma $t^I$ je definirana reukrzivno:
@@ -219,38 +220,36 @@ $t^I = [x_1, \ldots, x_n \mid t]^I$. Na primer,
 \end{opomba}
 %
 \begin{definicija}
-  Naj bosta $s$ in $t$ terma v kontekstu $x_1, \ldots, x_n$.
- V interpretaciji $I$ je enačba $s = t$ \emph{zadoščena}, če
-    sta morfizma $s^I$ in $t^I$ isti morfizem v $\mathcal{C}$.
-%
-V posebnem, če je $s = t$ aksiom teorije in so $x_1, \ldots, x_n$
-  vse spremenljivke, ki nastopanjo v $s$ in $t$, potem pravimo, da je
-  v interpretaciji $I$ \emph{zadoščen aksiom} $s = t$, če sta
+  Naj bosta $s$ in $t$ terma v kontekstu $x_1, \ldots, x_n$.  V
+  interpretaciji $I$ je enačba $s = t$ \emph{zadoščena}, če sta
+  morfizma $s^I$ in $t^I$ isti morfizem v~$\cat{C}$.  V posebnem, če
+  je $s = t$ aksiom teorije in so $x_1, \ldots, x_n$ vse
+  spremenljivke, ki nastopanjo v $s$ in $t$, potem pravimo, da je v
+  interpretaciji $I$ \emph{zadoščen aksiom} $s = t$, če sta
   $[x_1, \ldots, x_n \mid s]^I$ in $[x_1, \ldots, x_n \mid t]^I$ isti
-  morfizem
+  morfizem v $\cat{C}$.
   \begin{equation*}
     \begin{tikzcd}[column sep = 7em]
       I^n \ar[r, shift left=1ex, "{[x_1, \ldots, x_n \mid s]^I}"]
       \ar[r, shift right=1ex, "{[x_1, \ldots, x_n \mid t]^I}"'] & I
     \end{tikzcd}
   \end{equation*}
-%
   To označimo kot
-$$I \models s = t \iff s^I = t^I.$$
+  \[I \models s = t \iff s^I = t^I.\]
 \end{definicija}
 %
 \begin{definicija}
 Naj bo $\mathbb{T}$ algebraična teorija.
-\emph{Model} teorije $\mathbb{T}$ v kategoriji $\mathcal{C}$ s
+\emph{Model} teorije $\mathbb{T}$ v kategoriji~$\cat{C}$ s
 končnimi produkti je interpretacija $M$, ki zadošča vsem aksiomom
-teorije $\mathbb{T}$,
+teorije~$\mathbb{T}$,
 $$M \models s = t,$$
 za vsak $(s = t) \in A_\mathbb{T}$.
 \end{definicija}
 %
 \begin{definicija}
  \emph{Homomorfizem modelov} $h : M \to N$ je morfizem v
- $\mathcal{C}$, ki komutira z interpretacijami osnovnih operacij,
+ $\cat{C}$, ki komutira z interpretacijami osnovnih operacij,
 $$h \circ f^M = f^N \circ h,$$
 za vsak $f \in \Sigma_T$, kar ponazorimo v diagramu
 \begin{equation*}
@@ -260,95 +259,93 @@ za vsak $f \in \Sigma_T$, kar ponazorimo v diagramu
   \end{tikzcd}
 \end{equation*}
 \end{definicija}
-%
+Kompozitum in identitetni morfizem modelov nam to naredi v kategorijo.
 Kategorijo modelov teorije $\mathbb{T}$ v $\mathbf{C}$ označimo z
-$\mathbf{Mod}(\mathbb{T}, \mathcal{C})$.
+$\mathbf{Mod}(\mathbb{T}, \cat{C})$.
 %
 \begin{primer}
-  Model prazne teorije $\mathbb{T}_0$ je objekt $M \in \mathcal{C}$,
-  morfizem med dvema modeloma pa je le morfizem v $\mathcal{C}$ brez
+  Model prazne teorije $\mathbb{T}_0$ je samo objekt $M \in \cat{C}$,
+  homomorfizem med dvema modeloma pa je le morfizem v $\cat{C}$, brez
   dodatnih omejitev, torej
-$$\mathbf{Mod}(\mathbb{T}_0, \mathcal{C}) = \mathcal{C}.$$
+$$\mathbf{Mod}(\mathbb{T}_0, \cat{C}) = \cat{C}.$$
 %
 Model teorije grup $\mathbb{T}_{\mathrm{Grp}}$, v kategoriji množic
-$\mathbf{Set}$ je grupa v običajnem smislu. Homorfizem med dvemi modeli
+$\mathbf{Set}$, je grupa v običajnem smislu. Homorfizem med dvema modeloma
 teorije $\mathrm{Grp}$ je homomorfizem grup. Torej je
 $$\mathbf{Mod}(\mathbb{T}_{\mathrm{Grp}}, \mathbf{Set}) = \mathbf{Grp}.$$
 \end{primer}
 % 
 \begin{primer}
   Model teorije grup v funktorski kategoriji $\mathbf{Set}^{\mathbf{C}}$ je
-  natanko funktor iz $\mathbf{C}$ v kategorijo grup,
+  natanko funktor iz $\mathbf{C}$, v kategorijo grup:
   \[ \mathbf{Grp}(\mathbf{Set}^{\mathbf{C}}) \cong \mathbf{Hom}(\mathbf{C}, \mathbf{Grp}). \]
   To velja, kajti za vsak objekt $C \in \mathbf{C}$ obstaja evaluacijski
   funktor
   \[ \mathrm{eval}_{\mathbf{C}} : \mathbf{Set}^{\mathbf{C}} \to \mathbf{Set}, \]
   ki je definiran kot $\mathrm{eval}_{\mathbf{C}}(F) = F(C)$, za $F : \mathbf{C} \to \mathbf{Set}$.
-  Ker produkte računamo ``po točkah'', evaluacija ohranja produkte.
-  Za vsak morfizem~${h : C \to D}$ v $\mathbf{C}$ dobimo očitno naravno
+  Ker produkte računamo "`po komponentah"', evaluacija ohranja produkte.
+  Za vsak morfizem~${h : C \to D}$ v $\mathbf{C}$ dobimo naravno
   transformacijo $h : \mathrm{eval}_{\mathbf{C}} \to \mathrm{eval}_{\mathbf{D}}$.
   Torej za vsako grupo $G$ v $\mathbf{Set}^{\mathbf{C}}$ dobimo grupo
-  $\mathrm{eval}_C(G)$, za vsak $C \in \mathbf{C}$ in homorfizem $h_{G} : C(G) \to D(G)$
-  grup za vsak morfizem $h : C \to D$, kar definira funktor $G : \mathbf{C} \to \mathbf{Grp}$.
+  $\mathrm{eval}_{\mathbf{C}}(G)$, za vsak $C \in \mathbf{C}$ in homorfizem grup
+  $h_{G} : C(G) \to D(G)$, za vsak morfizem $h : C \to D$,
+  kar definira funktor $G : \mathbf{C} \to \mathbf{Grp}$.
   Obratno, vsak funktor $H : \mathbf{C} \to \mathbf{Grp}$, ki ohranja produkte,
   dobimo kot grupo v $\mathbf{Set}^{\mathbf{C}}$, kjer so komponente
   naravnih transformacij grupnih operacij ravno operacije tiste grupe.
-  Aksiomom grupe zadoščajo, ker jih zadoščajo pri vsaki komponenti posebej.
+  Aksiomom grupe zadoščajo, ker jih zadoščajo za vsako komponento posebej.
 \end{primer}
 %
 \section{Teorije kot kategorije}
 \label{sec:teorije-kot-kategorije}
-Predstavitev algebrajske teorije kot smo jo podali zgoraj za primer
-teorije grup je v svojem bistvu sintaktične narave. To pa ima,
-kot definicija matematičnega koncepta svoje pomanjkljivosti.
+Predstavitev algebrajske teorije, kot smo jo podali zgoraj za primer
+teorije grup, je v svojem bistvu sintaktične narave. To pa ima,
+kot definicija matematičnega koncepta, svoje pomanjkljivosti.
 Želeli bi najti pogled, ki bi nam omogočal govoriti o tem,
 kaj grupa \emph{je}, brez tega, da bi se morali odločati,
 na kak način bomo grupo \emph{zapisali}.
-Ta pogled nam do dala kategorija z določeno \emph{univerzalno lastnostjo},
+Ta pogled nam bo omočila kategorija z določeno \emph{univerzalno lastnostjo},
 ki jo bo natanko določala, do ekvivalence natančno.
 To nas bo privedlo do reformulacije klasičnih konceptov
 sintakse in semantike na način, ki bolj ustreza sodobni matematični praksi.
 
-Vrnimo se na primer grupe. Formulacija, ki smo jo podali zgoraj,
-ni edina možna. Obstaja alternativna predstavitev teorije grup,
+Kaj je mišljeno z izbiro predstavitve, si poglejmo na primeru grup.
+Formulacija, ki smo jo podali zgoraj, ni edina možna.
+Obstaja alternativna predstavitev teorije grup,
 z enoto $e$ in binarno operacijo $\odot$,
 ki se imenuje dvojno deljenje in enim samim aksiomom:
 $$x \odot (((x \odot y ) \odot z ) \odot ( z \odot e))) \odot (e \odot e) ) = z.$$
-Običajne operacije teorije grup so povezane prek formul
+Običajne operacije teorije grup lahko dobimo s formulami:
 $$x \odot y = x^{-1} \cdot y^{-1} \text{,} \quad x^{-1} = x \odot e \text{,} \quad x \cdot y = (x \odot e) \odot (y \odot e)$$
 %
 Obstajajo različni razlogi za uporabo ene ali druge predstavitve
-teorije grup, a ta izbira naj ne odraža tega kaj grupa v svojem bistvu je.
+teorije grup, a ta izbira naj ne odraža tega, kaj grupa v svojem bistvu je.
 Želimo se izogniti specifični izbiri konstant, operacij in aksiomov.
-To je podobna situacija, kot v linearni algebri, kjer želimo podati
-teorijo brez specificiranja baze vektorskega prostora o katerem govorimo,
-kljub temu, da lahko tako bazo vedno določimo. Za računanje v vektorskem
-prostoru je izbira baze brez dvoma ključnega pomena, a ni to tisti
-aspekt, ki določa naravo vektorskega prostora.
 
-Kot prvi korak, bi lahko vzeli vse operacije, ki jih lahko zgradimo iz
+Kot prvi korak do take sintaktično neodvisne specifikacije,
+bi lahko vzeli vse operacije, ki jih lahko zgradimo iz
 enote, množenja in inverza kot osnovne operacije in vse
 veljavne enačbe v teoriji grup kot aksiome. Lahko pa gremo še korak dlje
-in zberemo vse operacije v kategorijo in tako pozabimo katere so bile
+in zberemo vse operacije v kategorijo in tako pozabimo, katere so bile
 osnovne in katere izpeljane ter katere enakosti so bile podane kot aksiomi.
 %
 \begin{definicija}
   Naj bo $\mathbb{T}$ algebrajska teorija.
-  \emph{Sintaktična kategorija} $\mathcal{C}_\mathbb{T}$ je kategorija,
+  \emph{Sintaktična kategorija} $\cat{C}_\mathbb{T}$ je kategorija,
   v kateri so
   \begin{itemize}
-  \item Objekti: konteksti $[x_1, \ldots, x_n]$ za $n \geq 0$.
+  \item objekti: konteksti $[x_1, \ldots, x_n]$ za $n \geq 0$,
 %
-  \item Morfizmi: morfizem $[x_1, \ldots, x_m] \to [x_1, \ldots, x_n]$
+  \item morfizmi: morfizem $[x_1, \ldots, x_m] \to [x_1, \ldots, x_n]$
     je $n$-terica $\langle t_1, \ldots, t_n \rangle$ termov v kontekstu
-    $x_1, \ldots, x_m$. Morfizma $\langle t_1, \ldots t_n \rangle$,
-    $\langle s_1, \ldots, s_n \rangle$ sta enaka, če in samo če, za vsak
-    $k = 1, \ldots, n$ v teoriji $\mathbb{T}$ velja
+    $x_1, \ldots, x_m$. Morfizma $\langle t_1 \ldots t_n \rangle$ in
+    $\langle s_1, \ldots, s_n \rangle$ sta enaka, če in samo če,
+    v teoriji $\mathbb{T}$, za vsak $k = 1, \ldots, n$ velja
     $$\mathbb{T} \vdash t_k = s_k.$$
 \end{itemize}
 %
 Morfizmi so torej v resnici ekvivalenčni razredi termov v kontekstu
-$$[x_1, \ldots, x_m \mid t_1, \ldots, t_n] : [x_1, \ldots, x_m] \to [x_1, \ldots, x_n]$$
+$$[x_1, \ldots, x_m \mid t_1, \ldots, t_n] : [x_1, \ldots, x_m] \to [x_1, \ldots, x_n].$$
 %
 Kompozitum morfizmov
   \begin{align*}
@@ -356,26 +353,47 @@ Kompozitum morfizmov
     \langle s_1, \ldots, s_n \rangle : [x_1, \ldots, x_m] &\to [x_1, \ldots, x_n],
   \end{align*}
 je morfizem $\langle r_1, \ldots, r_n \rangle$, kjer dobimo $i$-to kompotneto tako,
-da v $s_i$ simultano vstavimo terme $t_1, \ldots, t_m$ namesto
+da v $s_i$ hkrati vstavimo terme $t_1, \ldots, t_m$ namesto
 spremenljivk $x_1, \ldots, x_m$.
 $$r_i = s_i[t_1, \ldots, t_m / x_1, \ldots, x_m].$$
 %
 \end{definicija}
 Sintaktično kategorijo $\mathbf{C}_{\mathbb{T}}$ si lahko predstavljamo kot
-``Lindenbaum--Tarski'' kategorijo teorije $\mathbb{T}$. Vsebuje vse algebraične
-informacije kot originalna teorija $\mathbb{T}$ le na sintaktično invarianten način.
+"`Lindenbaum--Tarski"' kategorijo teorije $\mathbb{T}$. Vsebuje vse algebraične
+informacije kot originalna teorija, le na sintaktično neodvisen način.
 Različne predstavitve teorije porodijo ekvivalentne sintaktične
 kategorije. V nadaljevanju bomo videli, da ima $\mathbf{C}_{\mathbb{T}}$ še eno,
 še bolj pomembno lastnost, s katero predstavlja teorijo $\mathbb{T}$.
 %
 \begin{lema}
-  Naj bo $\mathbb{T}$ algebraična teorija in $\mathcal{C}_\mathbb{T}$
-  njena sintaktična kategorija. Potem ima $\mathcal{C}_\mathbb{T}$ vse
+  Naj bo $\mathbb{T}$ algebraična teorija in $\cat{C}_\mathbb{T}$
+  njena sintaktična kategorija. Potem ima $\cat{C}_\mathbb{T}$ vse
   končne produkte in velja
 $$[x_1, \ldots, x_n] \times [x_1, \ldots, x_m] \cong [x_1, \ldots, x_{n+m}].$$
 \end{lema}
 \begin{dokaz}
-sorry.
+  Projekcijo na prvo komponento $\pi_1: [x_1, \ldots, x_{n+m}] \to [x_1, \ldots, x_n]$
+  definiramo kot $n$-terico termov, kjer je $i$-ta komponenta enaka $i$-ti spremenljivki
+  \[ x_1, \ldots, x_{n+m} \mid x_i\]
+  za $i = 1, \ldots, n$. Drugo projekcijo $\pi_2$ definiramo podobno, le da je $j$-ta
+  komponenta enaka spremenljivki $x_{n+j}$ za $j = 1, \ldots, m$. Recimo, da imamo morfizma
+  \[\langle t_1, \ldots t_n \rangle: [x_1, \ldots, x_k] \to [x_1, \ldots, x_n]\]
+  in
+  \[\langle s_1, \ldots s_n \rangle: [x_1, \ldots, x_k] \to [x_1, \ldots, x_m],\]
+  za nek objekt $[x_1, \ldots, x_k] \in \cat{C}_{\T}$.
+  Potem dobimo morfizem
+  \[\langle t_1, \ldots, t_n, s_1, \ldots s_m \rangle: [x_1, \ldots, x_k] \to [x_1, \ldots, x_{n+m}]\]
+  za katerega velja
+  \[\pi_1 \circ \langle t_1, \ldots, t_n, s_1, \ldots s_m \rangle = \langle t_1, \ldots t_n \rangle\]
+  in
+  \[\pi_2 \circ \langle t_1, \ldots, t_n, s_1, \ldots s_m \rangle = \langle s_1, \ldots s_m \rangle.\]
+  To je samo substitucija za $i$-to komponento.
+  Za enoličnost predpostavimo, da obstaja še en morfizem
+  $\langle r_1, \ldots, r_{n+m} \rangle :  [x_1, \ldots, x_k] \to [x_1, \ldots, x_{n+m}]$,
+  za katerega pri kompozitumu s $\pi_1$ dobimo $\langle t_1, \ldots t_n \rangle$,
+  s $\pi_2$ pa $\langle s_1, \ldots s_m \rangle$. To pa pomeni, da velja
+  \[ \T \vdash r_i = t_i \quad \text{in} \quad  \T \vdash r_{j+n} = s_j,\]
+  za  $i = 1, \ldots, n$ in $j = 1, \ldots, m$.
 \end{dokaz}
 %
 %
@@ -390,16 +408,16 @@ sintaktična kategorija. Potem za vsako kategorijo $\mathbf{C}$, ki ima končne
 produkte, obstaja naravna ekvivalenca med modeli teorije $\mathbb{T}$ v
 $\mathbf{C}$ in funktorji, ki ohranjajo končne produkte, iz
 $\mathbf{C}_{\mathbb{T}}$ v $\mathbf{C}$.
-$$M \in \mathbf{Mod}(\mathbb{T}, \mathbf{C})\quad \leftrightsquigarrow \quad \mathcal{M} : \mathbf{C}_\mathbb{T} \to \mathbf{C}$$
+$$M \in \mathbf{Mod}(\mathbb{T}, \mathbf{C})\quad \leftrightsquigarrow \quad \cat{M} : \mathbf{C}_\mathbb{T} \to \mathbf{C}$$
 Vsak model je podan kot funktorialna slika \emph{univerzalnega modela}
-$\mathcal{U}$ v $\mathbf{C}_T$, tako da velja
-$M \cong \mathcal{M}(\mathcal{U})$, v bistvu enoličnega funktorja
-$M : \mathbf{C}_{\mathbb{T}} \to \mathbf{C}$, ki ohranja produkte.
+$\mathcal{U}$ v $\mathbf{C}_T$ do izomorfizma natančno enoličnega funktorja
+$M : \mathbf{C}_{\mathbb{T}} \to \mathbf{C}$, ki ohranja produkte tako, da velja
+$M \cong \mathcal{M}(\mathcal{U})$.
 \end{izrek}
 \begin{opomba}
   Univerzalni model $\mathcal{U}$ po tej ekvivalenci ustreza identitetnemu
   funktorju $1_{\mathbf{C}_{\mathbb{T}}} : \mathbf{C}_{\mathbb{T}} \to \mathbf{C}_{\mathbb{T}}$.
-  Dejstvo, da obstajajo taki univerzalni modeli je prednost posplošitve
+  Dejstvo, da obstajajo taki univerzalni modeli, je prednost posplošitve
   koncepta modela na druge kategorije kot $\mathbf{Set}$.
 \end{opomba}
 %
@@ -413,6 +431,7 @@ $M : \mathbf{C}_{\mathbb{T}} \to \mathbf{C}$, ki ohranja produkte.
 $$f^U := [x_1, \ldots, x_n \mid f(x_1, \ldots, x_n)] : U^k = [x_1, \ldots, x_n] \to U = [x_1]$$
 \end{itemize}
 %
+Interpretacijo z indukcijo razširimo na vse terme.
 Aksiomi $\mathbb{T}$ so izpolnjeni, saj za vsaka terma $t$, $s$ velja
 $$U \models t = s \Longleftrightarrow t^U = s^U \Longleftrightarrow \mathbb{T} \vdash t = s.$$
 Velja torej
@@ -434,13 +453,13 @@ $$\mathbb{T} \vdash s = t  \iff  s^U = t^U,$$
 iz česar zaradi funktorialnosti $F$ sledi
 $$t^{FU} = F(t^U) = F(s^U) = s^{FU}.$$
 %
-Vsaka naravna transformacija $\vartheta : F \to G$ med takima
-funktorjema določi homorfizem modelov
-$$h = \vartheta_\mathcal{U} : F\mathcal{U} \to G\mathcal{U}$$
+Vsaka naravna transformacija $\vartheta : F \to G$, med takima
+funktorjema, določi homorfizem modelov
+$$h = \vartheta_\mathcal{U} : F\mathcal{U} \to G\mathcal{U},$$
 %
-saj za vsako osnovno operacijo $f$ zaradi naravnosti velja
-$$h \circ f^{F\mathcal{U}} = f^{G\mathcal{U}} \circ h,$$
-kar lahko razberemo iz diagrama
+saj za vsako osnovno operacijo $f$, zaradi naravnosti velja
+$$h \circ f^{F\mathcal{U}} = f^{G\mathcal{U}} \circ h.$$
+To lahko razberemo iz diagrama
 \begin{center}
   \begin{tikzcd}[column sep = large, row sep = large]
     F\mathcal{U}  \times F\mathcal{U} \ar[d] \ar[r, "h \times h"] \ar[dd, bend right=60, "f^{F\mathcal{U}}"'] & G\mathcal{U} \times G\mathcal{U} \ar[d] \ar[dd, bend left = 60, "f^{G\mathcal{U}}"] \\
@@ -448,25 +467,24 @@ kar lahko razberemo iz diagrama
     F\mathcal{U} \ar[r, "h"'] & G\mathcal{U}
   \end{tikzcd}
 \end{center}
-kjer zgornji kvadrat komutira ker $F$ ohranja produkte, spodnji
+kjer zgornji kvadrat komutira, ker $F$ ohranja produkte, spodnji
 pa zaradi naravnosti $\vartheta$. Torej evaluacija pri $U$ določa funktor
 \[ \mathrm{eval}_U : \mathbf{Hom}_{\mathrm{FP}}(\mathbf{C}_{\mathbb{T}}, \mathbf{C}) \to \mathbf{Mod}(\mathbb{T}, \mathbf{C}), \]
 iz kategorije funktorjev $\mathbf{C}_{\mathbb{T}} \to \mathbf{C}$,
 ki ohranjajo končne produkte in naravnih transformacij med njimi,
 v kategorijo modelov teorije $\mathbb{T}$ v $\mathbf{C}$.
 \begin{trditev}\label{trditev:modeli-so-funktorji}
-  Funktor $\mathrm{eval}_U$ opisan zgoraj, določa ekvivalenco kategorij,
+  Funktor $\mathrm{eval}_U$, opisan zgoraj, določa ekvivalenco kategorij,
   ki je naravna v $\mathbf{C}$.
 \end{trditev}
 \begin{dokaz}
-Za to je dovolj pokazati, da je $eval_U$:
-surjektiven na objektih, zvest in poln.
+Za to je dovolj pokazati, da je $eval_U$ surjektiven na objektih, zvest in poln.
 Za surjektivnost denimo, da imamo model
 $M \in \mathbf{Mod}(\mathbb{T}, \mathbf{C})$. Potem lahko definiramo funktor
-$$M^{\#} : \mathbf{C}_\mathbb{T} \to \mathbf{C}$$
+$$M^{\#} : \mathbf{C}_\mathbb{T} \to \mathbf{C},$$
 ki na objektih deluje kot $M^{\#}([x_1, \ldots, x_n]) = M^n$, na
 morfizmih pa
-$$M^{\#}(t_1, \ldots, t_n) = \langle t_1^M, \ldots, t_n^M \rangle$$
+$$M^{\#}(t_1, \ldots, t_n) = \langle t_1^M, \ldots, t_n^M \rangle.$$
 %
 Bolj natančno, je $M^{\#}$ na morfizmih definiran induktivno:
 \begin{enumerate}
@@ -480,8 +498,8 @@ Bolj natančno, je $M^{\#}$ na morfizmih definiran induktivno:
       "{M^{\#}f}"] & M,
     \end{tikzcd}
   \end{equation*}
-  kjer je $M^{\#}f = f^M$ interpretacija osnovne operacije $f$ podana
-  z modelom.
+  kjer je $M^{\#}f = f^M$ interpretacija osnovne operacije $f$,
+  podana z modelom.
 \end{enumerate}
 %
 Dobra definiranost $M^{\#}$ sledi iz tega, da je $M$ model, torej res zadošča vsem enačbam teorije.
@@ -501,7 +519,7 @@ Pokazati moramo še, da je ta ekvivalenca naravna v $\mathbf{C}$.
 To pomeni naslednje, denimo da je $M$ model $\mathbb{T}$ v neki kategoriji
 $\mathbf{C}$ s končnimi produkti. Vsak funktor $F : \mathbf{C} \to \mathbf{D}$,
 ki ohranja končne produkte, v drugo kategorijo s končnimi produkti,
-pošlje $M$ v model $F(M)$ v $\mathbf{D}$. Interpretacijo osnovne operacije $f$
+pošlje $M$ v model $F(M)$ v $\mathbf{D}$. Interpretacijo osnovne operacije~$f$
 v $\mathbf{D}$ dobimo s predpisom $f^{F(M)} = F(f^M)$, ki jo razširimo na
 vse terme preko kanoničnih izomorfizmov $F(M) \times F(M) \cong F(M \times M)$.
 Ker enačbe podamo z komutativnimi diagrami, $F$ pošlje model v model in
@@ -528,7 +546,7 @@ ki ohranja produkte velja
 \end{dokaz}
 Ekvivalenca kategorij
 \[ \mathbf{Hom}_{\mathrm{FP}}(\mathbf{C}_{\mathbb{T}}, \mathbf{C}) \simeq \mathbf{Mod}(\mathbb{T}, \mathbf{C}) \]
-dejansko določi kategorijo $\mathbf{C}_{\mathbb{T}}$ in univerzalni model $U$ enolično,
+dejansko določi kategorijo $\mathbf{C}_{\mathbb{T}}$ in sintaktični model $U$ enolično,
 do ekvivalence kategorij in izomorfizma modela natančno.
 Da dobimo $U$ lahko v zgornjo ekvivalenco za $\mathbf{C}$ vstavimo $\mathbf{C}_{\mathbb{T}}$
 in indentitetni funktor $1_{\mathbf{C}_{\mathbb{T}}}$ na levi in na desni dobimo
@@ -554,12 +572,12 @@ $$\vartheta_\mathcal{U} = h.$$
 Kot je to običajno za nekaj podano z univerzalno lastnostjo,
 je $\mathbf{C}_\mathbb{T}$ enolično določena, do ekvivalence kategorij natančno.
 %
-Naj bosta $(\mathbf{C}, U)$ in $(\mathcal{D}, V)$ obe klasifikacijski
+Naj bosta $(\mathbf{C}, U)$ in $(\cat{D}, V)$ obe klasifikacijski
 kategoriji neke teorije $\mathbb{T}$. Potem po univerzalni lastnosti
 dobimo funktorja
 \begin{center}
   \begin{tikzcd}[column sep = large]
-    \mathbf{C} \ar[r, bend left, "U^{\#}"] & \mathcal{D} \ar[l, bend
+    \mathbf{C} \ar[r, bend left, "U^{\#}"] & \cat{D} \ar[l, bend
     left, "V^{\#}"]
   \end{tikzcd}
 \end{center}
@@ -574,9 +592,9 @@ njena klasifikacijska kategorija.
 \begin{primer}
   Poglejmo si, kaj nam ta konstrukcija pove v primeru teorije grup
   $\mathbb{G} = \mathbf{C}_{\mathbb{T}_{\mathrm{Grp}}}$. Spomnimo se,
-  da je $\mathbb{G}$ sestanljena iz kontekstov $[x_1, \ldots x_n]$ in
+  da je $\mathbb{G}$ sestavljena iz kontekstov $[x_1, \ldots x_n]$ in
   termov zgajenih iz spremenljivk in osnovnih grupnih operacij.
-  Funktor $M : \mathbb{G} \to \mathbf{Set}$, ki ohranja produkte
+  Funktor, ki ohranja končne produkte, $M : \mathbb{G} \to \mathbf{Set}$
   je določen do izomorfizma natančno s tem, kam pošlje kontekst $[x_1]$
   in terme, ki predstavljajo osnovne operacije. Če definiramo
 \begin{align*}
@@ -585,7 +603,7 @@ njena klasifikacijska kategorija.
 \end{align*}
 potem je $(G,e,i,m)$ navadna grupa z enoto $e$, inverzom $i$ in
 množenjem $m$. Množica $G$ z operacijami res zadošča aksiomom
-grup, zaradi funktorialnosti $M$. Obratno, če je $(G,e,i,m)$ grupa,
+grup, zaradi funktorialnosti~$M$. Obratno, če je $(G,e,i,m)$ grupa,
 potem dobimo funktor $M_{G} : \mathbb{G} \to \mathbf{Set}$,
 ki ohranja končne produkte tako, da definiramo
 \begin{align*}
@@ -593,9 +611,9 @@ ki ohranja končne produkte tako, da definiramo
   M_{G}(x_1 \mid x_1^{-1}) &= i & M_{G}(x_1, x_2 \mid x_1 \cdot x_2) &= m.
 \end{align*}
 
-Recimo, da sta $(G,e_{G}, i_{G}, m_{G}$ in $(H, e_H, i_H, m_H)$ grupi
-in naj bo $\phi : M_{G} \to M_H$ naravna transformacija med pripadajočima
-funktorjema. Potem je $\phi$ določena s tem, kam slika kontekst $[x_1]$,
+Recimo, da sta $(G,e_{G}, i_{G}, m_{G})$ in $(H, e_H, i_H, m_H)$ grupi
+in označimo pripadajočo naravno transformacijo s ${\phi : M_{G} \to M_H}$.
+Potem je $\phi$ določena s tem, kam slika kontekst $[x_1]$,
 kajti po naravnosti za $1 \leq k \leq n$, naslednji diagram
 \begin{equation*}
 \begin{tikzcd}\label{primer:grupe-kot-funktorji}
@@ -613,15 +631,15 @@ Spet lahko vidimo, da zaradi naravnosti naslednji diagram
 \end{tikzcd}
 \end{equation*}
 komutira. Podobni diagrami pokažejo, da $\phi'$ ohranja enoto in
-inverze, torej je $\phi' : G \to H$ res homorfizem grup.
-Obratno, homomorfizem grup $\varphi' : G \to H$ inducira naravno
+inverze, kar pomeni da je $\phi' : G \to H$ res homorfizem grup.
+Obratno, homomorfizem grup ${\varphi' : G \to H}$ inducira naravno
 transformacijo $\varphi : G \to H$, katere komponenta pri
 $[x_1, \ldots, x_n]$ je enaka $\varphi' \times \ldots \times \varphi' : G^n \to H^n$.
 Demonstrirali smo ekvivalenco kategorij
 \[ \mathbf{Mod}_{\mathbf{Set}}(\mathbb{G}) \simeq \mathbf{Grp}. \]
 \end{primer}
 \section{Polnost algebrajske teorije}
-V matematični logiki pravimo, da je logičen sistem \emph{validen},
+V matematični logiki pravimo, da je logičen sistem \emph{veljaven},
 če vsaka formula, ki jo lahko dokažemo v tem sistemu, resnična
 glede na semantiko tega sistema. Logične formule algebrajske teorije
 $\mathbb{T}$ imajo zelo preprosto strukturo, vse so namreč enačbe
@@ -629,35 +647,36 @@ oblike $s = t$ med termi te teorije. To, da je ta teorija veljavna
 pomeni, da vsak model zadošča vsem enačbam, ki jih lahko izpeljemo
 iz aksiomov. Obratna lastnost logičnega sistema se imenuje \emph{polnost}.
 Pravimo, da je teorija $\mathbb{T}$ polna (semantično polna), če velja
-da
-$$\text{Vsak model } \mathbb{T} \text{ zadošča }s=t \quad \Longrightarrow \quad \mathbb{T} \vdash s = t,$$
+$$\text{Vsak model } \mathbb{T} \text{ zadošča }s=t \quad \Longrightarrow
+  \quad \mathbb{T} \vdash s = t,$$
 kjer $\vdash$ predstavlja izpeljavo enačbe iz aksiomov teorije.
-Za teorije prvega reda velja naslednji slaven izrek o polnosti \cite{godel-completeness}
+Za teorije prvega reda velja naslednji slaven izrek o polnosti \cite{godel-completeness}:
 \begin{izrek}[Gödel]
   Naj bo $T$ teorija prvega reda in $\varphi$ formula v jeziku, ki
   opisuje $T$. Potem so naslednje trditve ekvivalentne:
   \begin{enumerate}
   \item Obstaja dokaz $\varphi$ iz aksiomov teorije $T$
-    $(T \vdash \varphi)$
+    $(T \vdash \varphi)$.
   \item Stavek $\varphi$ drži v vsakem modelu teorije $T$
-    $(T \models \varphi)$
+    $(T \models \varphi)$.
   \end{enumerate}
 \end{izrek}
 To velja v posebno močnem smislu za kategorično semantiko
-\begin{izrek}[Polnost algebraičnih teorij]
-  Naj bo $\mathbb{T}$ algebraična teorija. Potem obstaja kategorija s
+\begin{izrek}[Polnost algebrajskih teorij]
+  Naj bo $\mathbb{T}$ algebrajska teorija. Potem obstaja kategorija s
   končnimi produkti $\mathbf{C}$ in model
   $\mathcal{U} \in \mathbf{Mod}(\mathbb{T}, \mathbf{C})$ tako, da za vsako
   enačbo $s = t$ teorije $\mathbb{T}$ velja
-$$\mathcal{U} \models s = t \quad \Longleftrightarrow \quad \mathbb{T} \vdash s = t$$
+$$\mathcal{U} \models s = t \quad \Longleftrightarrow \quad \mathbb{T} \vdash s = t.$$
 \end{izrek}
 \begin{dokaz}
   Kot kategorijo $\mathbf{C}$ vzamemo klasifikacijsko kategorijo
   $\mathbf{C}_\mathbb{T}$ in univerzalni model $\mathcal{U}$. Če
   velja $\mathbb{T} \vdash s = t$, potem iz konstrukcije
   $\mathbf{C}_\mathbb{T}$ sledi $s^\mathcal{U} =
-  t^\mathcal{U}$. Vsak model $M$ v kategoriji $\mathbf{C}$,
-  s končnimi produkti ima klasifikacijski funktor $M^{\#} : \mathbf{C}_{\mathbb{T}} \to \mathbf{C}$,
+  t^\mathcal{U}$. Vsak model $M$ v kategoriji $\mathbf{C}$
+  s končnimi produkti ima klasifikacijski funktor
+  \[  M^{\#} : \mathbf{C}_{\mathbb{T}} \to \mathbf{C}, \]
   ki ohranja interpretacijo termov $s$ in $t$, kajti velja
   \[ M^{\#}(s^\mathcal{U}) = s^{M^{\#}(\mathcal{U})} = s^M. \]
   Podobno za $t$.
@@ -671,7 +690,7 @@ $$\mathcal{U} \models s = t \quad \Longleftrightarrow \quad \mathbb{T} \vdash s 
   pravimo \emph{logično generičen}.
 \end{definicija}
 Po prejšnjem izreku je torej univerzalni model logično generičen.
-V klasičnem smislu models v kategoriji $\mathbf{Set}$, le redko obstaja
+V klasičnem smislu v kategoriji $\mathbf{Set}$ le redko obstaja
 logično generičen model. Za polnost moramo gledati veljavnost
 v vseh modelih teorije hkrati. Za algebrajske teorije v tem posplošenem
 smislu model velja torej močnejša lastnost.
@@ -679,14 +698,14 @@ Za modele v kategoriji $\mathbf{Set}^{\mathbf{C}^{\mathrm{op}}}$
 imamo posebej lep generičen model.
 \begin{trditev}
   Naj bo $\mathbb{T}$ algebrajska teorija. Potem je Yonedova vložitev
-  \[ y : \mathbf{C}_{\mathbb{T}} \to \mathbf{Fun}(\mathbf{C}_{\mathbb{T}}^{\mathrm{op}}, \mathbf{Set}) \]
+  \[ \mathsf{y} : \mathbf{C}_{\mathbb{T}} \to \mathbf{Fun}(\mathbf{C}_{\mathbb{T}}^{\mathrm{op}}, \mathbf{Set}) \]
   generičen model $\mathbb{T}$.
 \end{trditev}
 \begin{dokaz}
   Yonedova vložitev ohranja limite, torej v posebnem končne produkte.
-  Sledi, da nam da model $\tilde{U} = y(U)$ teorije $\mathbb{T}$.
-  Ker je $y$ funktor, so v $\tilde{U}$ zadoščene vse enačbe,
-  ki veljajo v $U$, ker pa je $y$ zvest funktor, je vsaka enačba,
+  Sledi, da nam da model $\tilde{U} = \mathsf{y}(U)$ teorije $\mathbb{T}$.
+  Ker je $\mathsf{y}$ funktor, so v~$\tilde{U}$ zadoščene vse enačbe,
+  ki veljajo v $U$, ker pa je $\mathsf{y}$ zvest funktor, je vsaka enačba,
   ki velja v $\tilde{U}$, morala veljati že v $U$.
   Ker je $U$ logično generičen, mora biti tudi $\tilde{U}$.
 \end{dokaz}
@@ -696,7 +715,7 @@ imamo posebej lep generičen model.
   in nobenim drugim. Spomnimo se, da je univerzalni model $U$
   predstavljen s kontekstom $[x_1]$ v $\mathbb{G}$.
   Yonedova vložitev nam da
-  \[ \tilde{U} = y[x_1] = \mathbb{G}(-, [x_1]). \]
+  \[ \tilde{U} = \mathsf{y}[x_1] = \mathbb{G}(-, [x_1]). \]
   To je množica, ki jo parametrizirajo objekti $\mathbb{G}$.
   Za vsak $n \in \mathbb{}N$ dobimo množico $\mathbb{G}([x_1, \ldots, x_x], [x_1])$,
   vseh termov, ki jih lahko konstruiramo iz $n$ spremenljivk,
@@ -727,12 +746,12 @@ Klasični pristop sestavljajo naslednji štirje deli:
 \item \emph{Interpretacija} algebrajske teorije je definirana kot množica $I$,
   skupaj z zbirko $n$-mestnih operacij predstavljenih s preslikavami $I^n \to I$.
   Interpretaciji včasih rečemo tudi \emph{struktura}. Videli smo, da je
-  koncept interpretacije algebrajske teorije smiselnoč definirati za vsako
+  koncept interpretacije algebrajske teorije smiselno definirati za vsako
   kategorijo s končnimi produkti. V taki kategoriji je predstavljena z
   objektom in zbirko morfizmov, ki predstavljajo osnovne operacije, ki jih
   z indukcijo razširimo na vse terme teorije. Interpretacija je \emph{model}
   teorije, če izpolnjuje vse aksiome. To pomeni, da so
-  morfizmi, predstavljajo terme, ki nastopajo v aksiomih, enaki.  
+  morfizmi, ki predstavljajo terme, ki nastopajo v aksiomih, enaki.  
 \end{enumerate}
 V tem poglavju smo razvili alternativen pristop, ki ga lahko poimenujemo
 \emph{funktorialna semantika}, kjer so ključne naslednje ideje.
@@ -752,7 +771,7 @@ V tem poglavju smo razvili alternativen pristop, ki ga lahko poimenujemo
   končne produkte.
 \item \emph{Homomorfizmi kot naravne transformacije}. Če definiramo model
   kot funktor, ki ohranja ustrezno strukturo, ven avtomatsko pade koncept
-  homomorfizma med modeli, kot naravna transformacija med funktorji, ki
+  homomorfizma med modeli.To je naravna transformacija med funktorji, ki
   predstavljajo te modele. Videli smo, da ohranjanje algebrajske strukture
   ustreza ravno pogoju naravnosti.
 \item \emph{Univerzalni model}. To, da smo dopustili interpretacijo teorije
@@ -777,15 +796,15 @@ ki jo je odkril F.~W.~Lawvere v svoji disertaciji [citat].
 
 To dualnost je mogoče zelo jasno opisati za primer algebrajskih
 teorij. Naj bo \(\mathbf{C}_{\mathbb{T}}\) klasifikacijska kategorija
-za algebrajsko teorijo \(\mathbb{T}\). Videli bomo, da je \(\mathbb{C}_{\mathbb{T}}\)
+za algebrajsko teorijo \(\mathbb{T}\). Videli bomo, da je \(\mathbf{C}_{\mathbb{T}}\)
 dualna neki podkategoriji \(\mathbb{M}\) modelov \(\mathbb{T}\) (v \(\mathbf{Set}\)).
 Specifično, obstaja \emph{polna} podkategorija 
 \(\mathbb{\mathbb{M}} \hookrightarrow \mathbf{Mod}(\mathbb{T})\) in
 ekvivalenca kategorij
 \[ \mathbf{C}_{\mathbb{T}} \simeq \mathbb{M}^{\mathrm{op}} \]
 tako, da je \emph{sintaktična} kategorija \(\mathbf{C}_{\mathbb{T}}\) dualna
-podkategoriji \emph{semantične} kategorije \(\mathbf{Mod}(\mathbb{T})\).
-Torej imamo v kategoriji modelov \(\mathbb{T}\) "skrito" invariantno
+podkategoriji \emph{semantične} ka\-tegorije \(\mathbf{Mod}(\mathbb{T})\).
+Torej imamo v kategoriji modelov \(\mathbb{T}\) "`skrito"' neodvisno
 predstavitev sintakse teorije \(\mathbb{T}\).
 \begin{izrek}
   Naj bo $\mathbb{T}$ algebrajska teorija in naj bo
@@ -802,13 +821,14 @@ predstavitev sintakse teorije \(\mathbb{T}\).
   množico, ki predstavlja ta model in jo označimo z $|M|$.  Ta funktor
   ima levi adjunkt, ki mu pravimo prosti funktor in ga označujemo z
   \[ F_{\mathbb{T}} = F : \mathbf{Set} \to \mathbf{Mod}(\mathbb{T},
-    \mathbf{Set}). \] Velja
+    \mathbf{Set}). \]
+  Iz adjunkcije dobimo izomorfizem
   \[ \mathbf{Hom}_{\mathbf{Mod}_{\mathbb{T}}}(F(M), N) \cong
     \mathbf{Hom}_{\mathbf{Set}}(M, |N|),\] za vsako množico $M$ in
   model $N$.  Najprej opazimo, da ima $\mathbb{M}$ vse končne
   koproduke
   \begin{align*}
-    F(n) + F(m) &\cong F(n + m) \\
+    F(n) + F(m) &\cong F(n + m), \\
     0 &\cong F(0),
   \end{align*}
   saj ima $\mathbf{Set}$ vse koprodukte in levi adjunkti ohranjajo kolimite.
@@ -819,50 +839,53 @@ predstavitev sintakse teorije \(\mathbb{T}\).
   Pokazali bomo, da je $U$ model $\mathbb{T}$.
   Za vsako osnovno $n$-mestno operacijo $f$ teorije $\mathbb{T}$ dobimo element modela
   $F(n)$, ki je sestavljen iz $f$ in generatorjev $x_1, \ldots, x_n$, označimo ga z
-  \[ f(x_1, \ldots, x_n) \in F(n)\]
+  \[ f(x_1, \ldots, x_n) \in F(n).\]
   Na primer, v prosti grupi na dveh generatorjih imamo element $x \cdot y \in F(x,y)$.
   Iz lastnosti prostega funktorja $F$, za vsak element $f(x_1, \ldots, x_n) \in F(n)$
   dobimo enoličen homomorfizem modelov
   \[ \overline{f(x_1, \ldots, x_n)} : F(1) \to F(n) \qquad \text{v $\mathbb{M}$}\]
-  (tisti homomorfizem, ki pošlje generator $F(1)$ v $f(x_1, \ldots, x_n) \in F(n)$).
+  to je tisti homomorfizem, ki pošlje generator $F(1)$ v $f(x_1, \ldots, x_n) \in F(n)$.
   Če to dualiziramo, dobimo interpretacijo $n$-mestne operacije
   \[ [f] : U^n \to U \qquad \text{v $\mathbb{M}^{\mathrm{op}}$}.\]
   Z indukcijo to sedaj lahko razširimo na vse terme v kontekstu $x_1, \ldots, x_n \mid t$:
   \[ [x_{1}, \ldots, x_n \mid t] : U^n \to U.\]
-  Sledi, da je vsaka enačba $s = t$ teorije $\mathbb{T}$ zadoščena v $U$,
+  Sledi, da je vsaka enačba $s = t$ teorije $\mathbb{T}$ zadoščena v $U$
   saj, če velja $\mathbb{T} \vdash s = t$, potem morata ta dva terma sovpadati
   že v prosti $\mathbb{T}$-algebri $F(n)$.
 
-  Sedaj opazimo, da obstaja kanoničen model $V$ teorije $\mathbb{T}$,
+  Sedaj opazimo, da obstaja kanoničen model $V$ teorije $\mathbb{T}$
   v funktorski kategoriji $\mathbf{Set}^{\mathbf{Mod}(\mathbb{T})}$, namreč
   pozabljivi funktor $V : \mathbf{Mod}(\mathbb{T}) \to \mathbf{Set}$.
   To je res model, saj za vsako $n$-mestno osnovno operacijo $f$ dobimo
-  naravno transformacijo $[f]^V : V^n to V$, kajti homomorfizmi v $\mathbf{Mod}(\mathbb{T})$
+  naravno transformacijo $[f]^V : V^n \to V$, kajti homomorfizmi v $\mathbf{Mod}(\mathbb{T})$
   komutirajo z operacijami, ki interpretirajo $f$. Da zadošča vsem enačba teorije $\mathbb{T}$
   sledi iz tega, da tem enačbam zadoščajo vsi modeli v $\mathbf{Mod}(\mathbb{T})$.
-  Kot funktor, je $V$ predstavljiv s prostim modelom $U = F(1)$, v smislu (kovariantne)
+  Kot funktor je $V$ predstavljiv s prostim modelom $U = F(1)$, v smislu (kovariantne)
   Yonedove vložitve
-  \[ \mathsf{y} : \mathbf{Mod}(\mathbb{T})^{\mathrm{op}} \to \mathbf{Set}^{\mathbf{Mod}(\mathbb{T})}\]
+  \[ \mathsf{y} : \mathbf{Mod}(\mathbb{T})^{\mathrm{op}} \to \mathbf{Set}^{\mathbf{Mod}(\mathbb{T})}.\]
   Za vsak $A \in \mathbf{Mod}(\mathbb{T})$ namreč velja:
   \begin{align*}
     V(A) &\cong \Hom_{\Mod(\mathbb{T})}(F(1), A) = \Hom_{\Mod(\mathbb{T})^{\mathrm{op}}}(A,U) \\
     V^n(A) &\cong \Hom_{\Mod(\mathbb{T})}(F(n), A) \\
-    &\cong \Hom_{\Mod(\mathbb{T})}(F(1) + \ldots F(1), A) = \Hom_{\Mod(\mathbb{T})^{\mathrm{op}}}(A,U^n).
+    &\cong \Hom_{\Mod(\mathbb{T})}(F(1) + \ldots + F(1), A) = \Hom_{\Mod(\mathbb{T})^{\mathrm{op}}}(A,U^n).
   \end{align*}
   Torej $V \cong \mathsf{y}(U)$. Vsaka interpretacija $[f]^V : V^n \to V$ je oblike
   \[ [f]^V = \Hom_{\Mod(\T)}([f]^U, -) : \Hom_{\Mod(\T)}(F(n), -) \to \Hom_{\Mod(\T)}(F(1), -),\]
   za interpretacijo $[f]^U: U^n \to U$, kajti za vsako $\T$-algebro $A$ in element
-  $a = (a_1, \ldots ,a_n) \in \Hom_{\Mod(\T)}(F(n), A)$ imamo:
+  \[a = (a_1, \ldots ,a_n) \in \Hom_{\Mod(\T)}(F(n), A)\]
+  velja
   \[ ([f]^V)_A(a) = f(a_1, \ldots, a_n) = a \circ \overline{f(x_1, \ldots, x_n)},\]
   kjer je $\overline{f(x_1, \ldots, x_n)} : F(1) \to F(n)$ enolični morfizem, ki nam
-  poda $f(x_1, \ldots x_n)$ kot sliko generatorja $F(1)$.
+  poda $f(x_1, \ldots x_n)$, kot sliko generatorja $F(1)$.
 
   Na primer, za dva elementa $g_1, g_2$ grupe $G$ imamo preslikavo
-  $\overline{(g_1, g_2)} : F(x,y) \to G$, ki pošlje generatorja v ta par
-  $\overline{(g_1, g_2)}(x,y) = (g_1, g_2)$, in element $x \cdot y \in (x,y)$ s homomorfizmom
+  \[\overline{(g_1, g_2)} : F(x,y) \to G, \]
+  ki pošlje generatorja v ta par
+  $\overline{(g_1, g_2)}(x,y) = (g_1, g_2)$, in element ${x \cdot y \in (x,y)}$,
+  s homomorfizmom
   $\overline{x \cdot y}: F(1) \to F(x,y)$. Kompozitum nam da očitni homomorfizem
   $\overline{g_1 \cdot g_2} : F(1) \to G$,
-  \[ \overline{(g_1, g_2)} \circ \overline{x \cdot y} = \overline{g_1 \cdot g_2}\]
+  \[ \overline{(g_1, g_2)} \circ \overline{x \cdot y} = \overline{g_1 \cdot g_2}, \]
   kar lahko prikažemo v diagramu:
   \begin{equation*}
     \begin{tikzcd}
@@ -871,8 +894,8 @@ predstavitev sintakse teorije \(\mathbb{T}\).
       & G      
     \end{tikzcd}
   \end{equation*}
-  Na tak način, je vsaka operacija $[f]^A : A^n \to A$ na $\T$-algebri $A$ inducirana s
-  predkompozicijo z ``univerzalno'' operacijo $[f]^U : U^n \to U$, kar prikažemo kot
+  Na tak način je vsaka operacija $[f]^A : A^n \to A$, na $\T$-algebri $A$, inducirana s
+  predkompozicijo z "`univerzalno"' operacijo $[f]^U : U^n \to U$, kar prikažemo kot
   \begin{equation}\label{diag:univerzalna-operacija}
     \begin{tikzcd}
       A^n \ar[d, "\cong"'] \ar[r, "{[f]^{A}}"] & A \ar[d, "\cong"] \\
@@ -881,18 +904,18 @@ predstavitev sintakse teorije \(\mathbb{T}\).
       U^n \ar[r, "{[f]^U}"] & U
     \end{tikzcd}
   \end{equation}
-  Torej, pokazali smo, da je $U$, z operacijami $[f]^U : U^n \to U$ res model $\T$
-  v $\mathbb{M} = \Mod_{\mathrm{fg}}(\T)$. Sestoji iz prostih $\T$-algeber $F(n)$ in
+  Torej, pokazali smo, da je $U$, z operacijami $[f]^U : U^n \to U$, res
+  model teorije~$\T$. Sestoji iz prostih $\T$-algeber $F(n)$ in
   preslikav $F(1) \to F(n)$, ki so določene z elementi $f(x_1, \ldots, x_n) \in F(n)$,
-  kjer so $x_1, \ldots x_n \in F(n)$ generatorji. Sedaj bomo v treh korakih pokazali,
+  kjer so $x_1, \ldots , x_n \in F(n)$ generatorji. Sedaj bomo v treh korakih pokazali,
   da je $U$ res univerzalna $\T$ algebra.
 
   Prvi korak: Naj bo $A$ poljubna $\T$-algebra v $\mathbf{Set}$. Potem obstaja funktor,
   ki ohranja končne produkte
   \[ A^{\#}: \mathbb{M}^{\mathrm{op}} \to \mathbf{Set}\]
   definiran kot $A^{\#}(U) \cong A$,
-  \[ A^{\#}(-) = \Hom_{\Mod(\T)}(-,A),\]
-  ki ga dobimo tako, da zožimo predstavljivi funktor
+  \[ A^{\#}(-) = \Hom_{\Mod(\T)}(-,A).\]
+  Dobimo ga tako, da zožimo predstavljivi funktor
   \[ \Hom_{\Mod(\T)}(-,A) : \Mod(\T)^{\mathrm{op}} \to \mathbf{Set}\]
   po polni inkluziji
   \[ \mathbb{M} = \Mod_{\mathrm{fg}}(\T) \to \Mod(\T)\]
@@ -906,9 +929,11 @@ predstavitev sintakse teorije \(\mathbb{T}\).
   Dodatno iz diagrama \eqref{diag:univerzalna-operacija} sledi, da za vsako osnovno operacijo $f$,
   do izomorfizma natančno velja
   \[ [f]^A = ([f]^U)^{*} = \Hom([f]^U,A) = A^{\#}([f]^U).\]
-  Torej, kot algebri $A^{\#}(U) \cong A$. Vsak homomorfizem $h : F(U) \to G(U)$ $\T$-algeber
-  je induciran s funktorji, ki ohranjajo produkte $F,G : \mathbb{M}^{\mathrm{op}} \to \mathbf{Set}$
-  in je oblike $h = \vartheta_U$ za enolično določeno naravno transformacijo $\vartheta : F \to G$.
+  Torej, kot $\mathbb{T}$-algebri $A^{\#}(U) \cong A$.
+  Vsak homomorfizem $h : F(U) \to G(U)$ $\T$-algeber
+  je induciran s funktorjema, ki ohranjajata produkte
+  ${F,G : \mathbb{M}^{\mathrm{op}} \to \mathbf{Set}}$
+  in je oblike $h = \vartheta_U$, za enolično določeno naravno transformacijo $\vartheta : F \to G$.
 
   Drugi korak: Naj bo $\mathbb{C}$ poljubna (lokalno majhna) kategorija in $\mathcal{A}$ naj bo
   $\T$-algebra v $\mathbf{Set}$. Ker je
@@ -917,13 +942,13 @@ predstavitev sintakse teorije \(\mathbb{T}\).
   je vsak $\mathcal{A}(X)$ $\T$-algebra v $\mathbf{Set}$,
   ki ima po prvem koraku klasifikacijski funktor
   \[ \mathcal{A}(X)^{\#} : \mathbb{M}^{\mathrm{op}} \to \mathbf{Set}.\]
-  Tej podatki skupaj določajo funktor
+  Tej funktorji skupaj določajo en funktor
   $\mathcal{A}^{\#} : \mathbb{M}^{\mathrm{op}} \to \mathbf{Set}^{\mathbb{C}}$,
   ki je definiran na $U \in \mathbb{M}^{\mathrm{op}}$ kot
   \[ (\mathcal{A}^{\#}(U))(X) = \mathcal{A}(X)^{\#}(U) \cong \mathcal{A}(X)\]
-  in je $U^n$ kot $(\mathcal{A}^{\#}(U^{n}))(X) = \mathcal{A}(X)^{\#}(U^n) \cong \mathcal{A}(X)^n$.
-  Funktor $\mathcal{A}^{\#}(U) : \mathbb{C} \to \mathbf{Set}$ deluje na morfizmih $g : X \to Y$ v
-  $\mathbb{C}$ kot je prikazano v naslednjem diagramu
+  in na $U^n$ kot $(\mathcal{A}^{\#}(U^{n}))(X) = \mathcal{A}(X)^{\#}(U^n) \cong \mathcal{A}(X)^n$.
+  Funktor ${\mathcal{A}^{\#}(U) : \mathbb{C} \to \mathbf{Set}}$ deluje na morfizmih $g : X \to Y$ v
+  $\mathbb{C}$, kot je prikazano v naslednjem diagramu
   \begin{equation*}
     \begin{tikzcd}
       \mathcal{A}^{\#}(U)(X) \ar[d, "\cong"'] \ar[r, "{\mathcal{A}^{\#}(U)(g)}"] &
@@ -931,7 +956,7 @@ predstavitev sintakse teorije \(\mathbb{T}\).
       \mathcal{A}(X) \ar[r, "{\mathcal{A}(g)}"] & \mathcal{A}(Y)
     \end{tikzcd}
   \end{equation*}
-  Primer za $U^n$ je povsem analogen. Končno, delovanje
+  Primer za $U^n$ je povsem analogen. Delovanje
   $\mathcal{A} : \mathbb{M}^{\mathrm{op}} \to \mathbf{Set}$ na morfizmih $U^n \to U^m$
   v $\mathbb{M}^{\mathrm{op}}$ je definirano prav tako po komponentah
   \[ (\mathcal{A}^{\#}(U^n))(X) \cong \mathcal{A}(X)^{\#}(U^n) \to
@@ -951,12 +976,12 @@ predstavitev sintakse teorije \(\mathbb{T}\).
     \begin{tikzcd}
       & \mathbf{Set}^{\mathbf{C}^{\mathrm{op}}} \\
       \mathbb{M}^{\mathrm{op}} \ar[ur, "\mathcal{A}^{\#}"] \ar[r, dashed, "A^{\#}"'] &
-      \mathbf{C} \ar[u, hook]
+      \mathbf{C} \ar[u, hook, "\mathsf{y}"']
     \end{tikzcd}
   \end{equation*}
   Vemo, da so vsi objekti v $\mathbb{M}^{\mathrm{op}}$ oblike $U^n$, torej so njihove slike
-  \[ \mathcal{A}(U^n) \cong \mathcal{A}^n \cong \mathsf{y}(A)^n \cong \mathsf{y}(A^n)\]
-  vse predstavljive. Ker je $\mathsf{y}$ poln in zvest, zgornja trditev sledi, in
+  \[ \mathcal{A}(U^n) \cong \mathcal{A}(U)^n \cong \mathsf{y}(A)^n \cong \mathsf{y}(A^n)\]
+  vse predstavljive. Ker je $\mathsf{y}$ poln in zvest, zgornja trditev drži, in
   dobljeni funktor $A^{\#} : M^{\mathrm{op}} \to \mathbf{Set}$ ohranja končne produkte, saj jih
   že $\mathcal{A}^{\#}$ in $\mathsf{y}$ jih ustvari. Jasno je
   \[ A^{\#}(U) \cong A.\]
@@ -969,20 +994,20 @@ predstavitev sintakse teorije \(\mathbb{T}\).
 Ker je klasifikacijska kategorija enolično določena z univerzalno lastnostjo,
 do ekvivalence natančno, nam zgornji izrek direktno poda naslednji opis sintaktične
 konstrukcije $\mathbf{C}_{\mathbb{T}}$.
-\begin{posledica}
+\begin{posledica}\label{posledica:logična-dualnost}
 Za vsako algebrajsko teorijo \(\mathbb{T}\) imamo ekvivalenco
 \[ \mathbf{C}_{\mathbb{T}} \simeq \mathbf{Mod}_{\mathrm{fg}}(\mathbb{T})^{\mathrm{op}} \]
-mde sintaktično kategorijo \(\mathbf{C}_{\mathbb{T}}\) in dualom
+med sintaktično kategorijo \(\mathbf{C}_{\mathbb{T}}\) in dualom
 \(\Mod_{\mathrm{fg}}(\mathbb{T})\), končno generiranih,
 prostih modelov.
 \end{posledica}
-V kategoriji modelov lahko torej najdemo invariantno sintaktično
+V kategoriji modelov lahko torej najdemo neodvisno sintaktično
 predstavitev naše teorije.
 Poglejmo si kaj nam to pove v posebnem primeru prazne teorije \(\mathbb{T}_0\),
-brez operacij in brez konstant. Model te teorije je množica \(X\),
-brez dodatne strukture. Torej je \(\mathbb{T}_0\) teorije striktne enakosti
+brez operacij in brez konstant. Model te teorije je množica~\(X\),
+brez dodatne strukture. Torej je \(\mathbb{T}_0\) teorija striktne enakosti
 med objekti.
-Vse $\mathbb{T}\textsubscript{0}$-algebre so proste in končno generirane med njimi
+Vse $\mathbb{T}\textsubscript{0}$-algebre so proste, in končno generirane med njimi
 so ravno končne množice, torej je
 \[ \Mod_{\mathrm{fg}}(\mathbb{T}_0) = \mathbf{Set} _{\mathrm{fin}} \]
 kategorija (dedno) končnih množic. Dualnost nam potem pove, da
@@ -994,26 +1019,27 @@ prosta kategorija s končnimi produkti z enim objektom.
 
 Zgornja posledica potem pravi, da je teorija enakosti \(\mathbb{T}_0\) dualna
 kategoriji končnih množic. Termi te teorije so enostavno urejeni seznami
-spremenljivk \((x_1, \ldots, x_n)\) in enačbe, ki veljajo so tiste,
-ki veljajo točno za terme \((x_2, x_5) = (x_2, x_5)\).
+spremenljivk~\((x_1, \ldots, x_n)\) in enačbe, ki veljajo so tiste,
+ki veljajo točno za terme
+\[(x_2, x_5) = (x_2, x_5).\]
 Posledica potem pravi, da je to ravno teorija končnih množic, če
 urejene sezname \((x_1, \ldots, x_n) : X \times \ldots \times X\) beremo
-kot urejene \emph{kosezname} \([x_1, \ldots, x_n] : 1 + \ldots + 1 \to 1\).
+kot urejene \emph{kosezname} \[[x_1, \ldots, x_n] : 1 + \ldots + 1 \to 1.\]
 %
 %
-\section{Lawverjeve Teorije}
+\section{Lawverjeve teorije}
 \label{sec:org3518651}
-Če natančno pogledamo zgornjo obravnavo dualnost za algebrajske teorije, nismo uporabili nič,
+Če natančno pogledamo zgornjo obravnavo dualnosti za algebrajske teorije, nismo uporabili nič,
 kar se direktno nanaša na njihovo primarno sintaktično konstrukcijo, npr. specifikacijo
 kaj so osnovne operacije, kaj so aksiomi in kaj izpeljane enakosti.
-To pomeni, da lahko to konstrukcijo posplošimo na ``abstraktne'' algebrajske teorije,
+To pomeni, da lahko to konstrukcijo posplošimo na "`abstraktne"' algebrajske teorije,
 ki nam dajo način, da povemo kaj je algebrajska teorija na način, ki je bolj
 sintaktično neodvisen, analogno kot pri pojmih vektorskega prostora, ki jih lahko
 opišemo neodvisno od izbire baze.
 \begin{definicija}
 \emph{Lawverjeva algebrajska teorija} \(\mathbb{A}\) je majhna kategorija
 v kateri objekti tvorijo zaporedje \(A^0, A^1, A^2, \ldots\) in obstajajo
-vsi končni produkti, ki so oblike \(A^m + A^n = A^{m + n}\), za vse \(m,n \in \mathbb{N}\).
+vsi končni produkti, ki so oblike \(A^m \times A^n = A^{m + n}\), za vse \(m,n \in \mathbb{N}\).
 Tukaj je mišljeno, da je \(A^0 = 1\) končni objekt v \(\mathbb{A}\).
 Vsak objekt je torej končni produkt objekta \(A\) samim s sabo.
 
@@ -1043,13 +1069,15 @@ Modeli te teorije in homomorfzimi med njimi na očiten način ustrezajo naši no
 funktorialni semantiki.
 \begin{primer}
 Algebraična teorija \(\mathcal{C}^{\infty}\) gladkih preslikav je kategorija
-v kateri so objekti \$n\$-dimenzionalni ekvlidski prostori \(1, \mathbb{R}, \mathbb{R}^2, \ldots\),
+v kateri so objekti $n$-dimenzionalni ekvlidski prostori \(1, \mathbb{R}, \mathbb{R}^2, \ldots\),
 in morfizmi \(\mathcal{C}^{\infty}\) preslikave med njimi.
 
 Model te teorije v \(\cat{Set}\) je funktor \(A : \mathcal{C}^{\infty} \to \cat{Set}\),
-ki ohranja končne produkte. Do naravnega izomorfizma ga lahko opišemo tako, da
+ki ohranja končne produkte. Do naravnega izomorfizma natančno ga lahko opišemo tako, da
 podamo množico \(A\) in za vsako gladko funkcijo \(f : \mathbb{R}^n \to \mathbb{R}\)
-podamo funkcijo \(Af : A^n \to A\). Za \(Af\) mora veljati, da za vse gladke preslikave
+podamo funkcijo
+\[Af : A^n \to A.\]
+Za \(Af\) mora veljati, da za vse gladke preslikave
 \(g_i : \mathbb{R}^m \to \mathbb{R}, i = 1, \ldots, n\) in vse \(a_1, \ldots, a_m \in A\),
 velja
 \[ 
@@ -1059,7 +1087,7 @@ velja
 Ker sta seštevanje in množenje gladki preslikavi, to v posebnem pomeni,
 da je \(A\) komutativen kolobar z enoto.
 Takim strukturam pravimo tudi $\mathcal{C}\textsuperscript{\(\infty\)}$-kolobarji
-ali gladke algebre. Torej so modeli teorije gladkih preslikav v set ravno gladke algebre.
+ali gladke algebre. Torej so modeli teorije gladkih preslikav v $\cat{Set}$ ravno gladke algebre.
 \end{primer}
 %
 \begin{primer}
@@ -1069,8 +1097,8 @@ pravimo teorija objekta \(A\).
 \end{primer}
 \subsection{Dualnost}
 \label{sec:orgef98ac4}
-Da lahko razširimo teorijo dualnosti na našo novo definicjo teorije potrebujemo
-koncept \emph{prostega modela}. Za to recimo, da je \(\mathbb{A}\) algebrajska teorija,
+Da lahko razširimo teorijo dualnosti na našo novo definicjo teorije, potrebujemo
+koncept \emph{prostega modela}. Za to recimo, da je \(\mathbb{A}\) Lawverjeva teorija,
 z objekti \(1, A, A^2, \ldots\). Označimo kategorijo (klasičnih) modelov z
 \[ \mathbf{Mod}(\mathbb{A}) = \mathbf{Hom}_{FP}(\mathbb{A}, \mathbf{Set}). \]
 Definirali bomo pozabljivi funktor
@@ -1088,12 +1116,12 @@ F(1) &= \mathbf{Hom}_{\mathbb{A}}(A,-) \\
 &\vdots \\
 F(n) &= \mathbf{Hom}_{\mathbb{A}}(A^n, -)
 \end{align*}
-Da smo res dobili adjungirani par prosti--adjungirani funktor, moramo dokazati, da
+Da smo res dobili adjungirani par prosti--pozabljivi funktor, moramo dokazati, da
 imamo izomorfizem
 \[ \mathbf{Hom}_{\mathbf{Mod}_{\mathbb{A}}}(F(n), M) \cong \mathbf{Hom}_{\mathbf{Set}}(n, |M|), \]
 ki mora biti naraven v obeh argumentih. Desna stran je 
-\(\mathbf{Hom}_{\mathbf{Set}}(n, |M|) \cong |M|^n\).
-Za desno stran uporabimo Yonedovo lemo, da dobimo
+\[\mathbf{Hom}_{\mathbf{Set}}(n, |M|) \cong |M|^n. \]
+Za levo stran uporabimo Yonedovo lemo in dobimo
 \begin{align*}
 \mathbf{Hom}_{\mathbf{Hom}(\mathbb{A})}(F(n),M) &\cong  \mathbf{Hom}_{\mathbf{Hom}(\mathbb{A})}(\mathbf{Hom}_{\mathbb{A}}(A^n, -), M) \\
 &\cong M(A^n) \qquad \text{(Yoneda)} \\
@@ -1101,14 +1129,16 @@ Za desno stran uporabimo Yonedovo lemo, da dobimo
 &\cong |M|^n.
 \end{align*}
 
-Ker so končno generirani, prosti modeli torej ravno končno predstavljivi, potem
-kot "obratno" semantiko \(\mathbf{Mod}_{\mathrm{fg}}(\mathbb{A}) \hookrightarrow \mathbf{Mod}(\mathbb{A})\)
-teorije \(\mathbb{A}\), v smislu posledice ??, dobimo kar polno podkategorijo kategorije
+Ker so končno generirani, so prosti modeli torej ravno končno predstavljivi, potem
+kot "`obratno"' semantiko
+\(\mathbf{Mod}_{\mathrm{fg}}(\mathbb{A}) \hookrightarrow \mathbf{Mod}(\mathbb{A})\)
+teorije \(\mathbb{A}\), v smislu posledice \ref{posledica:logična-dualnost},
+dobimo polno podkategorijo kategorije
 \(\mathbf{Hom}_{\mathrm{FP}}(\mathbb{A}, \mathbf{Set})\) kot sliko Yonedove vložitve
 \begin{equation*}
 \begin{tikzcd}
 \mathbf{Mod}_{\mathrm{fg}}(\mathbb{A}) \ar[r, hook] & \mathbf{Mod}(\mathbb{A}) = \mathbf{Hom}_{\mathrm{FG}}(\mathbb{A}, \mathbf{Set}) \ar[r, hook] & \mathbf{Set}^{\mathbb{A}} \\
-\mathbb{A}^{\mathrm{op}} \ar[u, "\cong"] \ar[urr, "y"]
+\mathbb{A}^{\mathrm{op}} \ar[u, "\cong"] \ar[urr, "\mathsf{y}"']
 \end{tikzcd}
 \end{equation*}
 V abstraktnem primeru algebrajske teorije lahko torej logično dualnost
@@ -1117,6 +1147,45 @@ opišemo s tem, da (kontravariantna) Yonedova vložitev
 \[ \mathbb{A}^{\mathrm{op}} \hookrightarrow \mathbf{Set}^{\mathbb{A}} \]
 predstavi \(\mathbb{A}\) kot dual polne podkategorije funktorjev, ki ohranjajo produkte.
 %
+\subsection{Karakterizacija}
+\label{subsec:karakterizacija-lawverjevih-teorij}
+%
+%
+Videli smo nekaj primerov struktur, ki jih lahko opišemo kot modele
+Lawverjeve teorije. Večino standardnih primerov iz algebre je mogoče
+tako opisati. To nam da način obravnave takih struktur,
+ki je neodvisen od izbire njihove prezentacije.
+Ta je analogen obravnavi linearnih preslikav brez izbire baze vektorskega
+prostora. Biti pa moramo malce pazljivi, niso namreč
+vsi primeri struktur, ki se jih obravnava na področju algebre, primeri
+algebrajskih teorij v zgornjem smislu. Radi bi način kako ločiti te
+strukture, ki "`izgledajo"' algebrajske od tistih, ki so dejansko
+modeli neke Lawverjeve teorije. Za primere struktur v kategoriji $\cat{Set}$,
+torej množic z dodatno strukturo obstaja naslednji izrek [referenca], ki te
+primere klasificira:
+\begin{izrek}[Birkhoffov HSP izrek]\label{izrek:Birkhoff-HSP}
+  Naj bo $\mathcal{L}$ jezik na teoriji z enim samim tipom, generiran z množico
+  osnovnih operacij in naj bo $\cat{C}$ razred interpretacij jezika $\mathcal{L}$,
+  za katerega obstaja pozabljivi funktor $V : \cat{C} \to \cat{Set}$, ki nam za
+  vsako strukturo poda njeno množico. Potem je $\cat{C}$ razred modelov
+  univerzalno kvantificiranih enačb med termi jezika $\mathcal{L}$, če
+  in samo če:
+  \begin{enumerate}
+  \item (H) Razred $\cat{C}$ je zaprt za homomorfne slike,
+  \item (S) Razred $\cat{C}$ je zaprt za podalgebre, 
+  \item (P) Razred $\cat{C}$ je zaprt za direktne produkte.
+  \end{enumerate}
+\end{izrek}
+Dokaz lahko bralec najde na primer v [referenca].
+%
+\begin{primer}
+  Z uporabo zgornjega izreka lahko končno pokažemo, da teorija polj ni algebrajska.
+  Čeprav smo videli, da standardni opis polj ni algebrajski, saj definicija inverza
+  ni univerzalno kvantificirana, ker izključuje ničlo, bi mogoče lahko obstajala
+  alternativna predstavitev, ki pa bi bila algebrajska. Kot pa vemo iz elementarne
+  algebre, direktni produkt polj, ni nikoli polje. Po Birkhoffovem izreku polja
+  torej niso razred modelov nobene algebrajske teorije.
+\end{primer}
 \end{document}
 
 %%% Local Variables:

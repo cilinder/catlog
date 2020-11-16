@@ -2,9 +2,18 @@
 \begin{document}
 \section{Osnovne Definicije}
 %
-Najprej bomo uvedli nekaj definicij, ki jih bomo uporabljali v
-celotni nalogi. Ta del služi tudi za to, da fiksiramo nekaj
-notacije, ki jo bomo vseskozi uporabljali.
+V tem uvodnem poglavju bomo podali nekaj osnovnih definicij iz
+teorije kategorij in s tem tudi uvedli nekaj notacije,
+ki jo bomo uporabljali v nalogi.
+Od bralca se pričakuje poznavanje osnovnih pojmov in rezultatov iz
+teorije kategorij, kot tudi osnov logike.
+Uvod v teorijo kategorij lahko najdemo v [reference],
+uvod v logiko pa na primer v [reference].
+Od bralca je pričakovana tudi določena stopnja matematiče razgledanosti
+in, čeprav to pri razvoju teorije v tem delu ni potrebno, se kot
+primer aplikacije te teorije pogosto sklicujemo na pojme iz
+osnovne algebre, kot so grupe, kolobarji, polja, itd.
+Za uvod v algebro si bralec lahko pogleda [reference].
 \begin{definicija}
   \emph{Kategorija} je sestavljena iz:
   \begin{itemize}
@@ -13,18 +22,18 @@ notacije, ki jo bomo vseskozi uporabljali.
   \item Razreda \emph{morfizmov}, ki jih bomo običajno označevali z
     malimi tiskanimi črkami, na primer $f,g,\alpha,\beta, \ldots$.
     Vsak morfizem $f$ je asociiran z dvema objektoma:
-    \[ \mathrm{dom}(f) \text{,} \qquad \mathrm{cod}(f), \]
+    \[ \mathrm{dom}(f) \quad \text{in} \quad \mathrm{cod}(f), \]
     ki jima pravimo \emph{domena} in \emph{kodomena}. Če je $\mathrm{dom}(f)=X$
     in ${\mathrm{cod}(f)=Y}$, potem pišemo $f : X \to Y$.
   \end{itemize}
   Kategorija mora zadoščati naslednjima aksiomoma:
   \begin{itemize}
   \item   Za vsaka dva morfizma $f,g$ za katera velja $\mathrm{cod}(f) = \mathrm{dom}(g)$,
-  mora obstajati njun \emph{kompozitum}, ki ga označujemo z $g \circ f$, in
+  obstaja njun \emph{kompozitum}. To je morfizem, ki ga označujemo z $g \circ f$, in
   za katerega velja $\mathrm{dom}(g \circ f) = \mathrm{dom}(f)$ in
   $\mathrm{cod}(g \circ f) = \mathrm{cod}(g)$.
-  \item Za vsak objekt $X$ mora obstajati t.i.\ \emph{identitetni morfizem}
-  $\mathrm{id}_X : X \to X$, za katerega velja $\mathrm{id}_X \circ f = f$,
+  \item Za vsak objekt $X$ obstaja t.i.\ \emph{identitetni morfizem}
+  $\mathrm{id}_X : X \to X$, za katerega a $\mathrm{id}_X \circ f = f$,
   za vsak $f : Y \to X$ in $g \circ \mathrm{id}_X = g$, za vsak $g : X \to Z$.
 \end{itemize}
 Kategorije običajno označujemo z velikimi tiskanimi črkami, na primer $\cat{C}, \cat{D}, \ldots$.
@@ -37,8 +46,8 @@ Kategorije običajno označujemo z velikimi tiskanimi črkami, na primer $\cat{C
 \end{definicija}
 \begin{definicija}
   Naj bosta $\cat{C}$ in $\cat{D}$ kategoriji. \emph{Funktor} od $\cat{C}$ do $\cat{D}$
-  je preslikava $F$, ki slika objekte iz $\cat{C}$ v objekte v $\cat{D}$ in morfizme iz
-  $\cat{C}$ v morfizme v~$\cat{D}$ in izpolnjuje naslednje pogoje:
+  je preslikava $F$, ki slika objekte iz $\cat{C}$, v objekte v $\cat{D}$ in morfizme iz
+  $\cat{C}$, v morfizme v~$\cat{D}$ in izpolnjuje naslednje pogoje:
   \begin{itemize}
   \item $F(f : X \to Y) = F(f) : F(X) \to F(Y)$,
 \item $F(\mathrm{id}_X) = \mathrm{id}_{F(X)}$,
@@ -47,7 +56,7 @@ Kategorije običajno označujemo z velikimi tiskanimi črkami, na primer $\cat{C
 \end{definicija}
 \begin{definicija}
   Naj bosta $\cat{C}$ in $\cat{D}$ kategoriji in $F,G : \cat{C} \to \cat{D}$ par funktorjev
-  med njima. \emph{Naravna transformacija} $\vartheta : F \to G$, iz $F$ v $G$ je
+  med njima. \emph{Naravna transformacija} $\vartheta : F \to G$, iz $F$ v $G$, je
   družina morfizmov
   \[ (\vartheta_X : F(X) \to G(X))_{X \in \cat{C}}\]
   tako, da za vsak morfizem $f : X \to Y$ v $\cat{C}$ naslednji diagram
@@ -65,12 +74,11 @@ Kategorije običajno označujemo z velikimi tiskanimi črkami, na primer $\cat{C
   funktorja. Potem sta $F$ in $G$ \emph{adjungirana}, oziroma tvorita
   \emph{par adjungiranih funktorjev}, če za vsaka objekta $X \in \cat{C}$ in $Y \in \cat{D}$
   obstaja bijekcija
-  \[ \Hom_{\cat{D}}(FX, Y) \cong \Hom_{\cat{C}}(X, GY),\]
+  \[ \Hom_{\cat{D}}(F(X), Y) \cong \Hom_{\cat{C}}(X, G(Y)),\]
   naravna v $X$ in $Y$.
   V tem primeru pravimo, da je $F$ \emph{levi adjunkt} $G$ in simetrično, da je $G$
   \emph{desni adjunkt} $F$. To označimo kot $F \dashv G$.
 \end{definicija}
-Več osnovnih pojmov iz teorije kategorij lahko najdemo v ??(Tukaj citiram svojo diplomsko).
 \end{document}
 
 %%% Local Variables:
