@@ -3,13 +3,13 @@
 \section{Osnovne Definicije}
 %
 V tem uvodnem poglavju bomo podali nekaj osnovnih definicij iz
-teorije kategorij in s tem tudi uvedli nekaj notacije,
+teorije kategorij in s tem tudi uvedli notacijo,
 ki jo bomo uporabljali v nalogi.
 Od bralca se pričakuje poznavanje osnovnih pojmov in rezultatov iz
 teorije kategorij, kot tudi osnov logike.
 Uvod v teorijo kategorij lahko najdemo v [reference],
 uvod v logiko pa na primer v [reference].
-Od bralca je pričakovana tudi določena stopnja matematiče razgledanosti
+Od bralca je pričakovana tudi določena stopnja matematične razgledanosti
 in, čeprav to pri razvoju teorije v tem delu ni potrebno, se kot
 primer aplikacije te teorije pogosto sklicujemo na pojme iz
 osnovne algebre, kot so grupe, kolobarji, polja, itd.
@@ -18,10 +18,10 @@ Za uvod v algebro si bralec lahko pogleda [reference].
   \emph{Kategorija} je sestavljena iz:
   \begin{itemize}
   \item Razreda \emph{objektov}, ki jih bomo običajno označevali z
-    velikimi tiskanimi črkami, na primer $X, Y, A, B, \ldots$.
+    velikimi tiskanimi črkami, na primer $X, Y, A, B, \ldots$
   \item Razreda \emph{morfizmov}, ki jih bomo običajno označevali z
-    malimi tiskanimi črkami, na primer $f,g,\alpha,\beta, \ldots$.
-    Vsak morfizem $f$ je asociiran z dvema objektoma:
+    malimi tiskanimi črkami, na primer $f,g,\alpha,\beta, \ldots$
+    Vsak morfizem $f$ ima dva pridružena objekta:
     \[ \mathrm{dom}(f) \quad \text{in} \quad \mathrm{cod}(f), \]
     ki jima pravimo \emph{domena} in \emph{kodomena}. Če je $\mathrm{dom}(f)=X$
     in ${\mathrm{cod}(f)=Y}$, potem pišemo $f : X \to Y$.
@@ -36,7 +36,7 @@ Za uvod v algebro si bralec lahko pogleda [reference].
   $\mathrm{id}_X : X \to X$, za katerega a $\mathrm{id}_X \circ f = f$,
   za vsak $f : Y \to X$ in $g \circ \mathrm{id}_X = g$, za vsak $g : X \to Z$.
 \end{itemize}
-Kategorije običajno označujemo z velikimi tiskanimi črkami, na primer $\cat{C}, \cat{D}, \ldots$.
+Kategorije običajno označujemo z velikimi tiskanimi črkami, na primer $\cat{C}, \cat{D}, \ldots$
 \end{definicija}
 \begin{definicija}
   Razred vseh morfizmov v kategoriji $\cat{C}$, z domeno $X$ in kodomeno $Y$ označimo s

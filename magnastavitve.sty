@@ -70,8 +70,10 @@
 \renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
 \fancyhf{} % delete current setting for header and footer
 \fancyhead[LE,RO]{\thepage}
-\fancyhead[RO]{\rightmark}
-\fancyhead[LE]{\leftmark}
+\fancyhead[LO]{\rightmark}
+\fancyhead[RE]{\leftmark}
+\fancyhead[LE]{\thepage}
+\fancyhead[RO]{\thepage}
 \renewcommand{\headrulewidth}{0.5pt}
 \renewcommand{\footrulewidth}{0pt}
 \addtolength{\headheight}{0.5pt} % make space for the rule

@@ -107,7 +107,6 @@ Teorija z eno konstanto in brez enačb je teorija množice z odlikovanim element
 %
 %
 \section{Model algebrajske teorije}
-\markright{Modeli}
 Poglejmo si na primeru grup, kaj je \emph{model} algebrajske teorije.
 Kot smo povedali zgoraj, v klasični algebri grupo razumemo kot množico $G$,
 skupaj s konstanto $e \in G$ in dvema preslikavama,
@@ -146,7 +145,7 @@ Aksiome grupe lahko predstavimo s komutativnimi diagrami
 \end{equation}
 %
 V tej formulaciji je bila edina lastnost kategorije $\mathbf{Set}$, ki smo jo uporabili to,
-da ima končne produkte. Torej je tak opis smiselen v vsaki kategoriji $\mathbf{C}$,
+da ima končne produkte. Torej je tak opis smiseln v vsaki kategoriji $\mathbf{C}$,
 ki ima končne produkte. Torej lahko definiramo:
 \emph{Grupa} v kategoriji s končnimi produkti $\mathbf{C}$ je objekt
 $G$, skupaj s tremi morfizmi:
@@ -193,7 +192,7 @@ To konstrukcijo sedaj posplošimo na poljubno algebrajsko teorijo.
   spremenljivke iz tega konteksta. To označimo kot
 $$x_1, \ldots, x_n \mid t.$$
 %
-Interpretacija terma $t^I$ je definirana reukrzivno:
+Interpretacija terma $t^I$ je definirana rekurzivno:
   \begin{enumerate}
   \item Interpretacija spremenljivke $x_i$ je $i$-ta projekcija
     $\pi_i : I^n \to I.$
@@ -224,7 +223,7 @@ $t^I = [x_1, \ldots, x_n \mid t]^I$. Na primer,
   interpretaciji $I$ je enačba $s = t$ \emph{zadoščena}, če sta
   morfizma $s^I$ in $t^I$ isti morfizem v~$\cat{C}$.  V posebnem, če
   je $s = t$ aksiom teorije in so $x_1, \ldots, x_n$ vse
-  spremenljivke, ki nastopanjo v $s$ in $t$, potem pravimo, da je v
+  spremenljivke, ki nastopajo v $s$ in $t$, potem pravimo, da je v
   interpretaciji $I$ \emph{zadoščen aksiom} $s = t$, če sta
   $[x_1, \ldots, x_n \mid s]^I$ in $[x_1, \ldots, x_n \mid t]^I$ isti
   morfizem v $\cat{C}$.
@@ -270,7 +269,7 @@ $\mathbf{Mod}(\mathbb{T}, \cat{C})$.
 $$\mathbf{Mod}(\mathbb{T}_0, \cat{C}) = \cat{C}.$$
 %
 Model teorije grup $\mathbb{T}_{\mathrm{Grp}}$, v kategoriji množic
-$\mathbf{Set}$, je grupa v običajnem smislu. Homorfizem med dvema modeloma
+$\mathbf{Set}$, je grupa v običajnem smislu. Homomorfizem med dvema modeloma
 teorije $\mathrm{Grp}$ je homomorfizem grup. Torej je
 $$\mathbf{Mod}(\mathbb{T}_{\mathrm{Grp}}, \mathbf{Set}) = \mathbf{Grp}.$$
 \end{primer}
@@ -287,7 +286,7 @@ $$\mathbf{Mod}(\mathbb{T}_{\mathrm{Grp}}, \mathbf{Set}) = \mathbf{Grp}.$$
   Za vsak morfizem~${h : C \to D}$ v $\mathbf{C}$ dobimo naravno
   transformacijo $h : \mathrm{eval}_{\mathbf{C}} \to \mathrm{eval}_{\mathbf{D}}$.
   Torej za vsako grupo $G$ v $\mathbf{Set}^{\mathbf{C}}$ dobimo grupo
-  $\mathrm{eval}_{\mathbf{C}}(G)$, za vsak $C \in \mathbf{C}$ in homorfizem grup
+  $\mathrm{eval}_{\mathbf{C}}(G)$, za vsak $C \in \mathbf{C}$ in homomorfizem grup
   $h_{G} : C(G) \to D(G)$, za vsak morfizem $h : C \to D$,
   kar definira funktor $G : \mathbf{C} \to \mathbf{Grp}$.
   Obratno, vsak funktor $H : \mathbf{C} \to \mathbf{Grp}$, ki ohranja produkte,
@@ -352,7 +351,7 @@ Kompozitum morfizmov
     \langle t_1, \ldots, t_m \rangle : [x_1, \ldots, x_k] &\to [x_1, \ldots, x_m], \\
     \langle s_1, \ldots, s_n \rangle : [x_1, \ldots, x_m] &\to [x_1, \ldots, x_n],
   \end{align*}
-je morfizem $\langle r_1, \ldots, r_n \rangle$, kjer dobimo $i$-to kompotneto tako,
+je morfizem $\langle r_1, \ldots, r_n \rangle$, kjer dobimo $i$-to komponento tako,
 da v $s_i$ hkrati vstavimo terme $t_1, \ldots, t_m$ namesto
 spremenljivk $x_1, \ldots, x_m$.
 $$r_i = s_i[t_1, \ldots, t_m / x_1, \ldots, x_m].$$
@@ -397,7 +396,7 @@ $$[x_1, \ldots, x_n] \times [x_1, \ldots, x_m] \cong [x_1, \ldots, x_{n+m}].$$
 \end{dokaz}
 %
 %
-\section{Modeli kot funtorji}
+\section{Modeli kot funktorji}
 %
 Videli bomo, da ima $\mathbf{C}_{\mathbb{T}}$ to posebno lastnost, da modeli
 teorije $\mathbb{T}$ natanko ustrezajo funktorjem iz $\mathbf{C}_{\mathbb{T}}$.
@@ -454,7 +453,7 @@ iz česar zaradi funktorialnosti $F$ sledi
 $$t^{FU} = F(t^U) = F(s^U) = s^{FU}.$$
 %
 Vsaka naravna transformacija $\vartheta : F \to G$, med takima
-funktorjema, določi homorfizem modelov
+funktorjema, določi homomorfizem modelov
 $$h = \vartheta_\mathcal{U} : F\mathcal{U} \to G\mathcal{U},$$
 %
 saj za vsako osnovno operacijo $f$, zaradi naravnosti velja
@@ -549,7 +548,7 @@ Ekvivalenca kategorij
 dejansko določi kategorijo $\mathbf{C}_{\mathbb{T}}$ in sintaktični model $U$ enolično,
 do ekvivalence kategorij in izomorfizma modela natančno.
 Da dobimo $U$ lahko v zgornjo ekvivalenco za $\mathbf{C}$ vstavimo $\mathbf{C}_{\mathbb{T}}$
-in indentitetni funktor $1_{\mathbf{C}_{\mathbb{T}}}$ na levi in na desni dobimo
+in identitetni funktor $1_{\mathbf{C}_{\mathbb{T}}}$ na levi in na desni dobimo
 model $U$. To lahko formuliramo kot univerzalno lastnost:
 \begin{definicija}
   \emph{Klasifikacijska kategorija} algebraične teorije $\mathbb{T}$
@@ -593,7 +592,7 @@ njena klasifikacijska kategorija.
   Poglejmo si, kaj nam ta konstrukcija pove v primeru teorije grup
   $\mathbb{G} = \mathbf{C}_{\mathbb{T}_{\mathrm{Grp}}}$. Spomnimo se,
   da je $\mathbb{G}$ sestavljena iz kontekstov $[x_1, \ldots x_n]$ in
-  termov zgajenih iz spremenljivk in osnovnih grupnih operacij.
+  termov zgrajenih iz spremenljivk in osnovnih grupnih operacij.
   Funktor, ki ohranja končne produkte, $M : \mathbb{G} \to \mathbf{Set}$
   je določen do izomorfizma natančno s tem, kam pošlje kontekst $[x_1]$
   in terme, ki predstavljajo osnovne operacije. Če definiramo
@@ -631,7 +630,7 @@ Spet lahko vidimo, da zaradi naravnosti naslednji diagram
 \end{tikzcd}
 \end{equation*}
 komutira. Podobni diagrami pokažejo, da $\phi'$ ohranja enoto in
-inverze, kar pomeni da je $\phi' : G \to H$ res homorfizem grup.
+inverze, kar pomeni da je $\phi' : G \to H$ res homomorfizem grup.
 Obratno, homomorfizem grup ${\varphi' : G \to H}$ inducira naravno
 transformacijo $\varphi : G \to H$, katere komponenta pri
 $[x_1, \ldots, x_n]$ je enaka $\varphi' \times \ldots \times \varphi' : G^n \to H^n$.
@@ -764,7 +763,7 @@ V tem poglavju smo razvili alternativen pristop, ki ga lahko poimenujemo
   kategorije s končnimi produkti.
 \item \emph{Modeli kot funktorji}. Videli smo, da model teorije lahko izrazimo
   kot funktor iz kategorije, ki predstavlja teorijo, v kategorijo z ustrezno
-  strukturo, da lahko intpretiramo logiko te teorije. V našem primeru
+  strukturo, da lahko interpretiramo logiko te teorije. V našem primeru
   je bila ta struktura obstoj končnih produktov. Pogoj, da model izpolnjuje
   vse aksiome teorije se izrazi kot pogoj, da funktor ohranja strukturo
   kategorije. Za algebrajske teorije so to ravno funktorji, ki ohranjajo
@@ -826,7 +825,7 @@ predstavitev sintakse teorije \(\mathbb{T}\).
   \[ \mathbf{Hom}_{\mathbf{Mod}_{\mathbb{T}}}(F(M), N) \cong
     \mathbf{Hom}_{\mathbf{Set}}(M, |N|),\] za vsako množico $M$ in
   model $N$.  Najprej opazimo, da ima $\mathbb{M}$ vse končne
-  koproduke
+  koprodukte
   \begin{align*}
     F(n) + F(m) &\cong F(n + m), \\
     0 &\cong F(0),
@@ -931,7 +930,7 @@ predstavitev sintakse teorije \(\mathbb{T}\).
   \[ [f]^A = ([f]^U)^{*} = \Hom([f]^U,A) = A^{\#}([f]^U).\]
   Torej, kot $\mathbb{T}$-algebri $A^{\#}(U) \cong A$.
   Vsak homomorfizem $h : F(U) \to G(U)$ $\T$-algeber
-  je induciran s funktorjema, ki ohranjajata produkte
+  je induciran s funktorjema, ki ohranjata produkte
   ${F,G : \mathbb{M}^{\mathrm{op}} \to \mathbf{Set}}$
   in je oblike $h = \vartheta_U$, za enolično določeno naravno transformacijo $\vartheta : F \to G$.
 
@@ -1065,11 +1064,11 @@ kar kot samega sebe, spremenljivke pa kot projekcije iz produktov (te vedno obst
 ker ima \(\mathbb{A}\) končne produkte). Enačbo \(u = v\) vzamemo kot aksiom te teorije,
 če sta kanonični interpretaciji termov \(u\) in \(v\) isti morfizem v \(\mathbb{A}\).
 
-Modeli te teorije in homomorfzimi med njimi na očiten način ustrezajo naši novi
+Modeli te teorije in homomorfizmi med njimi na očiten način ustrezajo naši novi
 funktorialni semantiki.
 \begin{primer}
 Algebraična teorija \(\mathcal{C}^{\infty}\) gladkih preslikav je kategorija
-v kateri so objekti $n$-dimenzionalni ekvlidski prostori \(1, \mathbb{R}, \mathbb{R}^2, \ldots\),
+v kateri so objekti $n$-dimenzionalni evklidski prostori \(1, \mathbb{R}, \mathbb{R}^2, \ldots\),
 in morfizmi \(\mathcal{C}^{\infty}\) preslikave med njimi.
 
 Model te teorije v \(\cat{Set}\) je funktor \(A : \mathcal{C}^{\infty} \to \cat{Set}\),
@@ -1097,7 +1096,7 @@ pravimo teorija objekta \(A\).
 \end{primer}
 \subsection{Dualnost}
 \label{sec:orgef98ac4}
-Da lahko razširimo teorijo dualnosti na našo novo definicjo teorije, potrebujemo
+Da lahko razširimo teorijo dualnosti na našo novo definicijo teorije, potrebujemo
 koncept \emph{prostega modela}. Za to recimo, da je \(\mathbb{A}\) Lawverjeva teorija,
 z objekti \(1, A, A^2, \ldots\). Označimo kategorijo (klasičnih) modelov z
 \[ \mathbf{Mod}(\mathbb{A}) = \mathbf{Hom}_{FP}(\mathbb{A}, \mathbf{Set}). \]
@@ -1154,7 +1153,7 @@ predstavi \(\mathbb{A}\) kot dual polne podkategorije funktorjev, ki ohranjajo p
 Videli smo nekaj primerov struktur, ki jih lahko opišemo kot modele
 Lawverjeve teorije. Večino standardnih primerov iz algebre je mogoče
 tako opisati. To nam da način obravnave takih struktur,
-ki je neodvisen od izbire njihove prezentacije.
+ki je neodvisen od izbire njihove predstavitve.
 Ta je analogen obravnavi linearnih preslikav brez izbire baze vektorskega
 prostora. Biti pa moramo malce pazljivi, niso namreč
 vsi primeri struktur, ki se jih obravnava na področju algebre, primeri
@@ -1172,7 +1171,7 @@ primere klasificira:
   in samo če:
   \begin{enumerate}
   \item (H) Razred $\cat{C}$ je zaprt za homomorfne slike,
-  \item (S) Razred $\cat{C}$ je zaprt za podalgebre, 
+  \item (S) Razred $\cat{C}$ je zaprt za pod-algebre, 
   \item (P) Razred $\cat{C}$ je zaprt za direktne produkte.
   \end{enumerate}
 \end{izrek}
