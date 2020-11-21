@@ -312,7 +312,7 @@ Kaj je mišljeno z izbiro predstavitve, si poglejmo na primeru grup.
 Formulacija, ki smo jo podali zgoraj, ni edina možna.
 Obstaja alternativna predstavitev teorije grup,
 z enoto $e$ in binarno operacijo $\odot$,
-ki se imenuje dvojno deljenje in enim samim aksiomom:
+ki se imenuje dvojno deljenje in enim samim aksiomom \cite{mccune1993single}:
 $$x \odot (((x \odot y ) \odot z ) \odot ( z \odot e))) \odot (e \odot e) ) = z.$$
 Običajne operacije teorije grup lahko dobimo s formulami:
 $$x \odot y = x^{-1} \cdot y^{-1} \text{,} \quad x^{-1} = x \odot e \text{,} \quad x \cdot y = (x \odot e) \odot (y \odot e)$$
@@ -649,7 +649,9 @@ Pravimo, da je teorija $\mathbb{T}$ polna (semantično polna), če velja
 $$\text{Vsak model } \mathbb{T} \text{ zadošča }s=t \quad \Longrightarrow
   \quad \mathbb{T} \vdash s = t,$$
 kjer $\vdash$ predstavlja izpeljavo enačbe iz aksiomov teorije.
-Za teorije prvega reda velja naslednji slaven izrek o polnosti \cite{godel-completeness}:
+Za teorije prvega reda velja naslednji slaven izrek o polnosti, ki
+ga lahko najdemo v \cite{godel-completeness}, ali za tiste, ki jim nemščina ne diši
+v \cite{prijatelj1992osnove2}.
 \begin{izrek}[Gödel]
   Naj bo $T$ teorija prvega reda in $\varphi$ formula v jeziku, ki
   opisuje $T$. Potem so naslednje trditve ekvivalentne:
@@ -791,7 +793,7 @@ V tem poglavju smo razvili alternativen pristop, ki ga lahko poimenujemo
 %
 V logiki obstaja fascinantna in daleč razsežna dualnost oblike
 \[ \mathrm{Sintaksa} \simeq \mathrm{Semantika}^{\mathrm{op}}, \]
-ki jo je odkril F.~W.~Lawvere v svoji disertaciji [citat].
+ki jo je odkril F.~W.~Lawvere v svoji disertaciji \cite{lawvere1963functorial}.
 
 To dualnost je mogoče zelo jasno opisati za primer algebrajskih
 teorij. Naj bo \(\mathbf{C}_{\mathbb{T}}\) klasifikacijska kategorija
@@ -1160,8 +1162,9 @@ vsi primeri struktur, ki se jih obravnava na področju algebre, primeri
 algebrajskih teorij v zgornjem smislu. Radi bi način kako ločiti te
 strukture, ki "`izgledajo"' algebrajske od tistih, ki so dejansko
 modeli neke Lawverjeve teorije. Za primere struktur v kategoriji $\cat{Set}$,
-torej množic z dodatno strukturo obstaja naslednji izrek [referenca], ki te
-primere klasificira:
+torej množic z dodatno strukturo obstaja naslednji izrek, ki te
+primere klasificira. Izreka tukaj ne bomo dokazovali, lahko ga najdemo v
+izviznem članku \cite{birkhoff_1935} ali v bolj moderni obravnavi v \cite{cohn1981universal}.
 \begin{izrek}[Birkhoffov HSP izrek]\label{izrek:Birkhoff-HSP}
   Naj bo $\mathcal{L}$ jezik na teoriji z enim samim tipom, generiran z množico
   osnovnih operacij in naj bo $\cat{C}$ razred interpretacij jezika $\mathcal{L}$,

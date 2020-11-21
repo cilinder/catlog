@@ -436,14 +436,14 @@ pravo okolje za tako konstrukcijo.
 \begin{definicija}\label{definicija:graf-morfizma}
   Naj bo $f : X \to Y$ morfizem v regularni kategoriji
   $\cat{C}$. Potem je \emph{graf} tega morfizma podobjekt
-  $$\graph(f) \rightarrowtail X \times Y,$$
+  $$\graf(f) \rightarrowtail X \times Y,$$
   ki ga definiramo kot sliko morfizma $\fprod{\mathrm{id}_X, f}$.
 \end{definicija}
-Opazimo lahko, da je kanonični morfizem $X \to \graph(f)$ izomorfizem,
+Opazimo lahko, da je kanonični morfizem $X \to \graf(f)$ izomorfizem,
 kajti po definiciji je regularen epimorfizem in kot sekcija je
 monomorfizem, torej je izomorfizem.
 \begin{lema}\label{lema:graf-kot-zozek}
-  Monomorfizem $\graph(f) \hookrightarrow X \times Y$ lahko izrazimo
+  Monomorfizem $\graf(f) \hookrightarrow X \times Y$ lahko izrazimo
   kot zožek morfizmov $f\circ \pi_1, \pi_2 : X \times Y \to Y$.
 \end{lema}
 \begin{dokaz}
@@ -470,7 +470,7 @@ monomorfizem, torej je izomorfizem.
   Naj bodo oznake kot v zgornji definiciji in naj bo
   $A \overset{\alpha}{\rightarrowtail} X$ podobjekt. Če s $\pi_X$ in
   $\pi_Y$ označimo projekciji iz produkta, potem velja
-  $$\exists_f(A) = \exists_{\pi_Y}(\pi_X^{-1}(A) \wedge \graph(f)).$$
+  $$\exists_f(A) = \exists_{\pi_Y}(\pi_X^{-1}(A) \wedge \graf(f)).$$
 \end{lema}
 \begin{dokaz}
   V ta namen konstruiramo diagram
@@ -540,14 +540,14 @@ grafa.
     na $X \times Y$.
   \item Za vsako totalno in funkcijsko relacijo
     $R \rightarrowtail X \times Y$ obstaja natanko en morfizem
-    $f : X \to Y$, za katerega je $R = \graph(f)$.
+    $f : X \to Y$, za katerega je $R = \graf(f)$.
   \end{enumerate}
 \end{lema}
 \begin{dokaz}
   \begin{enumerate}[label=(\roman*)]
-  \item Ker je $X \to \graph(f)$ izomorfizem, lahko faktoriziramo
+  \item Ker je $X \to \graf(f)$ izomorfizem, lahko faktoriziramo
     kompozitum
-    $\graph(f) \hookrightarrow X \times Y \xrightarrow{\pi_X} X$ kot
+    $\graf(f) \hookrightarrow X \times Y \xrightarrow{\pi_X} X$ kot
     \begin{equation*}
       \begin{tikzcd}
         \operatorname{graph}(f) \ar[d, two heads] \ar[r, tail]  & X \times Y \ar[d, "\pi_X"] \\
@@ -555,8 +555,25 @@ grafa.
       \end{tikzcd}
     \end{equation*}
     Iz enoličnosti faktorizacije sledi
-    $X \cong \exists_{\pi_X}\graph(f)$, torej je $\graph(f)$ totalna.
-    Za funkcijskost MANJKA DOKAZ!!.
+    $X \cong \exists_{\pi_X}\graf(f)$, torej je $\graf(f)$ totalna.
+
+    Da je tudi funkcijska relacija bomo razbrali iz diagrama povlekov
+    \begin{equation*}
+      \begin{tikzcd}[row sep=9ex]
+        \graf(f) \times_X \graf(f) \ar[d] \ar[r] \ar[dr, dashed, "e"] &
+        Y \times \graf(f) \ar[d] \ar[r] & \graf(f) \ar[d]\\
+        \graf(f) \times Y \ar[d] \ar[r] & X \times Y \times Y \ar[d, "\pi_{1,2}"'] \ar[r, "\pi_{1,3}"'] &
+        X \times Y \ar[d] \ar[l, bend right, " \mathrm{id}_X \times \Delta"'] \\
+        \graf(f) \ar[r] & X \times Y \ar[u, bend right, " \mathrm{id}_X \times \Delta"'] \ar[r] & X
+      \end{tikzcd}
+    \end{equation*}
+    Opazimo lahko, da sta obe poti $\graf(f) \times \graf(f) \to X \times Y$ enaki, saj ju lahko
+    podaljšamo do $X$ s projekcijo $\pi_X$ in do $Y$ s projekcijo $\pi_Y$, kar nam da identiteto.
+    Če te dve poti komponiramo z morfizmom $\mathrm{id}_X \times \Delta$ dobimo ravno enolični morfizem
+    $\graf(f) \times \graf(f) \to X \times Y \times Y$ podan z univerzalno lastnostjo tega povelka.
+    To velja saj $\mathrm{id}_X \times \Delta$ lahko podaljšamo s $\pi_{1,2}$ na eni strani in
+    $\pi_{1,3}$ na drugi in v obeh primerih dobimo identiteto. Torej lahko $e$ faktoriziramo
+    skozi $\mathrm{id}_X \times \Delta$.
 
   \item Ker je $R$ totalna, je
     $R \xhookrightarrow{r} X \times Y \xrightarrow{\pi_X} X$ regularen
@@ -583,7 +600,7 @@ grafa.
     para jedra, obstaja enoličen morfizem $f : X \to Y$, da diagram
     komutira.
 
-    Pokazati moramo še, da je $\graph(f)$ res izomorfen $R$. Za to
+    Pokazati moramo še, da je $\graf(f)$ res izomorfen $R$. Za to
     pogledamo diagram
     \begin{equation*}
       \begin{tikzcd}
@@ -599,13 +616,13 @@ grafa.
     v katerem je desni del samo definicija grafa morfizma $f$.  Levi
     kompozitum $R \to X$ je regularen epimorfizem.  Torej dobimo
     enolični morfizem
-    $R \twoheadrightarrow \graph(f) \hookrightarrow X \times Y$, za
+    $R \twoheadrightarrow \graf(f) \hookrightarrow X \times Y$, za
     katerega nam kompozitum s $\pi_X$ da $\mathrm{id}_X \pi_X r$ in
     kompozitum s $\pi_X$ da
     $f \pi_X r = \pi_Y \circ \fprod{\mathrm{id}_X, f} \circ \pi_X
     \circ r = \pi_Y r$.  To pa je ravno monomorfizem
     $r : R \hookrightarrow X \times Y$, katerega slika je kar $R$.
-    Torej je $R \cong \graph(f)$.
+    Torej je $R \cong \graf(f)$.
   \end{enumerate}
 \end{dokaz}
 
@@ -1515,7 +1532,7 @@ internega jezika regularne teorije opišemo kategorične pojme.
         \end{tikzcd}
       \end{equation*}
       Poleg tega, pa po lemi \ref{lema:graf-kot-zozek} vemo, da lahko
-      zožek $f \circ \pi_1$ in $\pi_2$ izrazimo kot $\graph(f)$.  Z
+      zožek $f \circ \pi_1$ in $\pi_2$ izrazimo kot $\graf(f)$.  Z
       uporabo leme \ref{lema:lastnosti-regularnih-epimorfizmov} lahko
       nato iz diagrama
       \begin{equation*}
@@ -2322,7 +2339,7 @@ pošlje model $M$ teorije $\T$ v kategoriji $\cat{C}$ v funktor
   \mathfrak{F}_{\cat{C}} : \mathcal{R}(\T) &\to \cat{C}\\
   \set{\bar{x}\,\middle|\, p} &\mapsto \set{\bar{x}\,\middle|\, p}^{(M)} \\
   \set{\gamma} : \set{\bar{x}\,\middle|\, p} \to \set{\bar{y}\,\middle|\, q} &\mapsto \text{`enolični morfizem} \ f : \set{\bar{x}\,\middle|\, p}^{(M)} \to \set{\bar{y}\,\middle|\, q}^{(M)} \\ 
-                                           &\qquad \text{da je} \ \graph(f) = \set{(\bar{x}, \bar{y}) \,\middle|\, \gamma}^{(M)} \text{'}
+                                           &\qquad \text{da je} \ \graf(f) = \set{(\bar{x}, \bar{y}) \,\middle|\, \gamma}^{(M)} \text{'}
 \end{align*}
 Morfizem $f$ obstaja po lemi \ref{lema:funkcijska-relacija-ima-graf}.
 Veljavnost pravil sklepanja in dejstvo, da model lahko definiramo z
