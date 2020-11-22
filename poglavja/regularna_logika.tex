@@ -66,6 +66,7 @@ povleka:
 \end{equation*}
 Opazimo lahko tudi, da sta obe projekciji v povleku monomorfizma.  To
 pa pomeni, da je $A \times_X B$ največja spodnja meja za $A$ in $B$.
+\begin{lema}
 Naj bo~$f : X \to Y$ morfizem v $\cat{C}$.  Potem dobimo s povlekom
 inducirano preslikavo
 $$f^{-1} : \Sub(Y) \to \Sub(X),$$
@@ -77,8 +78,7 @@ $f^{-1}(B) \rightarrowtail X$, kar lahko prikažemo v diagramu
     X \ar[r, "f"] & Y
   \end{tikzcd}
 \end{equation*}
-\begin{lema}
-  Preslikava $f^{-1}$ ohranja konjunkcije.
+  Potem $f^{-1}$ ohranja konjunkcije.
 \end{lema}
 \begin{dokaz}
   To lahko razberemo iz diagrama
@@ -139,7 +139,7 @@ kategorijo.
     \ref{izrek:Birkhoff-HSP}.
   \item Bolj splošno, če je $\mathbb{T}$ algebrajska teorija in
     $\cat{C}$ regularna, potem je $\cat{Mod}(\mathbb{T}, \cat{C})$
-    regularna.(Dokaz lahko najdemo v Barr, Exact categories 1971)
+    regularna. Dokaz lahko najdemo v \cite{barr-exact-categories}.
   \item Vsaka Abelova kategorija je regularna.
   \item Če je $\cat{C}$ regularna in je $\cat{D}$ poljubna kategorija,
     potem je funktorska kategorija $\cat{C}^{\cat{D}}$ regularna.
@@ -379,7 +379,7 @@ $\exists_f : \Sub(X) \to \Sub(Y)$.
   zaradi enoličnosti to faktorizacija $f \circ \alpha'$ in velja
   $Z \cong \exists_f A' \leq \exists_f A$.
 
-  Da pokažemo, da sta to adjungirana morfizma moramo pokazati
+  Da pokažemo, da sta to adjungirana funktorja moramo pokazati
   $$\Sub(X)(\exists_f A, B) \cong \Sub(Y)(A, f^{-1}B),$$
   kjer sta $A \leq X$ in $B \leq Y$. Če v diagramu
   \begin{equation*}
@@ -671,9 +671,13 @@ slikami in povleki.
   dovolj dobro pogojene?) regularne kategorije in morfizmi regularni
   funktorji med njimi.
 \end{definicija}
-
+\begin{lema}
+  Regularen funktor med regularnima kategorijama ohranja povleke in
+  slike.
+\end{lema}
+\begin{dokaz}
 Ker je v kategoriji s povleki morfizem $f$ monomorfizem natanko
-takrat, ko je kvadrat
+takrat, ko je diagram
 \begin{equation*}
   \begin{tikzcd}
     \bullet \ar[d, "\mathrm{id}"'] \ar[r, "\mathrm{id}"] & \bullet \ar[d, "f"] \\
@@ -689,11 +693,8 @@ pomeni, če imamo podobjekt
 $A \xhookrightarrow{\alpha} X \xrightarrow{f} Y$ potem je
 $$F(\exists_f A) = \exists_{F(f)}(F(A)),$$
 kajti $\exists_f A$ je definiran kot kozožek para jedra
-$f \circ \alpha : A \to Y$.  To pomeni
-\begin{lema}
-  Regularen funktor med regularnima kategorijama ohranja povleke in
-  slike.  \hfill$\Box$
-\end{lema}
+$f \circ \alpha : A \to Y$.
+\end{dokaz}.
 %
 %
 \section{Regularna logika}
@@ -2247,7 +2248,7 @@ $\T$, za katerega se bosta pojma veljavnosti in dokazljivosti ujemala.
     monomorfizem, potem sledi iz točke $(\mathrm{i})$. Obratno, vsak monomorfizem
     je tudi morfizem, torej iz $p(x)$ sledi $\exists x' p(x) \land x=x'$. Ker gre za
     monomorfizem je ta $x'$ določen enolično, kar nam posledično da $q(x')$. Iz
-    $x = x'$ nato sledi $q(x)$.
+    $x = x'$ nato sledi $q(x)$. Uporabili smo lemo \ref{lema:uporabne-izpeljave}.
   \end{enumerate}
 \end{dokaz}
 \begin{trditev}

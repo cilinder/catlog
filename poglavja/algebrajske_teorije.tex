@@ -95,8 +95,8 @@ Teorija z eno konstanto in brez enačb je teorija množice z odlikovanim element
   \begin{verbatim}
     type tree = Empty | Leaf of int | Node of tree * tree
   \end{verbatim}
-  Ta definicija bi ustrezala algebrajski teoriji sestavljeni iz konstante $\verb|Empty|$,
-  ki bi prestavljala prazno drevo, konstante $\verb|Leaf| \  n$ za vsak $n \in \mathbb{N}$
+  Ta definicija ustreza algebrajski teoriji sestavljeni iz konstante $\verb|Empty|$,
+  ki predstavlja prazno drevo, konstante $\verb|Leaf| \  n$, za vsak $n \in \mathbb{N}$
   in dvomestne operacije $\verb|Node|$. Ta teorija nima enačb. 
 \end{primer}
 \begin{primer}
@@ -107,10 +107,10 @@ Teorija z eno konstanto in brez enačb je teorija množice z odlikovanim element
 %
 %
 \section{Model algebrajske teorije}
-Poglejmo si na primeru grup, kaj je \emph{model} algebrajske teorije.
+Na primeru grup si poglejmo, kaj je \emph{model} algebrajske teorije.
 Kot smo povedali zgoraj, v klasični algebri grupo razumemo kot množico $G$,
 skupaj s konstanto $e \in G$ in dvema preslikavama,
-ki jih bomo, da jih ločimo od abstraktnih operacij pri definiciji teorije
+ki ju bomo, da ju ločimo od abstraktnih operacij pri definiciji teorije
 grupe, označili z $i : G \to G$ in $m : G \times G \to G$.
 Grupa mora ustrezati aksiomom:
 \begin{align*}
@@ -158,7 +158,7 @@ $G$, skupaj s tremi morfizmi:
 za katere diagrami \eqref{diagram:asociativnost}, \eqref{diagram:enota} in \eqref{diagram:inverz}
 komutirajo.
 %
-Podobno posplošimo homomorfizem med grupami v $\cat{C}$. Morfizem
+Podobno posplošimo homomorfizem med grupami v $\cat{C}$: Morfizem
 $h : G \to H$ je homomorfizem grup, če komutira z osnovnimi operacijami $m$, $i$ in $e$.
 To lahko izrazimo v komutirajočih diagramih
 %
@@ -312,7 +312,7 @@ Kaj je mišljeno z izbiro predstavitve, si poglejmo na primeru grup.
 Formulacija, ki smo jo podali zgoraj, ni edina možna.
 Obstaja alternativna predstavitev teorije grup,
 z enoto $e$ in binarno operacijo $\odot$,
-ki se imenuje dvojno deljenje in enim samim aksiomom \cite{mccune1993single}:
+imenovano dvojno deljenje, in enim samim aksiomom \cite{mccune1993single}:
 $$x \odot (((x \odot y ) \odot z ) \odot ( z \odot e))) \odot (e \odot e) ) = z.$$
 Običajne operacije teorije grup lahko dobimo s formulami:
 $$x \odot y = x^{-1} \cdot y^{-1} \text{,} \quad x^{-1} = x \odot e \text{,} \quad x \cdot y = (x \odot e) \odot (y \odot e)$$
@@ -322,9 +322,9 @@ teorije grup, a ta izbira naj ne odraža tega, kaj grupa v svojem bistvu je.
 Želimo se izogniti specifični izbiri konstant, operacij in aksiomov.
 
 Kot prvi korak do take sintaktično neodvisne specifikacije,
-bi lahko vzeli vse operacije, ki jih lahko zgradimo iz
-enote, množenja in inverza kot osnovne operacije in vse
-veljavne enačbe v teoriji grup kot aksiome. Lahko pa gremo še korak dlje
+bi lahko kot osnovne vzeli vse operacije, ki jih lahko zgradimo iz
+enote, množenja in inverza in vse
+veljavne enačbe v teoriji grup kot aksiome. Lahko gremo pa še korak dlje
 in zberemo vse operacije v kategorijo in tako pozabimo, katere so bile
 osnovne in katere izpeljane ter katere enakosti so bile podane kot aksiomi.
 %
