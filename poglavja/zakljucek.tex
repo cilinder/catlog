@@ -1,5 +1,45 @@
 \documentclass[../kategoricna_logika.tex]{subfiles}
 \begin{document}
-V tezi smo videli povezavo med fragmenti logike prvega reda in razredom kategorij,
-ki jim ustrezajo.
+V tem delu smo videli dva primera tako imenovane kategorične logike, kjer uporabimo
+koncepte iz teorije kategorij pri preučevanju matematične logike.
+Za začetek tega področja bi lahko oklicali tri članke Williama Lawvera \cite{lawvere1963functorial,lawvere1964elementary,lawvere1971quantifiers}.
+V prvem poglavju smo si ogledali kategorični pristop obravnave algebrajskih teorij.
+S primerno posploštivijo definicije modelov takih teorij, smo jih uspeli opisati
+kot fuktorje, ki so ohranjali neko strukturo.
+Za algebrajske teorije je bila ta struktura ohranjanje končnih produktov.
+To je bilo mogoče prek konstrukcije posebne kategorije, ki je to teorijo zakodirala.
+Tako smo lahko našli opis algebrajskih teorij v vsaki teoriji, ki tako strukturo premore.
+Na primer, tako lahko dobimo opis teorije grup v kategoriji $\cat{Grp}$ grup in
+homomorfizmov med njimi. Izkaže se, da so to ravno Abelove grupe.
+Videli smo pa tudi, da ta pogled lahko tudi obrnemo in z definicijo Lawverjeve teorije
+na vsako ustrezno kategorijo gledamo kot kategorijo, ki predstavlja neko algebrajsko
+teorijo. V takih kategorijah lahko nato definiramo njihovo interno logiko, s katero
+lahko transformiramo enačbe te teorije v ustrezne kategorične izjave in obratno.
+V drugem delu smo to združitev logike in družine kategorij začeli z drugega konca.
+Najprej smo "`našli"' zanimiv razred kategorij in opazili nekaj lastnosti tega razreda,
+ki so ustrezale znanim lastnostim iz kategorije množic. Te lastnosti so bile, da lahko
+v regularnih kategorijah izrazimo pojma slike morfizma in relacije. Nato smo skrbno
+izbrali fragment logike prvega reda, s katerim je mogoče izraziti te dve konstrukciji.
+Pokazali smo, da je ta fragment ravno tak, ki definira interno logiko regularnih kategorij.
+Zato ta fragment lahko primerno poimenujemo regularna logika.
+Ponovno nam je to omogočilo izraziti modele take logike kot ustrezne funktorje iz sintaktično
+zgrajene kategorije, ki tako teorijo zakodira, v ustrezne kategorije v katerih je
+mogoče to logiko interpretirati. To so seveda natanko regularne kategorije.
+
+Ta dva primera sta le vrh ledene gore korespondence logičnih teorij in razredov kategorij.
+Tu smo videli razširitev logike z upeljavo dodatnih logičnih operacij. Druga možna smer
+razširitve bi bila razširitev teorije tipov v "`lambda račun z enostavnimi tipi". Ustrezen
+razred kategorij v tem primeru so kartezično zaprte kategorije. Več o tem si lahko preberemo
+v \cite{seely1984locally}. Po drugi strani bi lahko še dodatno omejili strukturo regularnih
+kategorij. Ta pot nas privede do t.\ i.\ eksaktnih kategorij in eventuelno do Abelovih kategorij,
+ki služijo kot podlaga homološki teoriji. To je opisano v \cite{barr-exact-categories}.
+V tej smeri je mogoče logiko posplošiti do logike drugega (in višjega) reda, kjer so
+kategorije s tako interno logiko imenovane elementarni toposi. Ta teorija je razvita v
+knjigi \cite{TJohnstone2002-TJOSOA-2}.
+
+Teorija predstavljena v tej nalogi je temeljila na \cite{algebraic-logic} in \cite{barr-exact-categories}.
 \end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
