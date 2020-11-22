@@ -667,9 +667,8 @@ slikami in povleki.
   končne limite in kozožke jedrnih parov.
 \end{definicija}
 \begin{definicija}
-  $\cat{RegCat}$ je kategorija v kateri so objekti majhne (ali je
-  dovolj dobro pogojene?) regularne kategorije in morfizmi regularni
-  funktorji med njimi.
+  $\cat{RegCat}$ je kategorija v kateri so objekti majhne regularne
+  kategorije in morfizmi regularni funktorji med njimi.
 \end{definicija}
 \begin{lema}
   Regularen funktor med regularnima kategorijama ohranja povleke in
@@ -1837,7 +1836,7 @@ $\T$, za katerega se bosta pojma veljavnosti in dokazljivosti ujemala.
     kontekstu.  Dva taka para $(\bar{X}, p_1(\bar{x}_1))$ in
     $(\bar{X}, p_2(\bar{x}_2))$ sta ekvivalentna, če
       $$\T \vdash_{\bar{x}} p_1(\bar{x}) \Leftrightarrow p_2(\bar{x}),$$
-      kjer je $\bar{x}$ množica svežih(?) spremenljivk tipa $\bar{X}$.
+      kjer je $\bar{x}$ množica svežih spremenljivk tipa $\bar{X}$.
       Ekvivalenčne razrede označimo z $\set{\bar{x} \,\middle|\, p}$
       in konteksta ne pišemo eksplicitno (Tu smo na nek način vezali
       spremenljivke $\bar{x}$, ki se pojavljajo v $p$).
@@ -2062,8 +2061,8 @@ $\T$, za katerega se bosta pojma veljavnosti in dokazljivosti ujemala.
     \set{\theta}$.  Potem iščemo formulo $\mu$, ki bo definirala
     morfizem $\set{z \mid r} \to \set{x' \mid \epsilon}$, ki bo
     faktoriziral $\{ \theta\}$.  Definirajmo kar
-    $\mu(z,x') \equiv \theta(z,x')$. Ni se težko prepričati(ali dodamo
-    to izpeljavo?), da s tako definicijo res dobimo morfizem
+    $\mu(z,x') \equiv \theta(z,x')$. Ni se težko prepričati,
+    da s tako definicijo res dobimo morfizem
     $\set{z \mid r} \to \set{x' \mid \epsilon}$.  Kompozitum z
     $\set{\epsilon(x') \land x = x'}$ je po definiciji enak
     \[ \exists x' (\theta(z,x') \land \epsilon(x') \land x=x'),\] kar
@@ -2123,7 +2122,7 @@ $\T$, za katerega se bosta pojma veljavnosti in dokazljivosti ujemala.
 
   \item
     Najprej bomo pokazali, da je
-    \begin{equation}\label{diag:jederni-par-v-sintakticni-kategoriji}
+    \begin{equation}\label{diag:jedrni-par-v-sintakticni-kategoriji}
       \begin{tikzcd}[column sep=normal]
         \{ x_1,x_2 \mid \exists y(\varphi(x_1,y) \land \varphi(x_2,y))
         \} \ar[r, shift left, "\{\pi_1\}"] \ar[r, shift right,
@@ -2134,7 +2133,7 @@ $\T$, za katerega se bosta pojma veljavnosti in dokazljivosti ujemala.
     kozožek natanko takrat, ko velja
     $$\T \vdash_{\bar{y}} q(\bar{y}) \implies \exists \bar{x} \varphi(\bar{x},\bar{y}).$$
     Nato bomo pokazali, da je $\{ \varphi\}$ epimorfizem natanko takrat, ko
-    je \eqref{diag:jedrni-par-v-sintaktični-kategoriji} kozožek.
+    je \eqref{diag:jedrni-par-v-sintakticni-kategoriji} kozožek.
 
 
     Projekcija~$\{\pi_1\}$ je inducirana s formulo
@@ -2206,7 +2205,7 @@ $\T$, za katerega se bosta pojma veljavnosti in dokazljivosti ujemala.
 
 
     Pokažimo sedaj še drugi del trditve.
-    Če je \eqref{diag:jedrni-par-v-sintaktični-kategoriji} kozožek, je $\{ \varphi\}$
+    Če je \eqref{diag:jedrni-par-v-sintakticni-kategoriji} kozožek, je $\{ \varphi\}$
     jasno kozožek, saj je to njegov jedrni par. Obratno, naj obstajajo $r, \eta, \theta$
     taki, da je
     \begin{equation*}
@@ -2217,7 +2216,7 @@ $\T$, za katerega se bosta pojma veljavnosti in dokazljivosti ujemala.
       \end{tikzcd}
     \end{equation*}
     kozožek. Pokazati želimo, da to potem velja tudi za
-    \eqref{diag:jedrni-par-v-sintaktični-kategoriji}. V ta namen recimo, da imamo morfizem
+    \eqref{diag:jedrni-par-v-sintakticni-kategoriji}. V ta namen recimo, da imamo morfizem
     $\{ \sigma \} : \{ x \mid p\} \to \{ w \mid s\}$ za katerega velja
     $\{ \sigma\} \circ \{\pi_1\} = \{ \sigma\} \circ \{\pi_2\}$. V tem primeru zadostuje
     najti morfizem $\{\chi\}$, ki faktorizira $\{\eta\}$ in $\{\theta\}$ skozi $\{\pi_1\}$
