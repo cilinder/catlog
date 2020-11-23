@@ -1801,9 +1801,9 @@ morfizem modelov
 $$\set{\alpha_{\interp{X}}: G(\interp{X}) \to H(\interp{X})}_{X \in \underline{\mathrm{sort}}_{\Sigma}}$$
 Dodatno velja, da če imamo regularen funktor
 $F : \cat{D} \to \cat{C}$, potem diagram funktorjev
-\begin{equation}
+\begin{equation}\label{diag:naravnost-M}
   \begin{tikzcd}
-    \cat{RegCat}(\cat{E}, \cat{D}) \ar[d, "F \circ (\_)"'] \ar[r, "\mathfrak{M}_{M,\cat{D}}"] & \Mod(\T, \cat{D}) \ar[d, "F_T"] \\
+    \cat{RegCat}(\cat{E}, \cat{D}) \ar[d, "F \circ (\_)"'] \ar[r, "\mathfrak{M}_{M,\cat{D}}"] & \Mod(\T, \cat{D}) \ar[d, "F_{\T}"] \\
     \cat{RegCat}(\cat{E}, \cat{C}) \ar[r, "\mathfrak{M}_{M,\cat{C}}"']
     & \Mod(\T, \cat{C})
   \end{tikzcd}
@@ -2292,7 +2292,7 @@ $\T$, za katerega se bosta pojma veljavnosti in dokazljivosti ujemala.
     \set{\cdot\,\middle|\, \top} \to \interp[\mathcal{U}]{X}$, kjer je
     $c:X$ konstanta.
   \item
-    $\interp[\mathcal{U}]{f} = \set{(\bar{x}y)\,\middle|\, f(\bar{x})
+    $\interp[\mathcal{U}]{f} = \set{(\bar{x},y)\,\middle|\, f(\bar{x})
       = y}$, kjer je $f : \bar{X}\to Y$ funkcijski simbol. Uporabimo
     dejstvo, da je
     $\bar{X}^{(\mathcal{U})} = \interp[\mathcal{U}]{\bar{X}_1} \times
@@ -2302,6 +2302,13 @@ $\T$, za katerega se bosta pojma veljavnosti in dokazljivosti ujemala.
     kjer je $R$ relacijski simbol.
   \end{itemize}
 \end{definicija}
+\begin{izrek}\label{izrek:logicno-genericen-model-regularne-logike}
+  Kanonična interpretacija $\mathcal{U}$ v regularni kategoriji
+  $\mathcal{R}(\T)$ je logično generičen model teorije $\T$. Pravila
+  sklepanja v regularni logiki so polna glede na interpretacije v
+  majhnih regularnih kategorijah.
+\end{izrek}
+\begin{dokaz}
 Enostavna indukcija pokaže, da je za term $t(\bar{z})$ tipa $Y$
 $$\caninterp{t(\bar{z})} = \set{(\bar{z},y)\,\middle|\, t(\bar{z}) = y}$$
 morfizem $\caninterp{\bar{Z}} \to \caninterp{Y}$. Podobno za regularno
@@ -2316,15 +2323,11 @@ Za model $\mathcal{U}$ velja tudi, da za vse sekvente
 $p \Rightarrow q$ velja
 $$\text{če} \ \mathcal{U} \models p \implies q \text{, potem} \ \T \vdash_{\bar{x}} p \implies q$$
 kar sledi iz zgornjih argumentov in leme o klasifikaciji monomorfizmov
-v~$\mathcal{R}(\T)$.  To povzamemo v naslednjem izreku.
-\begin{izrek}
-  Kanonična interpretacija $\mathcal{U}$ v regularni kategoriji
-  $\mathcal{R}(\T)$ je logično generičen model teorije $\T$. Pravila
-  sklepanja v regularni logiki so polna glede na interpretacije v
-  majhnih regularnih kategorijah.
-\end{izrek}
+v~$\mathcal{R}(\T)$.
+\end{dokaz}
 Sedaj lahko podamo funktorje, ki nastopajo v ekvivalenci
 $$\Mod(\T, \cat{C}) \simeq \cat{RegCat}(\mathcal{R}(\T), \cat{C}).$$
+\begin{definicija}\label{def:ekvivalenca-reg-logike-reg-kategorij}
 Funktor
 $$\mathfrak{M}_{\cat{C}} : \cat{RegCat}(\mathcal{R}(\T), \cat{C}) \to \Mod(\T, \cat{C})$$
 je funktor $\mathfrak{M}_{\mathcal{U}, \cat{C}}$, kot smo ga definiral
@@ -2336,11 +2339,12 @@ V drugo smer, funktor
 $$\mathfrak{F}_{\cat{C}} : \Mod(\T, \cat{C}) \to \cat{RegCat}(\mathcal{R}(\T), \cat{C})$$
 pošlje model $M$ teorije $\T$ v kategoriji $\cat{C}$ v funktor
 \begin{align*}
-  \mathfrak{F}_{\cat{C}} : \mathcal{R}(\T) &\to \cat{C}\\
+  \mathfrak{F}_{\cat{C}}(M) : \mathcal{R}(\T) &\to \cat{C}\\
   \set{\bar{x}\,\middle|\, p} &\mapsto \set{\bar{x}\,\middle|\, p}^{(M)} \\
   \set{\gamma} : \set{\bar{x}\,\middle|\, p} \to \set{\bar{y}\,\middle|\, q} &\mapsto \text{`enolični morfizem} \ f : \set{\bar{x}\,\middle|\, p}^{(M)} \to \set{\bar{y}\,\middle|\, q}^{(M)} \\ 
                                            &\qquad \text{da je} \ \graf(f) = \set{(\bar{x}, \bar{y}) \,\middle|\, \gamma}^{(M)} \text{'}
 \end{align*}
+\end{definicija}
 Morfizem $f$ obstaja po lemi \ref{lema:funkcijska-relacija-ima-graf}.
 Veljavnost pravil sklepanja in dejstvo, da model lahko definiramo z
 interno logiko $\cat{C}$ pomeni, da je $\mathfrak{F}_{\cat{C}}(M)$
@@ -2363,7 +2367,7 @@ predstavlja ravno diagram naravne transformacije:
 \end{equation*}
 Ta funktor je naraven v $\cat{C}$: Če je $F : \cat{D} \to \cat{C}$
 regularen funktor, potem diagram
-\begin{equation}
+\begin{equation}\label{diag:naravnost-F}
   \begin{tikzcd}
     \Mod(\T, \cat{D}) \ar[d, "F_T"'] \ar[r, "\mathfrak{F}_{\cat{D}}"] & \cat{RegCat}(\mathcal{R}(\T), \cat{D}) \ar[d, "F \circ (\_)"] \\
     \Mod(\T, \cat{C}) \ar[r, "\mathfrak{F}_{\cat{C}}"'] &
@@ -2372,17 +2376,51 @@ regularen funktor, potem diagram
 \end{equation}
 komutira.
 \begin{izrek}
-  Funktorja $\mathfrak{M}_{\cat{C}}$ in $\mathfrak{F}_{\cat{C}}$
-  inducirata ekvivalenco kategorij
+  Naj bosta funktorja $\mathfrak{M}_{\cat{C}}$ in $\mathfrak{F}_{\cat{C}}$ definirana kot
+  v definiciji \ref{def:ekvivalenca-reg-logike-reg-kategorij}. Potem imamo za vsako
+  regularno kategorij $\cat{C}$ ekvivalenco kategorij
   $$\Mod(\T, \cat{C}) \simeq \cat{RegCat}(\mathcal{R}(\T), \cat{C}),$$
   ki je naravna v $\cat{C}$. Do ekvivalence natančno, vsaka majhna
   regularna kategorija $\cat{C}$ nastane na tak način, kot
-  `klasifikacijska kategorija' regularne teorije, kajti
+  "`klasifikacijska kategorija"' regularne teorije, kajti
   $\cat{C} \simeq \mathcal{R}(\T_{\cat{C}})$.
 \end{izrek}
 \begin{dokaz}
-  Preverimo, da je kompozitum v obe smeri izomorfen identiteti. Drugi
-  del sledi iz leme \ref{lema:regularen-funktor-v-interni-logiki}.
+  Preverimo, da je kompozitum v obe smeri izomorfen identiteti.
+  Najprej recimo, da je $M$ model $\T$ v $\cat{C}$. Potem je $\mathfrak{F}(M)$ regularen
+  funktor iz $\mathcal{R}(\T)$ v $\cat{C}$. Po lemi \ref{lema:regularen-funktor-v-interni-logiki}
+  vse sekvente interne logike $\mathcal{R}(\T)$ veljajo v za interpretacijo inducirano
+  s funktorjem $\mathfrak{F}(M)$. Interna logika $\mathcal{R}(\T)$ je pa ravno $\T$.
+  Če na tem funktorju nato uporabimo $\mathfrak{M}_{\cat{C}}$ dobimo sliko
+  univerzalnega modela $\mathcal{U}$:
+  \[ \mathfrak{F}_{\cat{C}}(M)(\mathcal{U}).\]
+  To je model $\T$ v $\cat{C}$ podan z interpretacijami
+  \begin{itemize}
+  \item Za vsak osnovni tip $X$ v $\T$ dobimo interpretacijo $\{ x \mid x = x\}^{(M)}$.
+  \item Za konstanto $c : X$ dobimo morfizem $\{ x \mid x = c\}^{(M)} : 1 \to X^{(M)}$.
+  \item Za funkcijski simbol $f : \bar{X} \to Y$ dobimo zožek
+    \begin{equation*}
+      \begin{tikzcd}
+        \{ \bar{x},y \mid f(\bar{x}) = y\}^{(M)} \ar[r] & \bar{X}^{(M)} \times Y^{(M)}
+        \ar[r, shift left, "f(\bar{x})^{(M)}"] \ar[r, shift right, "y^{(M)}"'] & Y^{(M)}
+      \end{tikzcd}
+    \end{equation*}
+  \item Za relacijski simbol $R \rightarrowtail \bar{X}$ dobimo podobjekt
+    \[ \{ \bar{x} \mid R(\bar{x})\}^{(M)} \hookrightarrow X^{(M)}.\]
+  \end{itemize}
+  Z indukcijo to sedaj razširimo na vse terme in formule teorije $\T$.
+  Iz konstrukcije sledi, da dobimo isti (do izomorfizma natančno) model $M$ s katerim
+  smo začeli.
+  Obratno, če začnemo z regularnim funktorjem $G : \mathcal{R}(\T) \to \cat{C}$, najprej z
+  aplikacijo $\mathfrak{M}_{\cat{C}}$ dobimo model $G(\mathcal{U})$ v $\cat{C}$. Nato z uporabo
+  $\mathfrak{F}_{\cat{C}}$ dobimo regularen funktor, ki na objektih $\mathcal{R}(\T)$ deluje
+  kot $\{ x \mid p\} \mapsto \{ x \mid p\}^{G(\mathcal{U})}$. Z uporabo leme
+  \ref{lema:regularen-funktor-v-interni-logiki} in izreka
+  \ref{izrek:logicno-genericen-model-regularne-logike} lahko vidimo, da je ta funktor
+  izomorfen $G$. Naravnost v $\cat{C}$ dobimo z združitvijo diagramov (\ref{diag:naravnost-M})
+  in (\ref{diag:naravnost-F}).
+
+  Drugi del sledi iz leme \ref{lema:regularen-funktor-v-interni-logiki}.
 \end{dokaz}
 \end{document}
 %%% Local Variables:
