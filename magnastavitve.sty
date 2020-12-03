@@ -37,16 +37,21 @@
 \usepackage{bussproofs} % package for writing natural deduction tree-style proofs
 %
 \usepackage{listings} % paket za prikazovanje kode
+
+\usepackage[raggedright]{titlesec} % da naslovi ne gredo v novo vrstico
+% https://tex.stackexchange.com/questions/24777/how-to-disable-hyphenation-in-all-section-and-subsection-titles
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %	DIPLOMA INFO
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newcommand{\ttitle}{Kategorična logika}
-\newcommand{\ttitleEn}{Naslov EN}
+\newcommand{\ttitle}{Algebrajska in regularna kategorna logika}
+\newcommand{\ttitleEn}{Algebraic and regular categorical logic}
 \newcommand{\tsubject}{\ttitle}
 \newcommand{\tsubjectEn}{\ttitleEn}
 \newcommand{\tauthor}{Jure Taslak}
-\newcommand{\tkeywords}{Teorija kategorij, Kategorična logika, kategorije, logika, algebraične teorije}
-\newcommand{\tkeywordsEn}{Category theory, Categorical logic, categories, logic, algebraic theories}
+\newcommand{\tkeywords}{Teorija kategorij, Kategorična logika, kategorije, logika, algebrajske teorije, regularna logika}
+\newcommand{\tkeywordsEn}{Category theory, Categorical logic, categories, logic, algebraic theories, regular logic}
 %
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -75,7 +80,7 @@
 \fancyhead[RO]{\thepage}
 \renewcommand{\headrulewidth}{0.5pt}
 \renewcommand{\footrulewidth}{0pt}
-\addtolength{\headheight}{0.5pt} % make space for the rule
+\addtolength{\headheight}{3pt} % make space for the rule
 \fancypagestyle{plain}{%
 \fancyhead{} % get rid of headers on plain pages
 \renewcommand{\headrulewidth}{0pt} % and the line
@@ -91,7 +96,6 @@
 \newtheorem{definicija}{Definicija}[chapter]
 \newtheorem{primer}[definicija]{Primer}
 \newtheorem*{primer*}{Primer}
-
 \theoremstyle{theorem}
 \newtheorem{izrek}[definicija]{Izrek}
 \newtheorem{trditev}[definicija]{Trditev}
@@ -134,7 +138,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
 \pdfinfo{%
     /Title    (\ttitle)
-    /Author   (\tauthor, damjan@cvetan.si)
+    /Author   (\tauthor, jure.taslak@gmail.com)
     /Subject  (\ttitleEn)
     /Keywords (\tkeywordsEn)
     /ModDate  (\pdfcreationdate)

@@ -2,44 +2,37 @@
 \usepackage{import}
 \usepackage{magnastavitve}
 \usepackage{subfiles}
-
+%
 \begin{document}
 %
 \frontmatter%
-
 \subfile{poglavja/preduvod.tex}
 \addcontentsline{toc}{chapter}{Kazalo}
-
 %------------------------------------------------------------------------
 %         IZVLECEK
 %-----------------------------------------------------------------------
-
 \cleardoublepage
 % povzetek
 \begin{center}
 \addcontentsline{toc}{chapter}{Povzetek}  
-{\bf Kategorična logika}\\[3mm]
+{\bf Algebrajska in regularna kategorna logika}\\[3mm]
 {\sc  Izvleček}
 \end{center}
 \vspace{10mm}
 Kratek izvleček v slovenskem jeziku, do 300 besed.\\[10mm]
 {\bf Ključne besede:}\\[3mm]
-
-
 \cleardoublepage
 % abstract
-\foreignlanguage{english}{  %  angleski delilni vzorci
+\foreignlanguage{english}{  %  angleški delilni vzorci
   \begin{center}
-    \addcontentsline{toc}{chapter}{Abstract}
-
-{\bf Categorical logic}\\[3mm]
+\addcontentsline{toc}{chapter}{Abstract}
+{\bf Algebraic and regular kategorical logic}\\[3mm]
 {\sc  Abstract}
 \end{center}
 \vspace{10mm}
 Kratek izvleček v angleškem jeziku, do 300 besed.\\[10mm]
 {\bf Keywords:}\\[3mm]
 }
-
 %-------------------------------------------------------------------
 %
 \noindent\textbf{Keywords:} \tkeywordsEn.
@@ -51,19 +44,18 @@ Kratek izvleček v angleškem jeziku, do 300 besed.\\[10mm]
 \setcounter{page}{1}
 \pagestyle{fancy}
 %
-\chapter{Uvod}
-\subfile{poglavja/uvod.tex}
+%\chapter{Uvod}
+%\subfile{poglavja/uvod.tex}
 %
 \chapter{Algebrajske teorije}
 \subfile{poglavja/algebrajske_teorije.tex}
 %
-\chapter{Regularna logika in Regularne kategorije}
+\chapter{Regularna logika in regularne kategorije}
 \subfile{poglavja/regularna_logika.tex}
 %
 \chapter{Zaključek}
 \subfile{poglavja/zakljucek.tex}
 %
-
 \bibliographystyle{plain}
 \bibliography{reference}
 \end{document}
