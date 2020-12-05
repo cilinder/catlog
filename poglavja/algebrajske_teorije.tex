@@ -1,16 +1,16 @@
 \documentclass[../kategoricna_logika.tex]{subfiles}
 \begin{document}
 \section{Kratek pregled teorije kategorij}
-V matematiki pogosto "`v naravi"' naletimo na strukture, za katere se izkaže,
+V matematiki pogosto ">v naravi"< naletimo na strukture, za katere se izkaže,
 da jih lahko opišemo z naborom operacij in enačb.
 Slaven tak primer je odkritje strukture grupe pri iskanju splošne formule
 za računanje ničel polinomov.
 Tak opis strukture z operacijami in enačbami imenujemo \emph{algebrajska teorija}.
 Na tak način lahko obravnavamo mnogo znanih primerov iz osnovne algebre,
-kot so grupe, kolobarji, moduli, itd., a tudi nekatere konstrukcije, ki niso
+kot so grupe, kolobarji, moduli itd., a tudi nekatere konstrukcije, ki niso
 tako očitno algebrajske, na primer adjungirane funktorje.
-Vse algebrajske teorije imajo mnogo skupnih mnogo splošnih lastnosti.
-Nekaj izmed njih bomo predstavili v sledečem poglavju.
+Vse algebrajske teorije imajo mnogo skupnih, splošnih lastnosti.
+Nekatere izmed njih bomo predstavili v sledečem poglavju.
 To bomo storili z uporabo tako imenovane funktorialne semantike, katere
 razvoj nam bo služil tudi kot zgled v drugem delu naloge, kjer bomo to
 idejo razširili na strukture, ki jih ni mogoče opisati samo z enačbami.
@@ -19,7 +19,7 @@ idejo razširili na strukture, ki jih ni mogoče opisati samo z enačbami.
 S tem tudi uvedemo notacijo, ki jo bomo uporabljali v nalogi.
 Tu pa ne bodo predstavljeni vsi rezultati teorije kategorij, ki jih bomo potrebovali.
 Uvod v teorijo kategorij lahko najdemo na primer v
-\cite{taslak2017,riehl2017category,awodey2010category}.
+\cite{awodey2010category, riehl2017category, taslak2017}.
 Večkrat se bomo naslonili tudi na koncepte in primere iz logike in algebre.
 Uvod v logiko lahko najdemo na primer v \cite{prijatelj1992osnove1},
 za uvod v algebro si bralec lahko pogleda \cite{bresar2018uvod}.
@@ -27,9 +27,9 @@ za uvod v algebro si bralec lahko pogleda \cite{bresar2018uvod}.
   \emph{Kategorija} sestoji iz:
   \begin{itemize}
   \item razreda \emph{objektov}, ki jih bomo običajno označevali z
-    velikimi tiskanimi črkami, na primer $X, Y, A, B, \ldots$
+    velikimi tiskanimi črkami, na primer $X, Y, A, B \ldots$
   \item razreda \emph{morfizmov}, ki jih bomo običajno označevali z
-    malimi tiskanimi črkami, na primer $f,g,\alpha,\beta, \ldots$
+    malimi tiskanimi črkami, na primer $f,g,\alpha,\beta \ldots$
     Vsak morfizem $f$ ima dva pridružena objekta:
     \[ \mathrm{dom}(f) \quad \text{in} \quad \mathrm{cod}(f), \]
     ki jima pravimo \emph{domena} in \emph{kodomena}. Če je $\mathrm{dom}(f)=X$
@@ -44,8 +44,7 @@ Kategorija mora zadoščati naslednjima aksiomoma:
   \begin{itemize}
   \item Če so \( f: X \to Y\), \(g : Y \to Z\) in \(h : Z \to W\) morfizmi, potem
     velja \(h \circ (g \circ f) = (h \circ g) \circ f\).
-  \item Vsakemu objektu priredimo identitetni m
-    orfizem
+  \item Vsakemu objektu priredimo identitetni morfizem
     $\mathrm{id}_X : X \to X$, za katerega velja $\mathrm{id}_X \circ f = f$,
     za vsak $f : Y \to X$ in $g \circ \mathrm{id}_X = g$, za vsak $g : X \to Z$.
 \end{itemize}
@@ -94,7 +93,7 @@ Kategorije običajno označujemo z velikimi tiskanimi črkami, na primer $\cat{C
 \section{Algebrajske teorije}
 Začnimo s splošnim pristopom opisa algebrajskih teorij.
 Te so karakterizirane aksiomatsko, s spremenljivkami, konstantami, operacijami in enačbami.
-Pomembno (za naš pristop) da so operacije definirane za celotno strukturo,
+Pomembno (za naš pristop) je, da so operacije definirane za celotno strukturo,
 ne pa samo za nekatere elemente te strukture.
 To izključi dva pomembna primera: teorijo polj,
 kjer inverz ničle ni definiran, in teorijo kategorij, kjer so kompozitumi
@@ -111,11 +110,11 @@ Idejo bomo ilustrirali s temeljnim primerom iz algebre, teorijo grup.
 \end{primer}
 \noindent
 Že na prvi pogled lahko rečemo, da je struktura drugega izmed zgornjih dveh aksiomov
-manj zadovoljiva od prvega, kajti vsebuje, tako vgnezdene kvantifikatorje,
+manj zadovoljiva od prvega, kajti vsebuje tako vgnezdene kvantifikatorje,
 kot določa obstoj nekih elementov, ki pa jih je mogoče iz teh aksiomov
 določiti enolično. Aksiomatizacijo lahko poenostavimo v naslednjih korakih.
 Najprej k strukturi grupe dodamo
-konstanto $e \in G$ in eno-mestno operacijo $(-)^{-1} : G \to G$ ter tako
+konstanto $e \in G$ in enomestno operacijo $(-)^{-1} : G \to G$ ter tako
 dobimo ekvivalentno formulacijo grupe, ki jo podamo samo z enačbami:
 \begin{align*}
   &x \cdot (y \cdot z) = (x \cdot y) \cdot z \\
@@ -135,7 +134,7 @@ Tak način specifikacije bomo uporabili kot definicijo splošne algebrajske teor
   \emph{Jezik} algebrajske teorije $\mathcal{L}(\Sigma)$ je množica \emph{termov},
   ki jih tvorimo induktivno:
   \begin{enumerate}
-  \item Spremenljivke $x,y,z, \ldots$ so termi,
+  \item Spremenljivke $x,y,z \ldots$ so termi,
   \item Če so $t_1, \ldots, t_k$ že termi in je $f \in \Sigma_k$, potem
     je $f(t_1,\ldots, t_k)$ tudi term.
   \end{enumerate}
@@ -144,8 +143,8 @@ Tak način specifikacije bomo uporabili kot definicijo splošne algebrajske teor
 \begin{definicija}
   \emph{Algebrajska teorija}
   $\mathbb{T} = (\Sigma_\mathbb{T}, A_\mathbb{T})$ je podana s signaturo
-  $\Sigma_\mathbb{T}$ in množico $A_\mathbb{T}$, enačb med termi
-  teorije. Enačbe iz $A_{\mathbb{T}}$ imenujemo \emph{aksiomi} teorije $\mathbb{T}$. Formalno so
+  $\Sigma_\mathbb{T}$ in množico enačb $A_\mathbb{T}$.
+  Enačbe iz $A_{\mathbb{T}}$ imenujemo \emph{aksiomi} teorije $\mathbb{T}$. Formalno so
   to pari termov jezika $\mathcal{L}(\Sigma_{\mathbb{T}})$.
 \end{definicija}
 \begin{primer}
@@ -157,7 +156,7 @@ Teorija z eno konstanto in brez enačb je teorija množice z odlikovanim element
 \end{primer}
 \begin{primer}
   Teorija komutativnega kolobarja z enoto je algebrajska teorija.
-  Imamo dve nič-mestni operaciji (konstanti) $0$ in $1$, eno eniško operacijo
+  Imamo dve ničmestni operaciji (konstanti) $0$ in $1$, eno eniško operacijo
   $-$ in dve dvojiški operaciji $+$ in $\cdot$. Zanje veljajo enačbe:
 \begin{align*}
   (x+y)+z &= x + (y + z) & (x \cdot y) \cdot z &= x \cdot (y \cdot z) \\
@@ -170,15 +169,15 @@ Teorija z eno konstanto in brez enačb je teorija množice z odlikovanim element
 \end{primer}
 \begin{primer}
   Induktivni podatkovni tipi, kot jih poznamo v programskih jezikih, so primer algebrajske teorije.
-  Na primer, podatkovni tip dvojiških dreves z listi označenimi s celimi števili
+  Na primer podatkovni tip dvojiških dreves z listi, označenimi s celimi števili,
   bi lahko definirali kot
   \begin{verbatim}
     type tree = Empty | Leaf of int | Node of tree * tree
   \end{verbatim}
-  Ta definicija ustreza algebrajski teoriji sestavljeni iz konstante $\verb|Empty|$,
+  Ta definicija ustreza algebrajski teoriji, sestavljeni iz konstante $\verb|Empty|$,
   ki predstavlja prazno drevo, konstante $\verb|Leaf| \  n$, za vsak $n \in \mathbb{N}$
-  in dvomestne operacije $\verb|Node|$. Zgoraj podana teorija nima enačb in, ko podamo
-  podatkovni tip na tak način imamo v mislih specifičen model, in sicer \emph{prosti}.
+  in dvomestne operacije $\verb|Node|$. Zgoraj podana teorija nima enačb, in ko podamo
+  podatkovni tip na tak način, imamo v mislih specifičen model, in sicer \emph{prosti}.
 \end{primer}
 \begin{primer}
   Pomembna struktura, ki ni primer algebrajske teorije, je teorija delno urejene množice,
