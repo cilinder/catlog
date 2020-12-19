@@ -1,16 +1,17 @@
 \documentclass[../kategoricna_logika.tex]{subfiles}
 \begin{document}
-\section{Regularne kategorije}
 V prvem delu smo videli kako lahko klasično obravnavo algebrajske
 teorije posplošimo v okvir teorije kategorij, kjer je opis teorije z
 operacijami in enačbami porodil interpretacijo v poljubni kategoriji s
 končnimi produkti. To nam je omogočilo tudi interpretacijo končnih
 produktov v kategoriji kot predstavitev neke algebrajske
 teorije. Kategorije, ki jih srečujemo v matematiki pa imajo pogosto
-bolj bogato strukturo, kot zgolj končne produkte. En tak razred
-kategorij, ki se pojavljajo ``v naravi'' so tako imenovane
+bolj bogato strukturo, kot zgolj končne produkte.
+\section{Regularne kategorije}
+En tak razred
+kategorij, ki se pojavljajo ">v naravi"< so tako imenovane
 \emph{regularne kategorije}.  To so na nek način kategorije, v katerih
-je mogoče govoriti o relacijah, kot jih poznamo iz logike in teorije
+je mogoče govoriti o funkcijskih relacijah, kot jih poznamo iz logike in teorije
 množic.  Izkaže se, da je v regularnih kategorijah prav tako mogoče
 najti interpretacijo neke logike, kakor smo to storili v kategorijah s
 končnimi produkti, kjer smo lahko interpretirali logiko termov
@@ -19,7 +20,7 @@ regularnih kategorijah gre za fragment logike prvega reda, ki ga
 imenujemo regularna logika.  Kaj so regularne kategorije, kje jih
 najdemo v matematiki, kako v njih najdemo relacije in kaj je ta
 fragment, ki ga je mogoče v njih interpretirati, si bomo ogledali v
-naslednjem poglavju.
+naslednjem razdelku.
 
 Za to bomo najprej potrebovali nekaj terminologije.
 \begin{definicija}
@@ -28,7 +29,7 @@ Za to bomo najprej potrebovali nekaj terminologije.
   kodomeno $X$, kjer sta dva monomorfizma
   $\alpha: A \rightarrowtail X$ in $\beta : B \rightarrowtail X$
   ekvivalenta, če sta $A$ in $B$ izomorfna nad~$X$ (z drugimi
-  besedami, če sta $A$ in $B$ isti objekt v $\cat{C}/X$).  To pomeni,
+  besedami, če sta $A$ in $B$ izomorfna v rezini $\cat{C}/X$).  To pomeni,
   da obstaja tak izomorfizem $i : A \xrightarrow{\cong} B$, da diagram
   \begin{equation*}
     \begin{tikzcd}[column sep=small]
@@ -90,16 +91,22 @@ $f^{-1}(B) \rightarrowtail X$, kar lahko prikažemo v diagramu
       B \ar[rr, tail] & & Y \ar[from=uu, crossing over, tail] &
     \end{tikzcd}
   \end{equation*}
-  v katerem je zadnja stranica povlek.
+  v katerem sta spodnje in desno lice povleka podobjektov $B$ in $C$ po $f$.
+  Sprednje lice je povlek po definiciji konjunkcije $B$ in $C$.
+  Levo lice dobimo kot povlek s skladanjem s spodnjim licem in
+  zgornje lice s skladanjem z desnim licem.
+  Zadnje lice je nato povlek, ker so vsa ostala lica povleki.
 \end{dokaz}
 
+Za morfizma $f : X \to Y$ in $g : Y \to Z$ velja $f^{-1}(g^{-1}(C)) = (g \circ f)^{-1}(C)$
+za vsak $C$ podobjekt $Z$.
 To pomeni, da za dobro potencirano kategorijo $\cat{C}$ dobimo funktor
 $$\Sub(\_) : \cat{C}^{\mathrm{op}} \to \cat{\wedge-\mathbf{SLat}}$$
-v kategorijo $\land$-polmrež, ki ga imenujemo \emph{podobjektni
+v kategorijo $\land$-polmrež z enoto, ki ga imenujemo \emph{podobjektni
   funktor}.
 \begin{definicija}
   Recimo, da je $f : X \to Y$ morfizem v $\cat{C}$. Potem paru
-  morfizmov $(p_1, p_2)$ iz diagrama povleka
+  morfizmov $(p_1, p_2)$ v povleku
   \begin{equation*}
     \begin{tikzcd}
       X \times_Y X \ar[d, "p_1"'] \ar[r, "p_2"] & X \ar[d, "f"] \\
@@ -110,56 +117,59 @@ v kategorijo $\land$-polmrež, ki ga imenujemo \emph{podobjektni
   oziroma, če je $f$ jasen iz konteksta, kar \emph{jedrni par}.
 \end{definicija}
 \begin{definicija}
-  Epimorfizmu $f$ pravimo \emph{regularen}, če je kozožek nekega para
-  vzporednih morfizmov.
+  Epimorfizmu $f$ pravimo \emph{regularen}, če je kozožek.
 \end{definicija}
-Sedaj imamo pripravljeno vse potrebno, da definiramo regularno
-kategorijo.
+Sedaj imamo pripravljeno vse potrebno, da definiramo pojem regularne
+kategorije.
 \begin{definicija}
   Kategorija $\cat{C}$ je \emph{regularna}, če ima vse končne limite,
-  če za vsak jedrni par obstaja kozožek, in če povleki ohranjajo
+  vsak jedrni par ima kozožek in povleki ohranjajo
   regularne epimorfizme.
 \end{definicija}
 
-\begin{primer}[Primeri regularnih kategorij]
-  \hfill
+\begin{primer}
+  Primeri regularnih kategorij:
   \begin{itemize}
   \item Kategorija $\cat{Set}$ množic in funkcij je
-    regularna. Kategorija $\mathbf{Set}$ je kartezično zaprta, torej v
-    posebnem ima vse končne limite in kolimite.  Regularni epimorfizmi
+    regularna. Kategorija $\mathbf{Set}$ je kartezično zaprta,
+    ima pa tudi vse končne limite in kolimite.  Regularni epimorfizmi
     so ravno surjektivne funkcije, za katere se ni težko prepričati,
     da jih povleki ohranjajo.
   \item Kategorija $\mathbf{Grp}$ grup in homomorfizmov med njimi.
-    Končni produkti so tu produkti grup, slika morfizma je ravno slika
-    homomorfizma in epimorfizmi v $\mathbf{Grp}$ so vsi regularni. Ni se
-    težko prepričati, da povleki ohranjajo epimorfizme.
+    Končni produkti so tu direktni produkti grup, slika morfizma je ravno slika
+    homomorfizma in epimorfizmi v $\mathbf{Grp}$ so vsi regularni.
+    Povleki grup ohranjajo epimorfizme, ker se povleki računajo tako kot v $\cat{Set}$
+    in so epimorfizmi ravno surjektivni homomorfizmi.
   \item Če je $\mathbb{T}$ algebrajska teorija, potem je kategorija
-    modelov te teorije (v $\mathbf{Set}$), oziroma Lawverjeva teorija,
-    regularna.  To je ravno ena smer Birkhoffovega izreka
+    modelov te teorije (v $\mathbf{Set}$), regularna.
+    To je ravno ena smer Birkhoffovega izreka
     \ref{izrek:Birkhoff-HSP}.
   \item Bolj splošno, če je $\mathbb{T}$ algebrajska teorija in
     $\cat{C}$ regularna, potem je $\cat{Mod}(\mathbb{T}, \cat{C})$
     regularna. Dokaz lahko najdemo v \cite{barr-exact-categories}.
-  \item Vsaka Abelova kategorija je regularna.
+  \item Vsaka Abelova kategorija je regularna. Abelove kategorije
+    so opisane v \cite{freyd1964abelian}. Dokaz, da so regularne
+    lahko najdemo v \cite{borceux1994handbook}.
   \item Če je $\cat{C}$ regularna in je $\cat{D}$ poljubna kategorija,
-    potem je funktorska kategorija $\cat{C}^{\cat{D}}$ regularna.
+    potem je funktorska kategorija $\cat{C}^{\cat{D}}$ regularna \cite{borceux1994handbook}.
   \item Če je $\cat{C}$ regularna in $X \in \cat{C}$, potem je
-    $\cat{C}/X$ regularna.
+    $\cat{C}/X$ regularna \cite{borceux1994handbook}.
   \item Kategorija $\cat{Top}^{\mathrm{op}}$ je regularna. Tu je
     ključno dejstvo to, da so regularni monomorfizmi, ki so dual
     regularnih epimorfizmov, ravno vložitve podprostorov (glede na
-    topologijo podprostora) in potiski inkluzij so spet inkluzije.
+    topologijo podprostora) in potiski so spet vložitve.
   \end{itemize}
 \end{primer}
 \begin{primer}[Primeri neregularnih kategorij]
   Kategorije $\cat{Cat}, \cat{Pos}\ \text{in}\ \cat{Top}$ niso
-  regularne.  Sledeči primer pokaže neregularnost za vse tri primere.
-  Naj bodo: $A$ delno urejena množica $\set{a, b} \times (0 \to 1)$,
-  $B$ naj bo enaka $(0 \to 1 \to 2)$ in $C$ naj bo množica
-  $(0 \to 2)$.  Obstaja regularen epimorfizem ${p : A \to B}$, ki ga
-  dobimo z identifikacijo $(a,1)$ z $(b, 0)$, in imamo očitno
-  inkluzijo ${\dot{\imath} : C \to B}$. Povlek morfizma $p$ po
-  $\dot{\imath}$ nam da inkluzijo $\set{0, 2} \to (0 \to 2)$, ki je
+  regularne. Denimo, da smo v kategoriji $\cat{Pos}$.
+  Naj bodo: $A$ delno urejena množica $\set{a, b} \times (0 \leq 1)$,
+  z urejenostjo $(a,0) \leq (a,1)$ in $(b,0) \leq (b,1)$.
+  $B$ naj bo enaka $(0 \leq 1 \leq 2)$ in $C$ naj bo podobjekt $B$
+  z očitno vložitvijo ${\dot{\imath}} : (0 \leq 2) \to (0 \leq 1 \leq 2)$.
+  Obstaja regularen epimorfizem ${p : A \to B}$, ki ga
+  dobimo z identifikacijo $(a,1)$ z $(b, 0)$. Povlek morfizma $p$ po
+  $\dot{\imath}$ nam da inkluzijo $\set{0, 2} \to (0 \leq 2)$, ki je
   epimorfizem, a ni regularen, kar pomeni, da povleki v $\cat{Pos}$ ne
   ohranjajo regularnih epimorfizmov.
 
@@ -198,8 +208,8 @@ Poglejmo si nekaj lastnosti regularnih kategorij.
     \end{equation*}
     kjer je morfizem $u$ podan z univerzalno lastnostjo povleka in
     morfizem~$v$ dobimo iz univerzalne lastnosti kozožka $g$ in $h$.
-    Torej je $f$ res kozožek morfizmov $p_1$ in $p_2$.  (to je pomoje
-    malo čudno napisano, ampak nočem pisat preveč enačb eksplicitno)
+    Torej je $f$ res kozožek morfizmov $p_1$ in $p_2$. Ker je $f$ epimorfizem
+    je morfizem $v$ enolično določen.
 
   \item % (ii)
     Naj bo $f : X \to Y$ regularen epimorfizem, ki je tudi
@@ -251,17 +261,17 @@ Poglejmo si nekaj lastnosti regularnih kategorij.
     in $f$ oba regularna epimorfizma.  Podobno kot pri prejšnji točki,
     naj bo $(\pi_1, \pi_2)$ par jedra~$g$ in $(q_1, q_2)$ par jedra
     $g \circ f$.  Če imamo $t : Y \to T$ tak, da je
-    $t \pi_1 = t \pi_2$ potem morfizem $tf$ zoži $q_1$ in $q_2$ in
+    $t \pi_1 = t \pi_2$, potem morfizem $tf$ zoži $q_1$ in $q_2$ in
     dobimo morfizem $h : Z \to T$, da velja $t f = h g f$. Ker je $f$
     epimorfizem, res dobimo $t = h g$.
   \end{enumerate}
 \end{dokaz}
-Kot vidimo, imajo regularni epimorfizmi mnogo lepih lastnosti, ki smo
-jih vajeni iz surjektivnih funkcij v kategoriji $\cat{Set}$.
-Naslednja lema nam poda še eno zelo pomembno lastnost regularnih
-kategorij, ki jo poznamo iz kategorije $\cat{Set}$, in sicer, da je
-mogoče vsako preslikavo razstaviti na kompozitum surjektivne in
-injektivne preslikave.
+Mnogo lepih lastnosti, ki smo
+jih vajeni iz surjektivnih funkcij v kategoriji $\cat{Set}$, imajo
+tudi regularni epimorfizmi.
+Naslednja lema na pove, da analogno kot lahko v kategoriji $\cat{Set}$
+vsako preslikavo razstavimo na kompozitum surjektivne in
+injektivne preslikave, podobno storimo v regularnih kategorijah.
 \begin{lema}
   Naj bo $\cat{C}$ regularna kategorija in $f: X \to Y$ morfizem
   v~$\cat{C}$.  Potem lahko $f$ razcepimo na kompozitum regularnega
@@ -286,7 +296,7 @@ injektivne preslikave.
 \end{comment}
 \begin{dokaz}
   Naj bo $f : X \to Y$ morfizem.  Označimo njegov par jedra s
-  $(p_1, p_2)$ in naj bo$q : X \to Q$ kozožek $(p_1, p_2)$.  To nam da
+  $(p_1, p_2)$ in naj bo $q : X \to Q$ kozožek $(p_1, p_2)$.  To nam da
   diagram
   \begin{equation*}
     \begin{tikzcd}
@@ -313,24 +323,25 @@ injektivne preslikave.
   $e$.  Tedaj imamo enakosti
   $m f p_1 = m f p_2 = f' e p_1 = f' e p_2$.  Ker je $m$ monomorfizem,
   sledi $f p_1 = f p_2$ in po univerzalni lastnosti kozožka dobimo
-  enoličen morfizem~$d : X' \to Y$, da velja $f = d e$. Ker kvadrat
-  komutira, dobimo
+  enoličen morfizem~$d : X' \to Y$, da velja $f = d e$. Ker diagram
+  iz leme komutira, dobimo
   \[f' e = m f = m d e, \] kar pomeni $f' = m d$, saj je $e$
   epimorfizem.
 \end{dokaz}
 
 \begin{definicija}
-  Monomorfizmu $m : E \hookrightarrow Y$, ki smo ga videli pri dokazu
-  faktorizacije morfizma $f$ pravimo \emph{(direktna) slika} in ga
-  označimo z $\mathrm{Im}(f)$.  Včasih rečemo kar objektu $E$ slika
-  $f$. Slika morfizma je določena le do izomorfizma natančno, a določa
+  V faktorizaciji $f = m \circ e$ na monomorfizem $m$ in epimorfizem $e$
+  pravimo podobjektu, ki ga predstavlja $m$, \emph{slika} morfizma $f$
+  in ga označimo z $\mathrm{Im}(f)$.
+  Včasih rečemo kar objektu $E$ slika $f$.
+  Slika morfizma je določena le do izomorfizma natančno, a določa
   natanko en podobjekt objekta $Y$, ki ga označimo z $\exists_f(X)$.
   Oznake $\mathrm{Im}(f)$, $\exists_f(X)$ in $E$ uporabljamo
   izmenljivo, če je pomen jasen iz konteksta.
 
   Za podobjekt $A \overset{\alpha}{\rightarrowtail} X$ definiramo
   sliko kot
-$$\exists_f(A) := \mathrm{Im}(f \circ \alpha),$$
+$$\exists_f A := \mathrm{Im}(f \circ \alpha),$$
 kar nam da dobro definirano preslikavo
 $\exists_f : \Sub(X) \to \Sub(Y)$.
 \end{definicija}
@@ -351,13 +362,13 @@ $\exists_f : \Sub(X) \to \Sub(Y)$.
   razberemo, da je $\dot{\imath}$ monomorfizem.
 \end{comment}
 \begin{lema}
-  Naj bo $\cat{C}$ regularna kategorija. Naj bo $f : X \to Y$
-  morfizem~v~$\cat{C}$. Potem
+  Naj bo $f : X \to Y$ morfizem v regularni kategoriji $\cat{C}$.
+  Tedaj velja:
   \begin{enumerate}[label=(\roman*)]
   \item Preslikava $\exists_f$ je monotona in levo adjungirana povleku
     $f^{-1}$, imamo torej par adjungiranih funktorjev
     $$\exists_f : \Sub(X) \rightleftarrows \Sub(Y) : f^{-1}.$$
-  \item Če je $g : Y \to Z$ morfizem v $\cat{C}$, potem velja
+  \item Za vsak morfizem $g : Y \to Z$ velja
     $$\exists_g \circ \exists_f = \exists_{g \circ f} : \Sub(X) \to
     \Sub(Z)$$
   \end{enumerate}
@@ -380,7 +391,7 @@ $\exists_f : \Sub(X) \to \Sub(Y)$.
   $Z \cong \exists_f A' \leq \exists_f A$.
 
   Da pokažemo, da sta to adjungirana funktorja moramo pokazati
-  $$\Sub(X)(\exists_f A, B) \cong \Sub(Y)(A, f^{-1}B),$$
+  $$\Sub(Y)(\exists_f A, B) \cong \Sub(X)(A, f^{-1}B),$$
   kjer sta $A \leq X$ in $B \leq Y$. Če v diagramu
   \begin{equation*}
     \begin{tikzcd}
@@ -391,10 +402,10 @@ $\exists_f : \Sub(X) \to \Sub(Y)$.
       & X \ar[r, "f"] & Y
     \end{tikzcd}
   \end{equation*}
-  predpostavimo, da obstaja črtkani morfizem $g$, potem lahko
+  predpostavimo, da je $A \leq f^{-1}B$, potem lahko
   razcepimo morfizem~$A \to B$ in dobimo monomorfizem
   $\exists_f A \hookrightarrow B$, po enoličnosti slik.  Obratno, če
-  predpostavimo da obstaja morfizem $h$, potem dobimo enolični
+  predpostavimo $\exists_fA \leq B$, potem dobimo enolični
   morfizem $g$ iz univerzalne lastnosti povleka.
 
   Drugi del trditve sledi iz tega, da to velja za povleke in je
@@ -409,8 +420,7 @@ $\Sub(Y)$, kajti desni adjunkti ohranjajo limite.
   Naj bo $\cat{C}$ regularna kategorija in ${f : X \to Y}$ morfizem v
   $\cat{C}$.  Naj bosta $A \overset{\alpha}{\rightarrowtail} X$ in
   $B \overset{\alpha}{\rightarrowtail} Y$ dva podobjekta.  Potem velja
-  $$\exists_f(A \wedge f^{-1}B) = \exists_f(A) \wedge B,$$
-  kot elementa $\Sub(Y)$.
+  $$\exists_f(A \wedge f^{-1}B) = \exists_f(A) \wedge B.$$
 \end{lema}
 \begin{dokaz}
   V diagramu
@@ -430,8 +440,8 @@ $\Sub(Y)$, kajti desni adjunkti ohranjajo limite.
     \hookrightarrow B\] kanonična faktorizacija morfizma
   $A \land f^{-1}B \to Y$, kar nam da želeno enakost.
 \end{dokaz}
-Še ena izmed lepih lastnosti funkcij med množicami je, da jih lahko
-opišemo kot njihov graf.  Izkaže se, da so regularne kategorije ravno
+Še ena izmed lepih lastnosti funkcij med množicami je, da so
+določene s svojimi grafi.  Izkaže se, da so regularne kategorije ravno
 pravo okolje za tako konstrukcijo.
 \begin{definicija}\label{definicija:graf-morfizma}
   Naj bo $f : X \to Y$ morfizem v regularni kategoriji
@@ -447,20 +457,20 @@ monomorfizem, torej je izomorfizem.
   kot zožek morfizmov $f\circ \pi_1, \pi_2 : X \times Y \to Y$.
 \end{lema}
 \begin{dokaz}
-  Ker je $\pi_X \circ \fprod{\mathrm{id}_X, f} = \mathrm{id}_X$, je
+  Ker je $\pi_1 \circ \fprod{\mathrm{id}_X, f} = \mathrm{id}_X$, je
   $\fprod{\mathrm{id}_X, f}$ sekcija, torej monomorfizem. To pomeni,
   da je kompozitum
   \[X \xrightarrow{\mathrm{id}_X} X
     \xrightarrow{\fprod{\mathrm{id}_X,f}} X \times Y\] že
   faktorizacija $\fprod{\mathrm{id}_X, f}$. Da ta morfizem res zoži
-  $f \pi_X$ in $\pi_Y$ velja, ker
-  \[ f \circ \pi_X \circ \fprod{\mathrm{id}_X, f} = f \circ
-    \mathrm{id}_X = f\] in $\pi_Y \circ \fprod{\mathrm{id}_X, f} = f$.
+  $f \pi_1$ in $\pi_2$ velja, ker
+  \[ f \circ \pi_1 \circ \fprod{\mathrm{id}_X, f} = f \circ
+    \mathrm{id}_X = f\] in $\pi_2 \circ \fprod{\mathrm{id}_X, f} = f$.
   Denimo sedaj, da obstaja morfizem $t : T \to X \times Y$, za
-  katerega velja $f \circ \pi_X \circ t = \pi_Y \circ t$. Po
+  katerega velja $f \circ \pi_1 \circ t = \pi_2 \circ t$. Po
   univerzalni lastnosti produkta lahko~$t$ zapišemo kot
   $\fprod{t_1, t_2}$, kjer
-  \[t_1 = \pi_X \circ t : T \to X \quad \text{in} \quad t_2 = \pi_Y
+  \[t_1 = \pi_1 \circ t : T \to X \quad \text{in} \quad t_2 = \pi_2
     \circ t : T \to Y. \] Dobili smo torej morfizem od $T$ do $X$, ki
   faktorizira~$t$. Ker je $\fprod{\mathrm{id}_X, f}$ monomorfizem, je
   to enolični morfizem, za katerega ta diagram komutira. (mogoče bi
@@ -468,9 +478,9 @@ monomorfizem, torej je izomorfizem.
 \end{dokaz}
 \begin{lema}
   Naj bodo oznake kot v zgornji definiciji in naj bo
-  $A \overset{\alpha}{\rightarrowtail} X$ podobjekt. Če s $\pi_X$ in
-  $\pi_Y$ označimo projekciji iz produkta, potem velja
-  $$\exists_f(A) = \exists_{\pi_Y}(\pi_X^{-1}(A) \wedge \graf(f)).$$
+  $A \overset{\alpha}{\rightarrowtail} X$ podobjekt. Če s $\pi_1$ in
+  $\pi_2$ označimo projekciji iz produkta, potem velja
+  $$\exists_f(A) = \exists_{\pi_2}(\pi_1^{-1}(A) \wedge \graf(f)).$$
 \end{lema}
 \begin{dokaz}
   V ta namen konstruiramo diagram
@@ -479,16 +489,16 @@ monomorfizem, torej je izomorfizem.
       & & Y & \\
       X \ar[urr, "f"] \ar[r, two heads] & \operatorname{graph}(f)
       \ar[r, tail] &
-      X \times Y \ar[u, "\pi_Y"] \ar[r, "\pi_X"] & X \\
-      A \ar[u, tail, "\alpha"] \ar[r, two heads] & \pi_X^{-1}A \land
-      \operatorname{graph}(f) \ar[u, tail] \ar[r, tail] & \pi_X^{-1}A
+      X \times Y \ar[u, "\pi_2"] \ar[r, "\pi_1"] & X \\
+      A \ar[u, tail, "\alpha"] \ar[r, two heads] & \pi_1^{-1}A \land
+      \operatorname{graph}(f) \ar[u, tail] \ar[r, tail] & \pi_1^{-1}A
       \ar[u, tail] \ar[r] & A \ar[u, tail, "\alpha"]
     \end{tikzcd}
   \end{equation*}
   kjer so kvadrati povleki.  Levi spodnji kvadrat dobimo kot povlek
   zunanjega trivialnega povleka $\mathrm{id}_X$ in $\alpha$.  Tako
   dobimo, da je morfizem
-  $$A \twoheadrightarrow \pi_X^{-1}A \land \operatorname{graph}(f)$$
+  $$A \twoheadrightarrow \pi_1^{-1}A \land \operatorname{graph}(f)$$
   regularen epimorfizem.  Torej nam da sliko morfizma
   $f \circ \alpha$, kar pokaže iskano enakost.
 \end{dokaz}
@@ -496,9 +506,9 @@ Sedaj bomo opisali, kako lahko dobimo nazaj morfizem iz njegovega
 grafa.
 \begin{definicija}
   Na podobjekt $R \rightarrowtail X \times Y$ lahko gledamo kot na
-  relacijo med ``elementi'' $X$ in $Y$. Relaciji $R$ pravimo
+  relacijo med ">elementi"< $X$ in $Y$. Relaciji $R$ pravimo
   \begin{itemize}
-  \item \emph{totalna}, če je $\exists_{\pi_X}R = X$ (to intuitivno
+  \item \emph{totalna}, če je $\exists_{\pi_1}R = X$ (to intuitivno
     pomeni, da je množica vseh tistih $x$, za katere obstaja nek $y$
     za katerega velja $xRy$, enaka $X$).
   \item \emph{funkcijska}, če kanonični morfizem
@@ -528,8 +538,8 @@ grafa.
   ga dobimo iz diagrama povleka
   \begin{equation*}
     \begin{tikzcd}[row sep=normal, column sep=normal]
-      X \times Y  \times Y\ar[d] \ar[r] & X \times Y \ar[d, "\pi_X"] \ar[r] & Y \ar[d] \\
-      X \times Y \ar[r, "\pi_X"] & X \ar[r] & 1
+      X \times Y  \times Y\ar[d] \ar[r] & X \times Y \ar[d, "\pi_1"] \ar[r] & Y \ar[d] \\
+      X \times Y \ar[r, "\pi_1"] & X \ar[r] & 1
     \end{tikzcd}
   \end{equation*}
 \end{opomba}
@@ -547,17 +557,17 @@ grafa.
   \begin{enumerate}[label=(\roman*)]
   \item Ker je $X \to \graf(f)$ izomorfizem, lahko faktoriziramo
     kompozitum
-    $\graf(f) \hookrightarrow X \times Y \xrightarrow{\pi_X} X$ kot
+    $\graf(f) \hookrightarrow X \times Y \xrightarrow{\pi_1} X$ kot
     \begin{equation*}
       \begin{tikzcd}
-        \operatorname{graph}(f) \ar[d, two heads] \ar[r, tail]  & X \times Y \ar[d, "\pi_X"] \\
+        \operatorname{graph}(f) \ar[d, two heads] \ar[r, tail]  & X \times Y \ar[d, "\pi_1"] \\
         X \ar[r, tail, "\mathrm{id}_X"] & X
       \end{tikzcd}
     \end{equation*}
     Iz enoličnosti faktorizacije sledi
-    $X \cong \exists_{\pi_X}\graf(f)$, torej je $\graf(f)$ totalna.
+    $X \cong \exists_{\pi_1}\graf(f)$, torej je $\graf(f)$ totalna.
 
-    Da je tudi funkcijska relacija bomo razbrali iz diagrama povlekov
+    Da je tudi funkcijska relacija bomo razbrali iz diagrama povlekov:
     \begin{equation*}
       \begin{tikzcd}[row sep=9ex]
         \graf(f) \times_X \graf(f) \ar[d] \ar[r] \ar[dr, dashed, "e"] &
@@ -568,15 +578,15 @@ grafa.
       \end{tikzcd}
     \end{equation*}
     Opazimo lahko, da sta obe poti $\graf(f) \times \graf(f) \to X \times Y$ enaki, saj ju lahko
-    podaljšamo do $X$ s projekcijo $\pi_X$ in do $Y$ s projekcijo $\pi_Y$, kar nam da identiteto.
+    podaljšamo do $X$ s projekcijo $\pi_1$ in do $Y$ s projekcijo $\pi_2$, kar nam da identiteto.
     Če te dve poti komponiramo z morfizmom $\mathrm{id}_X \times \Delta$ dobimo ravno enolični morfizem
     $\graf(f) \times \graf(f) \to X \times Y \times Y$ podan z univerzalno lastnostjo tega povelka.
-    To velja saj $\mathrm{id}_X \times \Delta$ lahko podaljšamo s $\pi_{1,2}$ na eni strani in
+    To velja, ker $\mathrm{id}_X \times \Delta$ lahko podaljšamo s $\pi_{1,2}$ na eni strani in
     $\pi_{1,3}$ na drugi in v obeh primerih dobimo identiteto. Torej lahko $e$ faktoriziramo
     skozi $\mathrm{id}_X \times \Delta$.
 
   \item Ker je $R$ totalna, je
-    $R \xhookrightarrow{r} X \times Y \xrightarrow{\pi_X} X$ regularen
+    $R \xhookrightarrow{r} X \times Y \xrightarrow{\pi_1} X$ regularen
     epimorfizem, torej je kozožek jedrnega para $(p_1, p_2)$, kar
     lahko predstavimo v diagramu
     \begin{equation*}
@@ -587,8 +597,8 @@ grafa.
         & X \times Y \ar[dr, dashed, "\mathrm{id}_X \times \Delta_Y"'] & & & \\
         R \times Y \ar[d] \ar[rr, tail] & & X \times Y \times Y \ar[d,
         "\pi_{1,2}"']
-        \ar[r, "\pi_{1,3}"] & X\times Y \ar[d, "\pi_X"'] \ar[ddr, "\pi_Y"] & \\
-        R \ar[rr, tail, "r"] & & X \times Y \ar[r, "\pi_X"] \ar[drr, "\pi_Y"'] & X & \\
+        \ar[r, "\pi_{1,3}"] & X\times Y \ar[d, "\pi_1"'] \ar[ddr, "\pi_2"] & \\
+        R \ar[rr, tail, "r"] & & X \times Y \ar[r, "\pi_1"] \ar[drr, "\pi_2"'] & X & \\
         & & & & Y
       \end{tikzcd}
     \end{equation*}
@@ -596,7 +606,7 @@ grafa.
     $$R \times_X R \to X \times Y \xrightarrow{\mathrm{id}_X \times \Delta_Y} X \times Y \times Y,$$
     ki obstaja, ker je $R$ funkcijska relacija.  Obe poti od
     $X \times Y$ do $Y$ sta samo projekciji na drugo koordinato, torej
-    velja $\pi_Y r p_1 = \pi_Y r p_2$.  Ker pa je $X$ kozožek svojega
+    velja $\pi_2 r p_1 = \pi_2 r p_2$.  Ker pa je $X$ kozožek svojega
     para jedra, obstaja enoličen morfizem $f : X \to Y$, da diagram
     komutira.
 
@@ -606,10 +616,10 @@ grafa.
       \begin{tikzcd}
         & & & & Y \\
         R \ar[r, tail, "r"'] \ar[rr, two heads, bend left] & X \times
-        Y \ar[r, "\pi_X"'] & X \ar[r, two heads] \ar[rr, bend left,
+        Y \ar[r, "\pi_1"'] & X \ar[r, two heads] \ar[rr, bend left,
         pos=0.3, "\fprod{\mathrm{id}_X, f}"] \ar[urr, crossing over,
         pos=0.75, "f"] \ar[drr, "\mathrm{id}_X"'] &
-        \operatorname{graph}(f) \ar[r, tail] & X \times Y \ar[d, "\pi_X"] \ar[u, "\pi_Y"'] \\
+        \operatorname{graph}(f) \ar[r, tail] & X \times Y \ar[d, "\pi_1"] \ar[u, "\pi_2"'] \\
         & & & & X
       \end{tikzcd}
     \end{equation*}
@@ -617,12 +627,12 @@ grafa.
     kompozitum $R \to X$ je regularen epimorfizem.  Torej dobimo
     enolični morfizem
     $R \twoheadrightarrow \graf(f) \hookrightarrow X \times Y$, za
-    katerega nam kompozitum s $\pi_X$ da $\mathrm{id}_X \pi_X r$ in
-    kompozitum s $\pi_X$ da
-    $f \pi_X r = \pi_Y \circ \fprod{\mathrm{id}_X, f} \circ \pi_X
-    \circ r = \pi_Y r$.  To pa je ravno monomorfizem
+    katerega nam kompozitum s $\pi_1$ da $\mathrm{id}_X \pi_1 r$ in
+    kompozitum s $\pi_1$ da
+    $f \circ \pi_1 \circ r = \pi_2 \circ \fprod{\mathrm{id}_X, f} \circ \pi_1
+    \circ r = \pi_2 \circ  r$.  To pa je ravno monomorfizem
     $r : R \hookrightarrow X \times Y$, katerega slika je kar $R$.
-    Torej je $R \cong \graf(f)$.
+    Torej je $R \cong \graf(f)$.\qedhere
   \end{enumerate}
 \end{dokaz}
 
@@ -693,7 +703,7 @@ $A \xhookrightarrow{\alpha} X \xrightarrow{f} Y$ potem je
 $$F(\exists_f A) = \exists_{F(f)}(F(A)),$$
 kajti $\exists_f A$ je definiran kot kozožek para jedra
 $f \circ \alpha : A \to Y$.
-\end{dokaz}.
+\end{dokaz}
 %
 %
 \section{Regularna logika}
@@ -703,87 +713,88 @@ bila precej enostavna s stališča logike, saj so bile edine logične
 formule, ki smo jih lahko konstruirali oblike $t_1 = t_2$ za neka
 terma, sestavljena induktivno iz spremenljivk in funkcijskih simbolov.
 Že iz teh osnovnih gradnikov je mogoče dobiti veliko pomembne
-matematične ``infrastrukture'', kot je na primer teorija grup.  Za
-opis nekih matematičnih teorij pa jasno ta stopnja kompleksnosti ne
+matematične ">infrastrukture"<, kot je na primer teorija grup.  Za
+opis vseh matematičnih teorij pa jasno ta stopnja kompleksnosti ne
 zadostuje.  Videli smo, da se teorije polj ne da opisati z algebrajsko
-teorijo.  Moderna matematika je standardno opisana v jeziku predikatne
-logike, oziroma logike drugega (ali višjega) reda, kjer imamo poleg
-funkcijskih simbolov še logične veznike kot so ``in'', ``ali'',
+teorijo.  Moderna matematika je standardno opisana v jeziku predikatnega
+računa, oziroma logike prvega (ali višjega) reda, kjer imamo poleg
+funkcijskih simbolov še logične veznike kot so ">in"<, ">ali"<,
 negacijo in univerzalni ter eksistenčni kvantifikator.  Naravno
 vprašanje je torej, ali lahko zgodbo algebrajskih teorij ponovimo z
-neko močnejšo logiko in če se to da, kako se to odraža v strukturi
-kategorijo, ki jo dobimo na ta način in ali ponovno dobimo povezavo
-med modeli take teorije in kakim posebnim razredom funktorjev, kot smo
-to videli v primeru algebrajskih teorij.  Naredili bomo korak v to
+neko močnejšo logiko. Naredili bomo korak v to
 smer in našo logiko le delno razširili v tako imenovano
 $\emph{regularno logiko}$, kjer bomo formule gradili iz atomskih
 formul, logične konstante resničnosti $\top$, konjunkcij $\wedge$ in
 eksistenčnega kvantifikatorja $\exists$.
 \begin{definicija}
-  \emph{Regularna Signatura} $\Sigma$ je sestavljena iz
+  \emph{Regularna signatura} $\Sigma$ je sestavljena iz
   \begin{itemize}
-  \item množice \emph{osnovnih tipov}
+  \item množice \emph{sort}
     $\underline{\mathrm{sort}}_\Sigma = \set{X_1, X_2, X_3, \ldots}$,
-  \item množice konstant
-    $\underline{\mathrm{const}}_\Sigma = \set{c_1, c_2, \ldots}$,
   \item množice funkcijskih simbolov
-    $\underline{\mathrm{func}}_\Sigma$ in
+    $\underline{\mathrm{func}}_\Sigma$ z elementi oblike
+    \[ f : (X_1, \ldots, X_n) \to Y,\]
+    kjer so $X_1,\ldots, X_n,Y$ sorte.
   \item množice relacijskih simbolov
-    $\underline{\mathrm{rel}}_\Sigma$.
+    $\underline{\mathrm{rel}}_\Sigma$ z elementi oblike
+    \[ R : (X_1,\ldots, X_n),\]
+    kjer so $X_1,\ldots, X_n$ sorte.
   \end{itemize}
-  Za funkcijske simbole uporabljamo oznake kot so
-  $f : X_1 \times \ldots \times X_n \to Y$, kjer je
-  $X_1 \times \ldots \times X_n$ formalna oznaka, s katero želimo
-  zajeti intuicijo produkta.  Relacijske simbole označujemo kot
-  $R \rightarrowtail X_1 \times \ldots \times X_n$.
 \end{definicija}
-Pogosto bomo za $X_1 \times \ldots \times X_n$ uporabljali tudi oznako
+\begin{opomba}
+  Poseben primer funkcijskih simbolov so \emph{konstante}, ki imajo
+  prazno domeno in so oblike $c : () \to X$. 
+\end{opomba}
+Pogosto bomo za $(X_1, \ldots, X_n)$ uporabljali tudi oznako
 $\bar{X}$, kjer $n$ razberemo iz konteksta.
 \begin{definicija}
   Naj bo $\Sigma$ regularna signatura.  Potem \emph{jezik}
-  $\mathcal{L}(\Sigma)$ sestoji iz signature $\Sigma$, za vsak osnovni
-  tip $X$ števno mnogo spremenljivk $x:X$.  Množice termov $(T)$ in
-  formul $(F)$ definiramo na sledeče načine:
+  $\mathcal{L}(\Sigma)$ sestoji iz signature $\Sigma$, za vsako
+  sorto $X$ števno mnogo spremenljivk $x_1,x_2,x_3,\ldots : X$.
+  Množice termov in formul definiramo induktivno:
   \begin{itemize}
-  \item [(T1)] Če je $x$ spremenljivka tipa $X$, potem je $x$ term
-    tipa $X$.
-  \item [(T2)] Če je $c$ konstanta tipa $X$, potem je $c$ term tipa
+  \item [(T1)] Če je $x$ spremenljivka sorte $X$, potem je $x$ term
+    sorte $X$.
+  \item [(T2)] Če je $c$ konstanta sorte $X$, potem je $c$ term sorte
     $X$.
-  \item [(T3)] Če so $t_1, \ldots t_n$ že termi tipov
-    $X_1, \ldots, X_n$ in je $f : X_1 \times \ldots \times X_n \to Y$
-    funkcijski simbol, potem je $f(t_1, \ldots, t_n)$ term tipa $Y$.
-  \item [(F1)] Če sta $t_1, t_2$ terma tipa $X$, potem je $t_1 = t_2$
+  \item [(T3)] Če so $t_1, \ldots t_n$ že termi sorte
+    $X_1, \ldots, X_n$ in je $f : (X_1, \ldots, X_n) \to Y$
+    funkcijski simbol, potem je $f(t_1, \ldots, t_n)$ term sorte $Y$.
+  \item [(F1)] Če sta $t_1, t_2$ terma sorte $X$, potem je $t_1 = t_2$
     formula. Bolj natančno bi to zapisali kot $t_1 =_X t_2$.
   \item [(F2)] Logična konstanta $\top$, ki predstavlja resnično
     izjavo, je formula.
-  \item [(F3)] Če so $t_1, \ldots t_n$ termi tipov $X_1, \ldots, X_n$
-    in je $R \rightarrowtail X_1 \times \ldots \times X_n$ relacijski
+  \item [(F3)] Če so $t_1, \ldots t_n$ termi sort $X_1, \ldots, X_n$
+    in je $R : (X_1, \ldots, X_n)$ relacijski
     simbol, potem je $R(t_1, \ldots, t_n)$ formula.
   \item [(F4)] Če sta $\varphi$ in $\psi$ logični formuli, potem sta
-    $\varphi \wedge \psi$ in $\exists x \varphi$ tudi logični formuli.
+    $\varphi \wedge \psi$ in $\exists (x:X) \varphi$ tudi logični formuli.
   \end{itemize}
   Za logično formulo $\varphi$, označujemo množico njenih prostih
   spremenljiv s $\mathrm{FV}(\varphi)$.  \emph{Teorija} $\T$,
   formulirana v jeziku $\mathcal{L}(\Sigma)$, je množica
   \emph{sekvent}, ki so sestavljene iz \emph{premise} in
   \emph{zaključka}, oblike
-  $$\varphi \implies \psi,$$
-  kjer sta $\varphi$ in $\psi$ formuli v jeziku teorije $\T$.
+  \[ \Gamma \mid \varphi \implies \psi,\]
+  kjer je $\Gamma$ kontekst spremenljivk in sta
+  $\varphi$ in $\psi$ formuli v jeziku teorije $\T$.
+  V kontekstu $\Gamma$ morajo biti vse proste spremenljivke,
+  ki nastopajo v $\varphi$ in $\psi$.
 \end{definicija}
 Če je v sekventi premisa enaka $\top$, potem sekvento
-$\top \implies \psi$ označujemo kar kot $\psi$, in pravimo da $\psi$
-\emph{velja}.
+$\Gamma \mid \top \implies \psi$ označujemo kar kot $\Gamma \mid \psi$, in pravimo da $\psi$
+\emph{velja} v kontekstu $\Gamma$.
 \begin{primer}\label{primer:kompozitum}
-  Naj bo $\Sigma$ signatura s termi osnovnimi tipi $X,Y$ in $Z$, ki
+  Naj bo $\Sigma$ signatura s tremi sortami $X,Y$ in $Z$, ki
   vsebuje tri funkcijske simbole $f: X \to Y$, $g : Y \to Z$ in
-  $h : X \to Z$.  Potem, če je $x$ spremenljivka tipa $X$, lahko v
+  $h : X \to Z$.  Potem, če je $x$ spremenljivka sorte $X$, lahko v
   jeziku $\mathcal{L}(\Sigma)$ tvorimo formulo
-  $$f(g(x)) = h(x).$$
-  Ko bomo definiramo interpretacijo teorije, bomo videli, da je to
+  $$x:X \mid f(g(x)) = h(x).$$
+  Ko definiramo interpretacijo teorije, bomo videli, da je to
   ravno formula, ki pravi, da je $h$ kompozitum $f$ in $g$.
 \end{primer}
 \begin{primer}[Delno urejene grupe]\label{primer:delno-urejene-grupe}
-  Naj bo $\Sigma$ signatura z enim osnovnim tipom $X$. Za delno
+  Naj bo $\Sigma$ signatura z eno sorto $X$. Za delno
   urejeno grupo potrebujemo operacije grupe:
   \begin{itemize}
   \item konstanto $e : X$, ki predstavlja enoto grupe,
@@ -817,21 +828,18 @@ $\top \implies \psi$ označujemo kar kot $\psi$, in pravimo da $\psi$
 Sedaj bomo definirali pravila sklepanja za naš fragment logike prvega
 reda, za katera bomo kasneje pokazali, da so veljavna in polna glede
 na kategorično semantiko, ki jim jih bomo dali.  Podali jih bomo kot
-zaporedja izpeljav oblike $\varphi \vdash_F \psi$, indeksiranih po
-končnih množicah spremenljivk $F$. Dedukcija $\varphi \vdash_F \psi$
-je definirana le, če vse proste spremenljivke v $\varphi$ ali $\psi$
-ležijo v $F$. V prihodnje bomo privzeli, da je za izraz
-$\varphi \vdash_F \psi$ ta pogoj vedno izpolnjen (napiši to lepše).
+zaporedja izpeljav oblike $\Gamma \mid \varphi \vdash_F \psi$,
+indeksiranih po končnih množicah spremenljivk $\Gamma$.
 Tu moramo biti pozorni, saj na primer izraz
-\[x_1 = x_2 \vdash_{x_1, x_2} x_2 = x_1\] ni enak izrazu
-\[x_1 = x_2 \vdash_{x_1, x_2, x_3} x_2 = x_1.\] Razlog za to
+\[x_1,x_2:X \mid x_1 = x_2 \vdash x_2 = x_1\] ni enak izrazu
+\[x_1,x_2,x_3:X \mid x_1 = x_2 \vdash x_2 = x_1.\] Razlog za to
 podrobnost bomo razložili kasneje, ko definiramo semantiko v
-kategoriji.
+kategoriji. Če je kontekst jasen, ga občasno tudi ne pišemo.
 
 Sedaj definiramo pravila sklepanja v regularni logiki, ki jih
 razdelimo v tri sklope.  Podali jih bomo kot izpeljave, zapisane v
 obliki ulomka, kjer števec predstavlja premise, imenovalec pa sklep
-izpeljave.  Beremo jih kot: Če veljajo vse premise nekega pravila,
+izpeljave.  Beremo jih kot: če veljajo vse premise nekega pravila,
 lahko izpeljemo njegov sklep.  Če neka izpeljava velja v obe smeri
 torej, če lahko iz premise $A$ izpeljemo sklep $B$ in iz premise $B$
 izpeljemo sklep~$A$, potem to podamo kot dvosmerno izpeljavo, ki jo
@@ -844,91 +852,93 @@ označimo z dvojno črto ulomka.
     \begin{enumerate}[label*=.\arabic*)]
     \item\label{pravilo:refl}
       \begin{prooftree}
-        \AxiomC{} \UnaryInfC{$p \vdash_F p$}
+        \AxiomC{} \UnaryInfC{$\Gamma \mid \varphi \vdash \varphi$}
       \end{prooftree}
     \item\label{pravilo:tranz}
       \begin{prooftree}
-        \AxiomC{$p \vdash_F q$} \AxiomC{$q \vdash_F r$}
-        \BinaryInfC{$p \vdash_F r$}
+        \AxiomC{$\Gamma \mid \varphi \vdash \psi$} \AxiomC{$\Gamma \mid \psi \vdash \rho$}
+        \BinaryInfC{$\Gamma \mid \varphi \vdash r$}
       \end{prooftree}
     \item\label{pravilo:slepa-spr}
       \begin{prooftree}
-        \AxiomC{$p \vdash_F q$}
-        \UnaryInfC{$p \vdash_{F \cup \set{y}} q$}
+        \AxiomC{$\Gamma \mid \varphi \vdash \psi$}
+        \UnaryInfC{$\Gamma, y:Y \mid \varphi \vdash \psi$}
       \end{prooftree}
     \item\label{pravilo:subst}
       \begin{prooftree}
-        \AxiomC{$\varphi(y) \vdash_F \psi(y)$}
-        \UnaryInfC{$\varphi(b) \vdash_{F \setminus \set{y}} \psi(b)$}
+        \AxiomC{$\Gamma, y:B \mid \varphi \vdash \psi$}
+        \AxiomC{$\Gamma \mid b : B$}
+        \BinaryInfC{$\Gamma \mid \varphi[b/y] \vdash \psi[b/y]$}
       \end{prooftree}
-      kjer je $y : B$ spremenljivka, $b$ pa term tipa $B$ in $b$ lahko
+      kjer je $y : B$ spremenljivka, $b$ pa term sorte $B$ in $b$ lahko
       zamenjamo za $y$ v obeh izrazih.
     \end{enumerate}
   \item Logična pravila
     \begin{enumerate}[label*=.\arabic*)]
     \item\label{pravilo:resnica}
       \begin{prooftree}
-        \AxiomC{} \UnaryInfC{$p \vdash_F \top$}
+        \AxiomC{} \UnaryInfC{$\Gamma \mid \varphi \vdash \top$}
       \end{prooftree}
     \item\label{pravilo:konj}
       \begin{prooftree}
-        \AxiomC{$r \vdash_F p$} \AxiomC{$r \vdash_F q$} \doubleLine
-        \BinaryInfC{$r \vdash_F p \wedge q$}
+        \AxiomC{$\Gamma \mid \rho \vdash \varphi$} \AxiomC{$\Gamma \mid \rho \vdash \psi$} \doubleLine
+        \BinaryInfC{$\Gamma \mid \rho \vdash \varphi \wedge \psi$}
       \end{prooftree}
     \item\label{pravilo:eksist}
       \begin{prooftree}
-        \AxiomC{$\exists y \psi(y) \vdash_F p$} \doubleLine
-        \UnaryInfC{$\psi(y) \vdash_{F \cup \set{y}} p$}
+        \AxiomC{$\Gamma \mid \exists (y:Y) \psi \vdash \varphi$} \doubleLine
+        \UnaryInfC{$\Gamma, y:Y \mid \psi \vdash \varphi$}
       \end{prooftree}
     \end{enumerate}
   \item Pravila za enakost
     \begin{enumerate}[label*=.\arabic*)]
-    \item\label{pravilo:enakost-refl} $\top \vdash_x x = x$
+    \item\label{pravilo:enakost-refl} $x:X \mid \top \vdash x = x$
     \item\label{pravilo:enakost-sim}
-      $x_1 = x_2 \vdash_{x_1, x_2} x_2 = x_1$
+      $x_1,x_2:X \mid x_1 = x_2 \vdash x_2 = x_1$
     \item\label{pravilo:enakost-tranz}
-      $x_1 = x_2 \wedge x_2 = x_3 \vdash_{x_1, x_2, x_3} x_1 = x_3$
+      $x_1,x_2,x_3:X \mid x_1 = x_2 \wedge x_2 = x_3 \vdash x_1 = x_3$
     \item\label{pravilo:enakost-subst-fun}
-      $\bar{x}^1 = \bar{x}^2 \vdash_{\bar{x}^1, \bar{x}^2}
-      f(\bar{x}^1) = f(\bar{x}^2)$
+      $\bar{x},\bar{y}:\bar{X} \mid \bar{x} = \bar{y} \vdash
+      f(\bar{x}) = f(\bar{y})$
     \item\label{pravilo:enakost-subst-rel}
-      $\bar{x}^1 = \bar{x}^2 \wedge R(\bar{x}^1) \vdash_{\bar{x}^1,
-        \bar{x}^2} \mathrm{R}(\bar{x}^2)$ kjer je
-      $R \rightarrowtail \bar{X}$
+      $\bar{x},\bar{y} : \bar{X} \mid \bar{x} = \bar{y} \wedge R(\bar{x}) \vdash
+      \mathrm{R}(\bar{y})$, kjer je
+      $R : \bar{X}$
     \end{enumerate}
   \end{enumerate}
-  Če je $F = \emptyset$, potem označimo $\vdash_\emptyset$ kot
-  $\vdash$.  Izpeljavo $\emptyset \vdash_F \psi$ označimo kar kot
-  $\vdash_F \psi$.  Če imamo podano teorijo $\T$, potem izpeljavo v
+  Če je $\Gamma = \emptyset$, potem $\Gamma \mid \varphi \vdash \psi$
+  označimo kot $\varphi \vdash \psi$.
+  Izpeljavo $\Gamma \mid \emptyset \vdash \psi$ označimo kar kot
+  $\Gamma \mid \psi$.
+  Če imamo podano teorijo $\T$, potem izpeljavo v
   tej teoriji označujemo z
-  \[ T, \varphi \vdash_F \psi, \] ali alternativno kot
-  $\varphi \vdash_F^T \psi$, kjer $\vdash_F^T$ pomeni izpeljava po
+  \[ \Gamma \mid \varphi \vdash_{\mathbb{T}} \psi, \]
+  kar pomeni izpeljava po
   zgornjih pravilih sklepanja, z dodatnim aksiomom
-  $$\varphi \vdash_{\mathrm{FV}(\varphi) \cup \mathrm{FV}(\psi)} \psi,$$
-  za vsako sekvento $\varphi \Rightarrow \psi$ v $\T$.  Kot tretjo
-  možnost označevanja lahko uporabimo
-  ${T \vdash_F \varphi \implies \psi}$, kar nakazuje, da $\varphi$
-  implicira $\psi$, modulo $\T$.  Izpeljave gradimo v obliki dreves,
+  \[\mathrm{FV}(\varphi) \cup \mathrm{FV}(\psi) \mid \varphi \vdash \psi,\]
+  za vsako sekvento $\varphi \Rightarrow \psi$ v $\T$.
+  Izpeljave gradimo v obliki dreves,
   kjer so listi drevesa naše predpostavke in koren sklep izpeljave.
 \end{definicija}
 \begin{primer}\label{primer:vpeljava-eksist-kvantifikatorja}
-  Poglejmo si kako bi izpeljali pravilo za vnos eksistenčnega
+  Poglejmo si kako bi izpeljali pravilo za vpeljavo eksistenčnega
   kvantifikatorja, ki pravi
   \begin{prooftree}
-    \AxiomC{$r \vdash_F \psi(t)$} \RightLabel{\scriptsize
-      $\exists$-intro} \UnaryInfC{$r \vdash_F \exists x \psi(x)$}
+    \AxiomC{$\Gamma,t:T \mid \rho \vdash \psi(t)$}
+    \UnaryInfC{$\Gamma \mid \rho \vdash \exists (x:X) \psi(x)$}
   \end{prooftree}
   Podali bi ga v obliki drevesa
   \begin{prooftree}
-    \AxiomC{$r \vdash_F \psi(t)$} \AxiomC{}
+    \AxiomC{$\Gamma,t:T \mid \rho \vdash \psi(t)$} \AxiomC{}
     \RightLabel{\scriptsize(1.1)}
-    \UnaryInfC{$\exists x \psi(x) \vdash_F \exists x \psi(x)$}
+    \UnaryInfC{\(\Gamma \mid \exists (x:X) \psi(x) \vdash \exists (x:X) \psi(x)\)}
     \RightLabel{\scriptsize(2.3)}
-    \UnaryInfC{$\psi(x) \vdash_{F \cup \set{x}} \exists x \psi(x)$}
+    \UnaryInfC{$\Gamma, x:X \mid \psi(x) \vdash \exists (x:X) \psi(x)$}
+    \AxiomC{$\Gamma \mid t:T$}
     \RightLabel{\scriptsize(1.4)}
-    \UnaryInfC{$\psi(t) \vdash_F \exists x \psi(x)$}
+    \BinaryInfC{$\Gamma \mid \psi(t) \vdash \exists (x:X) \psi(x)$}
     \RightLabel{\scriptsize(1.2)}
-    \BinaryInfC{$r \vdash_F \exists x \psi(x)$}
+    \BinaryInfC{$\Gamma \mid \rho \vdash \exists (x:X) \psi(x)$}
   \end{prooftree}
 \end{primer}
 Brez dokaza podamo še naslednji dve izpeljavi. V prvi lahko prepoznamo
@@ -949,7 +959,7 @@ Frobeniusovo lemo \ref{lema:frobeniusova-lema}.
 %
 %
 \section{Model regularnega jezika}
-Recimo, da imamo jezik $\mathcal{L}(\Sigma)$. Podobno kot smo to
+Recimo, da imamo jezik \(\mathcal{L}(\Sigma)\). Podobno kot smo to
 storili za algebrajsko teorijo, bi radi definirali model tega jezika v
 regularni kategoriji.  Za to najprej potrebujemo interpretacijo.
 \begin{opomba}
@@ -957,38 +967,38 @@ regularni kategoriji.  Za to najprej potrebujemo interpretacijo.
   zožke, ki so v splošnem določeni le do izomorfizma natančno.
   Privzeli bomo, da lahko vedno \emph{izberemo} nek objekt, ki
   produkt, oziroma zožek, predstavlja. To pa pomeni, da moramo
-  privzeti neko verzijo Aksioma Izbire.
+  privzeti neko verzijo aksioma izbire.
 \end{opomba}
 \begin{definicija}
   Naj bo $\mathcal{L}(\Sigma)$ jezik. Potem \emph{interpretacija} $M$
   v kategoriji $\cat{C}$ sestoji iz:
   \begin{itemize}
-  \item Objekta $X^{(M)}$ v $\cat{C}$, za vsak osnovni tip
+  \item Objekta $X^{(M)}$ v $\cat{C}$, za vsako sorto
     $X \in \underline{\mathrm{sort}}_\Sigma$
   \item Morfizma $c^{(M)} : 1 \to X^{(M)}$, za vsako konstanto
-    $c \in \underline{\mathrm{const}}_\Sigma$. Tu je $1$ končni objekt
+    $c : () \to X^{(M)}$. Tu je $1$ končni objekt
     v $\cat{C}$.
   \item Morfizma
     $f^{(M)} : X_1^{(M)} \times \ldots \times X_n^{(M)} \to Y^{(M)}$
     za vsak funkcijski simbol
-    \[f : X_1 \times \ldots \times X_n \to Y \in
+    \[f : (X_1, \ldots, X_n) \to Y \in
       \underline{\mathrm{func}}_\Sigma.\]
   \item Podobjekta
     $R^{(M)} \rightarrowtail X_1^{(M)} \times \ldots \times X_n^{(M)}$
     za vsak relacijski simbol
-    \[R \rightarrowtail X_1 \times \ldots \times X_n \in
+    \[R : (X_1, \ldots, X_n) \in
       \underline{\mathrm{rel}}_\Sigma.\]
   \end{itemize}
   Produkt $X_1^{(M)} \times \ldots \times X_n^{(M)}$ označimo z
   $\bar{X}^{(M)}$.  Interpretacijo $M$ bomo razširili na vse terme in
-  formule jezika.  Za term $t$ tipa $Y$, s prostimi spremenljivkami
+  formule jezika.  Za term $t$ sorte $Y$, s prostimi spremenljivkami
   med $\bar{z} : \bar{Z}$ bomo predpisali morfizem
   $t(\bar{z})^{(M)} : \bar{Z}^{(M)} \to Y^{(M)}$, za formulo
   $\varphi$, s prostimi spremenljivkami med $\bar{z} : \bar{Z}$, pa
   predpišemo podobjekt $\set{\bar{z} \mid \varphi}^{(M)}$ objekta
   $\bar{Z}^{(M)}$ po naslednjih pravilih:
   \begin{itemize}
-  \item[(T1)] Če je $x$ spremenljivka tipa $X$, potem
+  \item[(T1)] Če je $x$ spremenljivka sorte $X$, potem
     $x(\bar{z})^{(M)}$ definiramo kot kompo\-zi\-tum
     $\bar{Z}^{(M)} \xrightarrow{\pi} X^{(M)}
     \xrightarrow{\mathrm{id}_X} X^{(M)}$.  Tu je $\mathrm{id}_X$
@@ -1001,8 +1011,8 @@ regularni kategoriji.  Za to najprej potrebujemo interpretacijo.
     interpretiramo kot kompozitum
     \[\bar{Z} \xrightarrow{!} 1 \xrightarrow{c^{(M)}} X^{(M)}.\]
 
-  \item[(T3)] Naj bo $f : X_1 \times \ldots \times X_n \to Y$
-    funkcijski simbol in $t_i$ term tipa $X_i$ za $i = 1, \ldots, n$.
+  \item[(T3)] Naj bo $f : (X_1, \ldots, X_n) \to Y$
+    funkcijski simbol in $t_i$ term sorte $X_i$ za $i = 1, \ldots, n$.
     Po indukciji imamo interpretacije
     $t_i(\bar{z})^{(M)} : \bar{Z}^{(M)} \to X_i^{(M)}$.  Potem term
     $f(t_1, \ldots, t_n)$ interpretiramo kot kompozitum
@@ -1017,7 +1027,7 @@ regularni kategoriji.  Za to najprej potrebujemo interpretacijo.
       "t_1(\bar{z})^{(M)}"] \ar[r, shift right, "t_2(\bar{z})^{(M)}"']
       & X^{(M)}\end{tikzcd}.
 
-  \item[(F2)] Za relacijski simbol $R \rightarrowtail \bar{X}$
+  \item[(F2)] Za relacijski simbol $R : \bar{X}$
     interpretiramo $\set{\bar{z} \mid R(t_1, \ldots, t_n)}^{(M)}$ kot
     podobjekt $\bar{Z}^{(M)}$, definiran diagramom povleka
     \begin{equation*}
@@ -1062,7 +1072,7 @@ regularni kategoriji.  Za to najprej potrebujemo interpretacijo.
 \end{opomba}
 \begin{primer}
   Naj bo $\mathcal{L}(\Sigma)$ jezik iz primera
-  \ref{primer:kompozitum} s tremi tipi $X,Y,Z$ in funkcijskimi simboli
+  \ref{primer:kompozitum} s tremi sortami $X,Y,Z$ in funkcijskimi simboli
   $f : X \to Y$, $g : Y \to Z$ in $h : X \to Z$.  Potem za
   interpretacijo $M$ v regularni kategoriji $\cat{C}$ velja, da je $M$
   model formule kompozituma $f(g(x)) = h(x)$, oziroma da
@@ -1100,7 +1110,7 @@ modele te teorije.  Za to bomo najprej potrebovali dve tehnični lemi o
 \end{lema}
 \begin{dokaz}
   Z indukcijo po strukturi $\varphi$.  Najprej pokažimo, da za terme
-  $t$ tipa~$Y$ velja
+  $t$ sorte~$Y$ velja
   $$t(\bar{z}, w)^{(M)} = t(\bar{z})^{(M)} \circ \pi : \interp{\bar{Z}} \times W^{(M)} \to \interp{Y}.$$
   \begin{itemize}
   \item Če je $t = y$ spremenljivka, potem je $x(\bar{z},w)^{(M)}$
@@ -1122,7 +1132,7 @@ modele te teorije.  Za to bomo najprej potrebovali dve tehnični lemi o
     
     \item Za funkcijski simbol
       $f : \interp{X_1} \times \ldots \interp{X_n} \to \interp{Y}$ in
-      terme $t_i$ tipov~$X_i$, po indukcijski predpostavki, za vsak
+      terme $t_i$ sort~$X_i$, po indukcijski predpostavki, za vsak
       $i = 1, \ldots, n$ velja
       \[t_i(\bar{z},w)^{(M)} = t_i(\bar{z})^{(M)} \circ \pi :
         \interp{\bar{Z}} \to \interp{X_i}.\] Torej dobimo
@@ -1144,7 +1154,7 @@ modele te teorije.  Za to bomo najprej potrebovali dve tehnični lemi o
       zaključek sledi, ker zožki komutirajo s produkti.
       
     \item Če je $\varphi \equiv R(\bar{t})$, za relacijski simbol
-      $R \rightarrowtail \bar{X}$, dobimo diagram povleka
+      $R : \bar{X}$, dobimo diagram povleka
       \begin{equation*}
         \begin{tikzcd}[column sep=normal]
           \set{(\bar{z},w) \,\middle|\, R(\bar{t})}^{(M)} \ar[d]
@@ -1264,7 +1274,7 @@ modele te teorije.  Za to bomo najprej potrebovali dve tehnični lemi o
   \end{dokaz}
   \begin{lema}\label{lema:substitucija}
     Naj bo $\psi$ formula s prostimi spremenljivkami izmed
-    $y, \bar{z}$ in $b$ term tipa $Y$ (s prostimi spremenljivkami
+    $y, \bar{z}$ in $b$ term sorte $Y$ (s prostimi spremenljivkami
     izmed $\bar{z}$), ki je ">zamenljiv"< za $y$ v~$\psi$, kar pomeni,
     da po substituciji nobena prosta spremenljivka v $b$ ne postane
     vezana v $\psi(b)$.  Potem je
@@ -1275,7 +1285,7 @@ modele te teorije.  Za to bomo najprej potrebovali dve tehnični lemi o
 \begin{dokaz}
   Z indukcijo na strukturo $\psi$.  Najprej opazimo, da podobno kot
   pri prejšnji lemi z indukcijo lahko dokažemo, da za vse terme $t$
-  tipa $X$ s prostimi spremenljivkami izmed $(y, \bar{z})$ velja
+  sorte $X$ s prostimi spremenljivkami izmed $(y, \bar{z})$ velja
   $$t(b/y, \bar{z})^{(M)} = t^{(M)} \circ \fprod{b^{(M)}, \mathrm{id}_{\bar{Z}}^{(M)}} : \bar{Z}^{(M)} \to Y^{(M)} \times \bar{Z}^{(M)}$$
   \begin{itemize}
   \item Če je $t \equiv x$ spremenljivka, potem to sledi iz
@@ -1296,7 +1306,7 @@ modele te teorije.  Za to bomo najprej potrebovali dve tehnični lemi o
       \end{tikzcd}
     \end{equation*}
 
-  \item Za funkcijski simbol $f : \bar{W} \to X$ in terme $t_i$ tipov
+  \item Za funkcijski simbol $f : \bar{W} \to X$ in terme $t_i$ sort
     $W_i$ to sledi iz definicije interpretacije in indukcijske
     predpostavke.  (ta diagram tukaj bi bil malo nabit z oznakami in
     pomoje nebi dodal nič k razumevanju?)
@@ -1350,37 +1360,38 @@ interpretacije v regularnih kategorijah.
   Naj bo $\T$ regularna teorija formulirana v
   jeziku~$\mathcal{L}(\Sigma)$ in naj bo $M$ model te teorije v
   regularni kategoriji $\cat{C}$.  Če v teoriji $\T$ obstaja izpeljava
-  $\T, \varphi \vdash_{\bar{x}} \psi$, potem je
+  $\bar{x}:\bar{X} \mid \varphi \vdash_{\T} \psi$, potem je
   $M \models \varphi \implies \psi$, oziroma je
   \[\set{\bar{x} \,\middle|\, \varphi}^{(M)} \leq \set{\bar{x}
       \,\middle|\, \psi}^{(M)},\] kot podobjekta $\interp{X}$.
 \end{izrek}
 \begin{dokaz}
-  Z indukcijo po izpeljavah $\varphi \vdash_{\bar{x}}^{T} \psi$
+  Z indukcijo po izpeljavah $\bar{x}:\bar{X} \mid \varphi \vdash_{\T} \psi$
   \begin{itemize}
   \item Če je $\varphi \implies \psi$ aksiom $\T$, to sledi iz
     definicije modela.
   \item Za pravilo \ref{pravilo:refl} to velja trivialno.
   \item Za pravilo \ref{pravilo:tranz} to velja, ker je
-    $\Sub(\bar{X}^{M})$ delno urejena množica, torej v posebnem
+    $\Sub(\bar{X}^{(M)})$ delno urejena množica, torej v posebnem
     tranzitivna.
   \item Za pravilo \ref{pravilo:slepa-spr} to velja po lemi
     \ref{lema:slepe-spremenljivke}.
   \item Za pravilo \ref{pravilo:subst} to velja po lemi
     \ref{lema:substitucija}.
   \item Za pravilo \ref{pravilo:resnica} to velja, ker
-    $\{\bar{x} \mid p\}^{(M)} \leq \bar{X}^{(M)} = \{\bar{x} \mid
+    $\{\bar{x} \mid \varphi\}^{(M)} \leq \bar{X}^{(M)} = \{\bar{x} \mid
     \top\}^{(M)}$, po definiciji.
   \item Za pravilo \ref{pravilo:konj} to velja, ker smo interpretacijo
     konjunkcije definirali kot
-    $\{ \bar{x} \mid p \land q\}^{(M)} = \{ \bar{x} \mid p\}^{(M)}
-    \land \{ \bar{x} q\}^{(M)}$.
+    $\{ \bar{x} \mid \varphi \land \psi\}^{(M)} = \{ \bar{x} \mid \varphi\}^{(M)}
+    \land \{ \bar{x} \mid \psi\}^{(M)}$.
   \item Podobno za \ref{pravilo:eksist} to velja, ker po definiciji
-    \[ \{ \bar{x} \mid \exists y \psi(y)\}^{(M)} =
+    \[ \{ \bar{x} \mid \exists (y:Y) \psi(y)\}^{(M)} =
       \exists_{\pi}\{(\bar{y}, \bar{x}) \mid \psi(y)\}^{(M)} \leq
-      \{\bar{x} \mid p\}^{(M)}\] če in samo če,
-    $\{(\bar{y},\bar{x}) \mid \psi(y)\}^{(M)} \leq Y^{(M)} \times
-    \{\bar{x} \mid p\}^{(M)} = \{(y,\bar{x}) \mid p\}^{(M)}$, kjer je
+      \{\bar{x} \mid \varphi\}^{(M)}\] če in samo če,
+    $\{(\bar{y},\bar{x}) \mid \psi(y)\}^{(M)} \leq
+    Y^{(M)} \times \{\bar{x} \mid \varphi\}^{(M)} =
+    \{(y,\bar{x}) \mid \varphi\}^{(M)}$, kjer je
     $\pi$ projekcija $Y^{(M)} \times \bar{X}^{(M)} \to \bar{X}^{(M)}$.
     Ponovno uporabimo lemo \ref{lema:slepe-spremenljivke}.
   \item Za pravilo \ref{pravilo:enakost-refl} to velja, ker je
@@ -1402,8 +1413,9 @@ interpretacije v regularnih kategorijah.
       \end{tikzcd}
     \end{equation*}
     Ker je
-    \[ \pi_1 i_{1,2}p = \pi_2 i_{1,2}p = \pi_2i_{2,3}q =
-      \pi_3i_{2,3}q,\] lahko morfizem
+    \[ \pi_1 \circ i_{1,2} \circ p = \pi_2 \circ i_{1,2} \circ p =
+      \pi_2 \circ i_{2,3} \circ q = \pi_3i_{2,3}q,\]
+    lahko morfizem
     $P \to X^{(M)} \times X^{(M)} \times X^{(M)}$ faktoriziramo skozi
     zožek projekcij $\pi_1$ in $\pi_3$, ki je ravno interpretacija
     $\{x_1, x_2, x_3 \mid x_1 = x_3\}$.
@@ -1423,7 +1435,7 @@ interpretacije v regularnih kategorijah.
     $\bar{X}^{(M)} \to \bar{X}^{(M)} \times \bar{X}^{(M)}$ zoži
     $f \pi_1$ in $f \pi_2$.
   \item Nazadnje, pri pravilu \ref{pravilo:enakost-subst-rel}, za
-    interpretacijo $\bar{x}_1 = \bar{x}_2 \land R(x_1)$ dobimo povlek
+    interpretacijo $\bar{x}_1 = \bar{x}_2 \land R(\bar{x}_1)$ dobimo povlek
     \begin{equation*}
       \begin{tikzcd}[column sep=5em]
         P \ar[d, hook, "p"'] \ar[r, hook, "q"] & \bar{X}^{(M)} \ar[d, hook, "\Delta"] \\
@@ -1446,7 +1458,7 @@ interpretacije v regularnih kategorijah.
 \section{Interna logika regularne kategorije}
 Naj bo $\cat{C}$ regularna kategorija.  Priredili ji bomo signaturo
 $\Sigma_\cat{C}$ in regularen jezik na naslednji način: Signatura
-$\Sigma_\cat{C}$ ima za osnovne tipe objekte kategorije~$\cat{C}$.
+$\Sigma_\cat{C}$ ima za sorte objekte kategorije~$\cat{C}$.
 Fiksiramo končni objekt in za vsak končen seznam objektov fiksiramo
 objekt, ki predstavlja njihov produkt.  Tu torej spet uporabimo aksiom
 izbire. Potem
@@ -1455,12 +1467,12 @@ izbire. Potem
 \item Za vsak morfizem $f : \bar{X} \to Y$ v jezik dodamo funkcijski
   simbol $f$.
 \item Za vsak podobjekt $R \hookrightarrow \bar{X}$ v jezik dodamo
-  relacijski simbol ${R \rightarrowtail \bar{X}}$.
+  relacijski simbol ${R : \bar{X}}$.
 \end{itemize}
 Jezik $\mathcal{L}(\Sigma_\cat{C})$ ima sedaj kanonično interpretacijo
 $I^{\cat{C}}$ v $\cat{C}$.  Teorijo $\T_\cat{C}$ definiramo kot
 teorijo te interpretacije, torej množico vseh sekvent
-$\varphi \vdash_F \psi$ v jeziku~$\mathcal{L}(\Sigma_\cat{C})$, ki so
+$\Gamma \mid \varphi \vdash \psi$ v jeziku~$\mathcal{L}(\Sigma_\cat{C})$, ki so
 resnične pod interpretacijo $I^\cat{C}$. Z zlorabo notacije bomo
 namesto $I^\cat{C}$ pisali kar $\cat{C}$, hkrati pa tudi ne bomo
 ločevali med npr.\ funkcijskim simbolom $f$ v tem jeziku in njegovo
@@ -1473,7 +1485,7 @@ internega jezika regularne teorije opišemo kategorične pojme.
     $X \xrightarrow{h} Z$ morfizmi v $\cat{C}$.  Potem je $h$
     kompozitum $f$ in $g$ natanko takrat, ko velja
     ${\cat{C} \models h(x) = g(f(x))}$, kjer je $x$ prosta
-    spremenljivka tipa $X$.
+    spremenljivka sorte $X$.
   \item Morfizem $m : X \to Y$ je monomorfizem natanko takrat, ko
     velja
     \[\cat{C} \models m(x_1) = m(x_2) \implies x_1 = x_2. \]
@@ -1646,7 +1658,7 @@ internega jezika regularne teorije opišemo kategorične pojme.
       $\mathbf{C} \models \exists z (f(z) = x \land g(z) = y)$.
       
     \item Zožek morfizmov $f$ in $g$ je enak
-      $\set{x \mid f(x) = g(x)}$.  Ker velja ${f e = g e}$, imamo
+      $\set{x \mid f(x) = g(x)}$.  Ker velja ${f \circ e = g \circ e}$, imamo
       faktorizacijo
       \begin{equation*}
         \begin{tikzcd}
@@ -1689,12 +1701,12 @@ konstanto $c:X$ in funkcijski simbol $f:\bar{X} \to Y$, potem diagrama
     \interp[N]{Y}
   \end{tikzcd}
 \end{equation*}
-komutirata. Za relacijski simbol $R \rightarrowtail \bar{X}$ pa to
+komutirata. Za relacijski simbol $R : \bar{X}$ pa to
 pomeni, da kompozitum
 $$(h_{X_1} \times \ldots \times h_{X_n}) \circ \interp{i} : \interp{R} \to \interp{\bar{X}} \to \interp[N]{\bar{X}}$$
 lahko faktoriziramo skozi inkluzijo
 $\interp[N]{R} \hookrightarrow \interp[N]{X}$.  Po indukciji potem
-velja, da za vsak term $t(\bar{z})$ tipa $Y$, diagram
+velja, da za vsak term $t(\bar{z})$ sorte $Y$, diagram
 \begin{equation*}
   \begin{tikzcd}
     \interp{\bar{Z}} \ar[d, "h_{\bar{Z}}"'] \ar[r, "{t(\bar{z})^{(M)}}"] & \interp{Y} \ar[d, "h_Y"] \\
@@ -1714,13 +1726,13 @@ $\interp[N]{\set{\bar{z} \,\middle|\, \varphi}}$.
   $\mathcal{L}(\Sigma)$) v $\cat{C}$, potem definiramo interpretacijo
   $F(M)$ jezika, $\mathcal{L}(\Sigma)$ v $\cat{D}$ kot:
   \begin{itemize}
-  \item Za tip $X$, iz $\underline{\mathrm{sort}}_\Sigma$, definiramo
+  \item Za sorto $X$, iz $\underline{\mathrm{sort}}_\Sigma$, definiramo
     $\interp[F(M)]{X} = F(\interp{X})$.
   \item Za konstanto $c:X$ definiramo
     $\interp[F(M)]{c} = F(\interp{x})$.
   \item Za funkcijski simbol $f : \bar{X} \to Y$ definiramo
     $\interp[F(M)]{f} = F(\interp{f})$.
-  \item Za relacijski simbol $R \rightarrowtail \bar{X}$ definiramo
+  \item Za relacijski simbol $R : \bar{X}$ definiramo
     $\interp[F(M)]{R} = F(\interp{R}) \rightarrowtail \bar{X}$.
   \end{itemize}
 \end{definicija}
@@ -1732,7 +1744,7 @@ $\interp[N]{\set{\bar{z} \,\middle|\, \varphi}}$.
   majhnih regularnih kategorij, v majhne kategorije.
 \end{lema}
 \begin{dokaz}
-  Najprej z indukcijo pokažemo, da za vse terme $t$ tipa $X$, katerih
+  Najprej z indukcijo pokažemo, da za vse terme $t$ sorte $X$, katerih
   proste spremenljivke so vsebovanje v $\bar{z} : \bar{Z}$ velja
   \[ t^{(F(M))} = F(t^{(M)}) : \bar{Z}^{(F(M))} \to X^{(F(M))}.\] Nato
   z indukcijo po strukturi formul pokažemo, da za vse regularne
@@ -1831,12 +1843,11 @@ $\T$, za katerega se bosta pojma veljavnosti in dokazljivosti ujemala.
   \begin{itemize}
   \item \emph{Objekti} so ekvivalenčni razredi parov
     $(\bar{X}, p(\bar{x}))$, kjer je $\bar{x} : \bar{X}$ končna
-    množica tipov in je $p$ regularna formula.  $\bar{X}$ imenujemo
+    množica sort in je $p$ regularna formula.  $\bar{X}$ imenujemo
     \emph{kontekst} za $p$. Ekvivalentne so lahko le formule v istem
     kontekstu.  Dva taka para $(\bar{X}, p_1(\bar{x}_1))$ in
     $(\bar{X}, p_2(\bar{x}_2))$ sta ekvivalentna, če
-      $$\T \vdash_{\bar{x}} p_1(\bar{x}) \Leftrightarrow p_2(\bar{x}),$$
-      kjer je $\bar{x}$ množica svežih spremenljivk tipa $\bar{X}$.
+      $$\Gamma \mid  \vdash_{\T} p_1(\bar{x}) \Leftrightarrow p_2(\bar{x}),$$
       Ekvivalenčne razrede označimo z $\set{\bar{x} \,\middle|\, p}$
       in konteksta ne pišemo eksplicitno (Tu smo na nek način vezali
       spremenljivke $\bar{x}$, ki se pojavljajo v $p$).
@@ -1845,9 +1856,11 @@ $\T$, za katerega se bosta pojma veljavnosti in dokazljivosti ujemala.
       formul v kontekstu $(\bar{X}\bar{Y}, \gamma(\bar{x},\bar{y}))$,
       kjer je $\gamma$ dokazljivo funkcijska:
       \begin{align*}
-        &T \vdash_{\bar{x},\bar{y}} \gamma(\bar{x},\bar{y})  \implies p(\bar{x}) \wedge q(\bar{y}) \\
-        &T \vdash_{\bar{x}} p(\bar{x}) \implies \exists \bar{y} \gamma(\bar{x},\bar{y}) \\
-        &T \vdash_{\bar{x},\bar{y}_1,\bar{y}_2} \gamma(\bar{x},\bar{y}_1) \wedge \gamma(\bar{x},\bar{y}_2) \implies \bar{y}_1 = \bar{y}_2
+        &\bar{x}:\bar{X},\bar{y}:\bar{Y} \mid \gamma(\bar{x},\bar{y})
+          \vdash p(\bar{x}) \wedge q(\bar{y}) \\
+        &\bar{x}:\bar{X} \mid (\bar{x}) \vdash \exists \bar{y} \gamma(\bar{x},\bar{y}) \\
+        &\bar{x}:\bar{X},\bar{y}_1,\bar{y}_2:\bar{Y} \mid
+          \gamma(\bar{x},\bar{y}_1) \wedge \gamma(\bar{x},\bar{y}_2) \vdash \bar{y}_1 = \bar{y}_2
       \end{align*}
       kar intuitivno pravi, da je $\gamma$ graf funkcije.  Dve taki
       formuli v kontekstu sta ekvivalentni, če sta dokazljivo
@@ -1864,39 +1877,45 @@ $\T$, za katerega se bosta pojma veljavnosti in dokazljivosti ujemala.
         \end{tikzcd}
       \end{equation*}           
       je podan z ekvivalenčnim razredom formule
-      $$\exists \bar{x}(\gamma(\bar{y},\bar{x}) \wedge \chi(\bar{x},\bar{z})).$$
+      \[ \exists (\bar{x}:\bar{X}) (\gamma(\bar{y},\bar{x}) \wedge \chi(\bar{x},\bar{z})).\]
     \end{itemize}
   \end{definicija}
   \begin{lema}
     Kompozitum dveh morfizmov v $\mathcal{R}(\T)$ je dobro definiran.
   \end{lema}
   \begin{dokaz}
+    Pri dokazu bomo zaradi preglednosti predpostavili, da so
+    formule odvisne le od ene proste spremenljivke. Na idejo dokaza to
+    ne vpliva in če bralec želi, si lahko to interpretira kot striktno
+    sintaktično substitucijo.
+
     Naj bosta $\set{\varphi} : \set{x \mid p} \to \set{y \mid q}$ in
     $\set{\psi} : \set{y \mid q} \to \set{z \mid r}$ morfizma v
     $\mathcal{R}(\mathbb{T})$.  Potem je
     $\set{\psi} \circ \set{\varphi}$ induciran z ekvivalenčnim
     razredom formule
-    \[ \exists y(\varphi(x,y) \land \psi(y,z)). \] To je res formula v
+    \[ \exists (y:Y)(\varphi(x,y) \land \psi(y,z)). \] To je res formula v
     $\mathcal{R}(\mathbb{T})$ s prostima spremenljivkama $x, z$.
     Pokazati moramo, da določa morfizem v
-    $\mathcal{R}(\mathbb{T})$. Najprej privzamemo
-    \[ \exists y(\varphi(x,y) \land \psi(y,z)) \vdash_{x,z}\exists
-      y(p(x) \land r(z)) \vdash_{x,z}p(x) \land r(z), \] ker
+    $\mathcal{R}(\mathbb{T})$. Najprej privzamemo $\exists y(\varphi(x,y) \land \psi(y,z))$.
+    Iz tega sledi $\exists y(p(x) \land r(z))$ in posledično $p(x) \land r(z)$, ker
     $\varphi(x,y) \vdash p(x) \land q(y)$ in
     $\psi(y,z) \vdash q(y) \land r(z)$.  S tem smo pokazali, da če
-    določa morfizem, ga res določa od $\set{x \mid q}$ do
+    določa morfizem, ga res določa iz $\set{x \mid q}$ v
     $\set{z \mid r}$.  Za totalnost računamo:
     \begin{align*}
-      p(x) &\vdash_{x} \exists y \varphi(x,y) \\
-           &\vdash_{x} \exists y \exists z (\varphi(x,y) \land \psi(y,z)) \\
-           &\vdash_{x} \exists z \exists y(\varphi(x,y) \land \psi(y,z)),
+      x:X \mid p(x) &\vdash \exists y \varphi(x,y) \\
+           &\vdash \exists y \exists z (\varphi(x,y) \land \psi(y,z)) \\
+           &\vdash \exists z \exists y(\varphi(x,y) \land \psi(y,z)),
     \end{align*}
     kjer smo za drugi korak uporabili
-    $\varphi(x,y) \vdash_{x,y} q(y) \vdash_{x,y} \exists z \psi(y,z)$.
+    \[x:X,y:Y \mid \varphi(x,y) \vdash q(y) \quad \text{in}\quad
+      y:Y \mid q(y) \vdash \exists (z:Z) \psi(y,z).\]
     Za funk\-cij\-skost ponovno računamo:
     \begin{align*}
-      \exists y(\varphi(x,y) \land \psi(y,z_{1})) &\land \exists y' (\varphi(x,y') \land \psi(y',z_{2})) \\
-                                                  &\vdash_{x,z_{1}, z_{2}} \exists y \exists y' (\varphi(x,y) \land \psi(y,z_{1}) \land \varphi(x,y') \land \psi(y',z_{2})) \\
+      x:X,z_1,z_2:Z \mid&
+      \exists (y:Y)(\varphi(x,y) \land \psi(y,z_{1})) \land \exists (y':Y) (\varphi(x,y') \land \psi(y',z_{2})) \\
+                                                  &\vdash \exists (y,y':Y) (\varphi(x,y) \land \psi(y,z_{1}) \land \varphi(x,y') \land \psi(y',z_{2})) \\
                                                   &\vdash y = y' \qquad \text{(ker $\varphi(x,y) \land \varphi(x,y')$)} \\
                                                   &\vdash z_{1} = z_{2} \qquad \text{(ker $\psi(y,z_{1}) \land \psi(y',z_{2}) \land y=y'$)}.
     \end{align*}
@@ -1944,30 +1963,30 @@ $\T$, za katerega se bosta pojma veljavnosti in dokazljivosti ujemala.
     če tega nebi storili, a to omogoča sledeči dokaz.
   \end{opomba}
   \begin{dokaz}
-    Uporabljali bomo lastnosti relacije $\vdash^T$.
+    Uporabljali bomo lastnosti relacije $\vdash_{\T}$.
+    Ponovno bomo predpostavljali, da so formule odvisne od ene same proste
+    spremenljivke.
     \begin{enumerate}[label=(\roman*)]
-    \item Za poljuben objekt $\set{\bar{x} \mid p}$ dobimo morfizem v
+    \item Za poljuben objekt $\set{x \mid p}$ dobimo morfizem v
       $\set{\cdot \mid \top}$ z ekvivalenčnim razredom
-      $(\bar{X}\emptyset, p(\bar{x}))$.  Recimo, da imamo dva morfizma
-      $\set{\bar{x} \mid \gamma}, \set{\bar{x} \mid \gamma'}$ iz
-      $\set{\bar{x} \mid p}$ v $\set{\cdot \mid \top}$.  Potem iz
+      $(\bar{X}\emptyset, p(x))$.  Recimo, da imamo dva morfizma
+      $\set{x \mid \gamma}, \set{x \mid \gamma'}$ iz
+      $\set{x \mid p}$ v $\set{\cdot \mid \top}$.  Potem iz
       definicije morfizma v $\mathcal{R}(\mathbb{T})$ sledi
-      \[ \gamma \vdash_{\bar{x}}^{\mathbb{T}} p(\bar{x})\quad
-        \text{in}\quad p(\bar{x}) \vdash_{\bar{x}}^{\mathbb{T}}
-        \exists \emptyset \gamma'(\bar{x}).\] Zadnja izpeljava je
+      \[x:X \mid  \gamma \vdash_{\T} p(x)\quad
+        \text{in}\quad x:X \mid  p(x) \vdash_{\T}
+        \exists \emptyset \gamma'(x).\] Zadnja izpeljava je
       ekvivalentna
-      $p(\bar{x}) \vdash_{\bar{x}}^{\mathbb{T}} \gamma'(\bar{x})$.  Iz
+      $x:X \mid p(x) \vdash_{\T} \gamma'(x)$.  Iz
       tranzitivnosti izpeljav sledi
-      $\gamma(\bar{x}) \vdash_{\bar{x}}^{\mathbb{T}}
-      \gamma'(\bar{x})$.  Podobno dobimo še izpeljavo
-      $\gamma'(\bar{x}) \vdash_{\bar{x}}^{\mathbb{T}} \gamma(\bar{x})
-      $, torej velja
-      $\T \vdash_{\bar{x}} \gamma(\bar{x}) \Leftrightarrow
-      \gamma'(\bar{x})$ in sta morfizma, ki ju ti dve formuli
+      $x:X \mid \gamma(x) \vdash_{\T}
+      \gamma'(x)$.  Podobno dobimo še izpeljavo
+      $\gamma'(x) \vdash_{\T}(x)
+      $, torej sta morfizma, ki ju ti dve formuli
       definirata, enaka.
     
-    \item Naj imata objekta $\set{x \mid p}$ in $\set{y \mid q}$,
-      zaradi enostavnosti po eno samo prosto spremenljivko.  Označimo
+    \item Naj bosta $\set{x \mid p}$ in $\set{y \mid q}$ objekta.
+      Označimo
       s $\set{\pi_1}$ in $\set{\pi_2}$ morfizma podana s formulama
       \[ \pi_1(x,y,x') \equiv p(x) \land q(y) \land x=x', \qquad
         \pi_2(x,y,y') \equiv p(x) \land q(y) \land y=y'.
@@ -2093,10 +2112,6 @@ $\T$, za katerega se bosta pojma veljavnosti in dokazljivosti ujemala.
     \end{enumerate}
   \end{lema}
   \begin{dokaz}
-    Pri dokazu bomo ponovno zaradi preglednosti predpostavili, da so
-    formule odvisne le od ene proste spremenljivke. Na potek dokaza to
-    ne vpliva in če bralec želi, si lahko to interpretira kot striktno
-    sintaktično substitucijo.
     \begin{enumerate}[label=(\roman*)]
     \item Najprej bomo uporabili opazko, da je $f : X \to Y$
       monomorfizem natanko takrat, ko je
@@ -2286,7 +2301,7 @@ $\T$, za katerega se bosta pojma veljavnosti in dokazljivosti ujemala.
   $\mathcal{U}$ jezika $\mathcal{L}(\Sigma)$:
   \begin{itemize}
   \item $\interp[\mathcal{U}]{X} = \set{x\,\middle|\, x = x}$, kjer je
-    $x$ spremenljivka tipa $X$.
+    $x$ spremenljivka sorte $X$.
   \item
     $\interp[\mathcal{U}]{c} = \set{x\,\middle|\, x = c} :
     \set{\cdot\,\middle|\, \top} \to \interp[\mathcal{U}]{X}$, kjer je
@@ -2309,7 +2324,7 @@ $\T$, za katerega se bosta pojma veljavnosti in dokazljivosti ujemala.
   majhnih regularnih kategorijah.
 \end{izrek}
 \begin{dokaz}
-Enostavna indukcija pokaže, da je za term $t(\bar{z})$ tipa $Y$
+Enostavna indukcija pokaže, da je za term $t(\bar{z})$ sorte $Y$
 $$\caninterp{t(\bar{z})} = \set{(\bar{z},y)\,\middle|\, t(\bar{z}) = y}$$
 morfizem $\caninterp{\bar{Z}} \to \caninterp{Y}$. Podobno za regularno
 formulo $\varphi(\bar{z})$ velja
@@ -2396,7 +2411,7 @@ komutira.
   \[ \mathfrak{F}_{\cat{C}}(M)(\mathcal{U}).\]
   To je model $\T$ v $\cat{C}$ podan z interpretacijami
   \begin{itemize}
-  \item Za vsak osnovni tip $X$ v $\T$ dobimo interpretacijo $\{ x \mid x = x\}^{(M)}$.
+  \item Za vsako sorto $X$ v $\T$ dobimo interpretacijo $\{ x \mid x = x\}^{(M)}$.
   \item Za konstanto $c : X$ dobimo morfizem $\{ x \mid x = c\}^{(M)} : 1 \to X^{(M)}$.
   \item Za funkcijski simbol $f : \bar{X} \to Y$ dobimo zožek
     \begin{equation*}
@@ -2405,7 +2420,7 @@ komutira.
         \ar[r, shift left, "f(\bar{x})^{(M)}"] \ar[r, shift right, "y^{(M)}"'] & Y^{(M)}
       \end{tikzcd}
     \end{equation*}
-  \item Za relacijski simbol $R \rightarrowtail \bar{X}$ dobimo podobjekt
+  \item Za relacijski simbol $R : \bar{X}$ dobimo podobjekt
     \[ \{ \bar{x} \mid R(\bar{x})\}^{(M)} \hookrightarrow X^{(M)}.\]
   \end{itemize}
   Z indukcijo to sedaj razširimo na vse terme in formule teorije $\T$.
