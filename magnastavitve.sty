@@ -23,7 +23,7 @@
 \usepackage{mathtools}
 \usepackage{thmtools} % extends the theorem enviroment functionality
 \usepackage{enumitem} % for enumeration enviroments
-\usepackage{commath}
+%\usepackage{commath} % ta paket povzroča problem pri uporabi dvopičja v tikzcd diagramih
 \usepackage{array,xparse}
 \usepackage{bm} % to make greek symbols bold
 %
@@ -175,7 +175,7 @@
 \DeclareMathOperator{\graf}{graph}
 \newcommand{\T}{\mathbb{T}}
 %
-\renewcommand{\set}[1]{\left\lbrace\,#1\,\right\rbrace}
+\newcommand{\set}[1]{\lbrace\,#1\,\rbrace}
 %
 \newcommand{\setb}[2]{\left\lbrace\, #1 \,\middle|\, #2 \,\right\rbrace}
 %
