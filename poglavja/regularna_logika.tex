@@ -1602,7 +1602,7 @@ internega jezika regularne teorije opišemo kategorične pojme.
       \end{equation*}
       lahko razberemo, da za objekt $X$ velja
       $\cat{C} \models x_1:X,x_2:X \mid x_1 = x_2$ natanko takrat, ko je
-      $\pi_1 = \pi_2$, kar pomeni, da za vsaka $t_1,t_2:T \to X$ velja
+      $\pi_1 = \pi_2$, kar pomeni, da za vsaka $$t_1,t_2:T \to X$$ velja
       $t_1 = t_2$. To pa pomeni, da je $X \to 1$ monomorfizem.
       Če upoštevamo
       še, da je $\cat{C} \models \exists (x:X) (x = x)$ natanko takrat, ko
@@ -1689,7 +1689,7 @@ internega jezika regularne teorije opišemo kategorične pojme.
       \[\mathbf{C} \models x:X \mid f(x) = g(x) \implies (\exists (z:Z) e(z) =
         x),\] če in samo če, je monomorfizem
       $\exists_{e}Z \hookrightarrow \set{x \mid f(x) = g(x)}$ tudi
-      regularen epimorfizem.
+      regularen epimorfizem.\qedhere
     \end{enumerate}
   \end{dokaz}%
   Prejšnje leme pokažejo, da lahko vse lastnosti, ki določajo
@@ -2117,19 +2117,27 @@ $\T$, za katerega se bosta pojma veljavnosti in dokazljivosti ujemala.
   in enako velja za drugi kompozitum.  Denimo, da imamo morfizem
     \[\set{\bar{z}:\bar{Z},\bar{x}:\bar{X} \mid \theta} : \set{\bar{z}:\bar{Z} \mid r} \to \set{\bar{x}:\bar{X} \mid p}\]
     za katerega velja
-    $\set{\gamma} \circ \set{\theta} = \set{\gamma'} \circ
-    \set{\theta}$.  Potem iščemo formulo $\mu$, ki bo definirala
-    morfizem $\set{z \mid r} \to \set{x' \mid \epsilon}$, ki bo
-    faktoriziral $\{ \theta\}$.  Definirajmo kar
-    $\mu(z,x') \equiv \theta(z,x')$. Ni se težko prepričati, da s tako
+\begin{multline*}
+    \set{\bar{z}:\bar{Z},\bar{x}:\bar{X} \mid \gamma} \circ \set{\bar{z}:\bar{Z},\bar{x}:\bar{X} \mid \theta} =\\
+    \set{\bar{z}:\bar{Z},\bar{x}:\bar{X} \mid \gamma'} \circ
+    \set{\bar{z}:\bar{Z},\bar{x}:\bar{X} \mid \theta}.
+    \end{multline*}
+    Potem iščemo formulo $\mu$, ki bo definirala
+    morfizem
+    $$\set{\bar{z}:\bar{Z} \mid r} \to \set{\bar{x}':\bar{X} \mid \epsilon},$$
+    ki bo
+    faktoriziral $\set{\bar{z}:\bar{Z},\bar{x}:\bar{X} \mid \theta}.$
+    Definirajmo kar
+    $\mu(\bar{z},\bar{x}') \equiv \theta(\bar{z},\bar{x}')$. Ni se težko prepričati, da s tako
     definicijo res dobimo morfizem
-    $\set{z \mid r} \to \set{x' \mid \epsilon}$.  Kompozitum z
-    $\set{\epsilon(x') \land x = x'}$ je po definiciji enak
-    \[ \exists x' (\theta(z,x') \land \epsilon(x') \land x=x'),\] kar
-    je ekvivalentno kar $\theta(z,x)$.  Iz
-    zgornje izpeljave je tudi očitno, da za vsak morfizem $\set{\mu}$,
+    $$\set{\bar{z}:\bar{Z} \mid r} \to \set{\bar{x}':\bar{X} \mid \epsilon}.$$
+    Kompozitum z
+    $\set{\epsilon(\bar{x}') \land \bar{x} = \bar{x}'}$ je po definiciji enak
+    \[ \bar{z}:\bar{Z}, \bar{x}:\bar{X} \mid \exists \bar{x}' (\theta(\bar{z},\bar{x}') \land \epsilon(\bar{x}') \land \bar{x}=\bar{x}'),\]
+    kar je ekvivalentno kar $\theta(\bar{z},\bar{x})$.  Iz
+    zgornje izpeljave je tudi očitno, da za vsak morfizem $\set{\bar{z}:\bar{Z},\bar{x}':\bar{X} \mid \mu}$,
     ki nam da tako faktorizacijo, velja
-    \[\T \vdash \mu \iff \theta.\]
+    \[\bar{z}:\bar{Z},\bar{x}':\bar{X} \mid \mu \iff \theta.\]
 
   \item Opis povlekov v interni logiki sledi iz konstrukcije povlekov
     iz produktov in zožkov, ki velja v vsaki kategoriji s končnimi
@@ -2138,18 +2146,18 @@ $\T$, za katerega se bosta pojma veljavnosti in dokazljivosti ujemala.
 \end{dokaz}
 \begin{lema}\label{lema:morfizmi-v-sintakticni-kategoriji}
   Morfizem
-  $\set{\varphi} : \set{\bar{x} \mid  p} \to
-  \set{\bar{y} \mid  q}$ je:
+  $\set{\bar{x}:\bar{X},\bar{y}:\bar{Y} \mid \varphi} : \set{\bar{x}:\bar{X} \mid  p} \to
+  \set{\bar{y}:\bar{Y} \mid  q}$ je:
   \begin{enumerate}[label=(\roman*)]
   \item monomorfizem natanko takrat, ko
-      $$\T \vdash_{\bar{x}_1,\bar{x}_2}  \exists \bar{y} \left( \varphi(\bar{x}_1,\bar{y}) \wedge \varphi(\bar{x}_2,\bar{y}) \right) \implies \bar{x}_1 = \bar{x}_2 ,$$
+      $$\bar{x}_1:\bar{X},\bar{x}_{2}:\bar{X} \mid \exists (\bar{y}:\bar{Y}) \left( \varphi(\bar{x}_1,\bar{y}) \wedge \varphi(\bar{x}_2,\bar{y}) \right) \vdash \bar{x}_1 = \bar{x}_2 ,$$
     \item regularen epimorfizem natanko takrat, ko
-      $$\T \vdash_{\bar{y}} q(\bar{y}) \implies \exists \bar{x} \varphi(\bar{x},\bar{y}).$$
+      $$\bar{y}:\bar{Y} \mid  q(\bar{y}) \vdash \exists (\bar{x}:\bar{X}) \varphi(\bar{x},\bar{y}).$$
     \item Morfizem
-      $\set{p(\bar{x}) \wedge \bar{x} = \bar{x}'} :
-      \set{\bar{x} \mid  p } \to \set{\bar{x} \mid  q}$ je
+      $\bar{x}:\bar{X},\bar{x}':\bar{X} \mid \set{p(\bar{x}) \wedge \bar{x} = \bar{x}'} :
+      \set{\bar{x}:\bar{X} \mid  p } \to \set{\bar{x}:\bar{X} \mid  q}$ je
       monomorfizem natanko takrat, ko
-      $$\T \vdash_{\bar{x}} p \implies q.$$
+      $$\bar{x}:\bar{X} \mid p \vdash q.$$
     \end{enumerate}
   \end{lema}
   \begin{dokaz}
@@ -2162,155 +2170,217 @@ $\T$, za katerega se bosta pojma veljavnosti in dokazljivosti ujemala.
           X \ar[r, "f"'] & Y
         \end{tikzcd}
       \end{equation*}
-      povlek. Po prejšnji lemi lahko povlek $\{\varphi\}$ izrazimo kot
-      \[ \{ x_1,x_2 \mid \exists y(\varphi(x_1,y) \land
-        \varphi(x_2,y)) \}.\] Da je $\{\varphi\}$ monomorfizem je
+      povlek. Po prejšnji lemi lahko povlek $\set{\bar{x}:\bar{X},\bar{y}:\bar{Y} \mid \varphi}$
+      izrazimo kot
+      \[ \{ \bar{x}_{1}:\bar{X} ,\bar{x}_{2}:\bar{X}  \mid \exists (\bar{y}:\bar{Y})(\varphi(\bar{x}_1,\bar{y}) \land
+        \varphi(\bar{x}_2,\bar{y})) \}.\]
+      Da je $\set{\bar{x}:\bar{X},\bar{y}:\bar{Y} \mid \varphi}$
+      monomorfizem je
       torej ekvivalentno temu, da v $\mathcal{R}(\mathbb{T})$ velja
-      \[ \{ x_1,x_2 \mid \exists y(\varphi(x_1,y) \land
-        \varphi(x_2,y)) \} = \{x \mid p\} \] Če predpostavimo, da sta
+      \[ \{ \bar{x}_{1}:\bar{X} ,\bar{x}_{2}:\bar{X}  \mid \exists (\bar{y}:\bar{Y})(\varphi(\bar{x}_1,\bar{y}) \land
+        \varphi(\bar{x}_2,\bar{y})) \} = \{\bar{x}:\bar{X} \mid p\} \]
+      Če predpostavimo, da sta
       ta dva objekta enaka v $\mathcal{R}(\mathbb{T})$, mora jasno
       veljati
-    $$\T \vdash_{x_1,x_2}  \exists y \left( \varphi(x_1,y) \wedge \varphi(x_2,y) \right) \implies x_1 = x_2 .$$
+    $$\bar{x}_1:\bar{X},\bar{x}_2:\bar{X} \mid \exists (\bar{y}:\bar{Y}) \left( \varphi(\bar{x}_1,\bar{y}) \wedge \varphi(\bar{x}_2,\bar{y}) \right) \vdash \bar{x}_1 = \bar{x}_2.$$
     Obratno, če zgornja enačba velja, potem iz
-    $\exists y(\varphi(x_1,y) \land \varphi(x_2,y))$ sledi
-    \[p(x_1) \land p(x_2) \land x_1 = x_2,\] kar je ekvivalentno
-    $p(x_1)$.
+    $\exists (\bar{y}:\bar{Y})(\varphi(\bar{x}_1,\bar{y}) \land \varphi(\bar{x}_2,\bar{y}))$ sledi
+    \[p(\bar{x}_1) \land p(\bar{x}_2) \land \bar{x}_1 = \bar{x}_2,\] kar je ekvivalentno
+    $p(\bar{x}_1)$.
 
-  \item Najprej bomo pokazali, da je
+  \item Označimo s $\theta(\bar{x}_{1},\bar{x}_2)$ formulo
+    $\exists (\bar{y}:\bar{Y})(\varphi(x_1,y) \land \varphi(x_2,y))$ in z $\Gamma$ kontekst
+    $\bar{x}_1:\bar{X},\bar{x}_2:\bar{X}$.
+    Pokažimo, da je
     \begin{equation}\label{diag:jedrni-par-v-sintakticni-kategoriji}
-      \begin{tikzcd}[column sep=normal]
-        \{ x_1,x_2 \mid \exists y(\varphi(x_1,y) \land \varphi(x_2,y))
-        \} \ar[r, shift left, "\{\pi_1\}"] \ar[r, shift right,
-        "\{\pi_2\}"'] & \{x \mid p\} \ar[r, "\{\varphi\}"] & \{y \mid
-        q\}
+      \begin{tikzcd}[column sep =7em]
+        \{ \Gamma \mid \theta(\bar{x}_1,\bar{x}_2))
+        \} \ar[r, shift left, "{\{\Gamma ,\bar{x}:\bar{X} \mid \pi_1\}}"]
+        \ar[r, shift right, "{\{\Gamma,\bar{x}:\bar{X} \mid \pi_2\}}"'] &
+        \{\bar{x}:\bar{X}  \mid p\} \ar[r, "{\{\bar{x}:\bar{X},\bar{y}:\bar{Y} \mid \varphi \}}"] &
+        \{\bar{y}:\bar{Y} \mid q\}
       \end{tikzcd}
     \end{equation}
     kozožek natanko takrat, ko velja
-    $$\T \vdash_{\bar{y}} q(\bar{y}) \implies \exists \bar{x} \varphi(\bar{x},\bar{y}).$$
-    Nato bomo pokazali, da je $\{ \varphi\}$ epimorfizem natanko
+    $$\bar{y}:\bar{Y} \mid q(\bar{y}) \vdash \exists \bar{x} \varphi(\bar{x},\bar{y}).$$
+    Nato bomo pokazali, da je $\{\bar{x}:\bar{X},\bar{y}:\bar{Y} \mid \varphi \}$ epimorfizem natanko
     takrat, ko je \eqref{diag:jedrni-par-v-sintakticni-kategoriji}
     kozožek.
 
 
-    Projekcija~$\{\pi_1\}$ je inducirana s formulo
-    \[\exists y(\varphi(x_1,y) \land \varphi(x_2,y) \land x_1 = x )\]
-    in $\{\pi_2\}$ s podobno.  Enakost
-    $\{\varphi\} \circ \{\pi_1\} = \{ \varphi\} \circ \{\pi_2\}$
-    velja, ker $\{\pi_1\}$ in $\{\pi_2\}$ dobimo iz povleka. Denimo
-    sedaj, da imamo objekt $\{ z \mid r\}$ in morfizem
-    $\{\psi\} : \{ x \mid p\} \to \{ z \mid r\}$, za katerega velja
-    \[\{\psi\} \circ \{\pi_1\} = \{\psi\} \circ \{\pi_2\}.\] To po
-    definiciji pomeni
-    \[ \T \vdash_{x_1,x_2,z} \left(\exists x (\pi_1(x_1,x_2,x) \land
-        \psi(x,z)) \iff \exists x (\pi_2(x_1,x_2,x) \land
-        \psi(x,z))\right).
-    \]
+    Projekcija~$\{\Gamma ,\bar{x}:\bar{X} \mid \pi_1\}$ je inducirana s formulo
+    \[\Gamma \mid \theta(\bar{x}_1,\bar{x}_2) \land \bar{x}_1 = \bar{x} \]
+    in $\{\Gamma,\bar{x}:\bar{X} \mid \pi_2\}$ s podobno.  Enakost
+    $$\{\bar{x}:\bar{X},\bar{y}:\bar{Y} \mid \varphi \} \circ \{\Gamma ,\bar{x}:\bar{X} \mid \pi_1\} =
+    \{\bar{x}:\bar{X},\bar{y}:\bar{Y} \mid \varphi \} \circ \{\Gamma ,\bar{x}:\bar{X} \mid \pi_2\}$$
+    velja, ker $\{\Gamma ,\bar{x}:\bar{X} \mid \pi_1\}$ in $\{\Gamma ,\bar{x}:\bar{X} \mid \pi_2\}$
+    dobimo iz povleka. Denimo
+    sedaj, da imamo objekt $\{\bar{z}:\bar{Z} \mid r\}$ in morfizem
+    $$\{\bar{x}:\bar{X},\bar{z}:\bar{Z} \mid \psi\} : \{\bar{x}:\bar{X} \mid p\} \to \{\bar{z}:\bar{Z} \mid r\},$$
+    za katerega velja
+    \[\{\bar{x}:\bar{X},\bar{z}:\bar{Z} \mid \psi\} \circ \{\Gamma ,\bar{x}:\bar{X} \mid \pi_1\} =
+      \{\bar{x}:\bar{X},\bar{z}:\bar{Z} \mid \psi\} \circ \{\Gamma ,\bar{x}:\bar{X} \mid \pi_2\}.\]
+    To po definiciji pomeni
+\begin{multline*}
+    \Gamma,\bar{z}:\bar{Z} \mid \exists (\bar{x}:\bar{X} ) (\pi_1(\bar{x}_1,\bar{x}_2,\bar{x}) \land
+      \psi(\bar{x},\bar{z})) \\
+      \iff \exists (\bar{x}:\bar{X} ) (\pi_2(\bar{x}_1,\bar{x}_2,\bar{x}) \land
+        \psi(\bar{x},\bar{z})).
+   \end{multline*}
     Definirajmo formulo
-    \[ \eta(x,z) \equiv \exists x(\varphi(x,y) \land \psi(x,z)).\]
+    \[ \bar{y}:\bar{Y},\bar{z}:\bar{Z} \mid \eta(\bar{y},\bar{z}) \equiv
+      \exists (\bar{x}:\bar{X} )(\varphi(\bar{x},\bar{y}) \land \psi(\bar{x},\bar{z})).\]
     Pokazati želimo, da ta formula inducira enoličen morfizem
-    ${\{y \mid q\} \to \{z \mid r\}}$, za katerega velja
-    $\{\psi\} = \{ \eta\} \circ \{\varphi\}$.  Najprej pokažimo, da
+    $${\{\bar{y}:\bar{Y} \mid q\} \to \{\bar{z}:\bar{Z} \mid r\}},$$
+    za katerega velja
+    $$\{\bar{x}:\bar{X},\bar{z}:\bar{Z} \mid \psi\} = \{\bar{y}:\bar{Y},\bar{z}:\bar{Z} \mid \eta\} \circ
+    \{\bar{x}:\bar{X},\bar{y}:\bar{Y} \mid \varphi \}.$$
+    Najprej pokažimo, da
     res definira morfizem v $\mathcal{R}(\mathbb{T})$. Računamo:
     \begin{align*}
-      \eta(y,z) &\vdash \exists x(p(x) \land q(y) \land p(x) \land r(z)) \\
-                &\vdash q(y) \land r(z).
+      \bar{y}:\bar{Y},\bar{z}:\bar{Z} \mid \eta(\bar{y},\bar{z}) &\vdash \exists (\bar{x}:\bar{X} )(p(\bar{x}) \land q(\bar{y}) \land p(\bar{x}) \land r(\bar{z})) \\
+                &\vdash q(\bar{y}) \land r(\bar{z}).
     \end{align*}
     Za totalnost imamo izpeljavo:
     \begin{align*}
-      q(y) &\vdash\exists x(\varphi(x,y)) \\
-           &\vdash \exists x(p(x) \land q(y)) \\
-           &\vdash \exists x (\exists z \psi(x,z)) \\
-           &\vdash \exists x(\varphi(x,y) \land \exists z \psi(x,z)) \\
-           &\vdash \exists z ( \exists x(\varphi(x,y) \land \psi(x,z))) \\
-           &\equiv \eta(y,z).
+      \bar{y}:\bar{Y},\bar{z}:\bar{Z} \mid  q(\bar{y}) &\vdash\exists (\bar{x}:\bar{X} )(\varphi(\bar{x},\bar{y})) \\
+           &\vdash \exists (\bar{x}:\bar{X} )(p(\bar{x}) \land q(\bar{y})) \\
+           &\vdash \exists (\bar{x}:\bar{X} ) (\exists \bar{z}' \psi(\bar{x},\bar{z}')) \\
+           &\vdash \exists (\bar{x}:\bar{X} )(\varphi(\bar{x},\bar{y}) \land \exists (\bar{z}':\bar{Z}) \psi(\bar{x},\bar{z}')) \\
+           &\vdash \exists (\bar{z}':\bar{Z}) ( \exists (\bar{x}:\bar{X})(\varphi(\bar{x},\bar{y}) \land \psi(\bar{x},\bar{z}'))) \\
+           &\equiv \eta(\bar{y},\bar{z}).
     \end{align*}
     Za zadnji pogoj imamo:
-    \[ \exists x(\varphi(x,y) \land \psi(x,z_1)) \land \exists x'
-      (\varphi(x',y) \land \psi(x',z_2)) \vdash \exists
-      x,x'(\varphi(x,y) \land \varphi(x',y)).\] Iz predpostavke potem
-    sledi $z_1 = z_2$, kar smo želeli pokazati.  Za kompozitum moramo
-    pogledati formulo
-    \[ \exists y(\varphi(x,y) \land \eta(y,z)) \equiv \exists
-      y(\varphi(x,y) \land \exists x'(\varphi(x',y) \land \psi(x',z))
-      ), \] iz česar želimo izpeljati $\psi(x,z)$. Najprej izpostavimo
-    $\exists x'$ in dobimo
-    \[\exists y \exists x'( \varphi(x,y) \land \varphi(x',y) \land
-      \psi(x',z)). \] Po predpostavki potem iz
-    $\varphi(x,y) \land \varphi(x',y)$ sledi
-    $\psi(x',z) \land \psi(x,z)$, iz česar seveda sledi $\psi(x,z)$.
+\begin{align*}
+  \bar{y}:\bar{Y},\bar{z}_{1}:\bar{Z},\bar{z}_{2}:\bar{Z} \mid
+  \exists (\bar{x}:\bar{X})(\varphi&(\bar{x},\bar{y}) \land \psi(\bar{x},\bar{z}_1)) \\
+  \land \exists (\bar{x}':\bar{X}&)
+  (\varphi(\bar{x}',\bar{y}) \land \psi(\bar{x}',\bar{z}_2)) \\
+  &\vdash \exists
+      \bar{x},\bar{x}'(\varphi(\bar{x},\bar{y}) \land \varphi(\bar{x}',\bar{y})).
+      \end{align*}
+    Iz predpostavke potem
+    sledi $\bar{z}_1 = \bar{z}_2$, kar smo želeli pokazati.
+    Za kompozitum moramo pogledati formulo
+\begin{multline*}
+  \bar{x}:\bar{X},\bar{z}:\bar{Z} \mid \exists (\bar{y}:\bar{Y})(\varphi(\bar{x},\bar{y}) \land \eta(\bar{y},\bar{z})) \\
+  \equiv \exists
+      (\bar{y}:\bar{Y})(\varphi(\bar{x},\bar{y}) \land \exists \bar{x}'(\varphi(\bar{x}',\bar{y}) \land \psi(\bar{x}',\bar{z}))
+      ),
+      \end{multline*}
+    iz česar želimo izpeljati $\psi(\bar{x},\bar{z})$. Najprej izpostavimo
+    $\exists (\bar{x}':\bar{X})$ in dobimo
+    \[\exists (\bar{y}:\bar{Y}) \exists (\bar{x}':\bar{X})( \varphi(\bar{x},\bar{y}) \land \varphi(\bar{x}',\bar{y}) \land
+      \psi(\bar{x}',\bar{z})). \]
+    Po predpostavki potem iz
+    $\varphi(\bar{x},\bar{y}) \land \varphi(\bar{x}',\bar{y})$ sledi
+    $\psi(\bar{x}',\bar{z}) \land \psi(\bar{x},\bar{z})$, iz česar seveda sledi $\psi(\bar{x},\bar{z})$.
     Za enoličnost privzamemo, da obstaja drug morfizem
-    $\{\eta\} : \{y \mid q\} \to \{z \mid r\}$, za katerega velja
-    $\{\psi\} = \{\tilde{\eta}\} \circ \{\varphi\}$. Potem imamo
+    $\{\bar{y}:\bar{Y},\bar{z}:\bar{Z} \mid \tilde{\eta}\} : \{\bar{y}:\bar{Y} \mid q\} \to \{\bar{z}:\bar{Z} \mid r\}$,
+    za katerega velja
+    $\{\bar{x}:\bar{X},\bar{z}:\bar{Z} \mid \psi\} =
+    \{\bar{y}:\bar{Y},\bar{z}:\bar{Z} \mid \tilde{\eta}\} \circ \{\bar{x}:\bar{X},\bar{y}:\bar{Y} \mid \varphi \}$.
+    Potem imamo
     \begin{align*}
-      \exists y (\varphi(x,y) \land \tilde{\eta}&(y,z)) \land \psi(x,z) \\
-                                                &\vdash \exists y (\exists x(\varphi(x,y) \land \psi(x,z)) \land \tilde{\eta}(y,z)) \\
-                                                &\vdash (\eta(y,z) \land \tilde{\eta}(y,z))
+     \bar{x}:\bar{X},\bar{y}:\bar{Y}, \bar{z}:\bar{Z} \mid \exists (&\bar{y}':\bar{Y})(\varphi(\bar{x},\bar{y}') \land \tilde{\eta}(\bar{y}',\bar{z})) \land \psi(\bar{x},\bar{z}) \\
+                                                &\vdash \exists (\bar{y}':\bar{Y}) (\exists (\bar{x}:\bar{X} )(\varphi(\bar{x},\bar{y}') \land \psi(\bar{x},\bar{z})) \land \tilde{\eta}(\bar{y}',\bar{z})) \\
+                                                &\vdash (\eta(\bar{y},\bar{z}) \land \tilde{\eta}(\bar{y},\bar{z}))
     \end{align*}
-    Torej sta $\{\eta\}$ in $\{\tilde{\eta}\}$ isti morfizem v
+    Torej sta $\{\bar{y}:\bar{Y},\bar{z}:\bar{Z} \mid \eta\}$ in
+    $\{\bar{y}:\bar{Y},\bar{z}:\bar{Z} \mid \tilde{\eta}\}$ isti morfizem v
     $\mathcal{R}(\mathbb{T})$. Za dokaz v drugo smer definiramo objekt
-    $\{ y \mid \exists x \varphi(x,y)\}$, ki si ga lahko predstavljamo
-    kot sliko morfizma $\{\varphi\}$ in morfizem iz $\{x \mid p\}$ v
-    to sliko, ki ga predstavlja kar formula $\varphi$. Jasno bo ta
-    formula res določala morfizem z zgornjo kodomeno. Po definiciji
-    $\varphi$ bo ta morfizem tudi komutiral s projekcijama $\{\pi_1\}$
-    in $\{\pi_2\}$. To bo porodilo enolični morfizem
-    \[\{\mu\} : \{y \mid q\} \to \{ y \mid \exists x \varphi(x,y)\},\]
-    ki bo faktoriziral morfizem v to sliko, določen s formulo
-    $\varphi$. Ampak to pa pomeni, da mora biti $\{\mu\}$ izomorfizem,
+    $\{ \bar{y}:\bar{Y} \mid \exists (\bar{x}:\bar{X} ) \varphi(\bar{x},\bar{y})\}$,
+    ki si ga lahko predstavljamo
+    kot sliko morfizma $\{\bar{x}:\bar{X},\bar{y}:\bar{Y} \mid \varphi \}$
+    in morfizem iz $\{\bar{x}:\bar{X} \mid p\}$ v
+    to sliko, ki ga predstavlja kar formula $\varphi$. Jasno ta
+    formula res določa morfizem z zgornjo kodomeno. Po definiciji
+    $\varphi$ ta morfizem tudi komutira s projekcijama $\{\Gamma ,\bar{x}:\bar{X} \mid \pi_1\}$
+    in $\{\Gamma ,\bar{x}:\bar{X} \mid \pi_2\}$. To porodi enolični morfizem
+    \[\{\bar{y}:\bar{Y} \mid \mu\} : \{\bar{y}:\bar{Y} \mid q\} \to \{ \bar{y}:\bar{Y} \mid \exists (\bar{x}:\bar{X} ) \varphi(\bar{x},\bar{y})\},\]
+    ki faktorizira morfizem v to sliko, določen s formulo
+    $\varphi$. Ampak to pa pomeni, da mora biti $\{\bar{y}:\bar{Y} \mid \mu\}$ izomorfizem,
     kajti v drugo smer imamo očitno inkluzijo slike. Torej, če
-    predpostavimo $q(y)$, velja $\exists x \varphi(x,y)$.
-
+    predpostavimo $q(\bar{y})$, velja
+    $$\exists (\bar{y}:\bar{Y}) \varphi(\bar{x},\bar{y}).$$
+    
 
     Pokažimo sedaj še drugi del trditve.  Če je
     \eqref{diag:jedrni-par-v-sintakticni-kategoriji} kozožek, je
-    $\{ \varphi\}$ jasno kozožek, saj je to njegov jedrni
+    $\{\bar{x}:\bar{X},\bar{y}:\bar{Y} \mid \varphi \}$ jasno kozožek, saj je to njegov jedrni
     par. Obratno, naj obstajajo $r, \eta, \theta$ taki, da je
     \begin{equation*}
-      \begin{tikzcd}[column sep=normal]
-        \lbrace z \mid r \rbrace \ar[r, shift left, "\lbrace \eta
-        \rbrace"] \ar[r, shift right, "\lbrace \theta \rbrace"'] &
-        \lbrace x \mid p \rbrace \ar[r, "\lbrace \varphi \rbrace"] &
-        \lbrace y \mid q \rbrace
+      \begin{tikzcd}[column sep=7em]
+        {\lbrace \bar{x}:\bar{X} \mid p \rbrace}
+        \ar[r, "{\lbrace \bar{x}:\bar{X},\bar{z}:\bar{Z} \mid \varphi \rbrace}"] &
+        {\lbrace \bar{y}:\bar{Y} \mid q \rbrace}
       \end{tikzcd}
     \end{equation*}
-    kozožek. Pokazati želimo, da to potem velja tudi za
+    kozožek morfizmov
+    \begin{equation*}
+      \begin{tikzcd}[column sep=7em]
+        \lbrace \bar{z}:\bar{Z} \mid r \rbrace \ar[r, shift left, "{\lbrace \bar{z}:\bar{Z},\bar{x}:\bar{X} \mid \eta
+        \rbrace}"] \ar[r, shift right, "{\lbrace \bar{z}:\bar{Z},\bar{x}:\bar{X} \mid \theta \rbrace}"'] & {\lbrace \bar{x}:\bar{X} \mid p \rbrace}
+      \end{tikzcd}
+    \end{equation*}
+    Pokazati želimo, da to potem velja tudi za
     \eqref{diag:jedrni-par-v-sintakticni-kategoriji}. V ta namen
     recimo, da imamo morfizem
-    $\{ \sigma \} : \{ x \mid p\} \to \{ w \mid s\}$ za katerega velja
-    $\{ \sigma\} \circ \{\pi_1\} = \{ \sigma\} \circ \{\pi_2\}$. V tem
-    primeru zadostuje najti morfizem $\{\chi\}$, ki faktorizira
-    $\{\eta\}$ in $\{\theta\}$ skozi $\{\pi_1\}$ in $\{\pi_2\}$. Potem
+    $\{ \bar{x}:\bar{X}, \bar{w}:\bar{W} \mid \sigma \} :
+    \{ \bar{x}:\bar{X} \mid p\} \to \{ \bar{w}:\bar{W} \mid s\}$ za katerega velja
+    $$\{ \bar{x}:\bar{X}, \bar{w}:\bar{W} \mid \sigma \} \circ \{\Gamma ,\bar{x}:\bar{X} \mid \pi_1\} =
+    \{ \bar{x}:\bar{X}, \bar{w}:\bar{W} \mid \sigma \} \circ \{\Gamma ,\bar{x}:\bar{X} \mid \pi_2\}.$$
+    V tem
+    primeru zadostuje najti morfizem $\{\bar{z}:\bar{Z},\Gamma \mid \chi\}$, ki faktorizira
+    ${\lbrace \bar{z}:\bar{Z},\bar{x}:\bar{X} \mid \eta\rbrace}$ in
+    ${\lbrace \bar{z}:\bar{Z},\bar{x}:\bar{X} \mid \theta \rbrace}$ skozi
+    $\{\Gamma ,\bar{x}:\bar{X} \mid \pi_1\}$ in $\{\Gamma ,\bar{x}:\bar{X} \mid \pi_2\}$. Potem
     dobimo
-    \[ \{\sigma\} \circ \{\pi_1\} \circ \{\chi\} = \{\sigma\} \circ
-      \{\pi_2\} \circ \{\chi\}\] iz česar sledi
-    \[ \{ \sigma\} \circ \{\eta\} = \{\sigma\} \circ \{\theta\}\] kar
-    nam da enoličen morfizem $\{\mu\}$, ki faktorizira $\{\sigma\}$,
-    torej $\{\varphi\}$ res določa kozožek $\{\pi_1\}$ in
-    $\{\pi_2\}$. Definiramo
-    \[ \chi(z, x_1, x_2) \equiv \eta(z,x_1) \land \theta(z,x_2).\] Iz
-    predpostavke $\chi(z,x_1,x_2)$ jasno sledi $r(z)$.  Da pokažemo,
-    da določa pravilno kodomeno moramo najti tak $y$, da velja
-    $\varphi(x_1,y) \land \varphi(x_2,y)$.  Po definiciji $\chi$
-    dobimo neka $y_1, y_2$, za katera velja $\eta(x_1,y_1)$ in
-    $\theta(x_2,y_2)$, ki sta v principu lahko različna. Ker pa
-    $\{\varphi\}$ izenači $\{\eta\}$ in $\{\theta\}$, sledi
-    $y_1 = y_2$. Torej smo našli ustrezen $y$, ki pokaže, da $\chi$
+\begin{multline*}
+    \{ \bar{x}:\bar{X}, \bar{w}:\bar{W} \mid \sigma\} \circ \{\Gamma ,\bar{x}:\bar{X} \mid \pi_1\} \circ
+    \{\bar{z}:\bar{Z},\Gamma \mid \chi\} \\
+    = \{ \bar{x}:\bar{X}, \bar{w}:\bar{W} \mid \sigma \} \circ
+      \{\Gamma ,\bar{x}:\bar{X} \mid \pi_2\} \circ \{\bar{z}:\bar{Z},\Gamma \mid \chi\}
+      \end{multline*}
+    iz česar sledi
+\begin{multline*}
+  \{ \bar{x}:\bar{X}, \bar{w}:\bar{W} \mid \sigma\} \circ {\lbrace \bar{z}:\bar{Z},\bar{x}:\bar{X} \mid \eta\rbrace} \\
+  =
+    \{ \bar{x}:\bar{X}, \bar{w}:\bar{W} \mid \sigma \} \circ {\lbrace \bar{z}:\bar{Z},\bar{x}:\bar{X} \mid \theta \rbrace}
+    \end{multline*}
+    kar
+    nam da enoličen morfizem $\{\bar{y}:\bar{Y} \mid \mu\}$, ki faktorizira
+    $$\{ \bar{x}:\bar{X}, \bar{w}:\bar{W} \mid \sigma \},$$
+    torej ${\lbrace \bar{x}:\bar{X},\bar{z}:\bar{Z} \mid \varphi \rbrace}$
+    res določa kozožek $\{\Gamma ,\bar{x}:\bar{X} \mid \pi_1\}$ in
+    $\{\Gamma ,\bar{x}:\bar{X} \mid \pi_2\}$. Definiramo
+    \[ \chi(\bar{z}, \bar{x}_1, \bar{x}_2) \equiv \eta(\bar{z},\bar{x}_1) \land \theta(\bar{z},\bar{x}_2).\]
+    Iz
+    predpostavke $\chi(\bar{z},\bar{x}_1,\bar{x}_2)$ jasno sledi $r(\bar{z})$.  Da pokažemo,
+    da določa pravilno kodomeno moramo najti tak $\bar{y}$, da velja
+    $\varphi(\bar{x}_1,\bar{y}) \land \varphi(\bar{x}_2,\bar{y})$.  Po definiciji $\chi$
+    dobimo neka $\bar{y}_1, \bar{y}_2$, za katera velja $\eta(\bar{x}_1,\bar{y}_1)$ in
+    $\theta(\bar{x}_2,\bar{y}_2)$, ki sta v principu lahko različna. Ker pa
+    ${\lbrace \bar{x}:\bar{X},\bar{z}:\bar{Z} \mid \varphi \rbrace}$ izenači
+    ${\lbrace \bar{z}:\bar{Z},\bar{x}:\bar{X} \mid \eta\rbrace}$ in
+    ${\lbrace \bar{z}:\bar{Z},\bar{x}:\bar{X} \mid \theta \rbrace}$, sledi
+    $\bar{y}_1 = \bar{y}_2$. Torej smo našli ustrezen $\bar{y}$, ki pokaže, da $\chi$
     res določa ustrezno domeno in kodomeno.  Da res definira morfizem
-    sledi iz tega, da $\eta$ in $\theta$ vsak posebej definirata
-    morfizem.  Če razpišemo definicijo projekcij $\pi_1$ in $\pi_2$ in
+    sledi iz tega, da $\eta$ in $\theta$ vsaka posebej definirata
+    morfizma.  Če razpišemo definicijo projekcij $\pi_1$ in $\pi_2$ in
     kompozitumov $\{\pi_1\} \circ \{\chi\}$ in
     $\{\pi_2\} \circ \{\chi\}$ se ni težko prepričati, da res
     izpolnjujejo želeni enakosti.
 
   \item Pogoj
-    $$\T \vdash_{\bar{x}} p \implies q$$
+    $$\bar{x}:\bar{X}  p \vdash q$$
     je potreben, da formula res določa morfizem
     v~$\mathcal{R}(\mathbb{T})$.  To, da res določa monomorfizem,
     potem sledi iz točke $(\mathrm{i})$. Obratno, vsak monomorfizem je
-    tudi morfizem, torej iz $p(x)$ sledi $\exists x' p(x) \land
-    x=x'$. Ker gre za monomorfizem je ta $x'$ določen enolično, kar
-    nam posledično da $q(x')$. Iz $x = x'$ nato sledi
-    $q(x)$. Uporabili smo lemo \ref{lema:uporabne-izpeljave}.
+    tudi morfizem, torej iz $p(\bar{x})$ sledi $\exists \bar{x}' p(\bar{x}) \land
+    \bar{x}=\bar{x}'$. Ker gre za monomorfizem je ta $\bar{x}'$ določen enolično, kar
+    nam posledično da $q(\bar{x}')$. Iz $\bar{x} = \bar{x}'$ nato sledi
+    $q(\bar{x})$. Uporabili smo lemo \ref{lema:uporabne-izpeljave}.\qedhere
   \end{enumerate}
 \end{dokaz}
 \begin{trditev}
@@ -2324,38 +2394,39 @@ $\T$, za katerega se bosta pojma veljavnosti in dokazljivosti ujemala.
   regularne epimorfizme.  Torej naj bo
   \begin{equation*}
     \begin{tikzcd}[column sep=small]
-      \{y,x \mid \exists z(\gamma(y,z) \land \varphi(x,z))\} \ar[d,
-      "\{\pi\}"'] \ar[r] &
-      \{ x \mid p\} \ar[d, "\{\varphi\}"] \\
-      \{y \mid q\} \ar[r, "\{\gamma\}"'] & \{z \mid r\}
+      \{\bar{y}:\bar{Y},\bar{x}:\bar{X} \mid \exists (\bar{z}:\bar{Z})(\gamma(\bar{y},\bar{z}) \land \varphi(\bar{x},\bar{z}))\} \ar[d, "{\{\bar{y}:\bar{Y},\bar{x}:\bar{X},\bar{y}':\bar{Y} \mid \pi\}}"'] \ar[r] &
+      \{ \bar{x}:\bar{X} \mid p\} \ar[d, "{\{\bar{x}:\bar{X}, \bar{z}:\bar{Z} \mid \varphi\}}"] \\
+      \{\bar{y}:\bar{Y} \mid q\} \ar[r, "{\{\bar{y}:\bar{Y}, \bar{z}:\bar{Z} \mid \gamma\}}"'] & \{\bar{z}:\bar{Z} \mid r\}
     \end{tikzcd}
   \end{equation*}
-  diagram povleka. Projekcija $\{\pi\}$ je inducirana s formulo
-  \[ \pi(y,x,y') \equiv \exists z(\gamma(y,z) \land \varphi(x,z))
-    \land y=y'.\] Recimo, da je $\{\varphi\}$ regularen
+  diagram povleka. Projekcija $\{\bar{y}:\bar{Y},\bar{x}:\bar{X},\bar{y}':\bar{Y} \mid \pi\}$
+  je inducirana s formulo
+  \[ \pi(\bar{y},\bar{x},\bar{y}') \equiv \exists (\bar{z}:\bar{Z})(\gamma(\bar{y},\bar{z}) \land \varphi(\bar{x},\bar{z}))\land \bar{y}=\bar{y}'.\]
+  Recimo, da je $\{\bar{x}:\bar{X}, \bar{z}:\bar{Z} \mid \varphi\}$ regularen
   epimorfizem. Po prejšnji lemi vemo, da potem velja
-  $\mathbb{T} \vdash r(z) \Rightarrow \exists x \varphi(x,z)$.  Iz
-  $q(y)$ sledi $\exists z(\gamma(y,z))$, iz česar pa lahko izpeljemo
-  $\exists z r(z)$, kar nam da $\exists z \exists x
-  \varphi(x,z)$. Skupaj dobimo
-  \[ \exists z(\gamma(y,z) \land \exists x \varphi(x,z)),\] kar je po
-  lemi \ref{lema:uporabne-izpeljave} ekvivalentno
-  $\exists x \exists z(\gamma(y,z) \land \varphi(x,z))$.  Iz primera
-  \ref{primer:vpeljava-eksist-kvantifikatorja} nato sledi, da je
-  $\{\pi\}$ regularen epimorfizem.
+  $$\bar{z}:\bar{Z} \mid r(z) \vdash \exists (\bar{x}:\bar{X} ) \varphi(\bar{x},\bar{z}).$$
+  Iz
+  $q(\bar{y})$ sledi $\exists (\bar{z}:\bar{Z})(\gamma(\bar{y},\bar{z}))$, iz česar pa lahko izpeljemo
+  $\exists (\bar{z}:\bar{Z}) r(\bar{z})$, kar nam da $\exists (\bar{z}:\bar{Z}) \exists (\bar{x}:\bar{X} )
+  \varphi(\bar{x},\bar{z})$. Skupaj dobimo
+  \[ \exists (\bar{z}:\bar{Z})(\gamma(\bar{y},\bar{z}) \land \exists (\bar{x}:\bar{X} ) \varphi(\bar{x},\bar{z})),\]
+  kar je po lemi~\ref{lema:uporabne-izpeljave} ekvivalentno
+  $\exists (\bar{x}:\bar{X} ) \exists (\bar{z}:\bar{Z})(\gamma(\bar{y},\bar{z}) \land \varphi(\bar{x},\bar{z}))$.
+  Iz primera~\ref{primer:vpeljava-eksist-kvantifikatorja} nato sledi, da je
+  $\{\bar{y}:\bar{Y},\bar{x}:\bar{X},\bar{y}':\bar{Y} \mid \pi\}$ regularen epimorfizem.
 \end{dokaz}
 \begin{definicija}
   Kategorija $\mathcal{R}(\T)$ vsebuje kanonično interpretacijo
   $\mathcal{U}$ jezika $\mathcal{L}(\Sigma)$:
   \begin{itemize}
-  \item $\interp[\mathcal{U}]{X} = \set{x \mid  \top}$, kjer je
+  \item $\interp[\mathcal{U}]{X} = \set{x:X \mid  \top}$, kjer je
     $x$ spremenljivka sorte $X$.
   \item
-    $\interp[\mathcal{U}]{c} = \set{x \mid  x = c} :
+    $\interp[\mathcal{U}]{c} = \set{x:X \mid  x = c} :
     \set{\cdot \mid  \top} \to \interp[\mathcal{U}]{X}$, kjer je
     $c:X$ konstanta.
   \item
-    $\interp[\mathcal{U}]{f} = \set{(\bar{x},y) \mid  f(\bar{x})
+    $\interp[\mathcal{U}]{f} = \set{\bar{x}:\bar{X},y:Y \mid  f(\bar{x})
       = y}$, kjer je $f : \bar{X}\to Y$ funkcijski simbol. Uporabimo
     dejstvo, da je
     $\bar{X}^{(\mathcal{U})} = \interp[\mathcal{U}]{\bar{X}_1} \times
@@ -2373,19 +2444,19 @@ $\T$, za katerega se bosta pojma veljavnosti in dokazljivosti ujemala.
 \end{izrek}
 \begin{dokaz}
   Enostavna indukcija pokaže, da je za term $t(\bar{z})$ sorte $Y$
-$$\caninterp{t(\bar{z})} = \set{(\bar{z},y) \mid  t(\bar{z}) = y}$$
+$$\caninterp{t(\bar{z})} = \set{\bar{z}:\bar{Z},y:Y \mid  t(\bar{z}) = y}$$
 morfizem $\caninterp{\bar{Z}} \to \caninterp{Y}$.
 Podobno za regularno
 formulo $\varphi(\bar{z})$ velja
-$$\caninterp{\varphi(\bar{z})} = \set{\bar{z} \mid  \varphi}.$$
+$$\caninterp{\varphi(\bar{z})} = \set{\bar{z}:\bar{Z} \mid  \varphi}.$$
 Sledi, da je $\mathcal{U}$ model teorije $\T$, kajti če je
 $\varphi \Rightarrow \psi$ sekventa v $\T$, potem formula
 $p(\bar{x}) \wedge \bar{x}= \bar{x}'$ določa monomorfizem iz
-$\set{\bar{x} \mid  p}$ v $\set{\bar{x}' \mid  q}$, torej
-je $\set{\bar{x} \mid  p} \leq \set{\bar{x}' \mid  q}$.
+$\set{\bar{x}:\bar{X} \mid  p}$ v $\set{\bar{x}':\bar{X} \mid  q}$, torej
+je $\set{\bar{x}:\bar{X} \mid  p} \leq \set{\bar{x}':{\bar{X}} \mid  q}$.
 Za model $\mathcal{U}$ velja tudi, da za vse sekvente
 $p \Rightarrow q$ velja
-$$\text{če} \ \mathcal{U} \models p \implies q \text{, potem} \ \T \vdash_{\bar{x}} p \implies q$$
+$$\text{če} \ \mathcal{U} \models p \implies q \text{, potem} \ \bar{x}:\bar{X} \mid p \vdash q$$
 kar sledi iz zgornjih argumentov in leme o klasifikaciji monomorfizmov
 v~$\mathcal{R}(\T)$.
 \end{dokaz}
@@ -2404,31 +2475,34 @@ $$\mathfrak{F}_{\cat{C}} : \Mod(\T, \cat{C}) \to \cat{RegCat}(\mathcal{R}(\T), \
 slika model $M$ teorije $\T$ v kategoriji $\cat{C}$ v funktor
 \begin{align*}
   \mathfrak{F}_{\cat{C}}(M) : \mathcal{R}(\T) &\to \cat{C}\\
-  \set{\bar{x} \mid  p} &\mapsto \set{\bar{x} \mid  p}^{(M)} \\
-  \set{\gamma} : \set{\bar{x} \mid  p} \to \set{\bar{y} \mid  q} &\mapsto \text{`enolični morfizem} \ f : \set{\bar{x} \mid  p}^{(M)} \to \set{\bar{y} \mid  q}^{(M)} \\ 
-                                              &\qquad \text{da je} \ \graf(f) = \set{(\bar{x}, \bar{y})  \mid  \gamma}^{(M)} \text{'}
+  \set{\bar{x}:\bar{X} \mid  p} &\mapsto \set{\bar{x}:\bar{X} \mid  p}^{(M)} \\
+  \set{\bar{x}:\bar{X},\bar{y}:\bar{Y} \mid \gamma} : \set{\bar{x} \mid  p} \to \set{\bar{y} \mid  q}
+                                              &\mapsto f : \set{\bar{x} \mid  p}^{(M)} \to \set{\bar{y} \mid  q}^{(M)}.
 \end{align*}
 \end{definicija}
-Morfizem $f$ obstaja po lemi \ref{lema:funkcijska-relacija-ima-graf}.
+Kjer je $f$ enolični morfizem, da velja $\mathrm{graph}(f) = \set{\bar{x}:\bar{X},\bar{y}:\bar{Y} \mid \gamma}$, ki
+obstaja po lemi~\ref{lema:funkcijska-relacija-ima-graf}.
 Veljavnost pravil sklepanja in dejstvo, da model lahko definiramo z
 interno logiko $\cat{C}$ pomeni, da je $\mathfrak{F}_{\cat{C}}(M)$
 regularen funktor.  Morfizem med modeloma $h : M \to N$ porodi družino
 morfizmov
-$$h_{\set{\bar{x} \mid  p}} : \set{\bar{x} \mid  p}^{(M)} \to \set{\bar{x} \mid  p}^{(N)},$$
-naravnih v $\{\bar{x} \mid p\}$ kajti, če imamo morfizem
-$\set{\gamma} : \set{\bar{x} \mid  p} \to
-\set{\bar{y} \mid  q}$ potem, ker oba kvadrata v naslednjem
-diagramu komutirata, to pomeni, da komutira tudi zunanji, ki
-predstavlja ravno diagram naravne transformacije:
+$$h_{\set{\bar{x}:\bar{X} \mid  p}} : \set{\bar{x}:\bar{X} \mid  p}^{(M)} \to \set{\bar{x}:\bar{X} \mid  p}^{(N)},$$
+naravnih v $\{\bar{x}:\bar{X} \mid p\}$. Recimo namreč, da imamo morfizem
+$$\set{\bar{x}:\bar{X},\bar{x}:\bar{X} \mid \gamma} : \set{\bar{x}:\bar{X} \mid  p} \to \set{\bar{y}:\bar{Y} \mid  q},$$
+tak, da spornji in zgornji kvadrat v sledečem diagramu komutirata.
+Potem komutira tudi zunanji, ki predstavlja ravno diagram naravne transformacije.
 \begin{equation*}
   \begin{tikzcd}[column sep=3cm]
-    \set{\bar{x} \mid  p}^{(M)} \ar[d, two heads] \ar[r, "h_{\set{\bar{x} \mid  p}}"] & \set{\bar{x} \mid  p}^{(N)} \ar[d, two heads] \\
-    \set{\bar{y} \mid  \exists \bar{x} \gamma(\bar{x}, \bar{y})}^{(M)}  \ar[d, hook] \ar[r, "h_{\set{\bar{y} \mid  \exists \bar{x} \gamma(\bar{x}, \bar{y})}}"] & \set{\bar{y} \mid  \exists \bar{x} \gamma(\bar{x}, \bar{y})}^{(N)} \ar[d, hook] \\
-    \set{\bar{y} \mid  q}^{(M)} \ar[r,
-    "h_{\set{\bar{y} \mid  q}}"] & \set{\bar{y} \mid  q}^{(N)}
+    {\set{\bar{x}:\bar{X} \mid  p}^{(M)}} \ar[d, two heads] \ar[r, "{h_{\set{\bar{x}:\bar{X} \mid  p}}}"] &
+    {\set{\bar{x}:\bar{X} \mid  p}^{(N)}} \ar[d, two heads] \\
+    \set{\bar{y}:\bar{Y} \mid  \exists (\bar{x}:\bar{X}) \gamma(\bar{x}, \bar{y})}^{(M)}
+    \ar[d, hook] \ar[r, "{h_{\set{\bar{y}:\bar{Y} \mid  \exists (\bar{x}:\bar{X}) \gamma(\bar{x}, \bar{y})}}}"] &
+    \set{\bar{y}:\bar{Y} \mid  \exists (\bar{x}:\bar{X}) \gamma(\bar{x}, \bar{y})}^{(N)} \ar[d, hook] \\
+    \set{\bar{y}:\bar{Y} \mid  q}^{(M)} \ar[r,
+    "{h_{\set{\bar{y}:\bar{Y} \mid  q}}}"] & \set{\bar{y}:\bar{Y} \mid  q}^{(N)}
   \end{tikzcd}
 \end{equation*}
-Ta funktor je naraven v $\cat{C}$: Če je $F : \cat{D} \to \cat{C}$
+Ta funktor je naraven v $\cat{C}$: če je $F : \cat{D} \to \cat{C}$
 regularen funktor, potem diagram
 \begin{equation}\label{diag:naravnost-F}
   \begin{tikzcd}
