@@ -32,8 +32,8 @@ za uvod v algebro si bralec lahko pogleda \cite{bresar2018uvod}.
     malimi tiskanimi črkami, na primer $f,g,\alpha,\beta \ldots$
     Vsak morfizem $f$ ima dva pridružena objekta:
     \[ \mathrm{dom}(f) \quad \text{in} \quad \mathrm{cod}(f), \]
-    ki jima pravimo \emph{domena} in \emph{kodomena}. Če je $\mathrm{dom}(f)=X$
-    in ${\mathrm{cod}(f)=Y}$, potem pišemo $f : X \to Y$.
+    ki jima pravimo \emph{domena} in \emph{kodomena}. Za $\mathrm{dom}(f)=X$
+    in ${\mathrm{cod}(f)=Y}$ to označimo z $f : X \to Y$.
   \item operacije \emph{kompozicija}, ki morfizmoma $f,g$,
     za katera velja $\mathrm{cod}(f) = \mathrm{dom}(g)$,
     priredi njun \emph{kompozitum}. To je morfizem, ki ga označujemo z $g \circ f$, in
@@ -97,7 +97,7 @@ Kategorije običajno označujemo z velikimi tiskanimi črkami, na primer $\cat{C
 \section{Algebrajske teorije}
 Začnimo s splošnim pristopom opisa algebrajskih teorij.
 Te so karakterizirane aksiomatsko, s spremenljivkami, konstantami, operacijami in enačbami.
-Pomembno (za naš pristop) je, da so operacije definirane za celotno strukturo,
+Za naš pristop je pomembno, da so operacije definirane za celotno strukturo,
 ne pa samo za nekatere elemente te strukture.
 To izključi dva pomembna primera: teorijo polj,
 kjer inverz ničle ni definiran, in teorijo kategorij, kjer so kompozitumi
@@ -454,9 +454,7 @@ spremenljivk $x_1, \ldots, x_m$.
 $$r_i = s_i[t_1, \ldots, t_m / x_1, \ldots, x_m].$$
 %
 \end{definicija}
-Kategorijo $\mathbf{C}_{\mathbb{T}}$ si lahko predstavljamo kot
-kategorijo Lindenbaum-Tarskega, ki je kategorična različica znane konstrukcije v algebri.
-Vsebuje vse algebraične
+Kategorija $\mathbf{C}_{\mathbb{T}}$ vsebuje vse algebraične
 informacije kot originalna teorija, le na sintaktično neodvisen način.
 Različne predstavitve teorije porodijo ekvivalentne sintaktične
 kategorije. V nadaljevanju bomo videli, da ima $\mathbf{C}_{\mathbb{T}}$ še eno,
@@ -718,8 +716,8 @@ ki ohranja končne produkte tako, da definiramo
   M_{G}(x_1 \mid x_1^{-1}) &= i & M_{G}(x_1, x_2 \mid x_1 \cdot x_2) &= m.
 \end{align*}
 
-Recimo, da sta $(G,e_{G}, i_{G}, m_{G})$ in $(H, e_H, i_H, m_H)$ grupi
-in naj bo ${\phi : M_{G} \to M_H}$ naravna transformacija.
+Naj bosta $(G,e_{G}, i_{G}, m_{G})$ in $(H, e_H, i_H, m_H)$ grupi
+in ${\phi : M_{G} \to M_H}$ naravna transformacija.
 Potem je $\phi$ določena s tem, kam slika kontekst $[x_1]$,
 kajti po naravnosti za $1 \leq k \leq n$ naslednji diagram
 \begin{equation*}
@@ -1013,9 +1011,9 @@ Tu interpretiramo naravno število $n$ kot končno množico po standardni von Ne
       U^n \ar[r, "{[f]^U}"] & U
     \end{tikzcd}
   \end{equation}
-  Skupaj z operacijami $[f]^U$ je $U$ torej res model teorije $\mathbb{T}$.
-  Sestoji iz prostih $\T$-algeber $F(n)$ in
-  preslikav $F(1) \to F(n)$, ki so določene z elementi $f(x_1, \ldots, x_n) \in F(n)$,
+  Skupaj z operacijami $[f]^U$ je $U$ torej res model teorije $\mathbb{T}$, ki
+  sestoji iz prostih $\T$-algeber $F(n)$ in
+  preslikav $F(1) \to F(n)$, ki so določene z elementi $F(n)$ oblike $f(x_1, \ldots, x_n)$,
   kjer so $x_1, \ldots , x_n \in F(n)$ generatorji. Sedaj bomo v treh korakih pokazali,
   da je $U$ res univerzalna $\T$-algebra.
 
@@ -1056,7 +1054,7 @@ Tu interpretiramo naravno število $n$ kot končno množico po standardni von Ne
   ki je definiran na $U \in \mathbb{M}^{\mathrm{op}}$ kot
   \[ (\mathcal{A}^{\#}(U))(X) = \mathcal{A}(X)^{\#}(U) \cong \mathcal{A}(X)\]
   in na $U^n$ kot $(\mathcal{A}^{\#}(U^{n}))(X) = \mathcal{A}(X)^{\#}(U^n) \cong \mathcal{A}(X)^n$.
-  Funktor ${\mathcal{A}^{\#}(U) : \mathbb{C} \to \mathbf{Set}}$ deluje na morfizmih $g : X \to Y$ v
+  Funktor ${\mathcal{A}^{\#}(U)}$ deluje na morfizmih $g : X \to Y$ v
   $\mathbb{C}$, kot je prikazano v naslednjem diagramu
   \begin{equation*}
     \begin{tikzcd}[column sep=large]

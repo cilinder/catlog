@@ -275,7 +275,7 @@ injektivne preslikave, podobno storimo v regularnih kategorijah.
 \begin{lema}
   Naj bo $\cat{C}$ regularna kategorija in $f: X \to Y$ morfizem
   v~$\cat{C}$.  Potem lahko $f$ razcepimo na kompozitum regularnega
-  epimorfizma in monomorfizma.  Velja še, da za vsak komutativni
+  epimorfizma in mono\-morfizma.  Velja še, da za vsak komutativni
   diagram
   \begin{equation*}
     \begin{tikzcd}
@@ -416,7 +416,7 @@ $\exists_f : \Sub(X) \to \Sub(Y)$.
 \noindent
 Kot posledico tega lahko vidimo, da $f^{-1}$ ohranja konjunkcije v
 $\Sub(Y)$, kajti desni adjunkti ohranjajo limite.
-\begin{lema}[Frobeniusova lema]\label{lema:frobeniusova-lema}
+\begin{lema}[Frobenius]\label{lema:frobeniusova-lema}
   Naj bo $\cat{C}$ regularna kategorija in ${f : X \to Y}$ morfizem v
   $\cat{C}$.  Naj bosta $A \overset{\alpha}{\rightarrowtail} X$ in
   $B \overset{\alpha}{\rightarrowtail} Y$ dva podobjekta.  Potem velja
@@ -635,7 +635,7 @@ grafa.
     Torej je $R \cong \graf(f)$.\qedhere
   \end{enumerate}
 \end{dokaz}
-Naslednja pomembna lastnost regularnih kategorij je interakcija med
+Pomembna lastnost regularnih kategorij je interakcija med
 slikami in povleki.
 \begin{lema}\label{lema:zamenjava-povleka-in-slike}
   Naj bo
@@ -671,7 +671,7 @@ slikami in povleki.
 \end{dokaz}
 \begin{definicija}
   Naj bosta $\cat{C}$ in $\cat{D}$ regularni kategoriji.  Funktorju
-  ${F : \cat{C} \to \cat{D}}$ pravimo \emph{regularen}, če ohranja
+  iz $\cat{C}$ v $\cat{D}$ pravimo \emph{regularen}, če ohranja
   končne limite in kozožke jedrnih parov.
 \end{definicija}
 \begin{definicija}
@@ -1086,7 +1086,7 @@ regularni kategoriji.  Za to najprej potrebujemo interpretacijo.
   $\set{x  \mid  f(g(x)) = h(x)}^{(M)}$, ki je realizirana kot
   zožek
   \begin{equation*}
-    \begin{tikzcd}[column sep=normal]
+    \begin{tikzcd}[column sep=2em]
       \set{x  \mid  f(g(x)) = h(x)}^{(M)} \ar[r, hook, "e"] &
       X^{(M)} \ar[r, "x^{(M)}"] & X^{(M)} \ar[r, "f^{(M)}"] \ar[rr,
       bend right, "h^{(M)}"] & Y^{(M)} \ar[r, "g^{(M)}"] & Z^{(M)}
@@ -1359,12 +1359,11 @@ v \eqref{eq:2}.
   Iskana enakost nato sledi iz enoličnosti slik.
 \end{dokaz}
 \subsection{Veljavnost}
-Pripravili smo si vse potrebno, da lahko govorimo o veljavnosti pravil
+Sedaj imamo pripravljeno vse potrebno, da lahko govorimo o veljavnosti pravil
 sklepanja, ki smo jih definirali za regularno logiko glede na
 interpretacije v regularnih kategorijah.
 \begin{izrek}[Veljavnost]
-  Naj bo $\T$ regularna teorija, formulirana v
-  jeziku~$\mathcal{L}(\Sigma)$, in naj bo $M$ model te teorije v
+  Naj bo $\T$ regularna teorija in naj bo $M$ model te teorije v
   regularni kategoriji $\cat{C}$.  Če v teoriji $\T$ obstaja izpeljava
   $\bar{x}:\bar{X} \mid \varphi \vdash_{\T} \psi$, potem je
   $M \models \varphi \implies \psi$, oziroma je
@@ -1503,7 +1502,7 @@ internega jezika regularne teorije opišemo kategorične pojme.
   \item Po definiciji interne logike regularne
     kategorije dobimo diagram
     \begin{equation*}
-      \begin{tikzcd}
+      \begin{tikzcd}[column sep=normal]
         \setb{x_1,x_2}{x_1 = x_2}^{(\cat{C})} \ar[r, tail, "e"] & X \times X \ar[r, shift left, "x_1"] \ar[r, shift right, "x_2"'] & X \ar[r, tail, "m"] & Y \\
         \setb{x_1,x_2}{m(x_1) = m(x_2)}^{(\cat{C})} \ar[ur, tail,
         "f"'] \ar[u, dashed, "u"]
@@ -1523,7 +1522,7 @@ internega jezika regularne teorije opišemo kategorične pojme.
       $m t_1 = m t_2$.  Potem lahko morfizem $\fprod{t_1, t_2}$
       faktoriziramo preko morfizma $f$ in dobimo diagram
       \begin{equation*}
-        \begin{tikzcd}
+        \begin{tikzcd}[column sep=normal]
           \setb{x_1,x_2}{x_1 = x_2}^{(\cat{C})} \ar[r, tail, "e"] & X \times X \ar[r, shift left, "x_1"] \ar[r, shift right, "x_2"'] & X \ar[r, tail, "m"] & Y \\
           \setb{x_1,x_2}{m(x_1) = m(x_2)}^{(\cat{C})} \ar[ur, tail,
           "f"'] \ar[u, "u"] & T \ar[u, "\fprod{t_1, t_2}"'] \ar[l,
@@ -1651,20 +1650,20 @@ internega jezika regularne teorije opišemo kategorične pojme.
       $Z \times Y \to X \times Z \times Y$, nakar lahko iz
       \eqref{diag:injektivnost-produkta} izpeljemo, da je
       interpretacija formule iz pogoja $\eqref{eq:a}$ ravno slika morfizma
-      \[\fprod{f, \mathrm{id}_{Z}, g} : Z \to X \times Z \times Y\]
-      \begin{equation*}
-        \begin{tikzcd}[column sep=tiny]
-          Z \ar[d, two heads] \ar[r, two heads] & \mathrm{graph}(f)
-          \ar[d, two heads] \ar[r, hook] &
-          X \times Z \ar[d, two heads] \ar[r] & Z \ar[d, two heads] \\
-          \mathrm{graph}(g) \ar[d, hook] \ar[r, two heads] &
-          \set{x,z,y \mid f(z) = x \land g(z) = y} \ar[d, hook] \ar[r,
-          hook] & X \times \mathrm{graph}(g) \ar[d, hook] \ar[r] &
-          \mathrm{graph}(g) \ar[d, hook] \\
-          Z \times Y \ar[r, two heads] & \mathrm{graph}(f) \times Y
-          \ar[r, hook] & X \times Z \times Y \ar[r] & Z \times Y
-        \end{tikzcd}
-      \end{equation*}
+      \[\fprod{f, \mathrm{id}_{Z}, g} : Z \to X \times Z \times Y.\]
+      % \begin{equation*}
+      %   \begin{tikzcd}[column sep=tiny]
+      %     Z \ar[d, two heads] \ar[r, two heads] & \mathrm{graph}(f)
+      %     \ar[d, two heads] \ar[r, hook] &
+      %     X \times Z \ar[d, two heads] \ar[r] & Z \ar[d, two heads] \\
+      %     \mathrm{graph}(g) \ar[d, hook] \ar[r, two heads] &
+      %     \set{x,z,y \mid f(z) = x \land g(z) = y} \ar[d, hook] \ar[r,
+      %     hook] & X \times \mathrm{graph}(g) \ar[d, hook] \ar[r] &
+      %     \mathrm{graph}(g) \ar[d, hook] \\
+      %     Z \times Y \ar[r, two heads] & \mathrm{graph}(f) \times Y
+      %     \ar[r, hook] & X \times Z \times Y \ar[r] & Z \times Y
+      %   \end{tikzcd}
+      % \end{equation*}
       Iz leme \ref{lema:morfizmi-v-interni-logiki} sedaj lahko
       sklepamo, da je $\fprod{f,g}$ regularen epimorfizem natanko
       takrat, ko
@@ -1672,7 +1671,7 @@ internega jezika regularne teorije opišemo kategorične pojme.
       
     \item Zožek morfizmov $f$ in $g$ je enak
       $\set{x \mid f(x) = g(x)}$.  Ker velja
-      ${f \circ e = g \circ e}$, imamo faktorizacijo
+      ${f e = g e}$, imamo faktorizacijo
       \begin{equation*}
         \begin{tikzcd}
           \exists_{e}Z \ar[r, hook] & \set{x \mid f(x) = g(x)} \ar[r,
@@ -2335,7 +2334,7 @@ $\T$, za katerega se bosta pojma veljavnosti in dokazljivosti ujemala.
   $\mathcal{R}(\T)$ je regularna kategorija.
 \end{trditev}
 \begin{dokaz}
-  Po lemi\\ref{lema:limite-v-interni-logiki} vemo, da ima
+  Po lemi~\ref{lema:limite-v-interni-logiki} vemo, da ima
   $\mathcal{R}(\mathbb{T})$ končne limite in po lemi~\ref{lema:morfizmi-v-sintakticni-kategoriji} vemo,
   da kozožki
   jedrnih parov obstajajo. Pokazati moramo še, da povleki ohranjajo
@@ -2404,8 +2403,8 @@ $\set{\bar{x}:\bar{X} \mid  p}$ v $\set{\bar{x}':\bar{X} \mid  q}$, torej
 je $\set{\bar{x}:\bar{X} \mid  p} \leq \set{\bar{x}':{\bar{X}} \mid  q}$.
 Za model $\mathcal{U}$ velja tudi, da za vse sekvente
 $p \Rightarrow q$ velja
-$$\text{če} \ \mathcal{U} \models p \implies q \text{, potem} \ \bar{x}:\bar{X} \mid p \vdash q$$
-kar sledi iz zgornjih argumentov in leme o klasifikaciji monomorfizmov
+$$\text{če} \ \mathcal{U} \models p \implies q \text{, potem} \ \bar{x}:\bar{X} \mid p \vdash q.$$
+To sledi iz zgornjih argumentov in leme o klasifikaciji monomorfizmov
 v~$\mathcal{R}(\T)$.
 \end{dokaz}
 Sedaj lahko podamo funktorje, ki nastopajo v ekvivalenci
@@ -2441,13 +2440,13 @@ da spornji in zgornji kvadrat v sledečem diagramu komutirata.
 Potem komutira tudi zunanji, ki predstavlja ravno diagram naravne transformacije.
 \begin{equation*}
   \begin{tikzcd}[column sep=3cm]
-    {\set{\bar{x}:\bar{X} \mid  p}^{(M)}} \ar[d, two heads] \ar[r, "{h_{\set{\bar{x}:\bar{X} \mid  p}}}"] &
-    {\set{\bar{x}:\bar{X} \mid  p}^{(N)}} \ar[d, two heads] \\
-    \set{\bar{y}:\bar{Y} \mid  \exists (\bar{x}:\bar{X}) \gamma(\bar{x}, \bar{y})}^{(M)}
+    {\set{\bar{x}\mid  p}^{(M)}} \ar[d, two heads] \ar[r, "{h_{\set{\bar{x} \mid  p}}}"] &
+    {\set{\bar{x} \mid  p}^{(N)}} \ar[d, two heads] \\
+    \set{\bar{y} \mid  \exists (\bar{x}:\bar{X}) \gamma(\bar{x}, \bar{y})}^{(M)}
     \ar[d, hook] \ar[r, "{h_{\set{\bar{y} \mid  \exists \bar{x} \gamma}}}"] &
-    \set{\bar{y}:\bar{Y} \mid  \exists (\bar{x}:\bar{X}) \gamma(\bar{x}, \bar{y})}^{(N)} \ar[d, hook] \\
-    \set{\bar{y}:\bar{Y} \mid  q}^{(M)} \ar[r,
-    "{h_{\set{\bar{y} \mid  q}}}"] & \set{\bar{y}:\bar{Y} \mid  q}^{(N)}
+    \set{\bar{y}\mid  \exists (\bar{x}:\bar{X}) \gamma(\bar{x}, \bar{y})}^{(N)} \ar[d, hook] \\
+    \set{\bar{y} \mid  q}^{(M)} \ar[r,
+    "{h_{\set{\bar{y} \mid  q}}}"] & \set{\bar{y} \mid  q}^{(N)}
   \end{tikzcd}
 \end{equation*}
 Ta funktor je naraven v $\cat{C}$: če je $F : \cat{D} \to \cat{C}$
