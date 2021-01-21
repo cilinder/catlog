@@ -2,20 +2,136 @@
 \usepackage{import}
 \usepackage{magnastavitve}
 \usepackage{subfiles}
+%\usepackage{natbib}
+\usepackage{bibentry}
+\nobibliography*
+
+\renewcommand{\thepage}{}       % preprecimo težave s številkami strani v kazalu
+\newcommand{\sn}[1]{"`#1"'}                    % dodal Solina (slovenski narekovaji)
+\newcommand{\program}{Matematika} % ime studijskega programa
+\newcommand{\imeavtorja}{Jure Taslak} % ime avtorja
+\newcommand{\imementorja}{prof.~dr.~Andrej Bauer} % akademski naziv in ime mentorja, uporabi poln naziv, prof.~dr.~, doc.~dr., ali izr.~prof.~dr.
+\newcommand{\imesomentorja}{} % akademski naziv in ime somentorja, če ga imate
+\newcommand{\naslov}{Algebrajska in regularna kategorna logika}
+\newcommand{\letnica}{2021} % letnica magistriranja
+\newcommand{\opis}{Delo obravnava integracijo po ω-kompleksih, njene lastnosti in posplošitve
+na Levy-jeve topološke prostore.}  % Opis dela v eni povedi. Ne sme vsebovati matematičnih simbolov v $ $.
+\newcommand{\kljucnebesede}{integracija\sep kompleks} % ključne besede, ločene z \sep, da se PDF metapodatki prav procesirajo
+\newcommand{\keywords}{integration\sep complex} % ključne besede v angleščini
+\newcommand{\organization}{Univerza v Ljubljani, Fakulteta za matematiko in fiziko} % fakulteta
+\newcommand{\sep}{, }  % separator med ključnimi besedami v besedilu
+%
+%\newcommand{\literatura}{reference}  % pot do datoteke z literaturo (brez .bib končnice)
+%\nobibliography{\literatura}
+%\newcommand{\plancite}[1]{\item[\cite{#1}] \bibentry{#1}} % citiranje v programu dela
+
+\begin{filecontents*}{\jobname.xmpdata}
+  \Title{\naslov}
+  \Author{\imeavtorja}
+  \Keywords{\kljucnebesede}
+  \Subject{matematika}
+  \Org{\organization}
+\end{filecontents*}
+
+\usepackage[a-1b]{pdfx}  % zgenerira PDF v tem PDF/A-1b formatu, kot zahteva knjižnica
 %
 \begin{document}
 %
 \frontmatter%
-\subfile{poglavja/preduvod.tex}
-\addcontentsline{toc}{chapter}{Kazalo}
+
+%\nobibliography*
+
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%naslovnica
+\selectlanguage{slovene}
+\pagenumbering{roman} % začnemo z rimskimi številkami
+\thispagestyle{empty} % ampak na prvi strani ni številke
+\noindent{\large
+UNIVERZA V LJUBLJANI\\[1mm]
+FAKULTETA ZA MATEMATIKO IN FIZIKO\\[5mm]
+\program\ -- 2.~stopnja}
+% ustrezno dopolni za IŠRM
+\vfill
+
+\begin{center}
+  \large
+  \imeavtorja\\[3mm]
+  \Large
+  \textbf{\MakeUppercase{\naslov}}\\[10mm]
+  \large
+  Magistrsko delo \\[1cm]
+  Mentor: \imementorja \\[2mm] % ustrezno popravi spol
+%   Somentor: \imesomentorja   % dodaj, če potrebno
+\end{center}
+\vfill
+
+\noindent{\large Ljubljana, \letnica}
+
+\cleardoublepage
+
+% prazna stran
+%\clearemptydoublepage      % dodal Solina (izjava o licencah itd. se izpiše na hrbtni strani naslovnice)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% zahvala
+\thispagestyle{empty}\mbox{}\vfill\null\it%
+\vfill
+{\Large \bf Zahvala}
+\vspace{1cm}\\
+Zahvaljujem se mentorju prof.\ dr.\ Andreju Bauerju za usmerjanje in vso ostalo pomoč. \\
+Svojim staršem za vso podporo. \\
+Janji za pomoč pri odpravljanju slovničnih napak.
+\rm\normalfont
+%
+% prazna stran
+\clearemptydoublepage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% kazalo
+\pagestyle{empty}
+\def\thepage{}% preprecimo tezave s stevilkami strani v kazalu
+%\phantomsection
+%\addcontentsline{toc}{chapter}{Kazalo}
+\pdfbookmark[1]{Kazalo}{kazalo}
+\tableofcontents{}
+%
+% prazna stran
+\clearemptydoublepage
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pdfbookmark[1]{Program dela}{program dela}
+\section*{Program dela}
+%\phantomsection
+%\addcontentsline{toc}{chapter}{Program dela} % dodajmo v kazalo
+V delu obravnavajte algebrajsko in regularno logiko in njune modele v teoriji kategorij,
+vključno z Lawverovo funktorialno semantiko.
+Predstavite in dokažite osnovne izreke o veljavnoti in polnosti.
+
+\section*{Osnovna literatura}
+
+\begin{itemize}
+  \item \bibentry{butz1998regular}
+  \item \bibentry{algebraic-logic}
+\end{itemize}
+
+\vspace{2cm}
+\hspace*{\fill} Podpis mentorja: \phantom{prostor za podpis}
+
+% \vspace{2cm}
+% \hspace*{\fill} Podpis somentorja: \phantom{prostor za podpis}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Povzetek
 %------------------------------------------------------------------------
 %         IZVLECEK
 %-----------------------------------------------------------------------
 \cleardoublepage
 % povzetek
-\phantomsection
+%\phantomsection
+\pdfbookmark[1]{Izvleček}{izvlecek}
 \begin{center}
-\addcontentsline{toc}{chapter}{Izvleček}
+%\addcontentsline{toc}{chapter}{Izvleček}
 {\bf Algebrajska in regularna kategorna logika}\\[3mm]
 {\sc  Izvleček}
 \end{center}
@@ -39,17 +155,17 @@ bolj bogato in v njej je mogoče izraziti koncepte kot je slika morfizma.
 Analogno kot v prvem delu se za regularno teorijo definira njeno sintaktično kategorijo,
 s pomočjo katere se pokaže ekvivalenco med modeli regularne logike in funktorji, ki
 ohranjajo regularno strukturo.\\[10mm]
-{\bf Ključne besede:} \tkeywords \\[3mm]
 \cleardoublepage
 % abstract
-\phantomsection
+%\phantomsection
+\pdfbookmark[1]{Abstract}{abstract}
 \foreignlanguage{english}{  %  angleški delilni vzorci
   \begin{center}
 {\bf Algebraic and regular kategorical logic}\\[3mm]
 {\sc  Abstract}
 \end{center}
 \vspace{10mm}
-\addcontentsline{toc}{chapter}{Abstract}
+%\addcontentsline{toc}{chapter}{Abstract}
 The thesis develops functorial semantics for algebraic and regular logic.
 The first part starts by briefly presenting category theory, then the concept of
 an algebraic theory is introduced as a special case of a first order logic theory,
@@ -70,14 +186,18 @@ to express concepts like the image of a morphism. Analogous with the first part
 we define the syntactic category of a regular theory, with the help of which
 you can show an equivalence between models of a regular theory and functors that
 preserve regular structure.\\[10mm]
-{\bf Keywords:}\tkeywordsEn \\[3mm]
 }
 %-------------------------------------------------------------------
 %
 % prazna stran
+
+\vfill\noindent
+\textbf{Math.~Subj.~Class.~(2010):} 03G30\\[1mm]
+\textbf{Ključne besede:} \tkeywords \\[1mm]
+\textbf{Keywords:} \tkeywordsEn
+
 \clearemptydoublepage
 %
-\selectlanguage{slovene}
 \mainmatter%
 \setcounter{page}{1}
 \pagestyle{fancy}
@@ -94,8 +214,11 @@ preserve regular structure.\\[10mm]
 \chapter{Zaključek}
 \subfile{poglavja/zakljucek.tex}
 %
-\bibliographystyle{plain}
+\phantomsection
+\addcontentsline{toc}{chapter}{Literatura}
+\bibliographystyle{fmf-sl}                 % uporabljen stil je v datoteki fmf-sl.bst, na voljo tudi angleška verzija
 \bibliography{reference}
+
 \end{document}
 %%% Local Variables:
 %%% mode: latex

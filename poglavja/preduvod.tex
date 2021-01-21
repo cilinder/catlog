@@ -4,30 +4,156 @@
 \setcounter{page}{1} %
 \renewcommand{\thepage}{}       % preprecimo težave s številkami strani v kazalu
 \newcommand{\sn}[1]{"`#1"'}                    % dodal Solina (slovenski narekovaji)
+\newcommand{\program}{Matematika} % ime studijskega programa
+\newcommand{\imeavtorja}{Jure Taslak} % ime avtorja
+\newcommand{\imementorja}{prof.~dr.~Andrej Bauer} % akademski naziv in ime mentorja, uporabi poln naziv, prof.~dr.~, doc.~dr., ali izr.~prof.~dr.
+\newcommand{\imesomentorja}{} % akademski naziv in ime somentorja, če ga imate
+\newcommand{\naslovdela}{Algebrajska in regularna kategorna logika}
+\newcommand{\letnica}{2021} % letnica magistriranja
+\newcommand{\opis}{Delo obravnava integracijo po ω-kompleksih, njene lastnosti in posplošitve
+na Levy-jeve topološke prostore.}  % Opis dela v eni povedi. Ne sme vsebovati matematičnih simbolov v $ $.
+\newcommand{\kljucnebesede}{integracija\sep kompleks} % ključne besede, ločene z \sep, da se PDF metapodatki prav procesirajo
+\newcommand{\keywords}{integration\sep complex} % ključne besede v angleščini
+\newcommand{\organization}{Univerza v Ljubljani, Fakulteta za matematiko in fiziko} % fakulteta
+\newcommand{\sep}{, }  % separator med ključnimi besedami v besedilu
 %
 %
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %naslovnica
- \thispagestyle{empty}%
-   \begin{center}
-    {\large\sc Univerza v Ljubljani\\%
-      Fakulteta za matematiko in fiziko}%
-    \vskip 10em%
-    {\autfont \tauthor\par}%
-    {\titfont \ttitle \par}%
-    {\vskip 3em \textsc{MAGISTRSKO DELO\\[5mm]
-    UNIVERZITETNI\\ ŠTUDIJSKI PROGRAM DRUGE STOPNJE\\ MATEMATIKA}\par}%
-%
-    \vfill\null%
-    {\large \textsc{Mentor}: prof.\ dr.\ Andrej Bauer\par}%
-    {\vskip 2em \large Ljubljana, 2020 \par}%
+\pagenumbering{roman} % začnemo z rimskimi številkami
+\thispagestyle{empty} % ampak na prvi strani ni številke
+
+\noindent{\large
+UNIVERZA V LJUBLJANI\\[1mm]
+FAKULTETA ZA MATEMATIKO IN FIZIKO\\[5mm]
+\program\ -- 2.~stopnja}
+% ustrezno dopolni za IŠRM
+\vfill
+
+\begin{center}
+  \large
+  \imeavtorja\\[3mm]
+  \Large
+  \textbf{\MakeUppercase{\naslovdela}}\\[10mm]
+  \large
+  Magistrsko delo \\[1cm]
+  Mentor: \imementorja \\[2mm] % ustrezno popravi spol
+%   Somentor: \imesomentorja   % dodaj, če potrebno
 \end{center}
+\vfill
+
+\noindent{\large Ljubljana, \letnica}
+
+\cleardoublepage
+
 % prazna stran
 %\clearemptydoublepage      % dodal Solina (izjava o licencah itd. se izpiše na hrbtni strani naslovnice)
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%copyright stran
+% zahvala
+\thispagestyle{empty}\mbox{}\vfill\null\it%
+\vfill
+{\Large \bf Zahvala}
+\vspace{1cm}\\
+Zahvaljujem se mentorju prof.\ dr.\ Andreju Bauerju za usmerjanje in vso ostalo pomoč. \\
+Svojim staršem za vso podporo. \\
+Janji za pomoč pri odpravljanju slovničnih napak.
+\rm\normalfont
+%
+% prazna stran
+\clearemptydoublepage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% kazalo
+\pagestyle{empty}
+\def\thepage{}% preprecimo tezave s stevilkami strani v kazalu
+\tableofcontents{}
+%
+% prazna stran
+\clearemptydoublepage
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Program dela}
+\addcontentsline{toc}{section}{Program dela} % dodajmo v kazalo
+V delu obravnavajte algebrajsko in regularno logiko in njune modele v teoriji kategorij,
+vključno z Lawverovo funktorialno semantiko.
+Predstavite in dokažite osnovne izreke o veljavnoti in polnosti.
+
+\section*{Osnovna literatura}
+
+\begin{itemize}
+  \plancite{butz1998regular}
+  \plancite{algebraic-logic}
+\end{itemize}
+
+\vspace{2cm}
+\hspace*{\fill} Podpis mentorja: \phantom{prostor za podpis}
+
+% \vspace{2cm}
+% \hspace*{\fill} Podpis somentorja: \phantom{prostor za podpis}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Povzetek
+\cleardoublepage
+\pdfbookmark[1]{Povzetek}{abstract}
+
+\begin{center}
+\textbf{\naslovdela} \\[3mm]
+\textsc{Povzetek} \\[2mm]
+\end{center}
+V nalogi je razvita funktorialna semantika za algebrajsko in regularno kategorno logiko.
+V prvem delu je najprej na kratko predstavljena teorija kategorij, nato se uvede
+pojem algebrajske teorije, ki je poseben primer logične teorije prvega reda, v kateri
+nastopajo samo enačbe in operacije. Razširi se klasična interpretacija modela teorije
+na vse kategorije, v katerih je mogoče tako teorijo izraziti.
+Za vsako algebrajsko teorijo lahko definiramo posebno sintaktično kategorijo,
+ki to teorijo predstavlja. Izkaže se, da lahko vsak model algebrajske teorije
+enolično identificiramo s funktorjem, ki ohranja strukturo sintaktične kategorije.
+To je izraženo v obliki ekvivalence kategorij. S pomočjo te ekvivalence je raziskana
+dualnost med sintakso in semantiko algebrajske teorije.
+Drugi del se začne z opisom razreda kategorij imenovanih regularne in motivacijo
+za njihovo vpeljavo v obliki primerov in lepih lastnosti s katerimi se ponašajo.
+Nato se razvije razširitev enostavne algebrajske logike iz prvega dela na tako imenovano
+regularno logiko, v kateri poleg enačb in operacij nastopajo še relacijski simboli,
+resničnostna konstanta, konjunkcija in kvantifikator obstoja. To naredi logiko
+bolj bogato in v njej je mogoče izraziti koncepte kot je slika morfizma.
+Analogno kot v prvem delu se za regularno teorijo definira njeno sintaktično kategorijo,
+s pomočjo katere se pokaže ekvivalenco med modeli regularne logike in funktorji, ki
+ohranjajo regularno strukturo.
+\vfill
+\begin{center}
+\textbf{\ttitleEn} \\[3mm] % prevod slovenskega naslova dela
+\textsc{Abstract}\\[2mm]
+\end{center}
+The thesis develops functorial semantics for algebraic and regular logic.
+The first part starts by briefly presenting category theory, then the concept of
+an algebraic theory is introduced as a special case of a first order logic theory,
+in which you only have equations and operations. The classical notion of a model
+is expanded to categories in which such a theory can be expressed.
+For each algebraic theory we may define a special syntactic category, which represents
+it. It turns out that you can uniquely identify each model of such a theory with a
+functor that preserves the structure of the syntactic category. This is expressed
+in the form of an equivalence of categories. With the help of this equivalence a
+duality between syntax and semantics is explored.
+The second part begins with the description of a class of categories called regular
+categories and the motivation for their definition in terms of examples and nice
+properties that these categories posses. An extension of the simple algebraic logic is
+then developed into the so called regular logic which besides equations and
+operations includes relation symbols, the truth constant, conjunction and the
+existential quantifier. This makes the logic more rich and makes it possible
+to express concepts like the image of a morphism. Analogous with the first part
+we define the syntactic category of a regular theory, with the help of which
+you can show an equivalence between models of a regular theory and functors that
+preserve regular structure.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vfill\noindent
+\textbf{Math.~Subj.~Class.~(2010):} oznake kot 74B05, 65N99, na voljo so na naslovu
+\url{http://www.ams.org/msc/msc2010.html} \\[1mm]
+\textbf{Ključne besede:} \tkeywords \\[1mm]
+\textbf{Keywords:} \tkeywordsEn
+
+\cleardoublepage
+
 \thispagestyle{empty}
 \vspace*{8cm}
 %
@@ -78,30 +204,9 @@ Viri:
 % prazna stran
 \clearemptydoublepage
 %
-% zahvala
-\thispagestyle{empty}\mbox{}\vfill\null\it%
-\vfill
-{\Large \bf Zahvala}
-\vspace{1cm}\\
-Zahvaljujem se mentorju prof.\ dr.\ Andreju Bauerju za usmerjanje in vso ostalo pomoč. \\
-Svojim staršem za vso podporo. \\
-Janji za pomoč pri odpravljanju slovničnih napak.
-\rm\normalfont
-%
-% prazna stran
-\clearemptydoublepage
+
 %
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% kazalo
-\pagestyle{empty}
-\def\thepage{}% preprecimo tezave s stevilkami strani v kazalu
-\tableofcontents{}
-%
-% prazna stran
-\clearemptydoublepage
-%
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \end{document}
